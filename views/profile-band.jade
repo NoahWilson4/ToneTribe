@@ -1,0 +1,54 @@
+extends layout
+
+block content
+	div.container.band-profile-top
+		div.img-name.row
+			div.band-profile-pic.col-xs-4
+			div.name-loc.col-xs-8
+				h2.band-name(title="name") band.name
+				div.band-location(title="location") band.location
+
+	.container
+		.row
+			div.col-sm-4#sidebar
+				.profile-sidebar
+					.sidebar-list
+						button.edit-profile.btn.btn-default.btn-xs Edit Profile
+						.edit-directions Update By Clicking on Text
+						h4.sidebar-list-heading Instrumentation:
+						p.sidebar-list-text.band-instrumentation band.bands
+					.sidebar-list
+						h4.sidebar-list-heading Styles:
+						p.sidebar-list-text.band-styles band.styles
+					.sidebar-list
+						h4.sidebar-list-heading Inspired By:
+						p.sidebar-list-text.band-inspirations band.inspirations
+					.sidebar-list
+						h4.sidebar-list-heading Improvisational/Compositional Orientation:
+						dl.ratio-graph
+							dd
+								div#ratio-bar.bar(style="width: 50%") ratio
+						.improv Improv . . . . . . . . . . . . Composition
+					.sidebar-list
+						h4.sidebar-list-heading Date of Group Formation:
+						p.sidebar-list-text.band-birthdate band.birthdate
+			.col-sm-8
+				.info-block
+					h5.info-block-heading(title="about") About
+					p.band-about band.about
+				.info-block
+					h5.info-block-heading(title="philosophy") Philosophy
+					p.band-philosophy band.philosophy
+				.info-block
+					h5.info-block-heading Members
+					.member-container
+				.info-block.gallery-block
+					h5.info-block-heading Photos
+					.photo-gallery
+						button.btn.btn-default.btn-xs.view-gallery View Photo Gallery
+						.photo-container
+							.row
+								.col-xs-3.gallery-pic.pic-1
+								.col-xs-3.gallery-pic.pic-2
+								.col-xs-3.gallery-pic.pic-3
+				.band-media

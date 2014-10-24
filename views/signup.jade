@@ -1,0 +1,32 @@
+extends layout
+
+block content
+	.heading-form
+		h1 Welcome to ToneTribe!
+		p Please fill in some info about yourself and we'll get you started.
+		form#signup.form-horizontal(method="post" action="/signup" role="form")
+			.row
+				.form-group
+					label.col-sm-4.control-label(for="email") Email:
+					.col-sm-8
+						input.form-control.searchInput(type="email" placeholder="Email…" name="email")
+				.form-group
+					label.col-sm-4.control-label(for="password") Password:
+					.col-sm-8
+						input.form-control.searchInput(type="password" placeholder="Password…" name="password")
+				.form-group
+					label.col-sm-4.control-label(for="name") Name:
+					.col-sm-8
+						input.form-control.searchInput(type="text" name="name" placeholder="Musician or Band Name…")
+				.form-group
+					label.col-sm-4.control-label(for="location") Location:
+					.col-sm-8
+						input.form-control.searchInput(type="text" name="location" placeholder="Location…")
+				.form-group
+					label.col-sm-4.control-label(for="birthdate") Birthdate:
+					.col-sm-8
+						input.form-control.searchInput(type="date" name="birthdate")
+				
+				.form-group
+					.col-sm-offset-2.col-sm-10
+							button.btn.btn-success(type="submit") Join

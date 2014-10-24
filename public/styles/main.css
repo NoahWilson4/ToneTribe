@@ -1,0 +1,590 @@
+/*//////////    profile page ///////////////////////////////*/
+body {
+	background-color: whitesmoke;
+	font-size: 12px;
+}
+
+.main{
+	background: white;
+}
+
+.login {
+	margin-right: 7px;
+	max-width: 200px;
+}
+
+.profile-top {
+margin-top: 50px;
+padding: 10px;
+background-color: rgb(146, 160, 158);
+height: 280px;
+position: relative;
+background-image: ;
+background-size: cover;
+background-position: center;
+border-bottom: 10px solid black;
+}
+
+.band-profile-top {
+margin-top: 50px;
+padding: 10px;
+background-color: rgb(146, 160, 158);
+height: 280px;
+position: relative;
+background-image: ;
+background-size: cover;
+background-position: center;
+border-bottom: 10px solid black;
+}
+
+.img-name {
+	position: absolute;
+bottom: 10px;
+}
+
+.gallery-pic {
+	background: lightgray;
+	width: 100px;
+	height: 100px;
+	margin: 10px;
+}
+
+.gallery-block {
+	max-width: 386px;
+width: 90%;
+}
+
+.photo-container{
+padding: 0px 15px;
+}
+.profile-pic {
+float: left;
+margin-right: 15px;
+margin-left: 15px;
+margin-top: -30px;
+width: 150px;
+height: 150px;
+padding: 0;
+background-image: ;
+background-size: cover;
+background-position: center;
+border: 1px solid rgb(128, 118, 118);
+}
+
+.edit-icon-profile {
+	position: absolute;
+top: 117px;
+left: 0px;
+background: rgba(0, 0, 0, 0.4);
+padding: 10px 10px 5px 5px;
+border-top: 1px solid lightgray;
+border-right: 1px solid lightgray;
+border-top-right-radius: 10px;
+font-weight: bold;
+}
+
+.edit-icon-background {
+position: absolute;
+
+right: 0px;
+background: rgba(0, 0, 0, 0.4);
+padding: 10px 10px 5px 5px;
+border-bottom: 1px solid lightgray;
+border-right: 1px solid lightgray;
+border-bottom-left-radius: 10px;
+font-weight: bold;
+}
+
+.band-profile-pic {
+	float: left;
+margin-right: 15px;
+margin-left: 15px;
+margin-top: -30px;
+width: 150px;
+height: 150px;
+padding: 0;
+background-image: ;
+background-size: cover;
+background-position: center;
+border: 3px solid lightgray;
+}
+
+.name-loc {
+	display: inline-block;
+width: 240px;
+color: rgb(233, 231, 228);
+padding: 10px 15px;
+background-color: rgba(0, 0, 0, 0.35);
+border-radius: 10px;
+
+}
+
+.edit-name-loc {
+	color: rgb(255, 255, 255);
+background-color: rgba(156, 154, 154, 0.5);
+border-radius: 10px;
+}
+
+.edit-directions {
+color: rgb(180, 72, 72);
+padding: 5px;
+font-size: 17px;
+}
+
+.name {
+	margin-bottom: 0px;
+}
+
+.band-name {
+	margin-bottom: 0px;
+}
+
+.location {
+	color: lightgray;
+}
+
+.band-location {
+	color: lightgray;
+}
+
+.band {
+	font-size: 15px;
+}
+
+#sidebar {
+	padding: 0;
+}
+
+.profile-sidebar {
+background-color: white;
+padding: 10px;
+border: 1px solid lightgray;
+border-top: none;
+}
+
+.sidebar-list {
+
+}
+
+.sidebar-list-heading {
+	font-size: 15px;
+	border-left: 3px solid gray;
+padding-left: 5px;
+}
+
+.sidebar-list-text {
+	font-size: 13px;
+}
+
+.tag {
+	color: darkred;
+}
+
+.info-block {
+	border: 1px solid lightgray;
+background: white;
+padding: 12px;
+margin: 25px;
+position: relative;
+}
+
+.embed-info-block {
+	background: -webkit-linear-gradient(rgb(197, 197, 197), transparent);
+	border-color: gray;
+}
+
+.info-block-heading {
+background: whitesmoke;
+width: 100px;
+position: absolute;
+top: -28px;
+left: -7px;
+padding: 2px 11px;
+border: 1px solid lightgray;
+border-top-right-radius: 24px;
+}
+
+.embed-heading {
+	width: 130px;
+	color: rgb(180, 72, 72);
+	border-color: gray;
+}
+
+.media {
+	
+}
+
+.add-media {
+background: white;
+width: 96%;
+min-width: 220px;
+margin: 10px;
+border: 1px solid rgb(156, 156, 156);
+}
+
+.embed-info {
+background: white;
+border: 1px solid rgb(156, 156, 156);
+padding: 10px;
+margin: 10px;
+}
+
+.band-media {
+	
+}
+
+/*///////////  editing profile   //////////////////////////////////////////////////*/
+
+.add-new-word {
+	width: 75px;
+}
+
+.which {
+	margin-left: 11%;
+margin-top: 20px;
+}
+
+.editing-profile {
+background: -webkit-linear-gradient(rgb(238, 238, 238), transparent);
+border: 1px solid lightgray;
+border-radius: 5px;
+padding: 1px 3px;
+}
+
+.edit-popup {
+margin-top: 20px;
+margin-bottom: 20px;
+position: absolute;
+top: 50px;
+width: 100%;
+}
+
+.enter-info {
+position: relative;
+height: 550px;
+width: 90%;
+max-width: 500px;
+min-width: 290px;
+margin: auto;
+border: 1px solid rgb(211, 211, 211);
+border-radius: 0px;
+background: rgb(247, 247, 247);
+color: black;
+}
+
+.enter-info-heading {
+position: relative;
+height: 60px;
+width: 90%;
+max-width: 500px;
+min-width: 290px;
+color: rgb(233, 233, 233);
+margin: auto;
+background: -webkit-linear-gradient(rgb(102, 101, 101), rgb(10, 10, 10));
+border-top-right-radius: 15px;
+border-top-left-radius: 15px;
+padding: 15px 25px;
+}
+
+.enter-info-heading h2 {
+	margin-top: 0px;
+}
+
+.edit-pagination {
+position: relative;
+height: 20px;
+width: 90%;
+max-width: 500px;
+min-width: 290px;
+color: rgb(233, 233, 233);
+margin: auto;
+background: -webkit-linear-gradient(rgb(107, 107, 104), rgb(10, 10, 10));
+border-bottom-right-radius: 15px;
+border-bottom-left-radius: 15px;
+padding: 10px;
+}
+
+#edit-profile-form {
+	padding: 0% 6% 3% 6%;
+}
+
+.enter-info h4 {
+	padding-left: 14px;
+color: gray;
+}
+
+.enter-info h3 {
+	margin-left: 11%;
+	color: gray;
+}
+
+.edit-input-form input {
+	width: 100%;
+}
+
+.pages {
+	text-align: center;
+	color: darkred;
+}
+
+#signup-input {
+	width: 250px;
+}
+
+.choose-pic {
+	width: 200px;
+display: inline-block;
+}
+
+.profile-pic-div {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.background-pic-edit {
+	max-width: 100%;
+	max-height: 100%;	
+}
+
+.choose-pic {
+	display: inline-block;
+
+}
+
+.profile-pic-position {
+	margin-right: 10px;
+}
+
+.number-input {
+	width: 50px;
+	display: inline-block;
+}
+
+.fa-question {
+	font-size: 23px;
+padding: 5px 10px;
+background: rgb(214, 214, 214);
+margin-left: 5px;
+border-radius: 5px;
+}
+
+.previous {
+position: absolute;
+top: -35px;
+width: 120px;
+}
+
+.next {
+	position: absolute;
+right: 10px;
+top: -35px;
+width: 120px;
+}
+
+.make-it-white {
+	color: white;
+}
+
+.edit-icon {
+	position: absolute;
+right: 15px;
+top: 85px;
+}
+
+.edit-done {
+
+}
+
+.white-background {
+	background: white;
+}
+
+.background-image-holder {
+	background: lightgray;
+background-image: ;
+background-size: cover;
+background-position: center;
+width: 250px;
+height: 110px;
+
+}
+
+/*/////////////////// search pages ////////////////////*/
+
+
+
+.heading-form {
+	width: 90%;
+	min-width: 300px;
+	max-width: 400px;
+	margin-left: 5%;
+	margin-top: 70px;
+}
+
+.search-results {
+	max-width: 500px;
+min-width: 270px;
+margin-left: 5%;
+margin-right: 10%;
+margin-top: 70px;
+
+}
+
+.result-block {
+	height: 90px;
+}
+
+.search-profile-pic {
+background: lightgray;
+background-image: ;
+background-size: cover;
+background-position: center;
+width: 67px;
+height: 67px;
+margin-right: 10px;
+float: left;
+}
+.memberPic {
+	
+}
+
+.search-result-info {
+
+}
+
+.search-again {
+
+}
+
+.results {
+	margin-top: 20px;
+}
+
+
+
+/*///////////////// photo gallery ////////////////////////*/
+
+.gallery-background {
+	position: fixed;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+background: rgba(78, 78, 78, 0.5);
+}
+
+.gallery {
+	position: relative;
+	width: 75%;
+min-width: 280px;
+height: 80%;
+margin: 60px auto;
+background: white;
+border: 1px solid lightgray;
+}
+
+/*.gallery-heading {
+background: whitesmoke;
+width: 200px;
+position: absolute;
+top: -55px;
+left: -13px;
+padding: 9px 16px;
+border: 1px solid lightgray;
+border-top-right-radius: 45px;
+}*/
+
+.words {
+	display: inline-block;
+padding-right: 3px;
+position: relative;
+margin: 1px 2px;
+}
+
+.delete-word {
+	position: absolute;
+top: -2px;
+right: -2px;
+width: 10px;
+padding: 0px;
+height: 10px;
+font-size: 7px;
+text-align: center;
+color: darkred;
+font-weight: bold;
+
+}
+
+/*   graph           ///////////////////*/
+.bar {
+	background: rgb(157, 184, 91);
+color: transparent;
+border-radius: 7px;
+border-top-right-radius: 0px;
+border-bottom-right-radius: 0px;
+}
+
+.ratio-graph {
+	width: 200px;
+background: lightgray;
+border-radius: 7px;
+margin-bottom: 0px;
+}
+
+.improv {
+display: inline-block;
+top: 0px;
+border-left: 2px solid darkred;
+border-right: 2px solid darkred;
+padding: 5px 5px 0px 5px;
+}
+
+.improv-comp {
+	position: relative;
+}
+
+#edit-ratio{
+	width: 200px;
+}
+
+/*///////////////////////////////////////////////////////////////////////////
+		co-creation
+*/
+
+.cocreation-jt {
+	margin-top: 100px !important;
+}
+
+
+
+
+/*////////////////////*/
+/*    sign up pages     */
+
+.signup2-content {
+	max-width: 500px;
+	margin-left: 3%;
+	padding: 20px;
+	padding-bottom: 50px;
+	border-top: 1px solid lightgray;
+}
+
+.signup2-text-box {
+	margin: 5px;
+max-width: 320px;
+min-height: 26px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

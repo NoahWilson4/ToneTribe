@@ -1,0 +1,59 @@
+extends layout
+
+block content
+	div.container.profile-top
+		div.img-name.row
+			div.profile-pic.col-xs-4
+			div.name-loc.col-xs-8
+				h2.name(title="name") user.name
+				div.location(title="location") user.location
+
+	.container
+		.row
+			div.col-sm-4#sidebar
+				.profile-sidebar
+					.sidebar-list
+						button.edit-profile.btn.btn-default.btn-xs Edit Profile
+						.edit-directions Update By Clicking on Text
+						h4.sidebar-list-heading(title="bands") Bands:
+						p.sidebar-list-text.bands user.bands
+					.sidebar-list
+						h4.sidebar-list-heading Instruments:
+						p.sidebar-list-text.instruments user.instruments
+					.sidebar-list
+						h4.sidebar-list-heading Styles:
+						p.sidebar-list-text.styles user.styles
+					.sidebar-list
+						h4.sidebar-list-heading Skills:
+						p.sidebar-list-text.skills user.skills
+					.sidebar-list
+						h4.sidebar-list-heading Inspired By:
+						p.sidebar-list-text.inspirations user.inspirations
+					.sidebar-list
+						h4.sidebar-list-heading Improvisational/Compositional Orientation:
+						dl.ratio-graph
+							dd
+								div#ratio-bar.bar(style="width: 50%") ratio
+						.improv Improv . . . . . . . . . . . . Composition
+					.sidebar-list
+						h4.sidebar-list-heading Astrological Sign:
+						p.sidebar-list-text.astro-sign user.sign
+			.col-sm-8
+				.info-block
+					h5.info-block-heading(title="about") About
+					p.about user.about
+				.info-block
+					h5.info-block-heading(title="philosophy") Philosophy
+					p.philosophy user.philosophy
+				.info-block.gallery-block
+					h5.info-block-heading Photos
+					.photo-gallery
+						button.btn.btn-default.btn-xs.view-gallery View Photo Gallery
+						.photo-container
+							.row
+								.col-xs-3.gallery-pic.pic-1
+								.col-xs-3.gallery-pic.pic-2
+								.col-xs-3.gallery-pic.pic-3
+				.media
+
+						

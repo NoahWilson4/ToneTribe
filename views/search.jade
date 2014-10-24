@@ -1,0 +1,30 @@
+extends layout
+
+block content
+	.heading-form
+		h1 Search for Musicians
+		p Fill in the fields that you would like to search by:
+		form#search.form-horizontal(method="post" action="/search" role="form")
+			.form-group
+				label.col-sm-2.control-label(for="name") Name:
+				.col-sm-10
+					input.form-control.searchInput(type="text" name="name" placeholder="Musician or Band Name…")
+			.form-group
+				label.col-sm-2.control-label(for="location") Location:
+				.col-sm-10
+					input.form-control.searchInput(type="text" name="location" placeholder="Location…")
+			.form-group
+				label.col-sm-2.control-label(for="insrument") Instrument:
+				.col-sm-10
+					input.form-control.searchInput(type="text" name="instrument" placeholder="Instrument…")
+			.form-group
+				label.col-sm-2.control-label(for="style") Style:
+				.col-sm-10
+					input.form-control.searchInput(type="text" name="style" placeholder="Style…")
+			.form-group
+				label.col-sm-2.control-label(for="skill") Skill:
+				.col-sm-10
+					input.form-control.searchInput(type="text" name="skill" placeholder="Skill…")
+			.form-group
+				.col-sm-offset-2.col-sm-10
+						button.btn.btn-success(type="submit") Search

@@ -1,0 +1,42 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset="utf-8")
+		title ToneTribe
+		link(rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css")
+		link(rel="stylesheet" type="text/css" href="../styles/main.css")
+		link(href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet")
+
+	body
+		.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+
+			.container
+				.navbar-header
+					button.navbar-toggle.collapsed(type="button" data-toggle="collapse" data-target=".navbar-collapse")
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href="#")
+						strong ToneTribe
+				.navbar-collapse.collapse
+					ul.nav.navbar-nav
+						li: a(href="/live-stream") Live Stream
+						li: a(href="/profile-user") Profile
+						li.dropdown
+							a(href="#" class="dropdown-toggle" data-toggle="dropdown") Connect
+								span.caret
+							ul.dropdown-menu(role="menu")
+								li: a(id="navbar-search" href="/search") Search for Musicians and Bands
+								li: a(href="/cocreation") Co-Creation
+								li: a(href="#") Discussion Forums
+								li.divider
+								li.dropdown-header Search Classifieds
+								li: a(href="#") Looking for Musicians
+								li: a(href="#") Equipment and Services
+		.container-fluid
+			block content
+		script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
+		script(src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")
+		script(script src="../js/main.js")

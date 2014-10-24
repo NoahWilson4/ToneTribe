@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	.heading-form
+		h1 Welcome to ToneTribe!
+		p Please fill in some info about yourself and we'll get you started.
+		form#signup.form-horizontal(method="post" action="/signup" role="form")
+			.row
+				.form-group
+					label.col-sm-4.control-label(for="about") About:
+					.col-sm-8
+						textarea.form-control.searchInput(type="text" name="about" placeholder="About…")
+				.form-group
+					label.col-sm-4.control-label(for="philosophy") Philosophy:
+					.col-sm-8
+						textarea.form-control.searchInput(type="text" name="philosophy" placeholder="Philosophy…")

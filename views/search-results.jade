@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	.search-results
+		h1 Search Results:
+		a(href="/search"): button.btn.btn-success.btn-xs.search-again Search Again
+		.list-group.results
+		.search-result-info
+			h2.list-group-item-heading No Results Found.
+		.search-results-container
+			h3 Musicians:
+			div#search-results-musicians
+			h3 Bands:
+			div#search-results-bands

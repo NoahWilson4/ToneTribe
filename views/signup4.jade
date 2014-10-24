@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	.heading-form
+		h1 Welcome to ToneTribe!
+		p Please fill in some info about yourself and we'll get you started.
+		form.form-horizontal(method="post" action="/submitPublic" role="form")
+			.row
+				.form-group
+					label.col-sm-4.control-label(for="profilePic") Profile Pic:
+					.col-sm-8
+						input.form-control.edit-input(type="file" name="profilePic" enctype="multipart/form-data")
+						.background-image-holder(src="http://placehold.it/150x150")
+				.form-group
+					label.col-sm-4.control-label(for="backgroundPic") Background Pic:
+					.col-sm-8
+						input.form-control.edit-input(type="file" name="backgroundPic" enctype="multipart/form-data")
+						.background-image-holder(src="http://placehold.it/250x110")
+				.form-group
+					.col-sm-offset-2.col-sm-10
+						button.btn.btn-success(type="submit") Submit
