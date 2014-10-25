@@ -1,4 +1,5 @@
 var Users = require('../models/user.js');
+var CocreationSong = require('../models/cocreationSong.js');
 
 var indexController = {
 	index: function(req, res) {
@@ -33,6 +34,17 @@ var indexController = {
 		},
 	cocreation: function(req, res) {
 			res.render('cocreation');
+		},
+	song: function(req, res){
+		console.log('req.params: ', req.params);
+		var id = req.params.id;
+		CocreationSong.findOne({_id: id}, function(err, result){
+			console.log('result.name: ', result.name);
+			var name = result.name;
+			res.render('song', {
+				name: name
+			});
+			});
 		},
 	liveStream: function(req, res) {
 			res.render('live-stream');

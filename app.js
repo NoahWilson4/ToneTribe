@@ -1,7 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var indexController = require('./controllers/index.js');
+var apiController = require('./controllers/apiController.js')
 var mongoose = require('mongoose');
+
+var CocreationSong = require('./models/cocreationSong.js')
+
+
 //for aws
 var http = require('http');
 var path = require('path');
@@ -30,37 +35,47 @@ app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
+///// switch to new connector..... in new student sample code example
 app.use(require('connect-multiparty')());
 
 
 
 
+//// get urls of all bucket items...
+var params = {Bucket: BUCKET};
+s3.listObjects(params, function(err, data){
+    var bucketContents = data.Contents;
+    for (var i = 0; i < bucketContents.length; i++){
+        var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
+        s3.getSignedUrl('getObject',urlParams, function(err, url){
+          console.log('the url of the image is', url);
+          console.log('urlParams: ', urlParams);
 
-
-
-app.get('/cocreation', function(req, res) {
-  s3.listObjects({
-    Bucket: BUCKET,
-  }, function (err, data) {
-  	console.log('data: ', data);
-    res.render('cocreation', {s3: data});
-  });
-  
+        });
+    }
 });
+
+
 /*
   Files uploaded here will be
   publicly accessible
  */
 app.post('/submitPublic', function (req, res) {
-	if (req) {
-  		console.log('yes!!!!!', req.body);
-  	}
+  if (req) {
+      console.log('yes!!!!!', req.body);
+    }
   var fName = req.files.audio.name;
   var fPath = req.files.audio.path;
   var cType = req.files.audio.type;
   var size = req.files.audio.size;
   var audio = req.body;
   console.log(audio);
+
+  var key = 'public/' + fName;
+  var track = {
+    Key: key
+  };
+
 
   fs.readFile(fPath, function (err, data) {
     console.log(err);
@@ -71,7 +86,7 @@ app.post('/submitPublic', function (req, res) {
       Body: data
     }, function (err, result) {
       console.log(err, result);
-      res.redirect('/cocreation');
+      res.redirect('song:id');
       console.log('uploaded?');
     });
   });
@@ -99,7 +114,8 @@ app.post('/submitPrivate', function (req, res) {
       Body: data
     }, function (err, result) {
       console.log(err, result);
-      res.redirect('/');
+      res.redirect('search');
+      
     });
   });
 });
@@ -119,6 +135,16 @@ app.get('/view', function (req, res) {
   });
 });
 
+app.get('/cocreation', function(req, res) {
+  console.log('bucket: ', BUCKET)
+  s3.listObjects({
+    Bucket: BUCKET,
+  }, function (err, data) {
+  	console.log('data: ', data);
+    res.render('cocreation', {s3: data});
+  });
+});
+
 
 app.get('/', indexController.index);
 app.get('/signup', indexController.signup);
@@ -131,8 +157,12 @@ app.get('/search', indexController.search);
 app.get('/search-results', indexController.searchResults);
 // app.get('/cocreation', indexController.cocreation);
 app.get('/live-stream', indexController.liveStream);
+app.get('/song/:id', indexController.song);
 
 app.post('/search', indexController.submitSearch);
+app.post('/api/createNewSong', apiController.createNewSong);
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

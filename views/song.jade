@@ -1,0 +1,13 @@
+extends layout
+
+block content
+	.jumbotron.cocreation-jt
+		h2= name
+		.upload-view
+			h5 Upload Audio
+				form(action="/submitPublic" method="post" enctype="multipart/form-data")
+					input(type="file" name="audio")
+					input(type="submit" value="Upload")
+
+	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+	script(script src="../js/cocreation.js")
