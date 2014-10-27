@@ -3,27 +3,15 @@ extends layout
 block content
 	.container-fluid
 		.jumbotron.cocreation-jt
-			h1 Song
+			h1 CoCreation
 			form#create-new-song
 				input(type="text" name="name" placeholder="Name of Song…")
 				a(href="./song")
 					input.btn.btn-success(type="submit" value="Add New Song")
 	
 			.song-container
-		//- h5 Upload Audio
-		//- form(action="/submitPublic" method="post" enctype="multipart/form-data")
-		//- 	input(type="file" name="audio")
-		//- 	input(type="submit")
-
-	//- h1 Song
-	//- 	button#play.btn.btn-success.btn-sm Play All
-	//- 	ul
-	//- 		for file in s3.Contents
-	//- 			li
-	//- 				audio#audio(controls)
-	//- 					source(src='https://s3.amazonaws.com/tonetribe/#{file.Key}' type="audio/mpeg")
-					//- img(src="https://s3.amazonaws.com/tonetribe/#{file.Key}", alt="")
-					//- br
-					//- a(href='/view?key=' + file.Key) Private Link
+				ul
+					for name in songs.names
+						li= name
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
 	script(script src="../js/cocreation.js")

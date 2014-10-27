@@ -3,9 +3,11 @@ var bodyParser = require('body-parser');
 var indexController = require('./controllers/index.js');
 var apiController = require('./controllers/apiController.js')
 var mongoose = require('mongoose');
+var async = require('async');
 
 var CocreationSong = require('./models/cocreationSong.js')
 
+mongoose.connect('mongodb://localhost/toneTribe');
 
 //for aws
 var http = require('http');
@@ -13,7 +15,6 @@ var path = require('path');
 var aws = require('aws-sdk');
 var fs = require('fs');
 
-mongoose.connect('mongodb://localhost/toneTribe');
 
 var KEY = 'AKIAIHVWV3IPDGBN5OFA';
 var SECRET = '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';
@@ -42,53 +43,164 @@ app.use(require('connect-multiparty')());
 
 
 //// get urls of all bucket items...
-var params = {Bucket: BUCKET};
-s3.listObjects(params, function(err, data){
-    var bucketContents = data.Contents;
-    for (var i = 0; i < bucketContents.length; i++){
-        var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
-        s3.getSignedUrl('getObject',urlParams, function(err, url){
-          console.log('the url of the image is', url);
-          console.log('urlParams: ', urlParams);
+// var params = {Bucket: BUCKET};
+// s3.listObjects(params, function(err, data){
+//     var bucketContents = data.Contents;
+//     for (var i = 0; i < bucketContents.length; i++){
+//         var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
+//         s3.getSignedUrl('getObject',urlParams, function(err, url){
+//           // console.log('the url of the image is', url);
+//           // console.log('urlParams: ', urlParams);
 
-        });
-    }
-});
+//         });
+//     }
+// });
+app.post('/submitFoundation', function (req, res) {
 
-
-/*
-  Files uploaded here will be
-  publicly accessible
- */
-app.post('/submitPublic', function (req, res) {
-  if (req) {
-      console.log('yes!!!!!', req.body);
-    }
   var fName = req.files.audio.name;
   var fPath = req.files.audio.path;
   var cType = req.files.audio.type;
   var size = req.files.audio.size;
   var audio = req.body;
-  console.log(audio);
 
   var key = 'public/' + fName;
-  var track = {
-    Key: key
-  };
-
-
+  var trackTitle = req.body.trackTitle;
+  var songId = req.body.id;
+  var trackNumber = req.body.trackNumber;
+  console.log('trackNumber!!!!!!!!!!!!!!', trackNumber);
+ 
   fs.readFile(fPath, function (err, data) {
     console.log(err);
     s3.putObject({
-      Bucket: BUCKET,
-      Key: 'public/' + fName,
-      ACL: 'public-read',
-      Body: data
-    }, function (err, result) {
-      console.log(err, result);
-      res.redirect('song:id');
-      console.log('uploaded?');
-    });
+        Bucket: BUCKET,
+        Key: 'public/' + fName,
+        ACL: 'public-read',
+        Body: data
+      }, function (err, result) {
+          console.log(err, result);
+
+          var trackUrl;
+          var trackETag = result.ETag;
+
+          var params = {Bucket: BUCKET};
+          s3.listObjects(params, function(err, data){
+              var bucketContents = data.Contents;
+              for (var i = 0; i < bucketContents.length; i++){
+                if (key === bucketContents[i].Key){
+                  console.log('key: ', key, "bucketContents[i].Key)", bucketContents[i].Key);
+                  console.log('match!!!!')
+                  var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
+                  s3.getSignedUrl('getObject',urlParams, function(err, url){
+                    trackUrl = url;
+                  });
+                }
+                 
+              }
+          });
+
+
+          var asyncCount = 0;
+
+          async.whilst(
+              function () { return trackUrl === undefined; },
+              function (callback) {
+                  asyncCount++;
+                  console.log('Waiting for response.....');
+                  setTimeout(callback, 200);
+              },
+              function (err) {
+                 var track = {
+                    Key: key,
+                    trackTitle: trackTitle,
+                    ETag: trackETag,
+                    songId: songId,
+                    trackNumber: trackNumber,
+                    url: trackUrl
+                  };
+
+                apiController.addTrack(track);
+              }
+          );
+
+        });
+   
+    res.redirect('/song/' + songId);
+  });
+});
+////////////////////////////////////////////
+/*
+  Files uploaded here will be
+  publicly accessible
+ */
+app.post('/submitPublic', function (req, res) {
+
+  var fName = req.files.audio.name;
+  var fPath = req.files.audio.path;
+  var cType = req.files.audio.type;
+  var size = req.files.audio.size;
+  var audio = req.body;
+
+  var key = 'public/' + fName;
+  var trackTitle = req.body.trackTitle;
+  var songId = req.body.id;
+  var trackNumber = req.body.trackNumber;
+ 
+  fs.readFile(fPath, function (err, data) {
+    console.log(err);
+    s3.putObject({
+        Bucket: BUCKET,
+        Key: 'public/' + fName,
+        ACL: 'public-read',
+        Body: data
+      }, function (err, result) {
+          console.log(err, result);
+
+          var trackUrl;
+          var trackETag = result.ETag;
+
+          var params = {Bucket: BUCKET};
+          s3.listObjects(params, function(err, data){
+              var bucketContents = data.Contents;
+              for (var i = 0; i < bucketContents.length; i++){
+                if (key === bucketContents[i].Key){
+                  console.log('key: ', key, "bucketContents[i].Key)", bucketContents[i].Key);
+                  console.log('match!!!!')
+                  var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
+                  s3.getSignedUrl('getObject',urlParams, function(err, url){
+                    trackUrl = url;
+                  });
+                }
+                 
+              }
+          });
+
+
+          var asyncCount = 0;
+
+          async.whilst(
+              function () { return trackUrl === undefined; },
+              function (callback) {
+                  asyncCount++;
+                  console.log('Waiting for response.....');
+                  setTimeout(callback, 200);
+              },
+              function (err) {
+                 var track = {
+                    Key: key,
+                    trackTitle: trackTitle,
+                    ETag: trackETag,
+                    songId: songId,
+                    trackNumber: trackNumber,
+                    url: trackUrl
+                  };
+
+                apiController.addTrack(track);
+              }
+          );
+
+        });
+   
+    res.redirect('/song/' + songId);
   });
 });
 
@@ -135,16 +247,9 @@ app.get('/view', function (req, res) {
   });
 });
 
-app.get('/cocreation', function(req, res) {
-  console.log('bucket: ', BUCKET)
-  s3.listObjects({
-    Bucket: BUCKET,
-  }, function (err, data) {
-  	console.log('data: ', data);
-    res.render('cocreation', {s3: data});
-  });
-});
-
+app.get('/cocreation', indexController.cocreation);
+app.post('/api/getTrackUrls', apiController.getTrackUrls);
+// app.get('/api/getTrackUrls/:id', apiController.getTrackUrls);
 
 app.get('/', indexController.index);
 app.get('/signup', indexController.signup);

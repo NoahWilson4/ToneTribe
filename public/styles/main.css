@@ -555,6 +555,39 @@ padding: 5px 5px 0px 5px;
 	margin-top: 100px !important;
 }
 
+.track {
+	width: 400px;
+	height: 50px;
+	background: white;
+	border: 1px solid lightgray;
+}
+
+.track-container-foundation {
+	width: 400px;
+	height: 200px;
+	background: white;
+	border: 1px solid black;
+}
+
+.track-container {
+	width: 400px;
+	/*height: 200px;*/
+	background: lightgray;
+	border: 1px solid gray;
+}
+
+.upload-view-foundation {
+
+}
+
+.upload-view-tracks {
+
+}
+
+
+
+
+
 
 
 

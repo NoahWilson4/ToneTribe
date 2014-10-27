@@ -2,12 +2,84 @@ extends layout
 
 block content
 	.jumbotron.cocreation-jt
-		h2= name
-		.upload-view
+		h2#song-name= name
+		.track0.track
+			button.play0.btn.btn-lg.btn-success Play
+		.track1.track
+			button.play1.btn.btn-lg.btn-success Play
+		.track2.track
+			button.play2.btn.btn-lg.btn-success Play
+		.track3.track
+			button.play3.btn.btn-lg.btn-success Play
+		.track4.track
+			button.play4.btn.btn-lg.btn-success Play
+		.track5.track
+			button.play5.btn.btn-lg.btn-success Play
+		
+		.upload-view-foundation
 			h5 Upload Audio
-				form(action="/submitPublic" method="post" enctype="multipart/form-data")
-					input(type="file" name="audio")
-					input(type="submit" value="Upload")
+				form(action="/submitFoundation" method="post" enctype="multipart/form-data")
+					input(type="hidden" value="0" name="trackNumber")
+					input.upload-button.btn.btn-primary.btn-sm(type="file" name="audio")
+					input(type="text" name="trackTitle" placeholder="Name Your Track!")
+					input(type="hidden" value=id name="id")
+					input.btn.btn-success.btn-sm(type="submit" value="Upload")
+		.upload-view-tracks
+			h5 Upload Audio
+				form#upload(action="/submitPublic" method="post" enctype="multipart/form-data")
+					label(for="trackNumber") Track Number:
+					input(type="number" min="1" max="5" name="trackNumber")
+					input.upload-button.btn.btn-primary.btn-sm(type="file" name="audio")
+					input(type="text" name="trackTitle" placeholder="Name Your Track!")
+					input(type="hidden" value=id name="id")
+					input.btn.btn-success.btn-sm(type="submit" value="Upload")
+		button#play.btn.btn-success.btn-sm Play All
+		ul
+			each val in NumUrls
+				audio(controls)
+						source(src=val.url)
+		ul
+			each val in NumUrls
+				li= val.track
+		.foundation
+			.track-container-foundation: h2 Foundation Track
+				for val in NumUrls
+					if val.track === 0
+						h3 Track #{val.track}
+						audio(controls)
+							source(src=val.url)
+		.tracks-notusing
+			.track-container
+				for val in NumUrls
+					if val.track === 1
+						h3 Track #{val.track}
+						audio(controls)
+							source(src=val.url)
+			.track-container
+				for val in NumUrls
+					if val.track === 2
+						h3 Track #{val.track}
+						audio(controls)
+							source(src=val.url)
+			.track-container
+				for val in NumUrls
+					if val.track === 3
+						h3 Track #{val.track}
+						audio(controls)
+							source(src=val.url)
+			.track-container
+				for val in NumUrls
+					if val.track === 4
+						h3 Track #{val.track}
+						audio(controls)
+							source(src=val.url)
+			.track-container
+				for val in NumUrls
+					if val.track === 5
+						h3 Track #{val.track}
+						audio(controls)
+							source(src=val.url)
+
 
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
 	script(script src="../js/cocreation.js")
