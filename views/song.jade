@@ -2,19 +2,20 @@ extends layout
 
 block content
 	.jumbotron.cocreation-jt
-		h2#song-name= name
+		h2#song-name= songName
 		.track0.track
-			button.play0.btn.btn-lg.btn-success Play
+			button.play0.btn.btn-lg.btn-warning Play
 		.track1.track
-			button.play1.btn.btn-lg.btn-success Play
+			button.play1.btn.btn-lg.btn-warning Play
 		.track2.track
-			button.play2.btn.btn-lg.btn-success Play
+			button.play2.btn.btn-lg.btn-warning Play
 		.track3.track
-			button.play3.btn.btn-lg.btn-success Play
+			button.play3.btn.btn-lg.btn-warning Play
 		.track4.track
-			button.play4.btn.btn-lg.btn-success Play
+			button.play4.btn.btn-lg.btn-warning Play
 		.track5.track
-			button.play5.btn.btn-lg.btn-success Play
+			button.play5.btn.btn-lg.btn-warning Play
+		button#play.btn.btn-success.btn-lg Play All
 		
 		.upload-view-foundation
 			h5 Upload Audio
@@ -26,59 +27,63 @@ block content
 					input.btn.btn-success.btn-sm(type="submit" value="Upload")
 		.upload-view-tracks
 			h5 Upload Audio
-				form#upload(action="/submitPublic" method="post" enctype="multipart/form-data")
+				form#upload(action="/submitTrack" method="post" enctype="multipart/form-data")
 					label(for="trackNumber") Track Number:
 					input(type="number" min="1" max="5" name="trackNumber")
 					input.upload-button.btn.btn-primary.btn-sm(type="file" name="audio")
 					input(type="text" name="trackTitle" placeholder="Name Your Track!")
-					input(type="hidden" value=id name="id")
+					input(type="hidden" name="id" value=id)
 					input.btn.btn-success.btn-sm(type="submit" value="Upload")
-		button#play.btn.btn-success.btn-sm Play All
-		ul
-			each val in NumUrls
-				audio(controls)
-						source(src=val.url)
-		ul
-			each val in NumUrls
-				li= val.track
-		.foundation
+
+		//- .audio-elements
+		//- 	audio(controls)
+		//- 		source(src='https://s3.amazonaws.com/tonetribe/public/ma1.mp3')
+		//- 	for track in tracks
+		//- 		audio(controls)
+		//- 			source(src=track.url)
+		.tracks-hidden
 			.track-container-foundation: h2 Foundation Track
-				for val in NumUrls
-					if val.track === 0
-						h3 Track #{val.track}
-						audio(controls)
-							source(src=val.url)
-		.tracks-notusing
+				for tr in tracks
+					for t in tr
+						if t.track === 0
+							h3 Track #{t.track}
+							audio(controls)
+								source(src=t.url)
 			.track-container
-				for val in NumUrls
-					if val.track === 1
-						h3 Track #{val.track}
-						audio(controls)
-							source(src=val.url)
+				for tr in tracks
+					for t in tr
+						if t.track === 1
+							h3 Track #{t.track}
+							audio(controls)
+								source(src=t.url)
 			.track-container
-				for val in NumUrls
-					if val.track === 2
-						h3 Track #{val.track}
-						audio(controls)
-							source(src=val.url)
+				for tr in tracks
+					for t in tr
+						if t.track === 2
+							h3 Track #{t.track}
+							audio(controls)
+								source(src=t.url)
 			.track-container
-				for val in NumUrls
-					if val.track === 3
-						h3 Track #{val.track}
-						audio(controls)
-							source(src=val.url)
+				for tr in tracks
+					for t in tr
+						if t.track === 3
+							h3 Track #{t.track}
+							audio(controls)
+								source(src=t.url)
 			.track-container
-				for val in NumUrls
-					if val.track === 4
-						h3 Track #{val.track}
-						audio(controls)
-							source(src=val.url)
+				for tr in tracks
+					for t in tr
+						if t.track === 4
+							h3 Track #{t.track}
+							audio(controls)
+								source(src=t.url)
 			.track-container
-				for val in NumUrls
-					if val.track === 5
-						h3 Track #{val.track}
-						audio(controls)
-							source(src=val.url)
+				for tr in tracks
+					for t in tr
+						if t.track === 5
+							h3 Track #{t.track}
+							audio(controls)
+								source(src=t.url)
 
 
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")

@@ -15,9 +15,18 @@ var path = require('path');
 var aws = require('aws-sdk');
 var fs = require('fs');
 
+var KEY, SECRET;
+if(process.env.AWS_KEY){
+  // if the process has AWS_KEY set, we'll use those values
+  KEY = process.env.AWS_KEY;
+  SECRET = process.env.AWS_SECRET;
+} else {
+  // if the process doesn't have stuff set, we'll load in our config file
+  var privateSettings = require('./private.js');
+  KEY = privateSettings.aws.key;
+  SECRET = privateSettings.aws.secret;
+}
 
-var KEY = 'AKIAIHVWV3IPDGBN5OFA';
-var SECRET = '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';
 var BUCKET = 'tonetribe';
 
 
@@ -36,9 +45,10 @@ app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
-///// switch to new connector..... in new student sample code example
-app.use(require('connect-multiparty')());
 
+///// switch to new connector..... in new student sample code example
+// app.use(require('connect-multiparty')());
+var multer = require('multer');
 
 
 
@@ -55,197 +65,25 @@ app.use(require('connect-multiparty')());
 //         });
 //     }
 // });
-app.post('/submitFoundation', function (req, res) {
 
-  var fName = req.files.audio.name;
-  var fPath = req.files.audio.path;
-  var cType = req.files.audio.type;
-  var size = req.files.audio.size;
-  var audio = req.body;
-
-  var key = 'public/' + fName;
-  var trackTitle = req.body.trackTitle;
-  var songId = req.body.id;
-  var trackNumber = req.body.trackNumber;
-  console.log('trackNumber!!!!!!!!!!!!!!', trackNumber);
- 
-  fs.readFile(fPath, function (err, data) {
-    console.log(err);
-    s3.putObject({
-        Bucket: BUCKET,
-        Key: 'public/' + fName,
-        ACL: 'public-read',
-        Body: data
-      }, function (err, result) {
-          console.log(err, result);
-
-          var trackUrl;
-          var trackETag = result.ETag;
-
-          var params = {Bucket: BUCKET};
-          s3.listObjects(params, function(err, data){
-              var bucketContents = data.Contents;
-              for (var i = 0; i < bucketContents.length; i++){
-                if (key === bucketContents[i].Key){
-                  console.log('key: ', key, "bucketContents[i].Key)", bucketContents[i].Key);
-                  console.log('match!!!!')
-                  var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
-                  s3.getSignedUrl('getObject',urlParams, function(err, url){
-                    trackUrl = url;
-                  });
-                }
-                 
-              }
-          });
-
-
-          var asyncCount = 0;
-
-          async.whilst(
-              function () { return trackUrl === undefined; },
-              function (callback) {
-                  asyncCount++;
-                  console.log('Waiting for response.....');
-                  setTimeout(callback, 200);
-              },
-              function (err) {
-                 var track = {
-                    Key: key,
-                    trackTitle: trackTitle,
-                    ETag: trackETag,
-                    songId: songId,
-                    trackNumber: trackNumber,
-                    url: trackUrl
-                  };
-
-                apiController.addTrack(track);
-              }
-          );
-
-        });
-   
-    res.redirect('/song/' + songId);
-  });
-});
-////////////////////////////////////////////
-/*
-  Files uploaded here will be
-  publicly accessible
- */
-app.post('/submitPublic', function (req, res) {
-
-  var fName = req.files.audio.name;
-  var fPath = req.files.audio.path;
-  var cType = req.files.audio.type;
-  var size = req.files.audio.size;
-  var audio = req.body;
-
-  var key = 'public/' + fName;
-  var trackTitle = req.body.trackTitle;
-  var songId = req.body.id;
-  var trackNumber = req.body.trackNumber;
- 
-  fs.readFile(fPath, function (err, data) {
-    console.log(err);
-    s3.putObject({
-        Bucket: BUCKET,
-        Key: 'public/' + fName,
-        ACL: 'public-read',
-        Body: data
-      }, function (err, result) {
-          console.log(err, result);
-
-          var trackUrl;
-          var trackETag = result.ETag;
-
-          var params = {Bucket: BUCKET};
-          s3.listObjects(params, function(err, data){
-              var bucketContents = data.Contents;
-              for (var i = 0; i < bucketContents.length; i++){
-                if (key === bucketContents[i].Key){
-                  console.log('key: ', key, "bucketContents[i].Key)", bucketContents[i].Key);
-                  console.log('match!!!!')
-                  var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
-                  s3.getSignedUrl('getObject',urlParams, function(err, url){
-                    trackUrl = url;
-                  });
-                }
-                 
-              }
-          });
-
-
-          var asyncCount = 0;
-
-          async.whilst(
-              function () { return trackUrl === undefined; },
-              function (callback) {
-                  asyncCount++;
-                  console.log('Waiting for response.....');
-                  setTimeout(callback, 200);
-              },
-              function (err) {
-                 var track = {
-                    Key: key,
-                    trackTitle: trackTitle,
-                    ETag: trackETag,
-                    songId: songId,
-                    trackNumber: trackNumber,
-                    url: trackUrl
-                  };
-
-                apiController.addTrack(track);
-              }
-          );
-
-        });
-   
-    res.redirect('/song/' + songId);
-  });
-});
-
-/*
-  Files uploaded here will only be
-  accessible to the owner of the amazon
-  account. The 'view' route will act as
-  a gate to the content; a proxy.
- */
-app.post('/submitPrivate', function (req, res) {
-  console.log(req.files);
-  var fName = req.files.image.name;
-  var fPath = req.files.image.path;
-  var cType = req.files.image.type;
-  var size = req.files.image.size;
-
-  fs.readFile(fPath, function (err, data) {
-    console.log(err);
-    s3.putObject({
-      Bucket: BUCKET,
-      Key: 'private/' + fName,
-      ContentType: cType,
-      Body: data
-    }, function (err, result) {
-      console.log(err, result);
-      res.redirect('search');
-      
-    });
-  });
-});
+app.post('/submitFoundation', multer(), apiController.submitFoundation);
+app.post('/submitTrack', multer(), apiController.submitTrack);
+app.post('/submitPrivate', multer(), apiController.submitPrivate);
 
 /*
   View the privately saved files by accessing
   them through s3 directly.
  */
-app.get('/view', function (req, res) {
-  s3.getObject({
-    Bucket: BUCKET,
-    Key: req.query.key
-  }, function (err, data) {
-    res.writeHead(200, {'Content-Type': data.ContentType });
-    // console.log(data);
-    res.end(data.Body);
-  });
-});
+// app.get('/view', function (req, res) {
+//   s3.getObject({
+//     Bucket: BUCKET,
+//     Key: req.query.key
+//   }, function (err, data) {
+//     res.writeHead(200, {'Content-Type': data.ContentType });
+//     // console.log(data);
+//     res.end(data.Body);
+//   });
+// });
 
 app.get('/cocreation', indexController.cocreation);
 app.post('/api/getTrackUrls', apiController.getTrackUrls);

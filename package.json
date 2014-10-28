@@ -13,6 +13,7 @@
     "express": "^4.9.8",
     "jade": "^1",
     "mongoose": "^3.8.18",
+    "multer": "^0.1.6",
     "underscore": "^1.7.0"
   }
 }

@@ -961,10 +961,10 @@ var propertySearch = function(property, value){
 
 	});
 
-	$('.search-results').hide();
+	// $('.search-results').hide();
 
 	$(document).on('click', '.search-again', function(){
-		$('.search-results').hide();
+		// $('.search-results').hide();
 		// $('.search-results-container').empty();
 		positiveResults = [];
 		positiveResultsFinal = [];

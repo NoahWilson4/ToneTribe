@@ -1,210 +1,426 @@
 //http://localhost:3000/song/544c2f365c4cdf0000dd83a5//
 ///// test song url
 
+////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 
-var Users = require('../models/user.js');
-var CocreationSong = require('../models/cocreationSong.js');
-var apiController = require('./apiController.js')
-var async = require('async');
-var _ = require('underscore');
+this is for signed urls, from app.js
+
+app.post('/submitFoundation', function (req, res) {
+
+  var fName = req.files.audio.name;
+  var fPath = req.files.audio.path;
+  var cType = req.files.audio.type;
+  var size = req.files.audio.size;
+  var audio = req.body;
+
+  var key = 'public/' + fName;
+  var trackTitle = req.body.trackTitle;
+  var songId = req.body.id;
+  var trackNumber = req.body.trackNumber;
+  console.log('trackNumber!!!!!!!!!!!!!!', trackNumber);
+ 
+  fs.readFile(fPath, function (err, data) {
+    console.log(err);
+    s3.putObject({
+        Bucket: BUCKET,
+        Key: 'public/' + fName,
+        ACL: 'public-read',
+        Body: data
+      }, function (err, result) {
+          console.log(err, result);
 
 
-///// added for url grabbing...  ////////////////////////////////////////////////////
-var express = require('express');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var async = require('async');
-//for aws
-var http = require('http');
-var path = require('path');
-var aws = require('aws-sdk');
-var fs = require('fs');
+///////////// gets signed url ...  ////////////////////////
+          // var trackUrl;
+          // var trackETag = result.ETag;
 
-
-var KEY = 'AKIAIHVWV3IPDGBN5OFA';
-var SECRET = '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';
-var BUCKET = 'tonetribe';
-
-
-aws.config.update({
-  accessKeyId: KEY,
-  secretAccessKey: SECRET
-});
-var s3 = new aws.S3();
-/// environments
-var app = express();
-app.set('port', process.env.PORT || 3000);
-app.set('view engine', 'jade');
-app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({extended: false}));
-///// switch to new connector..... in new student sample code example
-app.use(require('connect-multiparty')());
-
-//////////////////////////////////////////////////////////////////////////////////
-
-//////// for async grabbing of urls
-// var trackKeysAndUrls = [];
-var getTrackUrl = function(key){
-		console.log('req.body test: ', key);
-		var params = {Bucket: BUCKET};
-		var trackUrl;
-          s3.listObjects(params, function(err, data){
-              var bucketContents = data.Contents;
-              for (var i = 0; i < bucketContents.length; i++){
-                if (key === bucketContents[i].Key){
-                  console.log('key: ', key, "bucketContents[i].Key)", bucketContents[i].Key);
-                  console.log('match!!!!')
-                  var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
-                  s3.getSignedUrl('getObject',urlParams, function(err, url){
-                    trackUrl = url;
-
-                    var asyncCount = 0;
-
-			          async.whilst(
-			              function () { return trackUrl === undefined; },
-			              function (callback) {
-			                  asyncCount++;
-			                  console.log('Waiting for response.....');
-			                  setTimeout(callback, 200);
-			              },
-			              function (err) {
-			              	console.log('in err function...'); 	
-			              }
-			          );
-                    		var results = {
-                    			url: trackUrl,
-                    			Key: key
-                    		};
-                    		trackKeysAndUrls.push(results);
-                    		console.log('trackKeysAndUrls at bottom of function: ', trackKeysAndUrls); 
-
-                  });
-                }
+          // var params = {Bucket: BUCKET};
+          // s3.listObjects(params, function(err, data){
+          //     var bucketContents = data.Contents;
+          //     for (var i = 0; i < bucketContents.length; i++){
+          //       if (key === bucketContents[i].Key){
+          //         console.log('key: ', key, "bucketContents[i].Key)", bucketContents[i].Key);
+          //         console.log('match!!!!')
+          //         var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
+          //         s3.getSignedUrl('getObject',urlParams, function(err, url){
+          //           trackUrl = url;
+          //         });
+          //       }
                  
-              }
-          });
-					
-	}
+          //     }
+          // });
 
-var indexController = {
-	index: function(req, res) {
-			res.render('cover');
-		},
-	signup: function(req, res) {
-			res.render('signup');
-		},
-	signup2: function(req, res) {
-			res.render('signup2');
-		},
-	signup3: function(req, res) {
-			res.render('signup3');
-		},
-	signup4: function(req, res) {
-			res.render('signup4');
-		},
-	profileUser: function(req, res) {
-			// User.find({}, function(err, response){
 
-				res.render('profile-user')
-			// });
-		},
-	profileBand: function(req, res) {
-			res.render('profile-band');
-		},
-	search: function(req, res) {
-			res.render('search');
-		},
-	searchResults: function(req, res) {
-			res.render('search-results');
-		},
-	cocreation: function(req, res) {
-			res.render('cocreation');
-		},
-	
-	song: function(req, res){
-		var trackKeysAndUrls = [];
-			console.log('req.params: ', req.params);
+          // var asyncCount = 0;
+
+          // async.whilst(
+          //     function () { return trackUrl === undefined; },
+          //     function (callback) {
+          //         asyncCount++;
+          //         console.log('Waiting for response.....');
+          //         setTimeout(callback, 200);
+          //     },
+          //     function (err) {
+          //        var track = {
+          //           Key: key,
+          //           trackTitle: trackTitle,
+          //           ETag: trackETag,
+          //           songId: songId,
+          //           trackNumber: trackNumber,
+          //           url: trackUrl
+          //         };
+
+          //       apiController.addTrack(track);
+          //     }
+          // );
+
+        });
+   
+    res.redirect('/song/' + songId);
+  });
+});
+////////////////////////////////////////////
+/*
+  Files uploaded here will be
+  publicly accessible
+ */
+app.post('/submitPublic', function (req, res) {
+
+  var fName = req.files.audio.name;
+  var fPath = req.files.audio.path;
+  var cType = req.files.audio.type;
+  var size = req.files.audio.size;
+  var audio = req.body;
+
+  var key = 'public/' + fName;
+  var trackTitle = req.body.trackTitle;
+  var songId = req.body.id;
+  var trackNumber = req.body.trackNumber;
+ 
+  fs.readFile(fPath, function (err, data) {
+    console.log(err);
+    s3.putObject({
+        Bucket: BUCKET,
+        Key: 'public/' + fName,
+        ACL: 'public-read',
+        Body: data
+      }, function (err, result) {
+          console.log(err, result);
+
+//////// gets signed url ... ///////////////////
+          // var trackUrl;
+          // var trackETag = result.ETag;
+
+          // var params = {Bucket: BUCKET};
+          // s3.listObjects(params, function(err, data){
+          //     var bucketContents = data.Contents;
+          //     for (var i = 0; i < bucketContents.length; i++){
+          //       if (key === bucketContents[i].Key){
+          //         console.log('key: ', key, "bucketContents[i].Key)", bucketContents[i].Key);
+          //         console.log('match!!!!')
+          //         var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
+          //         s3.getSignedUrl('getObject',urlParams, function(err, url){
+          //           trackUrl = url;
+          //         });
+          //       }
+                 
+          //     }
+          // });
+
+
+          // var asyncCount = 0;
+
+          // async.whilst(
+          //     function () { return trackUrl === undefined; },
+          //     function (callback) {
+          //         asyncCount++;
+          //         console.log('Waiting for response.....');
+          //         setTimeout(callback, 200);
+          //     },
+          //     function (err) {
+          //        var track = {
+          //           Key: key,
+          //           trackTitle: trackTitle,
+          //           ETag: trackETag,
+          //           songId: songId,
+          //           trackNumber: trackNumber,
+          //           url: trackUrl
+          //         };
+
+          //       apiController.addTrack(track);
+          //     }
+          // );
+
+        });
+   
+    res.redirect('/song/' + songId);
+  });
+});
+
+
+
+////////////////////////////////
+/////////////////////////////////////////
+//////////////////////////////////
+
+from index, signed urls.....
+
+song: function(req, res){
+		var trackNumAndUrls = [];
+		var results;
+		var name;
+		////// holder for all tracks to be loaded-
+		var trackKeys = [[],[],[],[],[],[]];
+		
+			// console.log('req.params: ', req.params);
 			var songId = req.params.id;
 			CocreationSong.findOne({_id: songId}, function(err, result){
-				console.log('result: ', result);
-				var name = result.name;
+				// console.log('result: ', result);
+				name = result.name;
 
-				////// holder for all tracks to be loaded-
-				var trackKeys = [[],[],[],[],[],[]];
 				
 				for (var i = 0; i < result.tracks.length; i++){
 					for (var z = 0; z < result.tracks[i].userTracks.length; z++){
 							var trackNum = result.tracks[i].track;
-							var Key = result.tracks[i].userTracks[z].Key;
-							console.log('trackNum, Key: ', trackNum, Key);
-							trackKeys[trackNum].push(Key);
+							var key = result.tracks[i].userTracks[z].Key;
+							var keyAndNum = {
+								Key: key,
+								track: trackNum
+							}
+
+							// console.log('trackNum, keyAndNum: ', trackNum, keyAndNum);
+							trackKeys[trackNum].push(keyAndNum);
 							
 					}
 				}
-				console.log('trackKeys: ', trackKeys);
-				var trackKeysAndUrls = [];
+				// console.log('trackKeys: ', trackKeys);
+				
 				for (var i = 0; i < trackKeys.length; i++){
+
+			/////////////////////////  async parrallel
 					async.parallel(
 							    // pass an array of built functions
-							    trackKeys[i].map(getTrackUrl),
+							    trackKeys[i].map(function(key){
+														// console.log('key test in map: ', key);
+														var params = {Bucket: BUCKET};
+
+														var trackNum = key.track;
+														key = key.Key;
+														var trackUrl;
+
+												          s3.listObjects(params, function(err, data){
+												              var bucketContents = data.Contents;
+												              for (var i = 0; i < bucketContents.length; i++){
+												                if (key === bucketContents[i].Key){
+												                  // console.log('key: ', key, "bucketContents[i].Key)", bucketContents[i].Key);
+												                  // console.log('match!!!!')
+												                  var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
+												                  s3.getSignedUrl('getObject',urlParams, function(err, url){
+												                    trackUrl = url;
+												               ////////////////////////////////////
+															          async.whilst(
+															              function () { return trackUrl === undefined; },
+															              function (callback) {
+
+															                  // console.log('Waiting for response.....');
+															                  setTimeout(callback, 200);
+															              },
+															              function (err) {
+															              	// console.log('in err function...'); 	
+															              }
+															          );
+
+															          ///////////// use this if i decide i need the key....
+												                    		// var results = {
+												                    		// 	url: trackUrl,
+												                    		// 	Key: key
+												                    		// };
+												                   /////////  else ...
+												                   			results = trackUrl;
+												                   			var tAndN ={
+												                   				track: trackNum,
+												                   				url: results
+												                   			}
+												                   			// console.log('tAndN', tAndN);
+
+												                    		trackNumAndUrls.push(tAndN);
+												                    		// console.log('trackNumAndUrls at bottom of function: ', trackNumAndUrls);
+
+												                  });
+												                }
+												                 
+												              }
+												          });			
+													}),
 								
 							    // this last function will be executed when
 							    // all the async functions are done
 							    function(err, results){
-							        console.log('err async err:', err);
+							        // console.log('err async err:', err);
 							        console.log('results in async function:', results);
 							    }
 					);
-				}
-				console.log('trackKeys after async: ', trackKeys);
-				console.log('trackKeysAndUrls at end of indexController.song: ', trackKeysAndUrls);
+				var loaded = 0;
 				async.whilst(
 			              function () { 
 
 			              	var numberOfKeys = _.flatten(trackKeys);
 			              	var num = numberOfKeys.length;
-			              	console.log('num: ', num);
-			              	console.log('trackKeysAndUrls.length: ', trackKeysAndUrls.length);
-			              	console.log('trackKeysAndUrls', trackKeysAndUrls);
+			              	// console.log('num: ', num);
+			              	var testNum = trackNumAndUrls.length;
+			              	// console.log('testNum: ', testNum);
 
-			              	return trackKeysAndUrls.length === num; 
+			              	return testNum !== num; 
 			              },
 			              function (callback) {
 			                  
-			                  console.log('Waiting for response.....');
-			                  setTimeout(callback, 200);
+			                  // console.log('Waiting for all urls to be found.....');
+			                  setTimeout(callback, 700);
 			              },
-
-			     
 			              function (err) {
-			              	
-			              	console.log('in err function...');
-							res.render('song', {
-								song: result
-							});
-                    		 	
+			              	// console.log('Render the page with the right info!!!!!!!!    results:', results, 'trackNumAndUrls: ', trackNumAndUrls);
+				              if (loaded === 0) {
+				              	loaded++;
+								res.render('song', {
+									// song: results,
+									name: name,
+									NumUrls: trackNumAndUrls
+								}); 
+							  }	
 			              }
-
-			        ////////  save url to database?
-			              // function (err) {
-			              	
-			              // 	console.log('url at end of api..... : ', trackUrl);
-                 //    		var results = {
-                 //    			url: trackUrl,
-                 //    			Key: key
-                 //    		};
-                 //    		trackKeysAndUrls.push(results);   	
-			              // }
 			          );
+				}
+				// console.log('trackKeys after async: ', trackKeys);
+				// console.log('trackNumAndUrls at end of indexController.song: ', trackNumAndUrls);
+
 			});
 		},
-	liveStream: function(req, res) {
-			res.render('live-stream');
-		},
-	submitSearch: function(req, res) {
-			res.render('search-results');
-	}
-};
 
-module.exports = indexController;
+
+
+		////////////////
+		//////////////////////
+		///////////////////////////
+		////////////////
+		//////////////////////
+		///////////////////////////
+
+		from app.js.......
+
+		// app.post('/submitFoundation', multer(), function (req, res) {
+
+//   var fName = req.files.audio.name;
+//   var fPath = req.files.audio.path;
+//   var cType = req.files.audio.type;
+//   var size = req.files.audio.size;
+//   var audio = req.body;
+
+//   var key = 'public/' + fName;
+//   var trackTitle = req.body.trackTitle;
+//   var songId = req.body.id;
+//   var trackNumber = req.body.trackNumber;
+//   var trackUrl = 'https://s3.amazonaws.com/tonetribe/' + key;
+
+//   console.log('trackNumber, trackUrl', trackNumber, trackUrl);
+ 
+//   fs.readFile(fPath, function (err, data) {
+//     console.log(err);
+//     s3.putObject({
+//         Bucket: BUCKET,
+//         Key: 'public/' + fName,
+//         ACL: 'public-read',
+//         Body: data
+//       }, function (err, result) {
+//           console.log(err, result);
+//           var track = {
+          
+//                 Key: key,
+//                 trackTitle: trackTitle,
+//                 ETag: trackETag,
+//                 songId: songId,
+//                 trackNumber: trackNumber,
+//                 url: trackUrl
+//           };
+
+//           apiController.addTrack(track);
+
+//         });
+   
+//     res.redirect('/song/' + songId);
+//   });
+// });
+// ////////////////////////////////////////////
+// /*
+//   Files uploaded here will be
+//   publicly accessible
+//  */
+// app.post('/submitPublic', multer(), function (req, res) {
+
+//   var fName = req.files.audio.name;
+//   var fPath = req.files.audio.path;
+//   var cType = req.files.audio.type;
+//   var size = req.files.audio.size;
+//   var audio = req.body;
+
+//   var key = 'public/' + fName;
+//   var trackTitle = req.body.trackTitle;
+//   var songId = req.body.id;
+//   var trackNumber = req.body.trackNumber;
+ 
+//   fs.readFile(fPath, function (err, data) {
+//     console.log(err);
+//     s3.putObject({
+//         Bucket: BUCKET,
+//         Key: 'public/' + fName,
+//         ACL: 'public-read',
+//         Body: data
+//       }, function (err, result) {
+//           console.log(err, result);
+
+//           var track = {
+//               Key: key,
+//               trackTitle: trackTitle,
+//               ETag: trackETag,
+//               songId: songId,
+//               trackNumber: trackNumber,
+//               url: trackUrl
+//           };
+
+//               apiController.addTrack(track);
+        
+//         });
+   
+//     res.redirect('/song/' + songId);
+//   });
+// });
+
+// /*
+//   Files uploaded here will only be
+//   accessible to the owner of the amazon
+//   account. The 'view' route will act as
+//   a gate to the content; a proxy.
+//  */
+// app.post('/submitPrivate', multer(), function (req, res) {
+//   console.log(req.files);
+//   var fName = req.files.image.name;
+//   var fPath = req.files.image.path;
+//   var cType = req.files.image.type;
+//   var size = req.files.image.size;
+
+//   fs.readFile(fPath, function (err, data) {
+//     console.log(err);
+//     s3.putObject({
+//       Bucket: BUCKET,
+//       Key: 'private/' + fName,
+//       ContentType: cType,
+//       Body: data
+//     }, function (err, result) {
+//       console.log(err, result);
+//       res.redirect('search');
+      
+//     });
+//   });
+// });
