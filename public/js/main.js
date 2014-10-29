@@ -752,10 +752,10 @@ $(document).on('click', '.band-done', function(){
 });
 //////// finish with editing user/////
 ///////////////////////////////////////////////
-
-
-
-
+////////////   search pages //////////////////////////////////
+////////////   search pages //////////////////////////////////
+////////////   search pages //////////////////////////////////
+////////////   search pages //////////////////////////////////
 ////////////   search pages //////////////////////////////////
 
 
@@ -770,73 +770,77 @@ $(document).on('click', '.band-done', function(){
 // 		}
 // 	};
 
-var propertySearch = function(property, value){
-	//////// users ////////////
-		for (var i = 0; i < users.length; i++) {
-			var user = users[i];
-			var userProp = user[property];
-			if ($.isArray(userProp) === true) {
-				var propertyArray = lowerCase(userProp);
-				var isDuplicate = false;
-						for (var z = 0; z < positiveResults.length; z++) {
-							var idSearch = positiveResults[z];
-							if (idSearch.userId === user.userId) {
-								isDuplicate = true;
-							}
-						}
-						if ( isDuplicate === false){
-							positiveResults.push(users[i]);
-						}						
-			} else {
-				var userProp = lowerCase(userProp);
-				if (userProp === value) {
-					var isDuplicate = false;
-						for (var z = 0; z < positiveResults.length; z++) {
-							var idSearch = positiveResults[z];
-							if (idSearch.userId === user.userId) {
-								isDuplicate = true;
-							}
-						}
-						if ( isDuplicate === false){
-							positiveResults.push(users[i]);
-						}						
-				}
-			}
-		}
-	////// bands //////////
-		for (var i = 0; i < bands.length; i++) {
-			var band = bands[i];
-			var bandProp = band[property];
-			if ($.isArray(bandProp) === true) {
-				console.log('band array being searched');
-				var propertyArray = lowerCase(bandProp);
-				var isDuplicate = false;
-						for (var z = 0; z < positiveResultsBands.length; z++) {
-							var idSearch = positiveResultsBands[z];
-							if (idSearch.bandId === band.bandId) {
-								isDuplicate = true;
-							}
-						}
-						if ( isDuplicate === false){
-							positiveResultsBands.push(bands[i]);
-						}						
-			} else {
-				var bandProp = lowerCase(bandProp);
-				if (bandProp === value) {
-					var isDuplicate = false;
-						for (var z = 0; z < positiveResultsBands.length; z++) {
-							var idSearch = positiveResultsBands[z];
-							if (idSearch.bandId === band.bandId) {
-								isDuplicate = true;
-							}
-						}
-						if ( isDuplicate === false){
-							positiveResultsBands.push(bands[i]);
-						}						
-				}
-			}
-		}
-	};
+
+// var propertySearch = function(property, value){
+// 	//////// users ////////////
+// 	console.log('prop search......');
+// 	console.log('property, value', property, value);
+// 	$.post('/api/findUsers',)
+// 		for (var i = 0; i < users.length; i++) {
+// 			var user = users[i];
+// 			var userProp = user[property];
+// 			if ($.isArray(userProp) === true) {
+// 				var propertyArray = lowerCase(userProp);
+// 				var isDuplicate = false;
+// 						for (var z = 0; z < positiveResults.length; z++) {
+// 							var idSearch = positiveResults[z];
+// 							if (idSearch.userId === user.userId) {
+// 								isDuplicate = true;
+// 							}
+// 						}
+// 						if ( isDuplicate === false){
+// 							positiveResults.push(users[i]);
+// 						}						
+// 			} else {
+// 				var userProp = lowerCase(userProp);
+// 				if (userProp === value) {
+// 					var isDuplicate = false;
+// 						for (var z = 0; z < positiveResults.length; z++) {
+// 							var idSearch = positiveResults[z];
+// 							if (idSearch.userId === user.userId) {
+// 								isDuplicate = true;
+// 							}
+// 						}
+// 						if ( isDuplicate === false){
+// 							positiveResults.push(users[i]);
+// 						}						
+// 				}
+// 			}
+// 		}
+// 	////// bands //////////
+// 		for (var i = 0; i < bands.length; i++) {
+// 			var band = bands[i];
+// 			var bandProp = band[property];
+// 			if ($.isArray(bandProp) === true) {
+// 				console.log('band array being searched');
+// 				var propertyArray = lowerCase(bandProp);
+// 				var isDuplicate = false;
+// 						for (var z = 0; z < positiveResultsBands.length; z++) {
+// 							var idSearch = positiveResultsBands[z];
+// 							if (idSearch.bandId === band.bandId) {
+// 								isDuplicate = true;
+// 							}
+// 						}
+// 						if ( isDuplicate === false){
+// 							positiveResultsBands.push(bands[i]);
+// 						}						
+// 			} else {
+// 				var bandProp = lowerCase(bandProp);
+// 				if (bandProp === value) {
+// 					var isDuplicate = false;
+// 						for (var z = 0; z < positiveResultsBands.length; z++) {
+// 							var idSearch = positiveResultsBands[z];
+// 							if (idSearch.bandId === band.bandId) {
+// 								isDuplicate = true;
+// 							}
+// 						}
+// 						if ( isDuplicate === false){
+// 							positiveResultsBands.push(bands[i]);
+// 						}						
+// 				}
+// 			}
+// 		}
+// 	};
 
 
 	var positiveResultsBands = [];
@@ -845,7 +849,8 @@ var propertySearch = function(property, value){
 	var positiveResults = [];
 	var positiveResultsFinal = [];
 	
-	$('#search').on('submit', function(e){
+	$('#submitSearch').on('submit', function(e){
+		console.log('submitted...');
 		$('.search-result-info').hide();
 		$('#search-results-musicians').empty();
 		$('#search-results-bands').empty();
@@ -867,10 +872,29 @@ var propertySearch = function(property, value){
 				.forEach(function(searchObject) {
 					searchedFor.push(searchObject.name);
 					searchedForValue.push(searchObject.value);
-					propertySearch(searchObject.name, searchObject.value);
+					// propertySearch(searchObject.name, searchObject.value);
 				});
-				console.log('positiveResults: ', positiveResults);
+		console.log('searchedForValue: ', searchedForValue);
+		console.log('searchedFor: ', searchedFor);
+		console.log('positiveResults: ', positiveResults);
 		console.log('positiveResultsBands', positiveResultsBands);
+		var searchFor = {
+			searchedFor: searchedFor, 
+			searchedForValue: searchedForValue
+		};
+		console.log('searchFor: ', searchFor);
+
+		$.ajax({
+			type: 'POST',
+			url: '/api/findUsers',
+			traditional: true,
+			data: searchFor
+		})
+
+		// $.post('/api/findUsers', searchFor, function(err, result){
+		// 	console.log('result: ', result);
+		// })
+
 	///// users /////////
 		for (var i = 0; i < positiveResults.length; i++) {
 			var userToQualify = positiveResults[i];
@@ -960,7 +984,6 @@ var propertySearch = function(property, value){
 			// }
 
 	});
-
 	// $('.search-results').hide();
 
 	$(document).on('click', '.search-again', function(){

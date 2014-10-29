@@ -34,6 +34,22 @@ app.use(bodyParser.urlencoded({extended: false}));
 ///// switch to new connector..... in new student sample code example
 app.use(require('connect-multiparty')());
 
+
+
+///// add to api?
+var lowerCase = function(x){
+		if (_.isArray(x) === true){
+			for (var y = 0; y < x.length; y++){
+				x[y] = x[y].toLowerCase();
+			}
+			return x;
+		} else if (x) {
+			var lowerCased = x.toLowerCase();
+			return lowerCased;
+			}
+		};
+
+
 var apiController = {
 	createNewSong: function(req, res){
 		var songName = req.body;
@@ -55,8 +71,8 @@ var apiController = {
 		console.log('trackUrl test: ', trackUrl);
 
 		CocreationSong.findById(songId, function(err, result){
-			console.log('result: ', result);
-			console.log('result.tracks: ', result.tracks);
+			// console.log('result: ', result);
+			// console.log('result.tracks: ', result.tracks);
 			var trackNumberMatches = 0;
 			for (var i = 0; i < result.tracks.length; i++) {
 				var trackNum = result.tracks[i].track;
@@ -132,19 +148,25 @@ var apiController = {
 	getTrackUrls: function(req, res, onComplete){
 		var tracks;
 		var trackKeys = [[],[],[],[],[],[]];
+		var songId;
 		
-		
-			// console.log('req.body: ', req.body);
-			// console.log('req.params: ', req.params);
+			console.log('req.body getTrackUrls: ', req.body);
+			
 			if (req.id) {
-				var songId = req.id;
-				// console.log('id coming from index');
+				songId = req.id;
+				console.log('id coming from index');
 			} else {
-				var songId = req.body.id;
-				// console.log('id coming from js');
+				songId = req.body;
+				console.log('id coming from js');
 			}	
-			CocreationSong.findOne({_id: songId}, function(err, result){
-				// console.log('result: ', result);
+			var sId = songId.id;
+			console.log('sId!!!!!', sId);
+			var id = 'ObjectId("' + songId.id + '")';
+			console.log('ObjectId', id);
+			CocreationSong.findOne({ _id: sId }, function(err, result){
+				console.log('***result: ', result);
+				var tracks = result;
+				console.log('result!!!!!!!!!!!!!!!!', result);
 				
 				async.series([
 				    function(callback){
@@ -153,6 +175,7 @@ var apiController = {
 						// console.log('looping...');
 						for (var z = 0; z < result.tracks[i].userTracks.length; z++){
 								var trackNum = result.tracks[i].track;
+								var trackTitle = result.tracks[i].userTracks[z].trackTitle;
 								var key = result.tracks[i].userTracks[z].Key;
 								var likes = result.tracks[i].userTracks[z].likes;
 								var url = 'https://s3.amazonaws.com/tonetribe/' + key;
@@ -161,13 +184,15 @@ var apiController = {
 									track: trackNum,
 									likes: likes,
 									id: songId,
-									url: url
+									url: url,
+									trackTitle: trackTitle
 								}
+								console.log('trackNum: ', trackNum);
 								trackKeys[trackNum].push(keyAndNum);
 								
 						}
 					}
-					var track0 = [];
+						var track0 = [];
 						var track1 = [];
 						var track2 = [];
 						var track3 = [];
@@ -254,49 +279,49 @@ var apiController = {
 		    res.redirect('/song/' + songId);
 		  });
 		},
-		submitTrack: function (req, res) {
-			console.log('req.body', req.body);
-			console.log('req.params', req.params);
+		// submitTrack: function (req, res) {
+		// 	console.log('req.body', req.body);
+		// 	console.log('req.params', req.params);
 
 
-		  var fName = req.files.audio.name;
-		  var fPath = req.files.audio.path;
-		  var cType = req.files.audio.type;
-		  var size = req.files.audio.size;
-		  var audio = req.body;
+		//   var fName = req.files.audio.name;
+		//   var fPath = req.files.audio.path;
+		//   var cType = req.files.audio.type;
+		//   var size = req.files.audio.size;
+		//   var audio = req.body;
 
-		  var key = 'public/' + fName;
-		  var trackTitle = req.body.trackTitle;
-		  var songId = req.body.id;
-		  var trackNumber = req.body.trackNumber;
+		//   var key = 'public/' + fName;
+		//   var trackTitle = req.body.trackTitle;
+		//   var songId = req.body.id;
+		//   var trackNumber = req.body.trackNumber;
 		 
-		  fs.readFile(fPath, function (err, data) {
-		    console.log(err);
-		    s3.putObject({
-		        Bucket: BUCKET,
-		        Key: 'public/' + fName,
-		        ACL: 'public-read',
-		        Body: data
-		      }, function (err, result) {
-		          console.log(err, result);
+		//   fs.readFile(fPath, function (err, data) {
+		//     console.log(err);
+		//     s3.putObject({
+		//         Bucket: BUCKET,
+		//         Key: 'public/' + fName,
+		//         ACL: 'public-read',
+		//         Body: data
+		//       }, function (err, result) {
+		//           console.log(err, result);
 
-		          var track = {
-		              Key: key,
-		              trackTitle: trackTitle,
-		              ETag: trackETag,
-		              songId: songId,
-		              trackNumber: trackNumber,
-		              url: trackUrl
-		          };
+		//           var track = {
+		//               Key: key,
+		//               trackTitle: trackTitle,
+		//               ETag: trackETag,
+		//               songId: songId,
+		//               trackNumber: trackNumber,
+		//               url: trackUrl
+		//           };
 
-		              apiController.addTrack(track);
+		//               apiController.addTrack(track);
 		        
-		        });
+		//         });
 		   
-		    console.log('finishing with upload.......', songId);
-		    res.redirect('/song/' + songId);
-		  });
-		},
+		//     console.log('finishing with upload.......', songId);
+		//     res.redirect('/song/' + songId);
+		//   });
+		// },
 		submitPrivate: function (req, res) {
 		  console.log(req.files);
 		  var fName = req.files.image.name;
@@ -317,6 +342,95 @@ var apiController = {
 		      
 		    });
 		  });
+		},
+		findUsers: function(req, res){
+			var positiveResults = [];
+			var positiveResultsBands = [];
+	///////////// why are there brackets???
+			console.log('*findUsers body: ', req.body);
+			console.log('findUsers req.body.searchFor: ', req.body.searchedFor);
+			var property = req.body.searchedFor;
+			var value = req.body.searchedForValue;
+			User.find({}, function(err, result){
+				var users = result;
+
+				// console.log('users: ', users);
+
+
+				for (var i = 0; i < users.length; i++) {
+					var user = users[i];
+					var userProp = user[property];
+					if (_.isArray(userProp) === true) {
+						var propertyArray = lowerCase(userProp);
+						var isDuplicate = false;
+								// for (var z = 0; z < positiveResults.length; z++) {
+								// 	var idSearch = positiveResults[z];
+								// 	if (idSearch.userId === user.userId) {
+								// 		isDuplicate = true;
+								// 	}
+								// 	if ( isDuplicate === false){
+								// 		positiveResults.push(users[i]);
+								// 	}						
+								// }
+								positiveResults.push(users[i]);
+					} else {
+						var userProp = lowerCase(userProp);
+						if (userProp === value) {
+							var isDuplicate = false;
+								// for (var z = 0; z < positiveResults.length; z++) {
+								// 	var idSearch = positiveResults[z];
+								// 	if (idSearch.userId === user.userId) {
+								// 		isDuplicate = true;
+								// 	}
+								// 	if ( isDuplicate === false){
+								// 		positiveResults.push(users[i]);
+								// 	}						
+								// }
+								positiveResults.push(users[i]);
+						}
+					}
+				}
+
+			// bands //////////
+				// for (var i = 0; i < bands.length; i++) {
+				// 	var band = bands[i];
+				// 	var bandProp = band[property];
+				// 	if (_.isArray(bandProp) === true) {
+				// 		console.log('band array being searched');
+				// 		var propertyArray = lowerCase(bandProp);
+				// 		var isDuplicate = false;
+				// 				for (var z = 0; z < positiveResultsBands.length; z++) {
+				// 					var idSearch = positiveResultsBands[z];
+				// 					if (idSearch.bandId === band.bandId) {
+				// 						isDuplicate = true;
+				// 					}
+				// 					if ( isDuplicate === false){
+				// 						positiveResultsBands.push(bands[i]);
+				// 					}						
+				// 				}
+				// 	} else {
+				// 		var bandProp = lowerCase(bandProp);
+				// 		if (bandProp === value) {
+				// 			var isDuplicate = false;
+				// 				for (var z = 0; z < positiveResultsBands.length; z++) {
+				// 					var idSearch = positiveResultsBands[z];
+				// 					if (idSearch.bandId === band.bandId) {
+				// 						isDuplicate = true;
+				// 					}
+				// 					// }
+				// 					if ( isDuplicate === false){
+				// 						positiveResultsBands.push(bands[i]);
+				// 					}						
+				// 				}
+				// 		}
+				// 	}
+				// };
+
+				
+				console.log('positiveResults: ', positiveResults);
+
+			});
+
 		}
 
 //////////////// returns signed urls..... ///////////////////////////

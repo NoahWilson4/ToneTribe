@@ -72,6 +72,7 @@ var indexController = {
 				);
 		},
 		song: function(req, res){
+			console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!')
 			var tracks;
 			var id = req.params.id;
 			console.log('id???', id);
@@ -82,21 +83,28 @@ var indexController = {
 				console.log('songName: ', songName);
 			});
 
-			apiController.getTrackUrls({id: id}, {}, function(tracks){
+			res.render('song', {
+				id: id
+			})
 
-				// console.log('tracks just before render: ', tracks);
-				res.render('song', {
-					songName: songName,
-					tracks: tracks
-				});
-			});
+			// apiController.getTrackUrls({id: id}, {}, function(tracks){
+
+			// 	console.log('tracks just before render: ', tracks);
+			// 	res.render('song', {
+			// 		songName: songName,
+			// 		tracks: tracks,
+			// 		id: id
+			// 	});
+			// });
 		
 		},
 	liveStream: function(req, res) {
 			res.render('live-stream');
 		},
 	submitSearch: function(req, res) {
-			res.render('search-results');
+		console.log('req.body', req.body);
+
+		res.render('search-results');
 	}
 };
 

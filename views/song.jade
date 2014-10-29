@@ -5,34 +5,40 @@ block content
 		h2#song-name= songName
 		.track0.track
 			button.play0.btn.btn-lg.btn-warning Play
+			button.like.btn.btn-xs.btn-primary Like
 		.track1.track
 			button.play1.btn.btn-lg.btn-warning Play
+			button.like.btn.btn-xs.btn-primary Like
 		.track2.track
 			button.play2.btn.btn-lg.btn-warning Play
+			button.like.btn.btn-xs.btn-primary Like
 		.track3.track
 			button.play3.btn.btn-lg.btn-warning Play
+			button.like.btn.btn-xs.btn-primary Like
 		.track4.track
 			button.play4.btn.btn-lg.btn-warning Play
+			button.like.btn.btn-xs.btn-primary Like
 		.track5.track
 			button.play5.btn.btn-lg.btn-warning Play
+			button.like.btn.btn-xs.btn-primary Like
 		button#play.btn.btn-success.btn-lg Play All
 		
-		.upload-view-foundation
-			h5 Upload Audio
-				form(action="/submitFoundation" method="post" enctype="multipart/form-data")
-					input(type="hidden" value="0" name="trackNumber")
-					input.upload-button.btn.btn-primary.btn-sm(type="file" name="audio")
-					input(type="text" name="trackTitle" placeholder="Name Your Track!")
-					input(type="hidden" value=id name="id")
-					input.btn.btn-success.btn-sm(type="submit" value="Upload")
+		//- .upload-view-foundation
+		//- 	h5 Upload Audio
+		//- 		form(action="/submitFoundation" method="post" enctype="multipart/form-data")
+		//- 			input(type="hidden" value="0" name="trackNumber")
+		//- 			input.upload-button.btn.btn-primary.btn-sm(type="file" name="audio")
+		//- 			input(type="text" name="trackTitle" placeholder="Name Your Track!")
+		//- 			input(type="hidden" value=id name="id")
+		//- 			input.btn.btn-success.btn-sm(type="submit" value="Upload")
 		.upload-view-tracks
 			h5 Upload Audio
 				form#upload(action="/submitTrack" method="post" enctype="multipart/form-data")
 					label(for="trackNumber") Track Number:
-					input(type="number" min="1" max="5" name="trackNumber")
+					input(type="number" min="0" max="5" name="trackNumber")
 					input.upload-button.btn.btn-primary.btn-sm(type="file" name="audio")
 					input(type="text" name="trackTitle" placeholder="Name Your Track!")
-					input(type="hidden" name="id" value=id)
+					input(type="hidden" value=id name="id")
 					input.btn.btn-success.btn-sm(type="submit" value="Upload")
 
 		//- .audio-elements
@@ -41,49 +47,49 @@ block content
 		//- 	for track in tracks
 		//- 		audio(controls)
 		//- 			source(src=track.url)
-		.tracks-hidden
-			.track-container-foundation: h2 Foundation Track
-				for tr in tracks
-					for t in tr
-						if t.track === 0
-							h3 Track #{t.track}
-							audio(controls)
-								source(src=t.url)
-			.track-container
-				for tr in tracks
-					for t in tr
-						if t.track === 1
-							h3 Track #{t.track}
-							audio(controls)
-								source(src=t.url)
-			.track-container
-				for tr in tracks
-					for t in tr
-						if t.track === 2
-							h3 Track #{t.track}
-							audio(controls)
-								source(src=t.url)
-			.track-container
-				for tr in tracks
-					for t in tr
-						if t.track === 3
-							h3 Track #{t.track}
-							audio(controls)
-								source(src=t.url)
-			.track-container
-				for tr in tracks
-					for t in tr
-						if t.track === 4
-							h3 Track #{t.track}
-							audio(controls)
-								source(src=t.url)
-			.track-container
-				for tr in tracks
-					for t in tr
-						if t.track === 5
-							h3 Track #{t.track}
-							audio(controls)
-								source(src=t.url)
+		//- .tracks-hidden
+		//- 	.track-container-foundation: h2 Foundation Track
+		//- 		for tr in tracks
+		//- 			for t in tr
+		//- 				if t.track === 0
+		//- 					h3 Track #{t.track}
+		//- 					audio(controls)
+		//- 						source(src=t.url)
+		//- 	.track-container
+		//- 		for tr in tracks
+		//- 			for t in tr
+		//- 				if t.track === 1
+		//- 					h3 Track #{t.track}
+		//- 					audio(controls)
+		//- 						source(src=t.url)
+		//- 	.track-container
+		//- 		for tr in tracks
+		//- 			for t in tr
+		//- 				if t.track === 2
+		//- 					h3 Track #{t.track}
+		//- 					audio(controls)
+		//- 						source(src=t.url)
+		//- 	.track-container
+		//- 		for tr in tracks
+		//- 			for t in tr
+		//- 				if t.track === 3
+		//- 					h3 Track #{t.track}
+		//- 					audio(controls)
+		//- 						source(src=t.url)
+		//- 	.track-container
+		//- 		for tr in tracks
+		//- 			for t in tr
+		//- 				if t.track === 4
+		//- 					h3 Track #{t.track}
+		//- 					audio(controls)
+		//- 						source(src=t.url)
+		//- 	.track-container
+		//- 		for tr in tracks
+		//- 			for t in tr
+		//- 				if t.track === 5
+		//- 					h3 Track #{t.track}
+		//- 					audio(controls)
+		//- 						source(src=t.url)
 
 
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
