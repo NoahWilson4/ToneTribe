@@ -18,7 +18,8 @@ var userSchema = mongoose.Schema({
 	astro: String,
 	about: String,
 	philosophy: String,
-	media: [String]
+	media: [String],
+	cocreationSongs: [String]
 });
 
 module.exports = mongoose.model('user', userSchema);

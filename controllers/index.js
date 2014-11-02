@@ -37,55 +37,74 @@ var indexController = {
 			res.render('search-results');
 		},
 	cocreation: function(req, res) {
-				var ids = [];
-				var names = [];
-				var songCollection;
+			res.render('cocreation');
+				// var ids = [];
+				// var names = [];
+				// var songCollection;
 
-					CocreationSong.find({}, function(err, result){
-						// console.log('result', result);
-						songCollection = result;
+				// 	CocreationSong.find({}, function(err, result){
+				// 		// console.log('result', result);
+				// 		songCollection = result;
 					
-						result.map(function(song){
-							ids.push(song._id);
-							names.push(song.name);
-						});
-					});
+				// 		result.map(function(song){
+				// 			ids.push(song._id);
+				// 			names.push(song.name);
+				// 		});
+				// 	});
 
-				async.whilst(
-					function(){ songCollection !== undefined && names.length === songCollection.length},
-					function(callback){
-						// console.log('testing');
-						setTimeout(callback, 5000);
-					},
-					function (err) {
-						// console.log('ids, names, songs: ', ids, names, songCollection);	
-						var songs = {
-							ids: ids,
-							names: names
-						}
-						// console.log('songs: ', songs);
-						res.render('cocreation', {
-							songs: songs
-						});
+				// async.whilst(
+				// 	function(){ songCollection !== undefined && names.length === songCollection.length},
+				// 	function(callback){
+				// 		// console.log('testing');
+				// 		setTimeout(callback, 5000);
+				// 	},
+				// 	function (err) {
+				// 		// console.log('ids, names, songs: ', ids, names, songCollection);	
+				// 		var songs = {
+				// 			ids: ids,
+				// 			names: names
+				// 		}
+				// 		// console.log('songs: ', songs);
+				// 		res.render('cocreation', {
+				// 			songs: songs
+				// 		});
 				       
-				    }
-				);
+				//     }
+				// );
 		},
 		song: function(req, res){
-			console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!')
+			console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!', req.query);
 			var tracks;
-			var id = req.params.id;
+			var id = req.query.songId;
 			console.log('id???', id);
+			var songName;
+			var song;
 
 			CocreationSong.findOne({_id: id}, function(err, result){
-				console.log('result: ', result);
+				console.log('result in song render: ', result);
 				songName = result.name;
 				console.log('songName: ', songName);
-			});
+				song = result;
+				var track0 = song.tracks[5];
+				var track1 = song.tracks[0];
+				var track2 = song.tracks[1];
+				var track3 = song.tracks[2];
+				var track4 = song.tracks[3];
+				var track5 = song.tracks[4];
+
+				console.log('sorted???? ', track1);
 
 			res.render('song', {
-				id: id
+				id: id,
+				song: song,
+				track0: track0,
+				track1: track1,
+				track2: track2,
+				track3: track3,
+				track4: track4,
+				track5: track5
 			})
+			});
 
 			// apiController.getTrackUrls({id: id}, {}, function(tracks){
 

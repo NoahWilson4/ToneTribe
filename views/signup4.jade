@@ -1,10 +1,10 @@
 extends layout
 
 block content
-	.heading-form
+	.heading-signup-form
 		h1 Welcome to ToneTribe!
 		p Please fill in some info about yourself and we'll get you started.
-		form.form-horizontal(method="post" action="/submitPublic" role="form")
+		form.form-horizontal(method="post" action="/updateUser3" role="form")
 			.row
 				.form-group
 					label.col-sm-4.control-label(for="profilePic") Profile Pic:
@@ -18,4 +18,7 @@ block content
 						.background-image-holder(src="http://placehold.it/250x110")
 				.form-group
 					.col-sm-offset-2.col-sm-10
-						button.btn.btn-success(type="submit") Submit
+				input(type="hidden" value=id name="_id")
+				a(href="/signup"): button.btn.btn-success Previous
+				input.btn.btn-success.pull-right(type="submit" value="Join the Tribe!")
+						

@@ -1,0 +1,255 @@
+/*body {
+	background-color: rgb(44, 44, 45);
+font-size: 12px;
+}*/
+.cocreation-jt {
+margin-top: 100px !important;
+border-radius: 1000px;
+/* background: black; */
+/* border: 15px solid gray; */
+}
+
+.song-container {
+	position: relative;
+/*background: rgb(159, 160, 160);
+background-image: url('flowers.jpg');*/
+background-size: cover;
+min-width: 300px;
+max-width: 1150px;
+padding: 15px;
+height: 720px;
+border-radius: 492px;
+/*-webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);*/
+-moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
+box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, .5);
+/*display: none;*/
+}
+
+.canvas-container {
+position: absolute;
+width: 100%;
+height: 78px;
+}
+
+.visuals {
+position: absolute;
+bottom: -51px;
+height: 128px;
+width: 100%;
+left: 0px;
+}
+
+#song-name {
+color: rgb(83, 105, 119);
+margin-left: 20px;
+padding-left: 30px;
+border-top: 2px solid lightgray;
+margin-bottom: 0;
+width: 640px;
+border-right: 5px solid lightgray;
+border-top-right-radius: 20px;
+border-top-left-radius: 20px;
+background: -webkit-linear-gradient(left, rgba(255, 255, 255, 1),rgba(253, 253, 253, 0.7),rgba(200,200,200,0));
+}
+
+.song-info-box {
+	padding: 0px;
+	/*width: 140px;*/
+}
+
+.song-user-image {
+position: absolute;
+top: 8px;
+left: 76px;
+width: 60px;
+border-radius: 15px;
+height: 61px;
+background: rgb(210, 210, 210);
+display: inline-block;
+}
+
+.song-user-info-box{
+background: rgba(255, 255, 255, 0.3);
+color: white;
+position: absolute;
+left: 148px;
+padding: 8px 25px 2px 5px;
+border-top-right-radius: 15px;
+border-top: 1px solid white;
+bottom: 0px;
+}
+
+.song-user-name {
+color: white;
+font-size: 19px;
+}
+
+.song-track-name {
+color: white;
+font-size: 15px;
+}
+
+.select-track {
+	height: 20px;
+position: absolute;
+width: 65px;
+top: 6px;
+}
+
+#upload-button {
+position: absolute;
+bottom: 2px;
+left: 3px;
+width: 20px;
+margin: 1px 0px;
+color: gray;
+padding: 0px;
+height: 20px;
+}
+
+.like {
+height: 20px;
+width: 21px;
+padding: 0px;
+position: absolute;
+left: 2px;
+top: 32px;
+}
+
+.likes{
+	position: absolute;
+left: 29px;
+top: 35px;
+font-weight: 100;
+color: white;
+}
+
+.mute {
+height: 20px;
+position: absolute;
+bottom: 3px;
+left: 25px;
+padding: 0px;
+width: 20px;
+}
+
+.unmute{
+	background: gray;
+}
+
+.play-track{
+font-size: 15px;
+position: absolute;
+bottom: 3px;
+right: 3px;
+width: 20px;
+height: 20px;
+padding: 0px;
+}
+
+.download-track {
+	/*display: inline-block;
+	position: absolute;
+	bottom: 0px;
+	width: 40px;
+	*/height: 30px;
+}
+
+.upload-switch-track {
+position: relative;
+width: 70px;
+background: -webkit-linear-gradient(top, rgb(64, 65, 62), rgba(64, 65, 62,.9), rgba(73, 71, 69,.3));
+height: 78px;
+padding: 2px;
+}
+
+.upload-container {
+	/*width: 30px;*/
+	height: 30px;
+	background: gray;
+	display: inline-block;
+}
+
+.track {
+	max-width: 700px;
+	height: 90px;
+	background: white;
+	border: 1px solid lightgray;
+}
+
+.track-container-foundation {
+	width: 400px;
+	height: 200px;
+	background: white;
+	border: 1px solid black;
+}
+
+.track-container {
+position: relative;
+width: 100%;
+height: 78px;
+border-top: 1px solid gray;
+/* background: -webkit-linear-gradient(top,rgba(237, 237, 237,1), rgba(192, 184, 160, 0), rgba(192, 184, 160, 0), rgba(231, 225, 225,0)); */
+}
+
+.tc0{
+	border-top: none;
+}
+
+.transport {
+position: absolute;
+left: 0px;
+width: 100%;
+padding: 15px 40px 30px 40px;
+bottom: -79px;
+border-bottom-right-radius: 15px;
+border-bottom-left-radius: 15px;
+background: -webkit-linear-gradient(rgb(54, 53, 76),rgb(54, 53, 76),rgb(25, 25, 27));
+/* border: 10px solid rgb(190, 190, 190); */
+-webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
+-moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
+box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
+}
+
+.tb{
+	margin: 0px 5px;
+}
+
+.inner-container{
+	border: 15px solid rgb(54, 53, 76);
+position: relative;
+border-radius: 5px;
+-webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
+-moz-box-shadow:    1px 3px 30px 0px rgba(48, 50, 50, 1);
+box-shadow:         1px 3px 30px 0px rgba(48, 50, 50, 1);
+background: rgb(159, 160, 160);
+background-image: url('mountain-sun.jpg');
+background-size: cover;
+}
+
+.upload-view-foundation {
+
+}
+
+.upload-view-tracks {
+
+}
+
+#canvas0{
+	opacity: .7;
+}
+#canvas1{
+	opacity: .7;
+}
+#canvas2{
+	opacity: .7;
+}
+#canvas3{
+	opacity: .7;
+}
+#canvas4{
+	opacity: .7;
+}
+#canvas5{
+	opacity: .7;
+}

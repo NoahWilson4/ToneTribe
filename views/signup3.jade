@@ -1,16 +1,19 @@
 extends layout
 
 block content
-	.heading-form
+	.heading-signup-form
 		h1 Welcome to ToneTribe!
 		p Please fill in some info about yourself and we'll get you started.
-		form#signup.form-horizontal(method="post" action="/signup" role="form")
+		form#signup.form-horizontal(method="post" action="/updateUser2" role="form")
 			.row
 				.form-group
 					label.col-sm-4.control-label(for="about") About:
 					.col-sm-8
-						textarea.form-control.searchInput(type="text" name="about" placeholder="About…")
+						textarea.form-control.signup-textarea(type="text" name="about" placeholder="About…")
 				.form-group
 					label.col-sm-4.control-label(for="philosophy") Philosophy:
 					.col-sm-8
-						textarea.form-control.searchInput(type="text" name="philosophy" placeholder="Philosophy…")
+						textarea.form-control.signup-textarea(type="text" name="philosophy" placeholder="Philosophy…")
+				input(type="hidden" value=id name="_id")
+				a(href="/signup"): button.btn.btn-success Previous
+				input.btn.btn-success.pull-right(type="submit" value="Next")

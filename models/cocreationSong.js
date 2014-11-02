@@ -10,6 +10,8 @@ var CocreationSong = mongoose.Schema({
 					url: String,
 					Key: String,
 					userId: String,
+					userName: String,
+					userPic: String,
 					trackTitle: String,
 					likes: Number
 				}

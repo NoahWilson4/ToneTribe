@@ -1,32 +1,35 @@
 extends layout
 
 block content
-	.heading-form
+	.heading-signup-form
 		h1 Welcome to ToneTribe!
 		p Please fill in some info about yourself and we'll get you started.
 	.profile-sidebar.signup2-content
-					.sidebar-list
-						h4.sidebar-list-heading(title="bands") Bands:
-						p.signup2-text-box.sidebar-list-text.bands.editing-profile(name="bands")
-					.sidebar-list
-						h4.sidebar-list-heading Instruments:
-						p.signup2-text-box.sidebar-list-text.instruments.editing-profile(name="instruments")
-					.sidebar-list
-						h4.sidebar-list-heading Styles:
-						p.signup2-text-box.sidebar-list-text.styles.editing-profile(name="styles")
-					.sidebar-list
-						h4.sidebar-list-heading Skills:
-						p.signup2-text-box.sidebar-list-text.skills.editing-profile(name="skills")
-					.sidebar-list
-						h4.sidebar-list-heading Inspired By:
-						p.signup2-text-box.sidebar-list-text.inspirations.editing-profile(name="inspirations")
-					.sidebar-list
-						h4.sidebar-list-heading Improvisational/Compositional Orientation:
-						input.form-control.searchInput(type="range" min="0" max="100" name="improvComp")
-						dl.ratio-graph
-							dd
-								div#ratio-bar.bar(style="width: 50%") ratio
-						.improv Improv . . . . . . . . . . . . Composition
+		h3 user.name
+		.sidebar-list
+			h4.sidebar-list-heading(title="bands") Bands:
+			p.signup2-text-box.sidebar-list-text.bands.editing-profile(name="bands")
+		.sidebar-list
+			h4.sidebar-list-heading Instruments:
+			p.signup2-text-box.sidebar-list-text.instruments.editing-profile(name="instruments")
+		.sidebar-list
+			h4.sidebar-list-heading Styles:
+			p.signup2-text-box.sidebar-list-text.styles.editing-profile(name="styles")
+		.sidebar-list
+			h4.sidebar-list-heading Skills:
+			p.signup2-text-box.sidebar-list-text.skills.editing-profile(name="skills")
+		.sidebar-list
+			h4.sidebar-list-heading Inspired By:
+			p.signup2-text-box.sidebar-list-text.inspirations.editing-profile(name="inspirations")
+		.sidebar-list
+			h4.sidebar-list-heading Improvisational/Compositional Orientation:
+			input.form-control.searchInput(type="range" min="0" max="100" name="improvComp")
+		form(method="post" action="/updateUser")
+			input(type="hidden" value=id name="id")
+			a(href="/signup"): button.btn.btn-success Previous
+			input.btn.btn-success.pull-right(type="submit" value="Next")
+			
+						
 
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
-	script(script src="../js/signup.js")
+	script(script src="../scripts/lib/signup.js")

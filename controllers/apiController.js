@@ -51,6 +51,47 @@ var lowerCase = function(x){
 
 
 var apiController = {
+	addUser: function(req, res){
+		console.log('req.body add user: ', req.body);
+		var newUser = new User(req.body);
+		newUser.save();
+		var id = newUser._id;
+		console.log('id on add user: ', id);
+		res.render('signup2', {
+			id: id
+		});
+	},
+	updateUser: function(req, res){
+		console.log('req.body update user: ', req.body);
+		var id = req.body.id;
+		// Music.findById(trackData.id, function(err, result){
+		// 	result.title = trackData.title;
+		// 	result.artist = trackData.artist;
+		// 	result.save(function(err, result){
+		// 		res.send(result);
+		// 	});
+		// });
+		res.render('signup3', {
+			id: id
+		});
+
+	},
+	updateUser2: function(req, res){
+		console.log('req.body update user2: ', req.body);
+		var id = req.body.id;
+		res.render('signup4', {
+			id: id
+		});
+
+	},
+	updateUser3: function(req, res){
+		console.log('req.body update user3: ', req.body);
+		var id = req.body.id;
+		res.render('profile-user' + id, {
+			id: id
+		});
+
+	},
 	createNewSong: function(req, res){
 		var songName = req.body;
 		var newSong = new CocreationSong(songName);
@@ -145,6 +186,12 @@ var apiController = {
               }
           });
 	},
+	getSongs: function(req, res){
+		CocreationSong.find({}, function(err, result){
+			// console.log('result of songs: ', result);
+			res.send(result);
+		})
+	},
 	getTrackUrls: function(req, res, onComplete){
 		var tracks;
 		var trackKeys = [[],[],[],[],[],[]];
@@ -167,6 +214,7 @@ var apiController = {
 				console.log('***result: ', result);
 				var tracks = result;
 				console.log('result!!!!!!!!!!!!!!!!', result);
+
 				
 				async.series([
 				    function(callback){
@@ -279,49 +327,6 @@ var apiController = {
 		    res.redirect('/song/' + songId);
 		  });
 		},
-		// submitTrack: function (req, res) {
-		// 	console.log('req.body', req.body);
-		// 	console.log('req.params', req.params);
-
-
-		//   var fName = req.files.audio.name;
-		//   var fPath = req.files.audio.path;
-		//   var cType = req.files.audio.type;
-		//   var size = req.files.audio.size;
-		//   var audio = req.body;
-
-		//   var key = 'public/' + fName;
-		//   var trackTitle = req.body.trackTitle;
-		//   var songId = req.body.id;
-		//   var trackNumber = req.body.trackNumber;
-		 
-		//   fs.readFile(fPath, function (err, data) {
-		//     console.log(err);
-		//     s3.putObject({
-		//         Bucket: BUCKET,
-		//         Key: 'public/' + fName,
-		//         ACL: 'public-read',
-		//         Body: data
-		//       }, function (err, result) {
-		//           console.log(err, result);
-
-		//           var track = {
-		//               Key: key,
-		//               trackTitle: trackTitle,
-		//               ETag: trackETag,
-		//               songId: songId,
-		//               trackNumber: trackNumber,
-		//               url: trackUrl
-		//           };
-
-		//               apiController.addTrack(track);
-		        
-		//         });
-		   
-		//     console.log('finishing with upload.......', songId);
-		//     res.redirect('/song/' + songId);
-		//   });
-		// },
 		submitPrivate: function (req, res) {
 		  console.log(req.files);
 		  var fName = req.files.image.name;
@@ -346,51 +351,47 @@ var apiController = {
 		findUsers: function(req, res){
 			var positiveResults = [];
 			var positiveResultsBands = [];
-	///////////// why are there brackets???
-			console.log('*findUsers body: ', req.body);
-			console.log('findUsers req.body.searchFor: ', req.body.searchedFor);
 			var property = req.body.searchedFor;
 			var value = req.body.searchedForValue;
+			if (_.isArray(property) === false){
+				property = [property];
+				value = [value];
+			}
+			console.log('property: ', property);
+			console.log('value: ', value);
 			User.find({}, function(err, result){
 				var users = result;
 
-				// console.log('users: ', users);
+				console.log('users: ', users);
 
+				for (var y = 0; y < property.length; y++){
+					for (var i = 0; i < users.length; i++) {
+						var user = users[i];
+						var userProp = user[property[y]] || user[property];
+						console.log('userProp', userProp);
+						if (_.isArray(userProp) === true) {
+							console.log('isArray');
+							var propertyArray = lowerCase(userProp);
+							console.log('propertyArray', propertyArray);
+							for (var z = 0; z < propertyArray.length; z++) {
+								console.log('propertyArray[z], value[i], value; ', propertyArray[z], value[i], value);
 
-				for (var i = 0; i < users.length; i++) {
-					var user = users[i];
-					var userProp = user[property];
-					if (_.isArray(userProp) === true) {
-						var propertyArray = lowerCase(userProp);
-						var isDuplicate = false;
-								// for (var z = 0; z < positiveResults.length; z++) {
-								// 	var idSearch = positiveResults[z];
-								// 	if (idSearch.userId === user.userId) {
-								// 		isDuplicate = true;
-								// 	}
-								// 	if ( isDuplicate === false){
-								// 		positiveResults.push(users[i]);
-								// 	}						
-								// }
-								positiveResults.push(users[i]);
-					} else {
-						var userProp = lowerCase(userProp);
-						if (userProp === value) {
-							var isDuplicate = false;
-								// for (var z = 0; z < positiveResults.length; z++) {
-								// 	var idSearch = positiveResults[z];
-								// 	if (idSearch.userId === user.userId) {
-								// 		isDuplicate = true;
-								// 	}
-								// 	if ( isDuplicate === false){
-								// 		positiveResults.push(users[i]);
-								// 	}						
-								// }
-								positiveResults.push(users[i]);
+								if (propertyArray[z] === value[y]){
+									console.log('is array positive!!!!');
+									positiveResults.push(users[i]);
+								}
+							}
+						} else {
+							console.log('is not array');
+							var userProp = lowerCase(userProp);
+							console.log('userProp, value[i], value: ', userProp, value[i], value);
+							if (userProp === value[i] || userProp === value) {
+								console.log('not array positive!!!!');
+									positiveResults.push(users[i]);
+							}
 						}
 					}
 				}
-
 			// bands //////////
 				// for (var i = 0; i < bands.length; i++) {
 				// 	var band = bands[i];
@@ -426,8 +427,10 @@ var apiController = {
 				// 	}
 				// };
 
-				
-				console.log('positiveResults: ', positiveResults);
+				console.log('positiveResults serverside: ', positiveResults);
+				console.log('positiveResults.length', positiveResults.length);
+				// console.log('positiveResultsBands: ', positiveResultsBands);
+				res.send(positiveResults);
 
 			});
 

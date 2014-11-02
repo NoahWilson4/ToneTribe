@@ -551,39 +551,6 @@ padding: 5px 5px 0px 5px;
 		co-creation
 */
 
-.cocreation-jt {
-	margin-top: 100px !important;
-}
-
-.track {
-	width: 400px;
-	height: 50px;
-	background: white;
-	border: 1px solid lightgray;
-}
-
-.track-container-foundation {
-	width: 400px;
-	height: 200px;
-	background: white;
-	border: 1px solid black;
-}
-
-.track-container {
-	width: 400px;
-	/*height: 200px;*/
-	background: lightgray;
-	border: 1px solid gray;
-}
-
-.upload-view-foundation {
-
-}
-
-.upload-view-tracks {
-
-}
-
 /*.input-hide {
 	display: none;
 }*/
@@ -597,7 +564,7 @@ padding: 5px 5px 0px 5px;
 /*    sign up pages     */
 
 .signup2-content {
-	max-width: 500px;
+	max-width: 600px;
 	margin-left: 3%;
 	padding: 20px;
 	padding-bottom: 50px;
@@ -606,12 +573,22 @@ padding: 5px 5px 0px 5px;
 
 .signup2-text-box {
 	margin: 5px;
-max-width: 320px;
+
 min-height: 26px;
 }
 
 
+.heading-signup-form {
+	width: 90%;
+	min-width: 300px;
+	max-width: 450px;
+	margin-left: 5%;
+	margin-top: 70px;
+}
 
+.signup-textarea {
+	height: 300px;
+}
 
 
 
