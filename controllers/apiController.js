@@ -26,7 +26,7 @@ aws.config.update({
 var s3 = new aws.S3();
 /// environments
 var app = express();
-app.set('port', process.env.PORT || 3000);
+// app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
@@ -62,23 +62,42 @@ var apiController = {
 		});
 	},
 	updateUser: function(req, res){
-		console.log('req.body update user: ', req.body);
 		var id = req.body.id;
-		// Music.findById(trackData.id, function(err, result){
-		// 	result.title = trackData.title;
-		// 	result.artist = trackData.artist;
-		// 	result.save(function(err, result){
-		// 		res.send(result);
-		// 	});
-		// });
 		res.render('signup3', {
 			id: id
 		});
 
 	},
+	updateUserFromClient: function(req, res){
+		console.log('req.body update user from client: ', req.body);
+		var id = req.body.id;
+		console.log('id: ', id);
+		User.find({_id: id}, function(err, result){
+			console.log('update result', result);
+			result.bands = req.body.bands || [];
+			result.instruments = req.body.instruments || [];
+			result.styles = req.body.styles || [];
+			result.skills = req.body.skills || [];
+			result.inspirations = req.body.inspirations || [];
+			result.improvComp = req.body.improvComp || [];
+			//////// why is it not able to save??????
+			result.save(function(err, result){
+				res.send(result);
+			});
+		});
+		
+
+	},
 	updateUser2: function(req, res){
 		console.log('req.body update user2: ', req.body);
 		var id = req.body.id;
+		User.find({_id: id}, function(err, result){
+			console.log('updateUser2 result', result);
+			result.about = req.body.about || '';
+			result.philosophy = req.body.philosophy || '';
+			//////// why is it not able to save??????
+			result.save();
+		});
 		res.render('signup4', {
 			id: id
 		});
@@ -87,6 +106,13 @@ var apiController = {
 	updateUser3: function(req, res){
 		console.log('req.body update user3: ', req.body);
 		var id = req.body.id;
+		User.find({_id: id}, function(err, result){
+			console.log('updateUser2 result', result);
+			result.profilePic = req.body.profilePic || '';
+			result.backgroundPic = req.body.backgroundPic || '';
+			//////// why is it not able to save??????
+			result.save();
+		});
 		res.render('profile-user' + id, {
 			id: id
 		});

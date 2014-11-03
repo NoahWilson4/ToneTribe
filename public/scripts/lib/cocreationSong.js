@@ -32,6 +32,11 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 		note.start(0);
 	}
 
+	navigator.getUserMedia({audio: true}, function(stream) {
+	  var microphone = context.createMediaStreamSource(stream);
+	  microphone.connect(context.destination);
+	}, function(err){});
+
 	var analyser0 = context.createAnalyser();
     var canvas0 = document.getElementById('canvas0');
 	var canvasCtx0 = canvas0.getContext('2d');

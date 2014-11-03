@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	.jumbotron.cocreation-jt
+	.cocreation-jt
 		#songId(value=id name="id")
 		.song-container
 			h2#song-name= song.name
@@ -120,7 +120,12 @@ block content
 					.song-user-info-box
 						.song-user-name Username
 						.song-track-name= track5.userTracks[0].trackTitle
-					.transport
+				.bottom-fill
+				button#play.btn.btn-success.tb Play
+				button#stop.btn.btn-danger.tb Stop
+				button#share.btn.btn-primary.tb Share
+				button#download.btn.btn-default.tb Download
+					//- .transport
 						button#play.btn.btn-success.tb Play
 						button#stop.btn.btn-danger.tb Stop
 						button#share.btn.btn-primary.tb Share

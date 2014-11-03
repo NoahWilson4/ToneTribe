@@ -24,10 +24,10 @@ block content
 		.sidebar-list
 			h4.sidebar-list-heading Improvisational/Compositional Orientation:
 			input.form-control.searchInput(type="range" min="0" max="100" name="improvComp")
-		form(method="post" action="/updateUser")
-			input(type="hidden" value=id name="id")
+		form#form-signup2(method="post" action="/updateUser")
+			input#id(type="hidden" value=id name="id")
 			a(href="/signup"): button.btn.btn-success Previous
-			input.btn.btn-success.pull-right(type="submit" value="Next")
+			input#signup2-submit.btn.btn-success.pull-right(type="submit" value="Next")
 			
 						
 

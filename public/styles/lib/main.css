@@ -50,8 +50,7 @@ bottom: 10px;
 }
 
 .gallery-block {
-	max-width: 386px;
-width: 90%;
+
 }
 
 .photo-container{
@@ -164,6 +163,10 @@ border-top: none;
 
 .sidebar-list {
 
+}
+
+.btn-songs{
+	margin-top: 15px;
 }
 
 .sidebar-list-heading {

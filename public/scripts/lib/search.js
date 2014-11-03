@@ -65,14 +65,16 @@ var lowerCase = function(x){
 		    console.log( "error" );
 		  })
 		  .always(function() {
-		    console.log( "complete, searchResults: ", searchResults );
+		    var results = _.uniq(searchResults.responseJSON);
+		    console.log('results: ', results);
+
 		  });
 
 		 
 
 
 
-		  console.log('searchResults', searchResults);
+		  
 
 		
 

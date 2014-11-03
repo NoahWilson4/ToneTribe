@@ -10,11 +10,13 @@ block content
 
 	.container
 		.row
-			div.col-sm-4#sidebar
+			div.col-sm-3#sidebar
 				.profile-sidebar
-					.sidebar-list
-						button.edit-profile.btn.btn-default.btn-xs Edit Profile
+					button.edit-profile.btn.btn-default.btn-xs Edit Profile
 						.edit-directions Update By Clicking on Text
+					.sidebar-list
+						button.btn.btn-default.btn-sm.btn-songs Cocreation Songs
+					.sidebar-list
 						h4.sidebar-list-heading(title="bands") Bands:
 						p.sidebar-list-text.bands user.bands
 					.sidebar-list
@@ -38,7 +40,7 @@ block content
 					.sidebar-list
 						h4.sidebar-list-heading Astrological Sign:
 						p.sidebar-list-text.astro-sign user.sign
-			.col-sm-8
+			.col-sm-9
 				.info-block
 					h5.info-block-heading(title="about") About
 					p.about user.about

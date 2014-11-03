@@ -5,8 +5,8 @@ var apiController = require('./controllers/apiController.js')
 var mongoose = require('mongoose');
 var async = require('async');
 var passport = require('passport');
-var passportConfig = require('./config/passport');
-var authController = require('./controllers/authController');
+var FacebookStrategy = require('passport-facebook').Strategy
+
 
 
 var CocreationSong = require('./models/cocreationSong.js')
@@ -56,27 +56,6 @@ app.use(require('connect-multiparty')());
 
 
 
-///////////////////////////////////////////
-////////// PASSPORT
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.get(
-  '/', 
-  authController.ensureAuthenticated, 
-  indexController.index
-);
-app.get('/login', authController.login);
-app.get('/logout', authController.logout);
-
-app.get('/login/facebook', passport.authenticate('facebook'));
-app.get(
-  '/facebook/callback',
-  passport.authenticate('facebook', {failureRedirect: '/login'}),
-  authController.loginSuccess
-);
-/////////////////////////////////////////
-
 
 app.get('/cocreation', indexController.cocreation);
 app.get('/api/getSongs', apiController.getSongs);
@@ -96,6 +75,7 @@ app.get('/live-stream', indexController.liveStream);
 app.get('/song', indexController.song);
 app.post('/addUser', apiController.addUser);
 app.post('/updateUser', apiController.updateUser);
+app.post('/updateUserFromClient', apiController.updateUserFromClient);
 app.post('/updateUser2', apiController.updateUser2);
 app.post('/updateUser3', apiController.updateUser3);
 app.post('/api/findUsers', apiController.findUsers);

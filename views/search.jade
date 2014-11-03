@@ -29,7 +29,24 @@ block content
 			.form-group
 				.col-sm-offset-2.col-sm-10
 					input.btn.btn-success(type="submit" value="Search")
-
-						
+	.search-results
+		h1 Search Results:
+		a(href="/search"): button.btn.btn-success.btn-xs.search-again Search Again
+		.list-group.results
+		.search-result-info
+			h2.list-group-item-heading No Results Found.
+		.search-results-container
+			h3 Musicians:
+			div#search-results-musicians
+			h3 Bands:
+			div#search-results-bands
+				
+	script(id="search-result-template" type="text/x-handlebars-template")
+		div.list-group.results
+			a.list-group-item.result-block(href="#")
+			img#memberPic.search-profile-pic(src="")
+			.search-result-info
+				h4.list-group-item-heading Name
+				p.list-group-item-text Location					
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
 	script(script src="../scripts/lib/search.js")

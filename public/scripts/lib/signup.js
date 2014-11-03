@@ -48,6 +48,29 @@ var userInfo = {
 			
 	});
 
+	$('#signup2-submit').on('click', function(){
+		var id = $(this).closest('form').find('#id').attr('value');
+		console.log('id: ', id);
+		userInfo['id'] = id;
+		var searchResults = $.ajax({
+			type: 'POST',
+			url: '/updateUserFromClient',
+			traditional: true,
+			data: userInfo
+		}).done(function() {
+		  	console.log( "success" );
+		  })
+		  .fail(function() {
+		    console.log( "error" );
+		  })
+		  .always(function() {
+		    console.log( "complete, searchResults: ", searchResults );
+		  });
+		// $.post('/updateUserFromClient', {userInfo: userInfo}, function(response){
+
+		// })
+	})
+
 
 	//////////  create ajax call to save userinfo on submit/go to next page
 
