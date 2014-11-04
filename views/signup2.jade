@@ -23,7 +23,17 @@ block content
 			p.signup2-text-box.sidebar-list-text.inspirations.editing-profile(name="inspirations")
 		.sidebar-list
 			h4.sidebar-list-heading Improvisational/Compositional Orientation:
-			input.form-control.searchInput(type="range" min="0" max="100" name="improvComp")
+			.improvCompNumbers Improv = 
+				span: strong#improv 50
+				span % / 
+				span: strong#comp 50
+				span % = Comp
+			.range-container
+				dl.ratio-graph-signup
+							dd
+								div#ratio-bar-signup.bar-signup(style="width: 50%") ratio
+								div#ratio-bar-signup2.bar-signup2(style="width: 50%") ratio
+				input.form-control.searchInput(type="range" min="0" max="100" value="" step="1" id="improvCompRange" onchange="getRangeValue(this.value)")
 		form#form-signup2(method="post" action="/updateUser")
 			input#id(type="hidden" value=id name="id")
 			a(href="/signup"): button.btn.btn-success Previous

@@ -19,7 +19,11 @@ var indexController = {
 			res.render('signup3');
 		},
 	signup4: function(req, res) {
-			res.render('signup4');
+			res.render('signup4', {
+				profileUrl: '',
+				id: '',
+				backgroundUrl: ''
+			});
 		},
 	profileUser: function(req, res) {
 			// User.find({}, function(err, response){

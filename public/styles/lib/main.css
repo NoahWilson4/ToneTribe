@@ -334,6 +334,7 @@ color: gray;
 	width: 250px;
 }
 
+
 .choose-pic {
 	width: 200px;
 display: inline-block;
@@ -402,19 +403,35 @@ top: 85px;
 	background: white;
 }
 
-.background-image-holder {
+#background-image-holder {
 	background: lightgray;
-background-image: ;
 background-size: cover;
 background-position: center;
-width: 250px;
-height: 110px;
+width: 500px;
+height: 250px;
 
+}
+
+#profile-image-holder {
+background: lightgray;
+width: 150px;
+height: 150px;
+background-size: cover;
 }
 
 /*/////////////////// search pages ////////////////////*/
 
+.search-results{
+	display: none;
+}
 
+.display {
+	display: inherit;
+}
+
+.no-results {
+	display: none;
+}
 
 .heading-form {
 	width: 90%;
@@ -519,12 +536,70 @@ font-weight: bold;
 }
 
 /*   graph           ///////////////////*/
+
+.range-container {
+	position: relative;
+}
+
+#ratio-bar-signup {
+
+}
+
+.improvCompNumbers {
+	width: 400px;
+	margin: auto;
+	text-align: center;
+	font-size: 17px;
+}
+
+.improvCompNumbers strong {
+	color: darkred;
+	font-size: 20px;
+}
+
+#improvCompRange {
+	margin-bottom: 20px;
+position: absolute;
+background: transparent;
+}
 .bar {
 	background: rgb(157, 184, 91);
 color: transparent;
 border-radius: 7px;
 border-top-right-radius: 0px;
 border-bottom-right-radius: 0px;
+}
+
+.bar-signup {
+height: 34px;
+background: -webkit-linear-gradient(right,rgb(207, 204, 201), rgb(242, 242, 242), rgb(250, 250, 250));
+color: transparent;
+border-radius: 7px;
+border-top-right-radius: 0px;
+border-bottom-right-radius: 0px;
+}
+.bar-signup2 {
+height: 34px;
+background: -webkit-linear-gradient(left,rgb(207, 204, 201), rgb(242, 242, 242), rgb(250, 250, 250));
+color: transparent;
+
+position: absolute;
+right: 0px;
+border-radius: 0px;
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+bottom: -2px;
+}
+
+
+.ratio-graph-signup {
+position: absolute;
+width: 100%;
+background: rgb(239, 239, 239);
+border-radius: 7px;
+margin-bottom: 0px;
+top: 0px;
+height: 33px;
 }
 
 .ratio-graph {
@@ -565,6 +640,10 @@ padding: 5px 5px 0px 5px;
 
 /*////////////////////*/
 /*    sign up pages     */
+
+#form-signup2 {
+	margin-top: 75px;
+}
 
 .signup2-content {
 	max-width: 600px;

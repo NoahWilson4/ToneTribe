@@ -1,18 +1,23 @@
 var express = require('express');
+var http = require('http');
 var bodyParser = require('body-parser');
-var indexController = require('./controllers/index.js');
-var apiController = require('./controllers/apiController.js')
 var mongoose = require('mongoose');
 var async = require('async');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy
 
+var authController = require('./controllers/authController');
+var indexController = require('./controllers/index.js');
+var apiController = require('./controllers/apiController.js')
 
+/// if no users, add a few for testing
+require('./models/seeds/userSeed.js');
 
-var CocreationSong = require('./models/cocreationSong.js')
+// var CocreationSong = require('./models/cocreationSong.js')
 
 mongoose.connect('mongodb://localhost/toneTribe');
 
+////////////////////////////////////////////
 //for aws
 var http = require('http');
 var path = require('path');
@@ -39,8 +44,7 @@ aws.config.update({
   secretAccessKey: SECRET
 });
 var s3 = new aws.S3();
-
-require('./models/seeds/userSeed.js');
+////////////////////////////////////////////
 
 /// environments
 var app = express();
@@ -54,14 +58,35 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(require('connect-multiparty')());
 // var multer = require('multer');
 
+////////////////////////////////////////////
+////// passport
 
 
+app.get(
+  '/', 
+  authController.ensureAuthenticated, 
+  indexController.index
+);
+app.get('/login', authController.login);
+app.get('/logout', authController.logout);
+
+app.get('/login/facebook', passport.authenticate('facebook'));
+app.get(
+  '/facebook/callback',
+  passport.authenticate('facebook', {failureRedirect: '/login'}),
+  authController.loginSuccess
+);
+
+
+
+
+////////////////////////////////////////////
 
 app.get('/cocreation', indexController.cocreation);
 app.get('/api/getSongs', apiController.getSongs);
 // app.get('/api/getTrackUrls/:id', apiController.getTrackUrls);
 
-app.get('/', indexController.index);
+// app.get('/', indexController.index);
 app.get('/signup', indexController.signup);
 app.get('/signup2', indexController.signup2);
 app.get('/signup3', indexController.signup3);
@@ -82,6 +107,86 @@ app.post('/api/findUsers', apiController.findUsers);
 app.post('/submitSearch', indexController.submitSearch);
 app.post('/api/createNewSong', apiController.createNewSong);
 app.post('/api/getTrackUrls', apiController.getTrackUrls);
+
+
+////////////////////////////////////////////
+/// uploads
+app.post('/uploadProfilePic', function (req, res){
+  console.log('req.files on uploadProfilePic: ', req.files);
+  console.log('req.body on uploadProfilePic: ', req.body);
+  var fName = req.files.image.name;
+      var fPath = req.files.image.path;
+      var cType = req.files.image.type;
+      var size = req.files.image.size;
+      var image = req.body;
+
+      var id = req.body._id;
+      var profileUrl = 'https://s3.amazonaws.com/tonetribe/public/' + fName;
+      var backgroundUrl = req.body.backgroundUrl;
+
+      console.log('profileUrl, id', profileUrl, id);
+
+      var image = {
+          Key: 'public/' + fName,
+          id: id
+              };
+     
+      fs.readFile(fPath, function (err, data) {
+        console.log(err);
+        s3.putObject({
+            Bucket: BUCKET,
+            Key: 'public/' + fName,
+            ACL: 'public-read',
+            Body: data
+          }, function (err, result) {
+                console.log('finishing with upload.......', err, result);
+          console.log('about to render.........');
+              });
+          res.render('signup4', {
+            id: id,
+            profileUrl: profileUrl,
+            backgroundUrl: backgroundUrl
+          });
+      });
+});
+app.post('/uploadBackgroundPic', function (req, res){
+  console.log('req.files on uploadBackgroundPic: ', req.files);
+  console.log('req.body on uploadBackgroundPic: ', req.body);
+  var fName = req.files.image.name;
+      var fPath = req.files.image.path;
+      var cType = req.files.image.type;
+      var size = req.files.image.size;
+      var image = req.body;
+
+      var id = req.body._id;
+      var profileUrl = req.body.profileUrl;
+      var backgroundUrl = 'https://s3.amazonaws.com/tonetribe/public/' + fName;
+
+      console.log('profileUrl, backgroundUrl, id', profileUrl, backgroundUrl, id);
+
+      var image = {
+          Key: 'public/' + fName,
+          id: id
+              };
+     
+      fs.readFile(fPath, function (err, data) {
+        console.log(err);
+        s3.putObject({
+            Bucket: BUCKET,
+            Key: 'public/' + fName,
+            ACL: 'public-read',
+            Body: data
+          }, function (err, result) {
+                console.log('finishing with upload.......', err, result);
+          console.log('about to render.........');
+              });
+          res.render('signup4', {
+            id: id,
+            profileUrl: profileUrl,
+            backgroundUrl: backgroundUrl
+          });
+      });
+});
 
 app.post('/submitTrack', function (req, res) {
       console.log('req.body on submitTrack', req.body);
@@ -127,7 +232,7 @@ app.post('/submitTrack', function (req, res) {
         res.redirect('song');
       });
     }
-  )
+  );
 app.post('/submitPrivate', function (req, res) {
   console.log(req.files);
   var fName = req.files.image.name;

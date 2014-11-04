@@ -2,6 +2,14 @@
 
 $(document).on('ready', function(){
 
+
+
+/////// HANDLEBARS SEARCH RESULT TEMPLATE
+var searchTemplate = $('#search-result-template').html();
+var compileTemplate = Handlebars.compile(searchTemplate);
+
+
+
 var lowerCase = function(x){
 		if ($.isArray(x) === true){
 			for (var y = 0; y < x.length; y++){
@@ -21,8 +29,14 @@ var lowerCase = function(x){
 	var positiveResultsFinal = [];
 	
 	$('#submitSearch').on('submit', function(e){
+		$('.search-form').hide();
+		$('.search-results').addClass('display');
+		var positiveResultsBands = [];
+		var positiveResultsFinalBands = [];
+		var positiveResults = [];
+		var positiveResultsFinal = [];
+
 		console.log('submitted...');
-		$('.search-result-info').hide();
 		$('#search-results-musicians').empty();
 		$('#search-results-bands').empty();
 		e.preventDefault();
@@ -67,45 +81,52 @@ var lowerCase = function(x){
 		  .always(function() {
 		    var results = _.uniq(searchResults.responseJSON);
 		    console.log('results: ', results);
+		    if (results.length === 0){
+		    	$('.no-results').addClass('display');
+		    }
+
+		    for (var i = 0; i < results.length; i++){
+			var user = results[i];
+			console.log(user)
+
+			var outputHTML = compileTemplate(user);
+			console.log(outputHTML);
+			$('#search-results-musicians').append(outputHTML);
+		    	
+		    }
+
+			
 
 		  });
 
-		 
-
-
-
-		  
-
-		
-
 	///// users /////////
-		for (var i = 0; i < positiveResults.length; i++) {
-			var userToQualify = positiveResults[i];
-			var matches = 0;
+		// for (var i = 0; i < positiveResults.length; i++) {
+		// 	var userToQualify = positiveResults[i];
+		// 	var matches = 0;
 
-			for (var x = 0; x < searchedFor.length; x++){
+		// 	for (var x = 0; x < searchedFor.length; x++){
 							
-				var key = searchedFor[x];
-				var value = searchedForValue[x];
-				var userKey = userToQualify[key];
+		// 		var key = searchedFor[x];
+		// 		var value = searchedForValue[x];
+		// 		var userKey = userToQualify[key];
 
-				if ( $.isArray(userKey)) {
-					for (var z = 0; z < userKey.length; z++) {
-						if (userKey[z] === value) {
-					matches++;
-						}
-					}
-				}
-				var userValue = userToQualify[key];
-				userValue = lowerCase(userValue);
-				if ( userValue === value ) {
-					matches++;
-				}
-				if (matches === searchedFor.length) {
-					positiveResultsFinal.push(positiveResults[i]);
-				}
-			}	
-		};
+		// 		if ( $.isArray(userKey)) {
+		// 			for (var z = 0; z < userKey.length; z++) {
+		// 				if (userKey[z] === value) {
+		// 			matches++;
+		// 				}
+		// 			}
+		// 		}
+		// 		var userValue = userToQualify[key];
+		// 		userValue = lowerCase(userValue);
+		// 		if ( userValue === value ) {
+		// 			matches++;
+		// 		}
+		// 		if (matches === searchedFor.length) {
+		// 			positiveResultsFinal.push(positiveResults[i]);
+		// 		}
+		// 	}	
+		// };
 	///// bands /////////
 		// for (var i = 0; i < positiveResultsBands.length; i++) {
 		// 	var userToQualify = positiveResultsBands[i];
@@ -145,33 +166,35 @@ var lowerCase = function(x){
 
 /////// search page rendering and displaying results ////////
 
-			$('.search-results').show();
-			$('.search-form').hide();
+			// $('.search-results').show();
+			// $('.search-form').hide();
 	
 			
 
-			for (var i = 0; i < positiveResultsFinal.length; i++){
-				var result = positiveResultsFinal[i];
-				result.displayResultsMusicians();
-			}
-			if (positiveResultsFinal.length < 1 && positiveResultsFinalBands < 1) {
-				$('.search-result-info').show();
-			}
-
-			for (var i = 0; i < positiveResultsFinalBands.length; i++){
-				var result = positiveResultsFinalBands[i];
-				result.displayResultsBands();
-			}
-			// if (positiveResultsFinalBands.length < 1) {
-			// 	$('#search-results-container').prepend('<div class="list-group results"</div><div class="search-result-info"><h4 class="list-group-item-heading">No results found.</h4></div>')
+			// for (var i = 0; i < positiveResultsFinal.length; i++){
+			// 	var result = positiveResultsFinal[i];
+			// 	result.displayResultsMusicians();
+			// }
+			// if (positiveResultsFinal.length < 1 && positiveResultsFinalBands < 1) {
+			// 	$('.no-results').show();
 			// }
 
-	});
-	// $('.search-results').hide();
+			// for (var i = 0; i < positiveResultsFinalBands.length; i++){
+			// 	var result = positiveResultsFinalBands[i];
+			// 	result.displayResultsBands();
+			// }
+			// if (positiveResultsFinalBands.length < 1) {
+			// 	$('#search-results-container').prepend('<div class="list-group results"</div><div class="no-results"><h4 class="list-group-item-heading">No results found.</h4></div>')
+			// }
+
+
+
+			});
+			// $('.search-results').hide();
 
 	$(document).on('click', '.search-again', function(){
-		// $('.search-results').hide();
-		// $('.search-results-container').empty();
+		$('.search-results').removeClass('display');
+		$('.no-results').removeClass('display');
 		positiveResults = [];
 		positiveResultsFinal = [];
 		positiveResultsBands = [];

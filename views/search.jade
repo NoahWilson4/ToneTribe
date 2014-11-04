@@ -2,38 +2,39 @@ extends layout
 
 block content
 	.heading-form
-		h1 Search for Musicians
-		p Fill in the fields that you would like to search by:
-		//- form#submitSearch.form-horizontal(action="/submitSearch" method="post" role="form")
-		form#submitSearch.form-horizontal(role="form")
-			.form-group
-				label.col-sm-2.control-label(for="name") Name:
-				.col-sm-10
-					input.form-control.searchInput(type="text" name="name" placeholder="Musician or Band Name…")
-			.form-group
-				label.col-sm-2.control-label(for="location") Location:
-				.col-sm-10
-					input.form-control.searchInput(type="text" name="location" placeholder="Location…")
-			.form-group
-				label.col-sm-2.control-label(for="insruments") Instrument:
-				.col-sm-10
-					input.form-control.searchInput(type="text" name="instruments" placeholder="Instrument…")
-			.form-group
-				label.col-sm-2.control-label(for="styles") Style:
-				.col-sm-10
-					input.form-control.searchInput(type="text" name="styles" placeholder="Style…")
-			.form-group
-				label.col-sm-2.control-label(for="skill") Skill:
-				.col-sm-10
-					input.form-control.searchInput(type="text" name="skills" placeholder="Skill…")
-			.form-group
-				.col-sm-offset-2.col-sm-10
-					input.btn.btn-success(type="submit" value="Search")
+		.search-form
+			h1 Search for Musicians
+			p Fill in the fields that you would like to search by:
+			//- form#submitSearch.form-horizontal(action="/submitSearch" method="post" role="form")
+			form#submitSearch.form-horizontal(role="form")
+				.form-group
+					label.col-sm-2.control-label(for="name") Name:
+					.col-sm-10
+						input.form-control.searchInput(type="text" name="name" placeholder="Musician or Band Name…")
+				.form-group
+					label.col-sm-2.control-label(for="location") Location:
+					.col-sm-10
+						input.form-control.searchInput(type="text" name="location" placeholder="Location…")
+				.form-group
+					label.col-sm-2.control-label(for="insruments") Instrument:
+					.col-sm-10
+						input.form-control.searchInput(type="text" name="instruments" placeholder="Instrument…")
+				.form-group
+					label.col-sm-2.control-label(for="styles") Style:
+					.col-sm-10
+						input.form-control.searchInput(type="text" name="styles" placeholder="Style…")
+				.form-group
+					label.col-sm-2.control-label(for="skill") Skill:
+					.col-sm-10
+						input.form-control.searchInput(type="text" name="skills" placeholder="Skill…")
+				.form-group
+					.col-sm-offset-2.col-sm-10
+						input.btn.btn-success(type="submit" value="Search")
 	.search-results
 		h1 Search Results:
 		a(href="/search"): button.btn.btn-success.btn-xs.search-again Search Again
 		.list-group.results
-		.search-result-info
+		.no-results
 			h2.list-group-item-heading No Results Found.
 		.search-results-container
 			h3 Musicians:
@@ -41,12 +42,15 @@ block content
 			h3 Bands:
 			div#search-results-bands
 				
-	script(id="search-result-template" type="text/x-handlebars-template")
-		div.list-group.results
-			a.list-group-item.result-block(href="#")
-			img#memberPic.search-profile-pic(src="")
-			.search-result-info
-				h4.list-group-item-heading Name
-				p.list-group-item-text Location					
+	script(id="search-result-template" type="text/x-handlebars-template").
+		<div class="list-group results">
+			<a class="list-group-item result-block" href="./profile-user">
+				<img id="memberPic" class="search-profile-pic" src={{profilePic}}>
+				<div class="search-result-info">
+					<h4 class="list-group-item-heading"> {{name}} </h4>
+					<p class="list-group-item-text"> {{location}} </p>
+				</div>
+			</a>
+		</div>				
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
 	script(script src="../scripts/lib/search.js")

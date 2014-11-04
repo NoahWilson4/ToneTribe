@@ -353,17 +353,17 @@ Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
 	})
 
 
-
+//////////////////////////////////////////
 //   ///////// cover page
 
-	$('#tune-in').on('submit', function(e){
-		e.preventDefault();
-		var form = $(e.target);
-		var email = form.find('[name=email]');
-		var password = form.find('[name=password]');
-		var url = "profile-user-prepopulated.html";
-		window.location = url;
-	})
+	// $('#tune-in').on('submit', function(e){
+	// 	e.preventDefault();
+	// 	var form = $(e.target);
+	// 	var email = form.find('[name=email]');
+	// 	var password = form.find('[name=password]');
+	// 	var url = "profile-user-prepopulated.html";
+	// 	window.location = url;
+	// })
 
 	$('.join').on('click', function(){
 		var url = "signup.html";

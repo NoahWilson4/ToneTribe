@@ -4,7 +4,7 @@ block content
 	.cocreation-jt
 		#songId(value=id name="id")
 		.song-container
-			h2#song-name= song.name
+			h1#song-name= song.name
 			.inner-container
 				.track-container.tc0
 					.canvas-container
@@ -121,10 +121,15 @@ block content
 						.song-user-name Username
 						.song-track-name= track5.userTracks[0].trackTitle
 				.bottom-fill
-				button#play.btn.btn-success.tb Play
-				button#stop.btn.btn-danger.tb Stop
-				button#share.btn.btn-primary.tb Share
-				button#download.btn.btn-default.tb Download
+				.song-controls
+					button#play.btn.btn-success.tb
+						i.fa.fa-play-circle
+					button#stop.btn.btn-danger.tb
+						i.fa.fa-stop
+					button#share.tb2.btn.btn-default.btn-sm
+						i.fa.fa-share-square
+					button#download.tb2.btn.btn-default.btn-sm
+						i.fa.fa-caret-square-o-down
 					//- .transport
 						button#play.btn.btn-success.tb Play
 						button#stop.btn.btn-danger.tb Stop

@@ -9,12 +9,12 @@ html(lang='en')
 		link(href="../styles/lib/cover.css" rel="stylesheet")
 		style(id="holderjs-style" type="text/css")
 	body
-		form#tune-in.navbar-form.navbar-right(role="form")
+		form#tune-in.navbar-form.navbar-right(method="get" action="/login" role="form")
 			.form-group
 				input.form-control.login(type="email" placeholder="Email…" name="email")
 			.form-group
 				input.form-control.login(type="password" placeholder="Password…" name="password")
-			button.btn.btn-success(type="submit") Tune In
+			input.btn.btn-success(type="submit" value="Tune In")
 		.site-wrapper
 			.site-wrapper-inner
 				.cover-container

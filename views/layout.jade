@@ -8,7 +8,10 @@ html(lang='en')
 		link(rel="stylesheet" type="text/css" href="../styles/lib/cocreation.css")
 		link(href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet")
 		link(href="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.amd.min.js")
-
+		script.
+			function getRangeValue(x){
+				  document.getElementById("improvCompRange").innerHTML = x;
+				};
 	body
 		.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
 
@@ -49,4 +52,4 @@ html(lang='en')
 		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
 		script(src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")
 		script(src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js")
-		script(script src="../scripts/lib/originalMain.js")
+		//- script(script src="../scripts/lib/originalMain.js")

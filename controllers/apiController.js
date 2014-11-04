@@ -61,6 +61,30 @@ var apiController = {
 			id: id
 		});
 	},
+	updateUserFromClient: function(req, res){
+		console.log('req.body update user from client: ', req.body);
+		var id = req.body.id;
+		var user;
+		console.log('id: ', id);
+
+		User.find({_id: id}, function(err, result){
+			console.log('find user result', result);
+			user = result[0];
+			
+				user.bands = req.body.bands;
+				user.instruments = req.body.instruments;
+				user.styles = req.body.styles;
+				user.skills = req.body.skills;
+				user.inspirations = req.body.inspirations || [];
+				user.improvComp = req.body.improvComp || [];
+				console.log('user updated: ', user);
+				user.save(function(err, results){
+					console.log('saving...');
+					res.send(results);
+				});
+		
+		});
+	},
 	updateUser: function(req, res){
 		var id = req.body.id;
 		res.render('signup3', {
@@ -68,38 +92,22 @@ var apiController = {
 		});
 
 	},
-	updateUserFromClient: function(req, res){
-		console.log('req.body update user from client: ', req.body);
-		var id = req.body.id;
-		console.log('id: ', id);
-		User.find({_id: id}, function(err, result){
-			console.log('update result', result);
-			result.bands = req.body.bands || [];
-			result.instruments = req.body.instruments || [];
-			result.styles = req.body.styles || [];
-			result.skills = req.body.skills || [];
-			result.inspirations = req.body.inspirations || [];
-			result.improvComp = req.body.improvComp || [];
-			//////// why is it not able to save??????
-			result.save(function(err, result){
-				res.send(result);
-			});
-		});
-		
-
-	},
 	updateUser2: function(req, res){
 		console.log('req.body update user2: ', req.body);
-		var id = req.body.id;
+		var id = req.body._id;
 		User.find({_id: id}, function(err, result){
 			console.log('updateUser2 result', result);
-			result.about = req.body.about || '';
-			result.philosophy = req.body.philosophy || '';
-			//////// why is it not able to save??????
-			result.save();
-		});
-		res.render('signup4', {
-			id: id
+			var user = result[0];
+			user.about = req.body.about || '';
+			user.philosophy = req.body.philosophy || '';
+			console.log('user updated before save: ', user);
+			user.save(function(err, results){
+				var profileUrl = '';
+				res.render('signup4', {
+					id: id,
+					profileUrl: profileUrl
+				});	
+			});
 		});
 
 	},
@@ -388,11 +396,11 @@ var apiController = {
 			User.find({}, function(err, result){
 				var users = result;
 
-				console.log('users: ', users);
-
-				for (var y = 0; y < property.length; y++){
-					for (var i = 0; i < users.length; i++) {
-						var user = users[i];
+				for (var i = 0; i < users.length; i++) {
+					var user = users[i];
+					console.log('user.name:', user.name);
+					var matches = 0;
+					for (var y = 0; y < property.length; y++){
 						var userProp = user[property[y]] || user[property];
 						console.log('userProp', userProp);
 						if (_.isArray(userProp) === true) {
@@ -400,60 +408,36 @@ var apiController = {
 							var propertyArray = lowerCase(userProp);
 							console.log('propertyArray', propertyArray);
 							for (var z = 0; z < propertyArray.length; z++) {
-								console.log('propertyArray[z], value[i], value; ', propertyArray[z], value[i], value);
+								console.log('looping in array: propertyArray[z] comparing to value; ', propertyArray[z], value[y]);
 
 								if (propertyArray[z] === value[y]){
-									console.log('is array positive!!!!');
-									positiveResults.push(users[i]);
+									console.log('is array positive match!!!!');
+									matches++;
 								}
 							}
 						} else {
 							console.log('is not array');
 							var userProp = lowerCase(userProp);
-							console.log('userProp, value[i], value: ', userProp, value[i], value);
-							if (userProp === value[i] || userProp === value) {
-								console.log('not array positive!!!!');
-									positiveResults.push(users[i]);
+							console.log('userProp, value[i], value: ', userProp, value[y], value);
+							if (userProp === value[y] || userProp === value) {
+								console.log('nonarray positive match!!!!');
+								matches++;
 							}
 						}
+					console.log('matches, property.length: ', matches, property.length);
+					if (matches === property.length){
+						positiveResults.push(users[i]);
 					}
+					}
+				
 				}
-			// bands //////////
-				// for (var i = 0; i < bands.length; i++) {
-				// 	var band = bands[i];
-				// 	var bandProp = band[property];
-				// 	if (_.isArray(bandProp) === true) {
-				// 		console.log('band array being searched');
-				// 		var propertyArray = lowerCase(bandProp);
-				// 		var isDuplicate = false;
-				// 				for (var z = 0; z < positiveResultsBands.length; z++) {
-				// 					var idSearch = positiveResultsBands[z];
-				// 					if (idSearch.bandId === band.bandId) {
-				// 						isDuplicate = true;
-				// 					}
-				// 					if ( isDuplicate === false){
-				// 						positiveResultsBands.push(bands[i]);
-				// 					}						
-				// 				}
-				// 	} else {
-				// 		var bandProp = lowerCase(bandProp);
-				// 		if (bandProp === value) {
-				// 			var isDuplicate = false;
-				// 				for (var z = 0; z < positiveResultsBands.length; z++) {
-				// 					var idSearch = positiveResultsBands[z];
-				// 					if (idSearch.bandId === band.bandId) {
-				// 						isDuplicate = true;
-				// 					}
-				// 					// }
-				// 					if ( isDuplicate === false){
-				// 						positiveResultsBands.push(bands[i]);
-				// 					}						
-				// 				}
-				// 		}
-				// 	}
-				// };
 
-				console.log('positiveResults serverside: ', positiveResults);
+			// bands //////////
+				
+			// positiveResultsBands.push(bands[i]);
+				
+
+				// console.log('positiveResults serverside: ', positiveResults);
 				console.log('positiveResults.length', positiveResults.length);
 				// console.log('positiveResultsBands: ', positiveResultsBands);
 				res.send(positiveResults);

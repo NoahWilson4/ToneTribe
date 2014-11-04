@@ -1,4 +1,6 @@
 
+change bootstrap styling
+
 COCREATION
 
 bug with songnames loading coming from main cocreation page...
@@ -6,14 +8,30 @@ individual cocreation on each user page, with a main public page with popular co
 comments
 user pics, links to user pages
 sort tracks by likes, button to pick tracks from
-
+live recording?
 download tracks, combine into one track?
+animations
+main page of songs sorted by most liked songs
+
+
+simultaneous sequencing??
 
 SEARCH
-
+bands...
+sort options?
 
 
 SIGNUP
 
 hook up pic uploaders
+
+PROFILES
+
+upload pics (reuse modal from cocreation?)
+edit button if it is your own page
+
+
+COOL THINGS TO ADD
+
+use d3 or another data graphics library to show web of connections globally between musicians
 

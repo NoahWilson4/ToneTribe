@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "toneTribe",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -16,6 +16,7 @@
     "mongoose": "^3.8.18",
     "multer": "^0.1.6",
     "passport": "^0.2.1",
+    "passport-facebook": "^1.0.3",
     "recorderjs": "^1.0.1",
     "underscore": "^1.7.0",
     "workerify": "^0.3.0"
