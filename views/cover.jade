@@ -9,7 +9,7 @@ html(lang='en')
 		link(href="../styles/lib/cover.css" rel="stylesheet")
 		style(id="holderjs-style" type="text/css")
 	body
-		form#tune-in.navbar-form.navbar-right(method="get" action="/login" role="form")
+		form#tune-in.navbar-form.navbar-right(action="/auth/login" method="post" role="form")
 			.form-group
 				input.form-control.login(type="email" placeholder="Email…" name="email")
 			.form-group

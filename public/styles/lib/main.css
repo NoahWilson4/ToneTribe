@@ -403,21 +403,7 @@ top: 85px;
 	background: white;
 }
 
-#background-image-holder {
-	background: lightgray;
-background-size: cover;
-background-position: center;
-width: 500px;
-height: 250px;
 
-}
-
-#profile-image-holder {
-background: lightgray;
-width: 150px;
-height: 150px;
-background-size: cover;
-}
 
 /*/////////////////// search pages ////////////////////*/
 
@@ -640,6 +626,36 @@ padding: 5px 5px 0px 5px;
 
 /*////////////////////*/
 /*    sign up pages     */
+#preview-profile{
+	background: lightgray;
+width: 150px;
+height: 150px;
+background-size: cover;
+}
+
+#preview-background{
+		background: lightgray;
+background-size: cover;
+background-position: center;
+width: 500px;
+height: 250px;
+}
+
+#background-image-holder {
+	background: lightgray;
+background-size: cover;
+background-position: center;
+width: 500px;
+height: 250px;
+
+}
+
+#profile-image-holder {
+background: lightgray;
+width: 150px;
+height: 150px;
+background-size: cover;
+}
 
 #form-signup2 {
 	margin-top: 75px;

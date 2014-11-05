@@ -1,32 +1,123 @@
 extends layout
 
 block content
-	.heading-signup-form
-		h1 Welcome to ToneTribe!
-		p Please fill in some info about yourself and we'll get you started.
-		form#signup.form-horizontal(method="post" action="/addUser" role="form")
-			.row
-				.form-group
-					label.col-sm-4.control-label(for="email") Email:
-					.col-sm-8
-						input.form-control.searchInput(type="email" placeholder="Email…" name="email")
-				.form-group
-					label.col-sm-4.control-label(for="password") Password:
-					.col-sm-8
-						input.form-control.searchInput(type="password" placeholder="Password…" name="password")
-				.form-group
-					label.col-sm-4.control-label(for="name") Name:
-					.col-sm-8
-						input.form-control.searchInput(type="text" name="name" placeholder="Musician or Band Name…")
-				.form-group
-					label.col-sm-4.control-label(for="location") Location:
-					.col-sm-8
-						input.form-control.searchInput(type="text" name="location" placeholder="Location…")
-				.form-group
-					label.col-sm-4.control-label(for="birthdate") Birthdate:
-					.col-sm-8
-						input.form-control.searchInput(type="date" name="birthdate")
-				
-				.form-group
-					.col-sm-offset-2.col-sm-10
-							button.btn.btn-success(type="submit") Join
+    .heading-signup-form
+        h1 Welcome to ToneTribe!
+        p Please fill in some info about yourself and we'll get you started.
+        form#signup.form-horizontal(method="post" action="/auth/signup" role="form" enctype="multipart/form-data")
+            .row
+                .form-group
+                    label.col-sm-4.control-label(for="email") Email:
+                    .col-sm-8
+                        input.form-control.searchInput(type="email" placeholder="Email…" name="email")
+                .form-group
+                    label.col-sm-4.control-label(for="password") Password:
+                    .col-sm-8
+                        input.form-control.searchInput(type="password" placeholder="Password…" name="password")
+                .form-group
+                    label.col-sm-4.control-label(for="name") Name:
+                    .col-sm-8
+                        input.form-control.searchInput(type="text" name="name" placeholder="Musician or Band Name…")
+                .form-group
+                    label.col-sm-4.control-label(for="location") Location:
+                    .col-sm-8
+                        input.form-control.searchInput(type="text" name="location" placeholder="Location…")
+                .form-group
+                    label.col-sm-4.control-label(for="birthdate") Birthdate:
+                    .col-sm-8
+                        input.form-control.searchInput(type="date" name="birthdate")
+                
+                //- .form-group
+                    .col-sm-offset-2.col-sm-10
+                            button.btn.btn-success(type="submit") Join
+
+                    //- End original signup....
+
+            .profile-sidebar.signup2-content
+                h3 user.name
+                .sidebar-list
+                    h4.sidebar-list-heading(title="bands") Bands:
+                    p.signup2-text-box.sidebar-list-text.bands.editing-profile(name="bands")
+                    input#bands(type="hidden" name="bands")
+                .sidebar-list
+                    h4.sidebar-list-heading Instruments:
+                    p.signup2-text-box.sidebar-list-text.instruments.editing-profile(name="instruments")
+                    input#instruments(type="hidden" name="instruments")
+                .sidebar-list
+                    h4.sidebar-list-heading Styles:
+                    p.signup2-text-box.sidebar-list-text.styles.editing-profile(name="styles")
+                    input#styles(type="hidden" name="styles")
+                .sidebar-list
+                    h4.sidebar-list-heading Skills:
+                    p.signup2-text-box.sidebar-list-text.skills.editing-profile(name="skills")
+                    input#skills(type="hidden" name="skills")
+                .sidebar-list
+                    h4.sidebar-list-heading Inspired By:
+                    p.signup2-text-box.sidebar-list-text.inspirations.editing-profile(name="inspirations")
+                    input#inspirations(type="hidden" name="inspirations")
+                .sidebar-list
+                    h4.sidebar-list-heading Improvisational/Compositional Orientation:
+                    .improvCompNumbers Improv = 
+                        span: strong#improv 50
+                        span % / 
+                        span: strong#comp 50
+                        span % = Comp
+                    .range-container
+                        dl.ratio-graph-signup
+                                    dd
+                                        div#ratio-bar-signup.bar-signup(style="width: 50%") ratio
+                                        div#ratio-bar-signup2.bar-signup2(style="width: 50%") ratio
+                        input.form-control.searchInput(type="range" min="0" max="100" value="" step="1" id="improvCompRange" onchange="getRangeValue(this.value)")
+                        input#improvComp(type="hidden" name="improvComp")
+                //- form#form-signup2(method="post" action="/updateUser")
+                    input#id(type="hidden" value=id name="id")
+                    a(href="/signup"): button.btn.btn-success Previous
+                    input#signup2-submit.btn.btn-success.pull-right(type="submit" value="Next")
+            //- form#signup.form-horizontal(method="post" action="/updateUser2" role="form")
+            .row
+                .form-group
+                    label.col-sm-4.control-label(for="about") About:
+                    .col-sm-8
+                        textarea.form-control.signup-textarea(type="text" name="about" placeholder="About…")
+                .form-group
+                    label.col-sm-4.control-label(for="philosophy") Philosophy:
+                    .col-sm-8
+                        textarea.form-control.signup-textarea(type="text" name="philosophy" placeholder="Philosophy…")
+
+
+                //- /////////////////
+
+                //- input(type="hidden" value=id name="_id")
+                //- a(href="/signup"): button.btn.btn-success Previous
+                //- input.btn.btn-success.pull-right(type="submit" value="Next")
+            .row
+                    //- form#upload-profilePic(method="post" action="/uploadProfilePic" enctype="multipart/form-data")
+                .form-group
+                    label.col-sm-4.control-label(for="image") Profile Pic:
+                    .col-sm-8
+                        //- input(type="hidden" value=id name="_id")
+                        //- input#profileUrl(type="hidden" value=profileUrl name="profileUrl")
+                        //- input#backgroundUrl(type="hidden" value=backgroundUrl name="backgroundUrl")
+                        input#upload-profilePic.form-control.edit-input(type="file" onchange="previewProfile()" name="profilePic")
+                        //- input(type="submit" value="Upload")
+                        //- img#preview-profile
+                        #profile-image-holder
+                .form-group
+                    label.col-sm-4.control-label(for="image") Background Pic:
+                    .col-sm-8
+                        //- input(type="hidden" value=id name="_id")
+                        //- input#profileUrl(type="hidden" value=profileUrl name="profileUrl")
+                        //- input#backgroundUrl(type="hidden" value=backgroundUrl name="backgroundUrl")
+                        input#upload-backgroundPic.form-control.edit-input(type="file" onchange="previewBackground()" name="backgroundPic")
+                        //- input(type="submit" value="Upload")
+                        //- img#preview-background
+                        #background-image-holder
+            //- form.form-horizontal(method="post" action="/updateUser3" role="form")
+                input(type="hidden" value=id name="_id")
+                a(href="/signup"): button.btn.btn-success Previous
+            input.btn.btn-success.pull-right(type="submit" value="Join the Tribe!")
+
+    script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+    script(script src="../scripts/lib/signup.js")
+    
+

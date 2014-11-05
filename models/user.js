@@ -1,8 +1,16 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 var userSchema = mongoose.Schema({
-	password: String,
-	email: String,
+	password: {
+		type: String,
+		required: true
+	},
+	email: {
+		type: String,
+		required: true,
+		unique: true
+	},
 	name: String,
 	location: String,
 	bands: [String],
@@ -19,7 +27,42 @@ var userSchema = mongoose.Schema({
 	about: String,
 	philosophy: String,
 	media: [String],
-	cocreationSongs: [String]
+	cocreationSongs: [String],
+	posts: [{
+		text: String,
+		date: String
+	}]
 });
 
-module.exports = mongoose.model('user', userSchema);
+
+userSchema.pre('save', function(next){
+
+  if(!this.isModified('password')) return next();
+	var user = this;
+	bcrypt.genSalt(10, function(err, salt){
+		if(err) return next(err);
+		bcrypt.hash(user.password, salt, function(err, hash){
+			if(err) return next(err);
+			user.password = hash;
+			return next();
+    	});
+  	});
+});
+
+userSchema.methods.comparePassword = function(candidatePassword, next){
+	bcrypt.compare(candidatePassword, this.password, function(err, isMatch){
+    if(err) return next(err);
+	return next(null, isMatch);
+  });
+};
+
+// Our user model
+var User = mongoose.model('user', userSchema);
+
+// Make user model available through exports/require
+module.exports = User;
+
+
+
+
+

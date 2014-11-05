@@ -7,19 +7,28 @@ var _ = require('underscore');
 
 var indexController = {
 	index: function(req, res) {
-			res.render('cover');
+			res.render('cover', {
+				user: req.user
+			});
 		},
 	signup: function(req, res) {
-			res.render('signup');
+			res.render('signup', {
+				user: req.user
+			});
 		},
 	signup2: function(req, res) {
-			res.render('signup2');
+			res.render('signup2', {
+				user: req.user
+			});
 		},
 	signup3: function(req, res) {
-			res.render('signup3');
+			res.render('signup3', {
+				user: req.user
+			});
 		},
 	signup4: function(req, res) {
 			res.render('signup4', {
+				user: req.user,
 				profileUrl: '',
 				id: '',
 				backgroundUrl: ''
@@ -28,20 +37,30 @@ var indexController = {
 	profileUser: function(req, res) {
 			// User.find({}, function(err, response){
 
-				res.render('profile-user')
+			res.render('profile-user', {
+				user: req.user
+			})
 			// });
 		},
 	profileBand: function(req, res) {
-			res.render('profile-band');
+			res.render('profile-band', {
+				user: req.user
+			});
 		},
 	search: function(req, res) {
-			res.render('search');
+			res.render('search', {
+				user: req.user
+			});
 		},
 	searchResults: function(req, res) {
-			res.render('search-results');
+			res.render('search-results', {
+				user: req.user
+			});
 		},
 	cocreation: function(req, res) {
-			res.render('cocreation');
+			res.render('cocreation', {
+				user: req.user
+			});
 				// var ids = [];
 				// var names = [];
 				// var songCollection;
@@ -97,8 +116,9 @@ var indexController = {
 				var track5 = song.tracks[4];
 
 				console.log('sorted???? ', track1);
-
+			req.user.password = '';
 			res.render('song', {
+				user: req.user,
 				id: id,
 				song: song,
 				track0: track0,
@@ -109,25 +129,18 @@ var indexController = {
 				track5: track5
 			})
 			});
-
-			// apiController.getTrackUrls({id: id}, {}, function(tracks){
-
-			// 	console.log('tracks just before render: ', tracks);
-			// 	res.render('song', {
-			// 		songName: songName,
-			// 		tracks: tracks,
-			// 		id: id
-			// 	});
-			// });
-		
 		},
 	liveStream: function(req, res) {
-			res.render('live-stream');
+			res.render('live-stream', {
+				user: req.user
+			});
 		},
 	submitSearch: function(req, res) {
 		console.log('req.body', req.body);
 
-		res.render('search-results');
+		res.render('search-results', {
+				user: req.user
+			});
 	}
 };
 

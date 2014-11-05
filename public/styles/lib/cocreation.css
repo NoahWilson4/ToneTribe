@@ -2,11 +2,30 @@
 	background-color: rgb(44, 44, 45);
 font-size: 12px;
 }*/
-.cocreation-jt {
+/*.cocreation-jt {
 margin-top: 100px !important;
 border-radius: 1000px;
 /* background: black; */
 /* border: 15px solid gray; */
+/*}*/
+
+.main {
+	background: rgb(40, 40, 40);
+	padding-top: 100px;
+	margin: 0px;
+	padding-bottom: 20px;
+}
+
+#song-id{
+	display: none;
+}
+
+#comments-container {
+	background: whitesmoke;
+padding: 25px;
+border-radius: 5px;
+border: 1px solid gray;
+margin: 15px;
 }
 
 .song-container {
@@ -41,14 +60,13 @@ left: 0px;
 
 #song-name {
 color: rgb(216, 216, 216);
-margin-left: 21px;
+
 padding-left: 30px;
 padding-bottom: 5px;
 padding-top: 15px;
-border-top: 2px solid lightgray;
+
 margin-bottom: 0;
-width: 640px;
-border-right: 5px solid lightgray;
+width: 100%;
 border-top-right-radius: 20px;
 border-top-left-radius: 20px;
 background: -webkit-linear-gradient(left, rgb(56, 56, 56),rgb(77, 77, 77),rgb(60, 59, 59));
@@ -97,9 +115,13 @@ font-size: 15px;
 }
 
 .select-track {
-	height: 20px;
+height: 20px;
 position: absolute;
 width: 65px;
+background: lightgray;
+border: none;
+color: darkred;
+border-radius: 0px;
 top: 6px;
 }
 
@@ -219,7 +241,7 @@ box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
 }
 
 .tb{
-margin: 14px 0px 20px 7px;
+margin: 20px 0px 15px 7px;
 position: relative;
 -webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
 -moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
@@ -229,7 +251,7 @@ padding: 3px 10px;
 }
 
 .tb2{
-margin: 14px 0px 20px 7px;
+margin: 20px 0px 15px 7px;
 position: relative;
 -webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
 -moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
@@ -241,11 +263,13 @@ padding: 3px 10px;
 .inner-container{
 	border: 15px solid rgb(77, 76, 74);
 position: relative;
-border-radius: 5px;
+
+border-bottom-right-radius: 5px;
+border-bottom-left-radius: 5px;
 -webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
 -moz-box-shadow:    1px 3px 30px 0px rgba(48, 50, 50, 1);
 box-shadow:         1px 3px 30px 0px rgba(48, 50, 50, 1);
-background: rgb(30, 32, 39);
+background: rgb(165, 165, 165);
 background-image: url();
 background-size: cover;
 

@@ -14,8 +14,18 @@ var fs = require('fs');
 
 var multer = require('multer');
 
-var KEY = 'AKIAIHVWV3IPDGBN5OFA';
-var SECRET = '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';
+var KEY, SECRET;
+if(process.env.AWS_KEY){
+  // if the process has AWS_KEY set, we'll use those values
+  KEY = process.env.AWS_KEY;
+  SECRET = process.env.AWS_SECRET;
+} else {
+  // if the process doesn't have stuff set, we'll load in our config file
+  var privateSettings = require('../private.js');
+  KEY = privateSettings.aws.key;
+  SECRET = privateSettings.aws.secret;
+}
+
 var BUCKET = 'tonetribe';
 
 
@@ -58,10 +68,12 @@ var apiController = {
 		var id = newUser._id;
 		console.log('id on add user: ', id);
 		res.render('signup2', {
-			id: id
+			id: id,
+			user: req.user
 		});
 	},
 	updateUserFromClient: function(req, res){
+		console.log('req.user updateUserFromClient: ', req.user);
 		console.log('req.body update user from client: ', req.body);
 		var id = req.body.id;
 		var user;
@@ -86,6 +98,7 @@ var apiController = {
 		});
 	},
 	updateUser: function(req, res){
+		console.log('req.user updateUser: ', req.user);
 		var id = req.body.id;
 		res.render('signup3', {
 			id: id
@@ -93,6 +106,7 @@ var apiController = {
 
 	},
 	updateUser2: function(req, res){
+		console.log('req.user updateUser2: ', req.user);
 		console.log('req.body update user2: ', req.body);
 		var id = req.body._id;
 		User.find({_id: id}, function(err, result){
@@ -112,6 +126,7 @@ var apiController = {
 
 	},
 	updateUser3: function(req, res){
+		console.log('req.user updateUser3: ', req.user);
 		console.log('req.body update user3: ', req.body);
 		var id = req.body.id;
 		User.find({_id: id}, function(err, result){
@@ -127,6 +142,7 @@ var apiController = {
 
 	},
 	createNewSong: function(req, res){
+		console.log('req.user createNewSong: ', req.user);
 		var songName = req.body;
 		var newSong = new CocreationSong(songName);
 		newSong.save(function(err, result){
@@ -134,6 +150,7 @@ var apiController = {
 		});
 	},
 	addTrack: function(req, res){
+		console.log('req.user addTrack: ', req.user);
 		// console.log('add track req test:', req);
 		//// i need to add user id!!
 		var userId;
@@ -187,7 +204,7 @@ var apiController = {
 		});
 	},
 	getTrackUrl: function(key){
-		console.log('req.body test: ', key);
+		console.log('key test: ', key);
 		var params = {Bucket: BUCKET};
 		var trackUrl;
           s3.listObjects(params, function(err, data){
@@ -195,7 +212,7 @@ var apiController = {
               for (var i = 0; i < bucketContents.length; i++){
                 if (key === bucketContents[i].Key){
                   console.log('key: ', key, "bucketContents[i].Key)", bucketContents[i].Key);
-                  console.log('match!!!!')
+                  console.log('match!!!!');
                   var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
                   s3.getSignedUrl('getObject',urlParams, function(err, url){
                     trackUrl = url;
@@ -221,12 +238,14 @@ var apiController = {
           });
 	},
 	getSongs: function(req, res){
+		console.log('req.user getSongs: ', req.user);
 		CocreationSong.find({}, function(err, result){
 			// console.log('result of songs: ', result);
 			res.send(result);
 		})
 	},
 	getTrackUrls: function(req, res, onComplete){
+		console.log('req.user getTrackUrls: ', req.user);
 		var tracks;
 		var trackKeys = [[],[],[],[],[],[]];
 		var songId;
@@ -321,6 +340,7 @@ var apiController = {
 			});
 	},
 	submitFoundation: function (req, res) {
+		console.log('req.user submitFoundation: ', req.user);
 		  var fName = req.files.audio.name;
 		  var fPath = req.files.audio.path;
 		  var cType = req.files.audio.type;
@@ -362,6 +382,7 @@ var apiController = {
 		  });
 		},
 		submitPrivate: function (req, res) {
+			console.log('req.user submitPrivate: ', req.user);
 		  console.log(req.files);
 		  var fName = req.files.image.name;
 		  var fPath = req.files.image.path;
@@ -383,6 +404,7 @@ var apiController = {
 		  });
 		},
 		findUsers: function(req, res){
+			console.log('req.user findUsers: ', req.user);
 			var positiveResults = [];
 			var positiveResultsBands = [];
 			var property = req.body.searchedFor;
@@ -444,138 +466,42 @@ var apiController = {
 
 			});
 
+		},
+		uploadProfilePic: function (req, res){
+		console.log('req', req);
+		  console.log('req.files on uploadProfilePic: ', req.files);
+		  console.log('req.body on uploadProfilePic: ', req.body);
+		  var fName = req.name;
+		      var fPath = req.path;
+		      var cType = req.type;
+		      var size = req.size;
+
+		      var profileUrl = 'https://s3.amazonaws.com/tonetribe/public/' + fName;
+
+		      var image = {
+		          Key: 'public/' + fName,
+		              };
+		     console.log('image', image);
+		      fs.readFile(fPath, function (err, data) {
+		        console.log(err);
+		        s3.putObject({
+		            Bucket: BUCKET,
+		            Key: 'public/' + fName,
+		            ACL: 'public-read',
+		            Body: data
+		          }, function (err, result) {
+		                console.log('finishing with upload.......', err, result);
+		          // console.log('about to render.........');
+		              });
+		       	// res.send();
+		          // res.render('signup4', {
+		          //   id: id,
+		          //   profileUrl: profileUrl,
+		          //   backgroundUrl: backgroundUrl
+		          // });
+		      });
 		}
 
-//////////////// returns signed urls..... ///////////////////////////
-
-	// getTrackUrls: function(req, res){
-	// 	var trackNumAndUrls = [];
-	// 	var results;
-	// 	////// holder for all tracks to be loaded-
-	// 	var trackKeys = [[],[],[],[],[],[]];
-		
-	// 		console.log('req.params: ', req.body);
-	// 		var songId = req.body.id;
-	// 		CocreationSong.findOne({_id: songId}, function(err, result){
-	// 			console.log('result: ', result);
-				
-
-				
-	// 			for (var i = 0; i < result.tracks.length; i++){
-	// 				for (var z = 0; z < result.tracks[i].userTracks.length; z++){
-	// 						var trackNum = result.tracks[i].track;
-	// 						var key = result.tracks[i].userTracks[z].Key;
-	// 						var likes = result.tracks[i].userTracks[z].likes;
-	// 						var keyAndNum = {
-	// 							Key: key,
-	// 							track: trackNum,
-	// 							likes: likes
-	// 						}
-
-	// 						console.log('trackNum, keyAndNum: ', trackNum, keyAndNum);
-	// 						trackKeys[trackNum].push(keyAndNum);
-							
-	// 				}
-	// 			}
-	// 			console.log('trackKeys: ', trackKeys);
-				
-	// 			for (var i = 0; i < trackKeys.length; i++){
-
-	// 		/////////////////////////  async parrallel
-	// 				async.parallel(
-	// 						    // search bucket to find urls
-	// 						    trackKeys[i].map(function(key){
-	// 													console.log('key test in map: ', key);
-	// 													var params = {Bucket: BUCKET};
-	// 													var likes = key.likes;
-	// 													var trackNum = key.track;
-	// 													key = key.Key;
-	// 													var trackUrl;
-
-	// 											          s3.listObjects(params, function(err, data){
-	// 											              var bucketContents = data.Contents;
-	// 											              for (var i = 0; i < bucketContents.length; i++){
-	// 											                if (key === bucketContents[i].Key){
-	// 											                  console.log('key: ', key, "bucketContents[i].Key)", bucketContents[i].Key);
-	// 											                  console.log('match!!!!')
-	// 											                  var urlParams = {Bucket: BUCKET, Key: bucketContents[i].Key};
-	// 											                  s3.getSignedUrl('getObject',urlParams, function(err, url){
-	// 											                    trackUrl = url;
-	// 											               ////////////////////////////////////
-	// 														          async.whilst(
-	// 														              function () { return trackUrl === undefined; },
-	// 														              function (callback) {
-
-	// 														                  console.log('Waiting for response.....');
-	// 														                  setTimeout(callback, 200);
-	// 														              },
-	// 														              function (err) {
-	// 														              	console.log('in err function...'); 	
-	// 														              }
-	// 														          );
-
-	// 														          ///////////// use this if i decide i need the key....
-	// 											                    		// var results = {
-	// 											                    		// 	url: trackUrl,
-	// 											                    		// 	Key: key
-	// 											                    		// };
-	// 											                   /////////  else ...
-	// 											                   			results = trackUrl;
-	// 											                   			var tAndN ={
-	// 											                   				track: trackNum,
-	// 											                   				url: results,
-	// 											                   				likes: likes
-	// 											                   			}
-	// 											                   			console.log('tAndN', tAndN);
-
-	// 											                    		trackNumAndUrls.push(tAndN);
-	// 											                    		console.log('trackNumAndUrls at bottom of function: ', trackNumAndUrls);
-
-	// 											                  });
-	// 											                }
-												                 
-	// 											              }
-	// 											          });			
-	// 												}),
-								
-	// 						    // this last function will be executed when
-	// 						    // all the async functions are done
-	// 						    function(err, results){
-	// 						        console.log('err async err:', err);
-	// 						        // console.log('results in async function:', results);
-	// 						    }
-	// 				);
-	// 			var loaded = 0;
-	// 			async.whilst(
-	// 		              function () { 
-
-	// 		              	var numberOfKeys = _.flatten(trackKeys);
-	// 		              	var num = numberOfKeys.length;
-	// 		              	console.log('num: ', num);
-	// 		              	var testNum = trackNumAndUrls.length;
-	// 		              	console.log('testNum: ', testNum);
-
-	// 		              	return testNum !== num; 
-	// 		              },
-	// 		              function (callback) {
-			                  
-	// 		                  console.log('Waiting for all urls to be found.....');
-	// 		                  setTimeout(callback, 700);
-	// 		              },
-	// 		              function (err) {
-	// 		              	console.log('Render the page with the right info!!!!!!!!    results:', results, 'trackNumAndUrls: ', trackNumAndUrls);
-	// 			              if (loaded === 0) {
-	// 			              	loaded++;
-	// 							res.send({NumUrls: trackNumAndUrls}); 
-	// 						  }	
-	// 		              }
-	// 		          );
-	// 			}
-	// 			// console.log('trackKeys after async: ', trackKeys);
-	// 			// console.log('trackNumAndUrls at end of indexController.song: ', trackNumAndUrls);
-
-	// 		});
-	// 	},
 };
 
 module.exports = apiController;

@@ -19,8 +19,10 @@ var CocreationSong = mongoose.Schema({
 		}
 	],
 	comments: [{
-		userId: String,
-		comment: String
+		user: {},
+		comment: String,
+		date: String,
+		likes: Number
 	}]
 
 });

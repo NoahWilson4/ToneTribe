@@ -262,10 +262,11 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 	var allTracks;
 
 	
-	var id = $('#songId').attr('value');
+	var id = $('#song-id').attr('value');
 	console.log('songId: ', id)
 	$.post('/api/getTrackUrls', {id: id}, function(responseData){
 		allTracks = responseData;
+		console.log('responseData 1: ', responseData);
 		console.log('allTracks 1: ', allTracks);
 
 	
@@ -603,20 +604,35 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 		  .trigger( "change" );
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 	});
+
+//////////////////////// comments ///////////////////////
+
+	var commentTemplate = $('#comment-template').html();
+	var compileCommentTemplate = Handlebars.compile(commentTemplate);
+
+	$('#addComment').on('submit', function(event){
+		event.preventDefault();
+		var comment = $(this).find('textarea').val();
+		var time = moment().format('MMMM Do YYYY, h:mm:ss a');
+		console.log('user: ', user);
+		console.log('moment: ', time);
+		var comment = {
+			user: user,
+			time: time,
+			comment: comment 
+		}
+		var outputHTML = compileCommentTemplate(comment);
+		$('#comments-container').append(outputHTML);
+		//// ajax call and fine tune posting
+	})
+
+
+
+
+
+
+
 
 });
 	//////// dynamically add a new track to the DOM ////////////

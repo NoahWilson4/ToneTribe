@@ -3,19 +3,25 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var async = require('async');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy
+var passportConfig = require('./config/passport');
+var moment = require('moment');
 
-var authController = require('./controllers/authController');
+
+var authenticationController = require('./controllers/authentication.js');
 var indexController = require('./controllers/index.js');
-var apiController = require('./controllers/apiController.js')
+var apiController = require('./controllers/apiController.js');
 
-/// if no users, add a few for testing
-require('./models/seeds/userSeed.js');
 
 // var CocreationSong = require('./models/cocreationSong.js')
 
 mongoose.connect('mongodb://localhost/toneTribe');
+/// if no users, add a few for testing
+require('./models/seeds/userSeed.js');
 
 ////////////////////////////////////////////
 //for aws
@@ -46,48 +52,60 @@ aws.config.update({
 var s3 = new aws.S3();
 ////////////////////////////////////////////
 
-/// environments
+/// express app, environments
 var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({extended: false}));
-
-///// switch to new connector..... in new student sample code example
+// app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser());
+app.use(cookieParser());
+app.use(flash());
+app.use(session({secret: 'secret'}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(require('connect-multiparty')());
+///// switch to new connector..... in new student sample code example
 // var multer = require('multer');
 
 ////////////////////////////////////////////
 ////// passport
 
+// Our get request for viewing the login page
+app.get('/auth/login', authenticationController.login);
 
-app.get(
-  '/', 
-  authController.ensureAuthenticated, 
-  indexController.index
-);
-app.get('/login', authController.login);
-app.get('/logout', authController.logout);
+// Post received from submitting the login form
+app.post('/auth/login', authenticationController.processLogin);
 
-app.get('/login/facebook', passport.authenticate('facebook'));
-app.get(
-  '/facebook/callback',
-  passport.authenticate('facebook', {failureRedirect: '/login'}),
-  authController.loginSuccess
-);
+// Post received from submitting the signup form
+app.post('/auth/signup', authenticationController.processSignup);
 
+// Any requests to log out can be handled at this url
+app.get('/auth/logout', authenticationController.logout);
 
-
-
-////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+app.get('/', indexController.index);
+app.get('/signup', indexController.signup);
 
 app.get('/cocreation', indexController.cocreation);
 app.get('/api/getSongs', apiController.getSongs);
-// app.get('/api/getTrackUrls/:id', apiController.getTrackUrls);
+app.get('/song', indexController.song);
+app.post('/api/getTrackUrls', apiController.getTrackUrls);
 
-// app.get('/', indexController.index);
-app.get('/signup', indexController.signup);
+
+// ***** IMPORTANT ***** //
+// By including this middleware (defined in our config/passport.js module.exports),
+// We can prevent unauthorized access to any route handler defined after this call
+// to .use()
+
+app.use(passportConfig.ensureAuthenticated);
+
+////////////////////////////////////////////
+// Because these routes occur after the ensureAuthenticated middleware, they will require
+// authentication before access is allowed.
+
 app.get('/signup2', indexController.signup2);
 app.get('/signup3', indexController.signup3);
 app.get('/signup4', indexController.signup4);
@@ -97,7 +115,6 @@ app.get('/search', indexController.search);
 app.get('/search-results', indexController.searchResults);
 // app.get('/cocreation', indexController.cocreation);
 app.get('/live-stream', indexController.liveStream);
-app.get('/song', indexController.song);
 app.post('/addUser', apiController.addUser);
 app.post('/updateUser', apiController.updateUser);
 app.post('/updateUserFromClient', apiController.updateUserFromClient);
@@ -106,11 +123,11 @@ app.post('/updateUser3', apiController.updateUser3);
 app.post('/api/findUsers', apiController.findUsers);
 app.post('/submitSearch', indexController.submitSearch);
 app.post('/api/createNewSong', apiController.createNewSong);
-app.post('/api/getTrackUrls', apiController.getTrackUrls);
 
 
 ////////////////////////////////////////////
 /// uploads
+
 app.post('/uploadProfilePic', function (req, res){
   console.log('req.files on uploadProfilePic: ', req.files);
   console.log('req.body on uploadProfilePic: ', req.body);
@@ -254,6 +271,7 @@ app.post('/submitPrivate', function (req, res) {
     });
   });
 });
+app.use(passportConfig.ensureAuthenticated);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
