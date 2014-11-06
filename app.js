@@ -126,6 +126,7 @@ app.post('/api/createNewSong', apiController.createNewSong);
 app.post('/api/postComment', apiController.postComment);
 app.post('/api/getComments', apiController.getComments);
 app.get('/api/getSongs', apiController.getSongs);
+app.post('/uploadSongBackgroundPic', apiController.uploadSongBackgroundPic);
 
 
 ////////////////////////////////////////////

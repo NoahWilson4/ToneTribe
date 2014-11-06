@@ -542,8 +542,10 @@ var apiController = {
 		getComments: function(req, res){
 			console.log('getComments req.body: ', req.body);
 
-		}
-
+		},
+		uploadSongBackgroundPic: function(req, res){
+			console.log('req.body uploadSongBackgroundPic: ', req.body);
+		},
 };
 
 module.exports = apiController;
