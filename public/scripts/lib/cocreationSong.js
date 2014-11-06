@@ -37,6 +37,13 @@ $(document).on('ready', function() {
 		});
 	})
 
+//////////////  add background image to player /////////
+
+$('#uploadBackgroundPic').on('click', function(){
+	console.log('click');
+	$('#upload-container').toggle('reveal');
+})
+
 
 ///////////////// audio context /////////////
 var navigator = window.navigator;

@@ -6,7 +6,7 @@ block content
 		.container
 			.song-container
 				h1#song-name= song.name
-				.inner-container
+				#inner-container
 					.track-container.tc0
 						.canvas-container
 							canvas#canvas0.visuals
@@ -138,15 +138,16 @@ block content
 							i.fa.fa-play-circle
 						button#stop.btn.btn-danger.tb
 							i.fa.fa-stop
-						button#share.tb2.btn.btn-default.btn-sm
+						button#share.tb.btn.btn-default.btn-sm
 							i.fa.fa-share-square
-						button#download.tb2.btn.btn-default.btn-sm
+						button#download.tb.btn.btn-default.btn-sm
 							i.fa.fa-caret-square-o-down
-						//- .transport
-							button#play.btn.btn-success.tb Play
-							button#stop.btn.btn-danger.tb Stop
-							button#share.btn.btn-primary.tb Share
-							button#download.btn.btn-default.tb Download
+						button#uploadBackgroundPic.btn.btn-default.btn-sm.tb2.pull-right
+							i.fa.fa-picture-o
+						#upload-container.pull-right
+							form.song-pic-upload(method="post" action="/uploadSongBackgroundPic" role="form" enctype="multipart/form-data")
+								input.btn.btn-primary.btn-sm(type="file" onchange="previewSongBackground()" id="upload-song-background")
+								input.pull-right(type="submit" value="upload")
 		.container.margin-top
 			#comments-container
 				h1 Comments

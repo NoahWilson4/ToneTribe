@@ -2,9 +2,11 @@
 change bootstrap styling
 hover text over buttons/links
 add dates to song creations, uploads,
+profile pics don't load upon first signing up...
 
 COCREATION
 
+wire up the song background upload and likes
 deleting songs... checking to see if they are still in the dataabase
 
 when you upload track, add it to your list of songs that youve collaborated on
@@ -27,7 +29,7 @@ bands...
 sort options?
 
 PROFILES
-
+ link to bands from user profile
 bands
 
 view/load other user's profiles

@@ -25,6 +25,14 @@ html(lang='en')
                     document.getElementById("background-image-holder").style.backgroundImage = 'url(' + oFREvent.target.result + ')';
                 };
             };
+            function previewSongBackground() {
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("upload-song-background").files[0]);
+
+                oFReader.onload = function (oFREvent) {
+                    document.getElementById("inner-container").style.backgroundImage = 'url(' + oFREvent.target.result + ')';
+                };
+            };
             function getRangeValue(x){
                   document.getElementById("improvCompRange").innerHTML = x;
                 };

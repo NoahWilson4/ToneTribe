@@ -4,6 +4,10 @@ body {
 	font-size: 12px;
 }
 
+.float-right{
+	float: right;
+}
+
 .main{
 	background: white;
 }

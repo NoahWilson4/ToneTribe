@@ -19,7 +19,8 @@ var CocreationSong = mongoose.Schema({
 			]
 		}
 	],
-	comments: []
+	comments: [],
+	backgroundImage: String
 
 });
 

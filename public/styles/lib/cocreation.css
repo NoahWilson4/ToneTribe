@@ -132,6 +132,7 @@ border: none;
 color: black;
 border-radius: 0px;
 top: 6px;
+
 }
 
 #upload-button {
@@ -144,6 +145,9 @@ font-size: 20px;
 color: gray;
 padding: 0px;
 height: 25px;
+-webkit-box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, 1);
+-moz-box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, 1);
+box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, 1);
 }
 
 .comment-date{
@@ -162,6 +166,9 @@ padding: 0px;
 position: absolute;
 left: 5px;
 top: 35px;
+-webkit-box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, .5);
+-moz-box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, .5);
+box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, .5);
 }
 
 .like-comment{
@@ -184,10 +191,13 @@ color: white;
 .mute {
 height: 25px;
 position: absolute;
-bottom: 5px;
-left: 34px;
+bottom: 6px;
+left: 35px;
 padding: 0px;
 width: 25px;
+-webkit-box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, .5);
+-moz-box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, .5);
+box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, .5);
 }
 
 .unmute{
@@ -197,11 +207,14 @@ width: 25px;
 .play-track{
 font-size: 23px;
 position: absolute;
-bottom: 5px;
-right: 5px;
+bottom: 4px;
+right: 4px;
 width: 32px;
 height: 32px;
 padding: 0px;
+-webkit-box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, .8);
+-moz-box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, .8);
+box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, .8);
 }
 
 .download-track {
@@ -279,7 +292,7 @@ padding: 3px 10px;
 }
 
 .tb2{
-margin: 20px 0px 15px 7px;
+margin: 20px 20px 15px 7px;
 position: relative;
 -webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
 -moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
@@ -288,7 +301,7 @@ font-size: 25px;
 padding: 3px 10px;
 }
 
-.inner-container{
+#inner-container{
 
 border: 10px solid rgb(160, 158, 158);
 position: relative;
@@ -354,3 +367,41 @@ box-shadow: inset 0px 0px 26px 1px #989696;
 #canvas5{
 	opacity: .7;
 }
+
+.song-pic-upload{
+float: right;
+background: white;
+width: 309px;
+height: 67px;
+padding: 5px 15px;
+margin-top: 7px;
+border-radius: 5px;
+}
+
+#upload-song-background{
+	margin-bottom: 5px;
+}
+
+#upload-container{
+	display: none;
+}
+
+.reveal {
+	display: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
