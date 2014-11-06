@@ -12,8 +12,9 @@ block content
 							canvas#canvas0.visuals
 						.upload-switch-track
 							select#select0.select-track.btn.btn-default
-								for track in track0.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+								if track0
+									for track in track0.userTracks
+										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
 							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal0")
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
@@ -22,17 +23,19 @@ block content
 							button.play0.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute0.btn.btn-xs.btn-danger M
-						.song-user-image
-						.song-user-info-box
-							.song-user-name Username
-							.song-track-name= track0.userTracks[0].trackTitle
+						if track0
+							.song-user-image
+							.song-user-info-box
+								.song-user-name= track0.userTracks[0].userName
+								.song-track-name= track0.userTracks[0].trackTitle
 					.track-container
 						.canvas-container
 							canvas#canvas1.visuals
 						.upload-switch-track
 							select#select1.select-track.btn.btn-default
-								for track in track1.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+								if track1
+									for track in track1.userTracks
+										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
 							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal1")
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
@@ -41,17 +44,19 @@ block content
 							button.play1.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute1.btn.btn-xs.btn-danger M
-						.song-user-image
-						.song-user-info-box
-							.song-user-name Username
-							.song-track-name= track1.userTracks[0].trackTitle
+						if track1
+							.song-user-image
+							.song-user-info-box
+								.song-user-name= track1.userTracks[0].userName
+								.song-track-name= track1.userTracks[0].trackTitle
 					.track-container
 						.canvas-container
 							canvas#canvas2.visuals
 						.upload-switch-track
 							select#select2.select-track.btn.btn-default
-								for track in track2.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+								if track2
+									for track in track2.userTracks
+										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
 							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal2")
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
@@ -60,17 +65,19 @@ block content
 							button.play2.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute2.btn.btn-xs.btn-danger M
-						.song-user-image
-						.song-user-info-box
-							.song-user-name Username
-							.song-track-name= track2.userTracks[0].trackTitle
+						if track2
+							.song-user-image
+							.song-user-info-box
+								.song-user-name= track2.userTracks[0].userName
+								.song-track-name= track2.userTracks[0].trackTitle
 					.track-container
 						.canvas-container
 							canvas#canvas3.visuals
 						.upload-switch-track
 							select#select3.select-track.btn.btn-default
-								for track in track3.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+								if track3
+									for track in track3.userTracks
+										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
 							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal3")
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
@@ -79,17 +86,19 @@ block content
 							button.play3.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute3.btn.btn-xs.btn-danger M
-						.song-user-image
-						.song-user-info-box
-							.song-user-name Username
-							.song-track-name= track3.userTracks[0].trackTitle
+						if track3
+							.song-user-image
+							.song-user-info-box
+								.song-user-name= track3.userTracks[0].userName
+								.song-track-name= track3.userTracks[0].trackTitle
 					.track-container
 						.canvas-container
 							canvas#canvas4.visuals
 						.upload-switch-track
 							select#select4.select-track.btn.btn-default
-								for track in track4.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+								if track4
+									for track in track4.userTracks
+										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
 							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal4")
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
@@ -98,17 +107,19 @@ block content
 							button.play4.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute4.btn.btn-xs.btn-danger M
-						.song-user-image
-						.song-user-info-box
-							.song-user-name Username
-							.song-track-name= track4.userTracks[0].trackTitle
+						if track4
+							.song-user-image
+							.song-user-info-box
+								.song-user-name= track4.userTracks[0].userName
+								.song-track-name= track4.userTracks[0].trackTitle
 					.track-container
 						.canvas-container
 							canvas#canvas5.visuals
 						.upload-switch-track
 							select#select5.select-track.btn.btn-default
-								for track in track5.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+								if track5
+									for track in track5.userTracks
+										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
 							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal5")
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
@@ -117,10 +128,11 @@ block content
 							button.play5.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute5.btn.btn-xs.btn-danger M
-						.song-user-image
-						.song-user-info-box
-							.song-user-name Username
-							.song-track-name= track5.userTracks[0].trackTitle
+						if track5
+							.song-user-image
+							.song-user-info-box
+								.song-user-name= track5.userTracks[0].userName
+								.song-track-name= track5.userTracks[0].trackTitle
 					.song-controls
 						button#play.btn.btn-success.tb
 							i.fa.fa-play-circle
@@ -135,7 +147,7 @@ block content
 							button#stop.btn.btn-danger.tb Stop
 							button#share.btn.btn-primary.tb Share
 							button#download.btn.btn-default.tb Download
-		.container
+		.container.margin-top
 			#comments-container
 				h1 Comments
 				form#addComment(role="form")
@@ -145,115 +157,114 @@ block content
 					.form-group
 						input.btn.btn-primary.btn-comment(type="submit" value="Post")
 
-
-		.modal.fade#uploadModal0
-			.modal-dialog
-				form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
-					.modal-content
-						.modal-header
-							button.close(data-dismiss="modal")
-								span(aria-hidden="true") &times;
-								span.sr-only Close
-							h4.modal-title Upload Track
-						.modal-body
-							.upload-view-tracks
-								input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
-								input(type="text" name="trackTitle" placeholder="Name Your Track!")
-								input#songId(type="hidden" value=track0.id name="id")
-								input#trackNum(type="hidden" value="trackNum" name="trackNum")
-						.modal-footer
-							button.btn.btn-default(type="button" data-dismiss="modal") Close
-							input.btn.btn-success(type="submit" value="Upload")
-		.modal.fade#uploadModal1
-			.modal-dialog
-				form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
-					.modal-content
-						.modal-header
-							button.close(data-dismiss="modal")
-								span(aria-hidden="true") &times;
-								span.sr-only Close
-							h4.modal-title Upload Track
-						.modal-body
-							.upload-view-tracks
-								input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
-								input(type="text" name="trackTitle" placeholder="Name Your Track!")
-								input#songId(type="hidden" value=track1.id name="id")
-								input#trackNum(type="hidden" value="trackNum" name="trackNum")
-						.modal-footer
-							button.btn.btn-default(type="button" data-dismiss="modal") Close
-							input.btn.btn-success(type="submit" value="Upload")
-		.modal.fade#uploadModal2
-			.modal-dialog
-				form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
-					.modal-content
-						.modal-header
-							button.close(data-dismiss="modal")
-								span(aria-hidden="true") &times;
-								span.sr-only Close
-							h4.modal-title Upload Track
-						.modal-body
-							.upload-view-tracks
-								input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
-								input(type="text" name="trackTitle" placeholder="Name Your Track!")
-								input#songId(type="hidden" value=track2.id name="id")
-								input#trackNum(type="hidden" value="trackNum" name="trackNum")
-						.modal-footer
-							button.btn.btn-default(type="button" data-dismiss="modal") Close
-							input.btn.btn-success(type="submit" value="Upload")
-		.modal.fade#uploadModal3
-			.modal-dialog
-				form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
-					.modal-content
-						.modal-header
-							button.close(data-dismiss="modal")
-								span(aria-hidden="true") &times;
-								span.sr-only Close
-							h4.modal-title Upload Track
-						.modal-body
-							.upload-view-tracks
-								input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
-								input(type="text" name="trackTitle" placeholder="Name Your Track!")
-								input#songId(type="hidden" value=track3.id name="id")
-								input#trackNum(type="hidden" value="trackNum" name="trackNum")
-						.modal-footer
-							button.btn.btn-default(type="button" data-dismiss="modal") Close
-							input.btn.btn-success(type="submit" value="Upload")
-		.modal.fade#uploadModal4
-			.modal-dialog
-				form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
-					.modal-content
-						.modal-header
-							button.close(data-dismiss="modal")
-								span(aria-hidden="true") &times;
-								span.sr-only Close
-							h4.modal-title Upload Track
-						.modal-body
-							.upload-view-tracks
-								input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
-								input(type="text" name="trackTitle" placeholder="Name Your Track!")
-								input#songId(type="hidden" value=track4.id name="id")
-								input#trackNum(type="hidden" value="trackNum" name="trackNum")
-						.modal-footer
-							button.btn.btn-default(type="button" data-dismiss="modal") Close
-							input.btn.btn-success(type="submit" value="Upload")
-		.modal.fade#uploadModal5
-			.modal-dialog
-				form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
-					.modal-content
-						.modal-header
-							button.close(data-dismiss="modal")
-								span(aria-hidden="true") &times;
-								span.sr-only Close
-							h4.modal-title Upload Track
-						.modal-body
-							.upload-view-tracks
-								input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
-								input(type="text" name="trackTitle" placeholder="Name Your Track!")
-								input#songId(type="hidden" value=track5.id name="id")
-								input#trackNum(type="hidden" value="trackNum" name="trackNum")
-						.modal-footer
-							button.btn.btn-default(type="button" data-dismiss="modal") Close
-							input.btn.btn-success(type="submit" value="Upload")
+			.modal.fade#uploadModal0
+				.modal-dialog
+					form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
+						.modal-content
+							.modal-header
+								button.close(data-dismiss="modal")
+									span(aria-hidden="true") &times;
+									span.sr-only Close
+								h4.modal-title Upload Track
+							.modal-body
+								.upload-view-tracks
+									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input(type="text" name="trackTitle" placeholder="Name Your Track!")
+									input#songId(type="hidden" value=song._id name="id")
+									input#trackNum(type="hidden" value="0" name="trackNum")
+							.modal-footer
+								button.btn.btn-default(type="button" data-dismiss="modal") Close
+								input.btn.btn-success(type="submit" value="Upload")
+			.modal.fade#uploadModal1
+				.modal-dialog
+					form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
+						.modal-content
+							.modal-header
+								button.close(data-dismiss="modal")
+									span(aria-hidden="true") &times;
+									span.sr-only Close
+								h4.modal-title Upload Track
+							.modal-body
+								.upload-view-tracks
+									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input(type="text" name="trackTitle" placeholder="Name Your Track!")
+									input#songId(type="hidden" value=song._id name="id")
+									input#trackNum(type="hidden" value="1" name="trackNum")
+							.modal-footer
+								button.btn.btn-default(type="button" data-dismiss="modal") Close
+								input.btn.btn-success(type="submit" value="Upload")
+			.modal.fade#uploadModal2
+				.modal-dialog
+					form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
+						.modal-content
+							.modal-header
+								button.close(data-dismiss="modal")
+									span(aria-hidden="true") &times;
+									span.sr-only Close
+								h4.modal-title Upload Track
+							.modal-body
+								.upload-view-tracks
+									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input(type="text" name="trackTitle" placeholder="Name Your Track!")
+									input#songId(type="hidden" value=song._id name="id")
+									input#trackNum(type="hidden" value="2" name="trackNum")
+							.modal-footer
+								button.btn.btn-default(type="button" data-dismiss="modal") Close
+								input.btn.btn-success(type="submit" value="Upload")
+			.modal.fade#uploadModal3
+				.modal-dialog
+					form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
+						.modal-content
+							.modal-header
+								button.close(data-dismiss="modal")
+									span(aria-hidden="true") &times;
+									span.sr-only Close
+								h4.modal-title Upload Track
+							.modal-body
+								.upload-view-tracks
+									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input(type="text" name="trackTitle" placeholder="Name Your Track!")
+									input#songId(type="hidden" value=song._id name="id")
+									input#trackNum(type="hidden" value="3" name="trackNum")
+							.modal-footer
+								button.btn.btn-default(type="button" data-dismiss="modal") Close
+								input.btn.btn-success(type="submit" value="Upload")
+			.modal.fade#uploadModal4
+				.modal-dialog
+					form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
+						.modal-content
+							.modal-header
+								button.close(data-dismiss="modal")
+									span(aria-hidden="true") &times;
+									span.sr-only Close
+								h4.modal-title Upload Track
+							.modal-body
+								.upload-view-tracks
+									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input(type="text" name="trackTitle" placeholder="Name Your Track!")
+									input#songId(type="hidden" value=song._id name="id")
+									input#trackNum(type="hidden" value="4" name="trackNum")
+							.modal-footer
+								button.btn.btn-default(type="button" data-dismiss="modal") Close
+								input.btn.btn-success(type="submit" value="Upload")
+			.modal.fade#uploadModal5
+				.modal-dialog
+					form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")
+						.modal-content
+							.modal-header
+								button.close(data-dismiss="modal")
+									span(aria-hidden="true") &times;
+									span.sr-only Close
+								h4.modal-title Upload Track
+							.modal-body
+								.upload-view-tracks
+									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input(type="text" name="trackTitle" placeholder="Name Your Track!")
+									input#songId(type="hidden" value=song._id name="id")
+									input#trackNum(type="hidden" value="5" name="trackNum")
+							.modal-footer
+								button.btn.btn-default(type="button" data-dismiss="modal") Close
+								input.btn.btn-success(type="submit" value="Upload")
 
 
 
@@ -271,19 +282,25 @@ block content
 		//- 			input.btn.btn-success.btn-sm(type="submit" value="Upload")
 	script.
 		var user = !{JSON.stringify(user)};
+		var song = !{JSON.stringify(song)};
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
 	script(script src="../scripts/lib/cocreationSong.js")
 	script(src="../scripts/lib/moment.js")
 	script(id="comment-template" type="text/x-handlebars-template").
 		<div class="list-group results">
-			<div class="list-group-item result-block">
-				<a href="./profile-user"><img id="memberPic" class="search-profile-pic" src={{user.profilePic}}></a>
-				<div class="search-result-info">
-					<a href="./profile-user"><h4 class="list-group-item-heading"> {{user.name}} </h4></a>
-					<p>{{date}}</p>
-					<p id="comment-text" class="list-group-item-text"> {{comment}} </p>
-					<button class="like btn btn-xs btn-primary><i class="fa fa-thumbs-o-up"></i></button>
-							
+			<div class="list-group-item">
+				<div class="comment-pic-holder">
+					<a href="../profile/?id={{userId}}"><img id="memberPic" class="search-profile-pic" src={{userProfilePic}}></a>
+					<a href="../profile/?id={{userId}}"><h4 class="list-group-item-heading"> {{userName}} </h4></a>
+					<p class="comment-date"> {{date}} </p>
 				</div>
+				<div class="search-result-info">
+					<p id="comment-text" class="list-group-item-text"> {{comment}} </p>
+				</div>
+				<button class="like like-comment btn btn-xs btn-default">
+					<i class="fa fa-thumbs-o-up"></i>
+				</button>
+				<div class="likes-comment"> {{likes}} Likes </div>
+							
 			</div>
 		</div>

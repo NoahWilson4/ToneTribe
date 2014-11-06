@@ -1,5 +1,42 @@
 $(document).on('ready', function() {
 
+//////////////////////// comments ///////////////////////
+//////////////////////// comments ///////////////////////
+
+// song and user data is bootstrapped into the script
+
+
+	var commentTemplate = $('#comment-template').html();
+	var compileCommentTemplate = Handlebars.compile(commentTemplate);
+
+	console.log('song test!!!!:', song);
+
+	song.comments.map(function(comment){
+		var outputHTML = compileCommentTemplate(comment);
+		$('#comments-container').append(outputHTML);
+	})
+
+	$('#addComment').on('submit', function(event){
+		event.preventDefault();
+		var comment = $(this).find('textarea').val();
+		var date = moment().format('MMMM Do YYYY, h:mm:ss a');
+		var comment = {
+			userProfilePic: user.profilePic,
+			userId: user._id,
+			userName: user.name,
+			date: date,
+			comment: comment,
+			likes: 0
+		}
+		var outputHTML = compileCommentTemplate(comment);
+		$('#comments-container').append(outputHTML);
+
+
+		$.post('/api/postComment', {comment: comment, songId: song._id} , function(responseData){
+			console.log('responseData: ', responseData);
+		});
+	})
+
 
 ///////////////// audio context /////////////
 var navigator = window.navigator;
@@ -11,26 +48,383 @@ navigator.getUserMedia = (
 );
 
 var context = new (window.AudioContext || window.webkitAudioContext)();
-	var note;
+	// var note;
 
-	function playNote(url) {
-		note = context.createBufferSource();
-		  request = new XMLHttpRequest();
-		  request.open('GET', url, true);
-		  request.responseType = 'arraybuffer';
+	// function playNote(url) {
+	// 	note = context.createBufferSource();
+	// 	  request = new XMLHttpRequest();
+	// 	  request.open('GET', url, true);
+	// 	  request.responseType = 'arraybuffer';
 
-		  request.onload = function() {
-		    var audioData = request.response;
-		    context.decodeAudioData(audioData, function(buffer) {
-		        note.buffer = buffer;
-		        note.connect(context.destination);
-		        note.loop = false;
-		    },
-		    function(e){"Error with decoding audio data" + e.err});
-		  }
-		request.send();
-		note.start(0);
-	}
+	// 	  request.onload = function() {
+	// 	    var audioData = request.response;
+	// 	    context.decodeAudioData(audioData, function(buffer) {
+	// 	        note.buffer = buffer;
+	// 	        note.connect(context.destination);
+	// 	        note.loop = false;
+	// 	    },
+	// 	    function(e){"Error with decoding audio data" + e.err});
+	// 	  }
+	// 	request.send();
+	// 	note.start(0);
+	// }
+
+/////////////// get urls /////////////////
+
+	var allTracks;
+
+	$.post('/api/getTrackUrls', {id: song._id}, function(responseData){
+		allTracks = responseData;
+		console.log('responseData 1: ', responseData);
+		console.log('allTracks 1: ', allTracks);
+
+	
+
+
+
+		var tracks0 = allTracks[0];
+		var tracks1 = allTracks[1];
+		var tracks2 = allTracks[2];
+		var tracks3 = allTracks[3];
+		var tracks4 = allTracks[4];
+		var tracks5 = allTracks[5];
+
+		var gain0 = context.createGain();
+		var gain1 = context.createGain();
+		var gain2 = context.createGain();
+		var gain3 = context.createGain();
+		var gain4 = context.createGain();
+		var gain5 = context.createGain();
+
+		
+		console.log('tracks0 at beginning', tracks0);
+		console.log('tracks1 at beginning', tracks1);
+
+
+		console.log('test....')
+
+		if (tracks0[0]){
+			var track0 = document.createElement('audio');
+					    track0.setAttribute('src', tracks0[0].url);
+					    track0.load()
+					    track0.controls = true;
+					    $.get();
+						
+			}
+		if (tracks1[0]){
+		var track1 = document.createElement('audio');
+				    track1.setAttribute('src', tracks1[0].url);
+				    track1.load()
+				    track1.controls = true;
+				    $.get();
+				    
+			}
+		if (tracks2[0]){
+		var track2 = document.createElement('audio');
+				    track2.setAttribute('src', tracks2[0].url);
+				    track2.load()
+				    track2.controls = true;
+				    $.get();
+				    
+			}
+		if (tracks3[0]){
+		var track3 = document.createElement('audio');
+				    track3.setAttribute('src', tracks3[0].url);
+				    track3.load()
+				    track3.controls = true;
+				    $.get();
+				    
+			}
+		if (tracks4[0]){
+		var track4 = document.createElement('audio');
+				    track4.setAttribute('src', tracks4[0].url);
+				    track4.load()
+				    track4.controls = true;
+				    $.get();
+				    
+			}
+		if (tracks5[0]){
+		var track5 = document.createElement('audio');
+				    track5.setAttribute('src', tracks5[0].url);
+				    track5.load()
+				    track5.controls = true;
+				    $.get();
+				    
+			}
+
+		//connect sources
+		if (tracks0[0]){
+			var source0 = context.createMediaElementSource(track0);
+				source0.connect(gain0);
+				gain0.connect(analyser0);
+				gain0.connect(context.destination);
+			}
+		if (tracks1[0]){
+			var source1 = context.createMediaElementSource(track1);
+				source1.connect(gain1);
+				gain1.connect(analyser1);
+				gain1.connect(context.destination);
+			}
+		if (tracks2[0]){
+			var source2 = context.createMediaElementSource(track2);
+				source2.connect(gain2);
+				gain2.connect(analyser2);
+				gain2.connect(context.destination);
+			}
+		if (tracks3[0]){
+			var source3 = context.createMediaElementSource(track3);
+				source3.connect(gain3);
+				gain3.connect(analyser3);
+				gain3.connect(context.destination);
+			}
+		if (tracks4[0]){
+			var source4 = context.createMediaElementSource(track4);
+				source4.connect(gain4);
+				gain4.connect(analyser4);
+				gain4.connect(context.destination);
+			}
+		if (tracks5[0]){
+			var source5 = context.createMediaElementSource(track5);
+				source5.connect(gain5);
+				gain5.connect(analyser5);
+				gain5.connect(context.destination);
+			}
+
+
+		$('.play0').on('click', function(){
+			console.log('play click!');
+			track0.play();
+		})
+		$('.play1').on('click', function(){
+			console.log('play click!');
+			track1.play();
+		})
+		$('.play2').on('click', function(){
+			console.log('play click!');
+			track2.play();
+		})
+		$('.play3').on('click', function(){
+			console.log('play click!');
+			track3.play();
+		})
+		$('.play4').on('click', function(){
+			console.log('play click!');
+			track4.play();
+		})
+		$('.play5').on('click', function(){
+			console.log('play click!');
+			track5.play();
+		})
+
+		$(document).on('click', '.mute0', function(){
+			gain0.gain.value = 0;
+			$(this).addClass('unmute0').removeClass('mute0');
+		})
+		$(document).on('click', '.unmute0', function(){
+			gain0.gain.value = 1;
+			$(this).removeClass('unmute0').addClass('mute0');
+		})
+
+		$(document).on('click', '.mute1', function(){
+			gain1.gain.value = 0;
+			$(this).addClass('unmute1').removeClass('mute1');
+		})
+		$(document).on('click', '.unmute1', function(){
+			gain1.gain.value = 1;
+			$(this).removeClass('unmute1').addClass('mute1');
+		})
+
+		$(document).on('click', '.mute2', function(){
+			gain2.gain.value = 0;
+			$(this).addClass('unmute2').removeClass('mute2');
+		})
+		$(document).on('click', '.unmute2', function(){
+			gain2.gain.value = 1;
+			$(this).removeClass('unmute2').addClass('mute2');
+		})
+
+		$(document).on('click', '.mute3', function(){
+			gain3.gain.value = 0;
+			$(this).addClass('unmute3').removeClass('mute3');
+		})
+		$(document).on('click', '.unmute3', function(){
+			gain3.gain.value = 1;
+			$(this).removeClass('unmute3').addClass('mute3');
+		})
+
+		$(document).on('click', '.mute4', function(){
+			gain4.gain.value = 0;
+			$(this).addClass('unmute4').removeClass('mute4');
+		})
+		$(document).on('click', '.unmute4', function(){
+			gain4.gain.value = 1;
+			$(this).removeClass('unmute4').addClass('mute4');
+		})
+
+		$(document).on('click', '.mute5', function(){
+			gain5.gain.value = 0;
+			$(this).addClass('unmute5').removeClass('mute5');
+		})
+		$(document).on('click', '.unmute5', function(){
+			gain5.gain.value = 1;
+			$(this).removeClass('unmute5').addClass('mute5');
+		})
+		
+
+
+
+		$('#play').on('click', function(){
+			console.log('play all...');
+			if(track0){
+
+			track0.play();
+			}
+			track1.play();
+			track2.play();
+			track3.play();
+			track4.play();
+			track5.play();
+		})
+		$('#stop').on('click', function(){
+			console.log('play all...');
+			track0.pause();
+			track1.pause();
+			track2.pause();
+			track3.pause();
+			track4.pause();
+			track5.pause();
+		})
+
+////////// should be able to be refactored ...., this was being a pain and not working....
+
+		// var setTrackUrl = function(tracks, track, trackTitle) {
+		// 	console.log('tracks: ', tracks);
+		// 	console.log('track: ', track);
+		// 	for(var i = 0; i < tracks.length; i++){
+		//     	var testVal = tracks[i].trackTitle;
+		//     	if (testVal === trackTitle) {
+		//     		console.log('match!')
+		//     		track.setAttribute('src', tracks[i].url);
+		//     	}
+		//     }
+		// }
+
+		$('#select0').on('change', function() {
+		    console.log('test: ', $("#select0 option:selected").val());
+		    var trackTitle = $("#select0 option:selected").val();
+		    console.log('tracks0 in selector, trackTitle', trackTitle, tracks0);
+		    // setTrackUrl(tracks0, track0, trackTitle);
+		    for(var i = 0; i < tracks0.length; i++){
+		    	var testVal = tracks0[i].trackTitle;
+		    	if (testVal === trackTitle) {
+		    		console.log('match!');
+		    		track0.setAttribute('src', tracks0[i].url);
+		    		$(this).closest('.track-container').find('.song-user-name').text(tracks0[i].userName);
+		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.likes').text(tracks0[i].likes + ' Likes');
+		    	}
+		    }
+		  })
+		  .trigger( "change" );
+
+		$('#select1').on('change', function() {
+		    console.log('test: ', $("#select1 option:selected").val());
+		    var trackTitle = $("#select1 option:selected").val();
+		    console.log('tracks1 in selector, trackTitle', trackTitle, tracks1);
+		    // setTrackUrl(tracks0, track0, trackTitle);
+		    for(var i = 0; i < tracks1.length; i++){
+		    	var testVal = tracks1[i].trackTitle;
+		    	if (testVal === trackTitle) {
+		    		console.log('match!');
+		    		track1.setAttribute('src', tracks1[i].url);
+		    		$(this).closest('.track-container').find('.song-user-name').text(tracks1[i].userName);
+		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.likes').text(tracks1[i].likes + ' Likes');
+		    	}
+		    }
+		  })
+		  .trigger( "change" );
+
+		  $('#select2').on('change', function() {
+		    console.log('test: ', $("#select2 option:selected").val());
+		    var trackTitle = $("#select2 option:selected").val();
+		    console.log('tracks2 in selector, trackTitle', trackTitle, tracks2);
+		    // setTrackUrl(tracks0, track0, trackTitle);
+		    for(var i = 0; i < tracks2.length; i++){
+		    	var testVal = tracks2[i].trackTitle;
+		    	if (testVal === trackTitle) {
+		    		console.log('match!');
+		    		track2.setAttribute('src', tracks2[i].url);
+		    		$(this).closest('.track-container').find('.song-user-name').text(tracks2[i].userName);
+		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.likes').text(tracks2[i].likes + ' Likes');
+		    	}
+		    }
+		  })
+		  .trigger( "change" );
+
+		  $('#select3').on('change', function() {
+		    console.log('test: ', $("#select3 option:selected").val());
+		    var trackTitle = $("#select3 option:selected").val();
+		    console.log('tracks3 in selector, trackTitle', trackTitle, tracks3);
+		    // setTrackUrl(tracks0, track0, trackTitle);
+		    for(var i = 0; i < tracks3.length; i++){
+		    	var testVal = tracks3[i].trackTitle;
+		    	if (testVal === trackTitle) {
+		    		console.log('match!');
+		    		track3.setAttribute('src', tracks3[i].url);
+		    		$(this).closest('.track-container').find('.song-user-name').text(tracks3[i].userName);
+		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.likes').text(tracks3[i].likes + ' Likes');
+		    	}
+		    }
+		  })
+		  .trigger( "change" );
+
+		  $('#select4').on('change', function() {
+		    console.log('test: ', $("#select4 option:selected").val());
+		    var trackTitle = $("#select4 option:selected").val();
+		    console.log('tracks4 in selector, trackTitle', trackTitle, tracks4);
+		    // setTrackUrl(tracks0, track0, trackTitle);
+		    for(var i = 0; i < tracks4.length; i++){
+		    	var testVal = tracks4[i].trackTitle;
+		    	if (testVal === trackTitle) {
+		    		console.log('match!');
+		    		track4.setAttribute('src', tracks4[i].url);
+		    		$(this).closest('.track-container').find('.song-user-name').text(tracks4[i].userName);
+		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.likes').text(tracks4[i].likes + ' Likes');
+		    	}
+		    }
+		  })
+		  .trigger( "change" );
+
+		  $('#select5').on('change', function() {
+		    console.log('test: ', $("#select5 option:selected").val());
+		    var trackTitle = $("#select5 option:selected").val();
+		    console.log('tracks5 in selector, trackTitle', trackTitle, tracks5);
+		    // setTrackUrl(tracks0, track0, trackTitle);
+		    for(var i = 0; i < tracks5.length; i++){
+		    	var testVal = tracks5[i].trackTitle;
+		    	if (testVal === trackTitle) {
+		    		console.log('match!');
+		    		track5.setAttribute('src', tracks5[i].url);
+		    		$(this).closest('.track-container').find('.song-user-name').text(tracks5[i].userName);
+		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.likes').text(tracks5[i].likes + ' Likes');
+		    	}
+		    }
+		  })
+		  .trigger( "change" );
+
+
+	});
 
 
 ////// microphone access
@@ -257,375 +651,6 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
     drawBars5();
  
 
-/////////////// get urls /////////////////
-
-	var allTracks;
-
-	
-	var id = $('#song-id').attr('value');
-	console.log('songId: ', id)
-	$.post('/api/getTrackUrls', {id: id}, function(responseData){
-		allTracks = responseData;
-		console.log('responseData 1: ', responseData);
-		console.log('allTracks 1: ', allTracks);
-
-	
-
-
-
-		var tracks0 = allTracks[0];
-		var tracks1 = allTracks[1];
-		var tracks2 = allTracks[2];
-		var tracks3 = allTracks[3];
-		var tracks4 = allTracks[4];
-		var tracks5 = allTracks[5];
-
-		var gain0 = context.createGain();
-		var gain1 = context.createGain();
-		var gain2 = context.createGain();
-		var gain3 = context.createGain();
-		var gain4 = context.createGain();
-		var gain5 = context.createGain();
-
-		
-		console.log('tracks0 at beginning', tracks0);
-		console.log('tracks1 at beginning', tracks1);
-
-
-		console.log('test....')
-
-		if (tracks0[0]){
-			var track0 = document.createElement('audio');
-					    track0.setAttribute('src', tracks0[0].url);
-					    track0.load()
-					    track0.controls = true;
-					    $.get();
-						
-			}
-		if (tracks1[0]){
-		var track1 = document.createElement('audio');
-				    track1.setAttribute('src', tracks1[0].url);
-				    track1.load()
-				    track1.controls = true;
-				    $.get();
-				    
-			}
-		if (tracks2[0]){
-		var track2 = document.createElement('audio');
-				    track2.setAttribute('src', tracks2[0].url);
-				    track2.load()
-				    track2.controls = true;
-				    $.get();
-				    
-			}
-		if (tracks3[0]){
-		var track3 = document.createElement('audio');
-				    track3.setAttribute('src', tracks3[0].url);
-				    track3.load()
-				    track3.controls = true;
-				    $.get();
-				    
-			}
-		if (tracks4[0]){
-		var track4 = document.createElement('audio');
-				    track4.setAttribute('src', tracks4[0].url);
-				    track4.load()
-				    track4.controls = true;
-				    $.get();
-				    
-			}
-		if (tracks5[0]){
-		var track5 = document.createElement('audio');
-				    track5.setAttribute('src', tracks5[0].url);
-				    track5.load()
-				    track5.controls = true;
-				    $.get();
-				    
-			}
-
-		//connect sources
-
-		var source0 = context.createMediaElementSource(track0);
-			source0.connect(gain0);
-			gain0.connect(analyser0);
-			gain0.connect(context.destination);
-		var source1 = context.createMediaElementSource(track1);
-			source1.connect(gain1);
-			gain1.connect(analyser1);
-			gain1.connect(context.destination);
-		var source2 = context.createMediaElementSource(track2);
-			source2.connect(gain2);
-			gain2.connect(analyser2);
-			gain2.connect(context.destination);
-		var source3 = context.createMediaElementSource(track3);
-			source3.connect(gain3);
-			gain3.connect(analyser3);
-			gain3.connect(context.destination);
-		var source4 = context.createMediaElementSource(track4);
-			source4.connect(gain4);
-			gain4.connect(analyser4);
-			gain4.connect(context.destination);
-		var source5 = context.createMediaElementSource(track5);
-			source5.connect(gain5);
-			gain5.connect(analyser5);
-			gain5.connect(context.destination);
-
-
-		$('.play0').on('click', function(){
-			console.log('play click!');
-			track0.play();
-		})
-		$('.play1').on('click', function(){
-			console.log('play click!');
-			track1.play();
-		})
-		$('.play2').on('click', function(){
-			console.log('play click!');
-			track2.play();
-		})
-		$('.play3').on('click', function(){
-			console.log('play click!');
-			track3.play();
-		})
-		$('.play4').on('click', function(){
-			console.log('play click!');
-			track4.play();
-		})
-		$('.play5').on('click', function(){
-			console.log('play click!');
-			track5.play();
-		})
-
-		$(document).on('click', '.mute0', function(){
-			gain0.gain.value = 0;
-			$(this).addClass('unmute0').removeClass('mute0');
-		})
-		$(document).on('click', '.unmute0', function(){
-			gain0.gain.value = 1;
-			$(this).removeClass('unmute0').addClass('mute0');
-		})
-
-		$(document).on('click', '.mute1', function(){
-			gain1.gain.value = 0;
-			$(this).addClass('unmute1').removeClass('mute1');
-		})
-		$(document).on('click', '.unmute1', function(){
-			gain1.gain.value = 1;
-			$(this).removeClass('unmute1').addClass('mute1');
-		})
-
-		$(document).on('click', '.mute2', function(){
-			gain2.gain.value = 0;
-			$(this).addClass('unmute2').removeClass('mute2');
-		})
-		$(document).on('click', '.unmute2', function(){
-			gain2.gain.value = 1;
-			$(this).removeClass('unmute2').addClass('mute2');
-		})
-
-		$(document).on('click', '.mute3', function(){
-			gain3.gain.value = 0;
-			$(this).addClass('unmute3').removeClass('mute3');
-		})
-		$(document).on('click', '.unmute3', function(){
-			gain3.gain.value = 1;
-			$(this).removeClass('unmute3').addClass('mute3');
-		})
-
-		$(document).on('click', '.mute4', function(){
-			gain4.gain.value = 0;
-			$(this).addClass('unmute4').removeClass('mute4');
-		})
-		$(document).on('click', '.unmute4', function(){
-			gain4.gain.value = 1;
-			$(this).removeClass('unmute4').addClass('mute4');
-		})
-
-		$(document).on('click', '.mute5', function(){
-			gain5.gain.value = 0;
-			$(this).addClass('unmute5').removeClass('mute5');
-		})
-		$(document).on('click', '.unmute5', function(){
-			gain5.gain.value = 1;
-			$(this).removeClass('unmute5').addClass('mute5');
-		})
-		
-
-
-
-		$('#play').on('click', function(){
-			console.log('play all...');
-			if(track0){
-
-			track0.play();
-			}
-			track1.play();
-			track2.play();
-			track3.play();
-			track4.play();
-			track5.play();
-		})
-		$('#stop').on('click', function(){
-			console.log('play all...');
-			track0.pause();
-			track1.pause();
-			track2.pause();
-			track3.pause();
-			track4.pause();
-			track5.pause();
-		})
-
-////////// should be able to be refactored ...., this was being a pain and not working....
-
-		// var setTrackUrl = function(tracks, track, trackTitle) {
-		// 	console.log('tracks: ', tracks);
-		// 	console.log('track: ', track);
-		// 	for(var i = 0; i < tracks.length; i++){
-		//     	var testVal = tracks[i].trackTitle;
-		//     	if (testVal === trackTitle) {
-		//     		console.log('match!')
-		//     		track.setAttribute('src', tracks[i].url);
-		//     	}
-		//     }
-		// }
-
-		$('#select0').on('change', function() {
-		    console.log('test: ', $("#select0 option:selected").val());
-		    var trackTitle = $("#select0 option:selected").val();
-		    console.log('tracks0 in selector, trackTitle', trackTitle, tracks0);
-		    // setTrackUrl(tracks0, track0, trackTitle);
-		    for(var i = 0; i < tracks0.length; i++){
-		    	var testVal = tracks0[i].trackTitle;
-		    	if (testVal === trackTitle) {
-		    		console.log('match!')
-		    		track0.setAttribute('src', tracks0[i].url);
-		    		$(this).closest('.track-container').find('.song-user-name').text('Username');
-		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image');
-		    		$(this).closest('.track-container').find('.likes').text(tracks0[i].likes + ' Likes');
-		    	}
-		    }
-		  })
-		  .trigger( "change" );
-
-		$('#select1').on('change', function() {
-		    console.log('test: ', $("#select1 option:selected").val());
-		    var trackTitle = $("#select1 option:selected").val();
-		    console.log('tracks1 in selector, trackTitle', trackTitle, tracks1);
-		    // setTrackUrl(tracks0, track0, trackTitle);
-		    for(var i = 0; i < tracks1.length; i++){
-		    	var testVal = tracks1[i].trackTitle;
-		    	if (testVal === trackTitle) {
-		    		console.log('match!')
-		    		track1.setAttribute('src', tracks1[i].url);
-		    		$(this).closest('.track-container').find('.song-user-name').text('Username');
-		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image');
-		    		$(this).closest('.track-container').find('.likes').text(tracks1[i].likes + ' Likes');
-		    	}
-		    }
-		  })
-		  .trigger( "change" );
-
-		  $('#select2').on('change', function() {
-		    console.log('test: ', $("#select2 option:selected").val());
-		    var trackTitle = $("#select2 option:selected").val();
-		    console.log('tracks2 in selector, trackTitle', trackTitle, tracks2);
-		    // setTrackUrl(tracks0, track0, trackTitle);
-		    for(var i = 0; i < tracks2.length; i++){
-		    	var testVal = tracks2[i].trackTitle;
-		    	if (testVal === trackTitle) {
-		    		console.log('match!')
-		    		track2.setAttribute('src', tracks2[i].url);
-		    		$(this).closest('.track-container').find('.song-user-name').text('Username');
-		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image');
-		    		$(this).closest('.track-container').find('.likes').text(tracks2[i].likes + ' Likes');
-		    	}
-		    }
-		  })
-		  .trigger( "change" );
-
-		  $('#select3').on('change', function() {
-		    console.log('test: ', $("#select3 option:selected").val());
-		    var trackTitle = $("#select3 option:selected").val();
-		    console.log('tracks3 in selector, trackTitle', trackTitle, tracks3);
-		    // setTrackUrl(tracks0, track0, trackTitle);
-		    for(var i = 0; i < tracks3.length; i++){
-		    	var testVal = tracks3[i].trackTitle;
-		    	if (testVal === trackTitle) {
-		    		console.log('match!')
-		    		track3.setAttribute('src', tracks3[i].url);
-		    		$(this).closest('.track-container').find('.song-user-name').text('Username');
-		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image');
-		    		$(this).closest('.track-container').find('.likes').text(tracks3[i].likes + ' Likes');
-		    	}
-		    }
-		  })
-		  .trigger( "change" );
-
-		  $('#select4').on('change', function() {
-		    console.log('test: ', $("#select4 option:selected").val());
-		    var trackTitle = $("#select4 option:selected").val();
-		    console.log('tracks4 in selector, trackTitle', trackTitle, tracks4);
-		    // setTrackUrl(tracks0, track0, trackTitle);
-		    for(var i = 0; i < tracks4.length; i++){
-		    	var testVal = tracks4[i].trackTitle;
-		    	if (testVal === trackTitle) {
-		    		console.log('match!')
-		    		track4.setAttribute('src', tracks4[i].url);
-		    		$(this).closest('.track-container').find('.song-user-name').text('Username');
-		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image');
-		    		$(this).closest('.track-container').find('.likes').text(tracks4[i].likes + ' Likes');
-		    	}
-		    }
-		  })
-		  .trigger( "change" );
-
-		  $('#select5').on('change', function() {
-		    console.log('test: ', $("#select5 option:selected").val());
-		    var trackTitle = $("#select5 option:selected").val();
-		    console.log('tracks5 in selector, trackTitle', trackTitle, tracks5);
-		    // setTrackUrl(tracks0, track0, trackTitle);
-		    for(var i = 0; i < tracks5.length; i++){
-		    	var testVal = tracks5[i].trackTitle;
-		    	if (testVal === trackTitle) {
-		    		console.log('match!')
-		    		track5.setAttribute('src', tracks5[i].url);
-		    		$(this).closest('.track-container').find('.song-user-name').text('Username');
-		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image');
-		    		$(this).closest('.track-container').find('.likes').text(tracks5[i].likes + ' Likes');
-		    	}
-		    }
-		  })
-		  .trigger( "change" );
-
-
-	});
-
-//////////////////////// comments ///////////////////////
-
-	var commentTemplate = $('#comment-template').html();
-	var compileCommentTemplate = Handlebars.compile(commentTemplate);
-
-	$('#addComment').on('submit', function(event){
-		event.preventDefault();
-		var comment = $(this).find('textarea').val();
-		var time = moment().format('MMMM Do YYYY, h:mm:ss a');
-		console.log('user: ', user);
-		console.log('moment: ', time);
-		var comment = {
-			user: user,
-			time: time,
-			comment: comment 
-		}
-		var outputHTML = compileCommentTemplate(comment);
-		$('#comments-container').append(outputHTML);
-		//// ajax call and fine tune posting
-	})
 
 
 

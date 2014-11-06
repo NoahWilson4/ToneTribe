@@ -3,7 +3,7 @@ $(document).on('ready', function() {
 var userInfo = {
 	bands: [],
 	instruments: [],
-	styles: [],
+	styles: '',
 	skills: [],
 	inspirations: [],
 	improvComp: undefined

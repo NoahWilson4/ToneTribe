@@ -89,10 +89,6 @@ app.get('/auth/logout', authenticationController.logout);
 app.get('/', indexController.index);
 app.get('/signup', indexController.signup);
 
-app.get('/cocreation', indexController.cocreation);
-app.get('/api/getSongs', apiController.getSongs);
-app.get('/song', indexController.song);
-app.post('/api/getTrackUrls', apiController.getTrackUrls);
 
 
 // ***** IMPORTANT ***** //
@@ -109,11 +105,14 @@ app.use(passportConfig.ensureAuthenticated);
 app.get('/signup2', indexController.signup2);
 app.get('/signup3', indexController.signup3);
 app.get('/signup4', indexController.signup4);
+app.get('/profile', indexController.viewProfile);
 app.get('/profile-user', indexController.profileUser);
 app.get('/profile-band', indexController.profileBand);
 app.get('/search', indexController.search);
+app.get('/cocreation', indexController.cocreation);
+app.get('/cocreation-user', indexController.cocreationUser)
+app.get('/song', indexController.song);
 app.get('/search-results', indexController.searchResults);
-// app.get('/cocreation', indexController.cocreation);
 app.get('/live-stream', indexController.liveStream);
 app.post('/addUser', apiController.addUser);
 app.post('/updateUser', apiController.updateUser);
@@ -122,7 +121,11 @@ app.post('/updateUser2', apiController.updateUser2);
 app.post('/updateUser3', apiController.updateUser3);
 app.post('/api/findUsers', apiController.findUsers);
 app.post('/submitSearch', indexController.submitSearch);
+app.post('/api/getTrackUrls', apiController.getTrackUrls);
 app.post('/api/createNewSong', apiController.createNewSong);
+app.post('/api/postComment', apiController.postComment);
+app.post('/api/getComments', apiController.getComments);
+app.get('/api/getSongs', apiController.getSongs);
 
 
 ////////////////////////////////////////////
@@ -207,7 +210,7 @@ app.post('/uploadBackgroundPic', function (req, res){
 
 app.post('/submitTrack', function (req, res) {
       console.log('req.body on submitTrack', req.body);
-
+      console.log('req.user on submitTrack: ', req.user._id, req.user);
       var fName = req.files.audio.name;
       var fPath = req.files.audio.path;
       var cType = req.files.audio.type;
@@ -217,13 +220,15 @@ app.post('/submitTrack', function (req, res) {
       var key = 'public/' + fName;
       var trackTitle = req.body.trackTitle;
       var id = req.body.id;
-      var trackNumber = req.body.trackNumber;
+      var trackNumber = req.body.trackNum;
 
       console.log('id on appjs', id);
               var track = {
                   Key: key,
                   trackTitle: trackTitle,
-                  // ETag: trackETag,
+                  userId: req.user._id,
+                  userPic: req.user.profilePic,
+                  userName: req.user.name,
                   songId: id,
                   trackNumber: trackNumber,
                   // url: trackUrl
@@ -239,15 +244,11 @@ app.post('/submitTrack', function (req, res) {
             Body: data
           }, function (err, result) {
               console.log(err, result);
-
-        console.log('finishing with upload.......', id);
-            
-            });
-       console.log('about to render.........id: ', id);
-      // res.send();
-        
-        res.redirect('song');
+              console.log('finishing with upload.......', id);
+        console.log('about to render.........id: ', id);
+        res.redirect('song?id=' + id);
       });
+        });
     }
   );
 app.post('/submitPrivate', function (req, res) {

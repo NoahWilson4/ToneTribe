@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var CocreationSong = mongoose.Schema({
 	name: String,
+	userId: String,
 	tracks: [
 		{
 			track: Number,
@@ -18,12 +19,7 @@ var CocreationSong = mongoose.Schema({
 			]
 		}
 	],
-	comments: [{
-		user: {},
-		comment: String,
-		date: String,
-		likes: Number
-	}]
+	comments: []
 
 });
 

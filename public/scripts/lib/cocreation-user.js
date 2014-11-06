@@ -2,22 +2,22 @@ $(document).on('ready', function() {
 
 ////////////// cocreation main page ///////////////////////
 
-$.get('/api/getSongs', {}, function(responseData){
-	console.log(responseData);
-	responseData.map(function(song){
-		$('.song-container').append(renderSong(song));
-		});
-})
+
 
 
 var renderSong = function(songData) {
 	console.log('songData',songData);
 	var el = $('<div>')
 	el.append('<form id="viewSong"></form>')
-	el.append('<h3><a href="/song/?id=' + songData._id + '">' + songData.name + '</a></h3>');
-	el.attr('data-id', songData._id);
+	el.append('<div class="song-result-container"><h3><a href="/song/?id=' + songData.songId + '">' + songData.songName + '</a></h3></div>');
+	el.attr('data-id', songData.songId);
 	return el;
 };
+user.cocreationSongs.map(function(song){
+	console.log('song test: ', song);
+	$('.song-container').append(renderSong(song));
+
+});
 
 $('#create-new-song').on('submit', function(e){
 	e.preventDefault();

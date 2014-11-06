@@ -10,10 +10,17 @@ border-radius: 1000px;
 /*}*/
 
 .main {
-	background: rgb(40, 40, 40);
+	background: rgb(228, 228, 228);
 	padding-top: 100px;
 	margin: 0px;
 	padding-bottom: 20px;
+}
+
+.song-result-container{
+	background: white;
+	padding: 15px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
 }
 
 #song-id{
@@ -47,7 +54,7 @@ height: 720px;
 .canvas-container {
 position: absolute;
 width: 100%;
-height: 78px;
+height: 100px;
 }
 
 .visuals {
@@ -59,17 +66,15 @@ left: 0px;
 }
 
 #song-name {
-color: rgb(216, 216, 216);
-
+color: rgb(161, 153, 153);
 padding-left: 30px;
 padding-bottom: 5px;
 padding-top: 15px;
-
 margin-bottom: 0;
 width: 100%;
 border-top-right-radius: 20px;
 border-top-left-radius: 20px;
-background: -webkit-linear-gradient(left, rgb(56, 56, 56),rgb(77, 77, 77),rgb(60, 59, 59));
+ background: white; 
 
 box-shadow: inset 0px 0px 26px 1px #989696;
 -webkit-box-shadow: inset 0px 0px 26px 1px #989696;
@@ -83,21 +88,25 @@ box-shadow: inset 0px 0px 26px 1px #989696;
 }
 
 .song-user-image {
+border-right: 1px solid gray;
+border-left: 1px solid gray;
 position: absolute;
-top: 8px;
-left: 76px;
-width: 60px;
-border-radius: 15px;
-height: 61px;
+top: 0px;
+left: 100px;
+width: 100px;
+/* border-radius: 15px; */
+height: 100px;
 background: rgb(210, 210, 210);
 display: inline-block;
+background-position: center center;
+background-size: cover;
 }
 
 .song-user-info-box{
-background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
 color: white;
 position: absolute;
-left: 148px;
+left: 200px;
 padding: 8px 25px 2px 5px;
 border-top-right-radius: 15px;
 border-top: 1px solid white;
@@ -117,23 +126,33 @@ font-size: 15px;
 .select-track {
 height: 20px;
 position: absolute;
-width: 65px;
-background: lightgray;
+width: 95px;
+background: rgb(187, 187, 187);
 border: none;
-color: darkred;
+color: black;
 border-radius: 0px;
 top: 6px;
 }
 
 #upload-button {
 position: absolute;
-bottom: 2px;
-left: 3px;
-width: 20px;
+bottom: 5px;
+left: 5px;
+width: 25px;
 margin: 1px 0px;
+font-size: 20px;
 color: gray;
 padding: 0px;
-height: 20px;
+height: 25px;
+}
+
+.comment-date{
+	margin: 5px;
+color: lightgray;
+}
+
+.comment-image-container{
+	display: inline-block;
 }
 
 .like {
@@ -141,8 +160,17 @@ height: 20px;
 width: 21px;
 padding: 0px;
 position: absolute;
-left: 2px;
-top: 32px;
+left: 5px;
+top: 35px;
+}
+
+.like-comment{
+	position: static;
+margin-top: 10px;
+}
+
+.like-comment{
+	color: darkgray;
 }
 
 .likes{
@@ -154,12 +182,12 @@ color: white;
 }
 
 .mute {
-height: 20px;
+height: 25px;
 position: absolute;
-bottom: 3px;
-left: 25px;
+bottom: 5px;
+left: 34px;
 padding: 0px;
-width: 20px;
+width: 25px;
 }
 
 .unmute{
@@ -167,12 +195,12 @@ width: 20px;
 }
 
 .play-track{
-font-size: 15px;
+font-size: 23px;
 position: absolute;
-bottom: 3px;
-right: 3px;
-width: 20px;
-height: 20px;
+bottom: 5px;
+right: 5px;
+width: 32px;
+height: 32px;
 padding: 0px;
 }
 
@@ -186,9 +214,9 @@ padding: 0px;
 
 .upload-switch-track {
 position: relative;
-width: 70px;
+width: 100px;
 background: -webkit-linear-gradient(top, rgb(64, 65, 62), rgba(64, 65, 62,.9), rgba(73, 71, 69,.3));
-height: 78px;
+height: 100px;
 padding: 2px;
 }
 
@@ -216,7 +244,7 @@ padding: 2px;
 .track-container {
 position: relative;
 width: 100%;
-height: 78px;
+height: 100px;
 border-top: 1px solid gray;
 /* background: -webkit-linear-gradient(top,rgba(237, 237, 237,1), rgba(192, 184, 160, 0), rgba(192, 184, 160, 0), rgba(231, 225, 225,0)); */
 }
@@ -261,22 +289,22 @@ padding: 3px 10px;
 }
 
 .inner-container{
-	border: 15px solid rgb(77, 76, 74);
-position: relative;
 
+border: 10px solid rgb(160, 158, 158);
+position: relative;
 border-bottom-right-radius: 5px;
 border-bottom-left-radius: 5px;
 -webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
--moz-box-shadow:    1px 3px 30px 0px rgba(48, 50, 50, 1);
-box-shadow:         1px 3px 30px 0px rgba(48, 50, 50, 1);
-background: rgb(165, 165, 165);
+-moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
+box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
+background: rgb(89, 89, 89);
 background-image: url();
 background-size: cover;
-
 box-shadow: inset 0px 0px 26px 1px #464952;
 -webkit-box-shadow: inset 0px 0px 26px 1px #464952;
 -moz-box-shadow: inset 0px 0px 26px 1px #464952;
 -o-box-shadow: inset 0px 0px 26px 1px #464952;
+
 }
 
 .bottom-fill{
@@ -290,10 +318,9 @@ background: -webkit-linear-gradient(rgb(30, 32, 39), rgb(44, 43, 61));
 
 .song-controls {
 position: relative;
-background: rgb(94, 94, 94);
+background: rgb(224, 224, 224);
 width: 100%;
 border: 1px solid rgb(107, 106, 106);
-
 box-shadow: inset 0px 0px 26px 1px #989696;
 -webkit-box-shadow: inset 0px 0px 26px 1px #989696;
 -moz-box-shadow: inset 0px 0px 26px 1px #989696;

@@ -143,17 +143,32 @@ var apiController = {
 	},
 	createNewSong: function(req, res){
 		console.log('req.user createNewSong: ', req.user);
-		var songName = req.body;
-		var newSong = new CocreationSong(songName);
+		var songName = req.body.name;
+		var userId = req.user._id;
+		var song = {
+			name: songName,
+			userId: userId
+		}
+		console.log('song objecta: ', song);
+		var newSong = new CocreationSong(song);
 		newSong.save(function(err, result){
+			console.log('result test: ', result);
+
+			req.user.cocreationSongs.push({
+				songName: songName,
+				songId: result._id
+			});
+			req.user.save();
 			res.send(result);
 		});
 	},
 	addTrack: function(req, res){
-		console.log('req.user addTrack: ', req.user);
+		console.log('req.body addTrack: ', req);
 		// console.log('add track req test:', req);
 		//// i need to add user id!!
-		var userId;
+		var userId = req.userId;
+		var userPic = req.userPic;
+		var userName = req.userName;
 		var trackNumber = req.trackNumber;
 		var trackTitle = req.trackTitle;
 		var ETag = req.ETag;
@@ -176,8 +191,10 @@ var apiController = {
 					console.log('is same track in tracks...');
 					result.tracks[i].userTracks.push({
 								url: trackUrl,
+								userId: userId,
+								userPic: userPic,
+								userName: userName,
 								Key: Key,
-								userId: '',
 								trackTitle: trackTitle,
 								likes: 0
 					})
@@ -192,6 +209,9 @@ var apiController = {
 							track: trackNumber,
 							userTracks: [{
 								url: trackUrl,
+								userId: userId,
+								userPic: userPic,
+								userName: userName,
 								Key: Key,
 								userId: '',
 								trackTitle: trackTitle,
@@ -275,12 +295,18 @@ var apiController = {
 					for (var i = 0; i < result.tracks.length; i++){
 						// console.log('looping...');
 						for (var z = 0; z < result.tracks[i].userTracks.length; z++){
+								var userPic = result.tracks[i].userTracks[z].userPic;
+								var userName = result.tracks[i].userTracks[z].userName;
+								var userId = result.tracks[i].userTracks[z].userId;
 								var trackNum = result.tracks[i].track;
 								var trackTitle = result.tracks[i].userTracks[z].trackTitle;
 								var key = result.tracks[i].userTracks[z].Key;
 								var likes = result.tracks[i].userTracks[z].likes;
 								var url = 'https://s3.amazonaws.com/tonetribe/' + key;
 								var keyAndNum = {
+									userPic: userPic,
+									userName: userName,
+									userId: userId,
 									Key: key,
 									track: trackNum,
 									likes: likes,
@@ -500,6 +526,22 @@ var apiController = {
 		          //   backgroundUrl: backgroundUrl
 		          // });
 		      });
+		},
+		postComment: function(req, res){
+			console.log('req.body: ', req.body);
+			CocreationSong.findOne({_id: req.body.songId}, function(err, result){
+				console.log('find song comment posting: ', result);
+				// var comment = req.body.comment;
+				result.comments.push(req.body.comment);
+				console.log('updated result: ', result);
+				result.save();
+
+			res.send(result);
+			})
+		},
+		getComments: function(req, res){
+			console.log('getComments req.body: ', req.body);
+
 		}
 
 };

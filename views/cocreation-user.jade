@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	.container-fluid
+		.jumbotron.cocreation-jt
+			h1 CoCreation Songs
+			form#create-new-song
+				input(type="text" name="name" placeholder="Name of Song…")
+				//- a(href="./song")
+				input.btn.btn-success(type="submit" value="Create New Song")
+	
+			.song-container
+			//- 	ul
+			//- 		for name in songs.names
+			//- 			li= name
+			h2 Songs you have Collaborated On
+			.song-container-collaborations
+	script.
+		var user = !{JSON.stringify(user)};
+	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+	script(script src="../scripts/lib/cocreation-user.js")

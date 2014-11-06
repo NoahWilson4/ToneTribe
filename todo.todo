@@ -1,33 +1,40 @@
 
 change bootstrap styling
 hover text over buttons/links
+add dates to song creations, uploads,
 
 COCREATION
 
-bug with songnames loading coming from main cocreation page...
+deleting songs... checking to see if they are still in the dataabase
+
+when you upload track, add it to your list of songs that youve collaborated on
 individual cocreation on each user page, with a main public page with popular cocreations
-comments
-user pics, links to user pages
+search by styles, users, likes, instruments....
+links to user pages
 sort tracks by likes, button to pick tracks from
+main page of songs sorted by most liked songs
+different view for your own song
+upload background photo option
+
 live recording?
 download tracks, combine into one track?
-animations
-main page of songs sorted by most liked songs
-
-
 simultaneous sequencing??
+animations
+
 
 SEARCH
 bands...
 sort options?
 
-
-SIGNUP
-
-hook up pic uploaders
-
 PROFILES
 
+bands
+
+view/load other user's profiles
+    from search
+    from comments
+    from songtracks
+notifications (cocreation requests for instruments...)
 upload pics (reuse modal from cocreation?)
 edit button if it is your own page
 

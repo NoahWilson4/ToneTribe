@@ -185,7 +185,7 @@ var authenticationController = {
     // It is safer to send as post, however, because the actual data won't
     // show up in browser history.
     var user = new User({
-      name: req.param('username'),
+      name: req.param('name'),
       password: req.param('password'),
       email: req.param('email'),
       location: req.param('location'),
@@ -201,7 +201,7 @@ var authenticationController = {
       age: age,
       astro: astro,
       about: req.param('about'),
-      philosophy: req.param('about')
+      philosophy: req.param('philosophy')
     });
 
     console.log('user test: ', user);

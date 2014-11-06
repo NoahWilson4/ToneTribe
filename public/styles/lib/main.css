@@ -13,13 +13,17 @@ body {
 	max-width: 200px;
 }
 
+.margin-top{
+	margin-top: 100px;
+}
+
 .profile-top {
 margin-top: 50px;
 padding: 10px;
 background-color: rgb(146, 160, 158);
 height: 280px;
 position: relative;
-background-image: ;
+/*background-image: ;*/
 background-size: cover;
 background-position: center;
 border-bottom: 10px solid black;

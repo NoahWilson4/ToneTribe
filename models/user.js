@@ -27,7 +27,15 @@ var userSchema = mongoose.Schema({
 	about: String,
 	philosophy: String,
 	media: [String],
-	cocreationSongs: [String],
+	photos: [String],
+	cocreationSongs: [{
+		songName: String,
+		songId: String
+	}],
+	cocreationCollaborations: [{
+		songName: String,
+		songId: String
+	}],
 	posts: [{
 		text: String,
 		date: String
