@@ -14,9 +14,9 @@ passport.deserializeUser(function(id, done){
 
 var localStrategy = new LocalStrategy({usernameField: 'email'}, function(email, password, done){
   User.findOne({email: email}, function(err, user){
-    console.log(email);
-    console.log(password);
-    console.log(err, user);
+    // console.log(email);
+    // console.log(password);
+    // console.log(err, user);
     if(err) return done(err);
     if(!user) return done(null, false);
     user.comparePassword(password, function(err, isMatch){

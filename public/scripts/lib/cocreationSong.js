@@ -14,7 +14,7 @@ $(document).on('ready', function() {
 	song.comments.map(function(comment){
 		var outputHTML = compileCommentTemplate(comment);
 		$('#comments-container').append(outputHTML);
-	})
+	});
 
 	$('#addComment').on('submit', function(event){
 		event.preventDefault();
@@ -26,23 +26,53 @@ $(document).on('ready', function() {
 			userName: user.name,
 			date: date,
 			comment: comment,
-			likes: 0
-		}
-		var outputHTML = compileCommentTemplate(comment);
-		$('#comments-container').append(outputHTML);
+			likes: 0,
+			songId: song._id
+		};
 
 
 		$.post('/api/postComment', {comment: comment, songId: song._id} , function(responseData){
 			console.log('responseData: ', responseData);
+			console.log('addComment responseData: ', responseData);
+
+			var outputHTML = compileCommentTemplate(comment);
+			$('#comments-container').append(outputHTML);
 		});
-	})
+	});
+
+	$(document).on('click', '.like-comment', function(){
+		var songId = $(this).find('#commentInfo').attr('value');
+		var commentText = $(this).closest('.list-group-item').find('#comment-text').text();
+		console.log('songId, commentText: ', songId, commentText);
+		// $.post('/api/addCommentLike', {songId: songId, comment: comment}, function(responseData){
+		// 	console.log('posting.....');
+		// 	console.log('addCommentLike responseData:', responseData);
+		// 	var likes = responseData.likes;
+		// 	console.log('this???', this);
+		// });
+		var responseData = $.ajax({
+			type: "POST",
+			data: {
+				songId: songId,
+				comment: commentText
+			},
+			url: '/api/addCommentLike',
+			traditional: true
+		})
+		.error(function(){
+			console.log('error');
+		})
+		.done(function(err, result){
+			console.log('done.');
+		});
+	});
 
 //////////////  add background image to player /////////
 
 $('#uploadBackgroundPic').on('click', function(){
 	console.log('click');
 	$('#upload-container').toggle('reveal');
-})
+});
 
 
 ///////////////// audio context /////////////
@@ -328,7 +358,7 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 		    		track0.setAttribute('src', tracks0[i].url);
 		    		$(this).closest('.track-container').find('.song-user-name').text(tracks0[i].userName);
 		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks0[i].userPic + ')'});
 		    		$(this).closest('.track-container').find('.likes').text(tracks0[i].likes + ' Likes');
 		    	}
 		    }
@@ -366,7 +396,7 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 		    		track2.setAttribute('src', tracks2[i].url);
 		    		$(this).closest('.track-container').find('.song-user-name').text(tracks2[i].userName);
 		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks2[i].userPic + ')'});
 		    		$(this).closest('.track-container').find('.likes').text(tracks2[i].likes + ' Likes');
 		    	}
 		    }
@@ -385,7 +415,7 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 		    		track3.setAttribute('src', tracks3[i].url);
 		    		$(this).closest('.track-container').find('.song-user-name').text(tracks3[i].userName);
 		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks3[i].userPic + ')'});
 		    		$(this).closest('.track-container').find('.likes').text(tracks3[i].likes + ' Likes');
 		    	}
 		    }
@@ -404,7 +434,7 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 		    		track4.setAttribute('src', tracks4[i].url);
 		    		$(this).closest('.track-container').find('.song-user-name').text(tracks4[i].userName);
 		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks4[i].userPic + ')'});
 		    		$(this).closest('.track-container').find('.likes').text(tracks4[i].likes + ' Likes');
 		    	}
 		    }
@@ -423,7 +453,7 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 		    		track5.setAttribute('src', tracks5[i].url);
 		    		$(this).closest('.track-container').find('.song-user-name').text(tracks5[i].userName);
 		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
-		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
+		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks5[i].userPic + ')'});
 		    		$(this).closest('.track-container').find('.likes').text(tracks5[i].likes + ' Likes');
 		    	}
 		    }

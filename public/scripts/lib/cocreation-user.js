@@ -9,8 +9,8 @@ var renderSong = function(songData) {
 	console.log('songData',songData);
 	var el = $('<div>')
 	el.append('<form id="viewSong"></form>')
-	el.append('<div class="song-result-container"><h3><a href="/song/?id=' + songData.songId + '">' + songData.songName + '</a></h3></div>');
-	el.attr('data-id', songData.songId);
+	el.append('<div class="song-result-container"><h3><a href="/song/?id=' + songData._id + '">' + songData.name + '</a></h3></div>');
+	el.attr('data-id', songData._id);
 	return el;
 };
 user.cocreationSongs.map(function(song){

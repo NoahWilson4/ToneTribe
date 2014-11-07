@@ -148,16 +148,13 @@ var apiController = {
 		var song = {
 			name: songName,
 			userId: userId
-		}
+		};
 		console.log('song objecta: ', song);
 		var newSong = new CocreationSong(song);
 		newSong.save(function(err, result){
 			console.log('result test: ', result);
 
-			req.user.cocreationSongs.push({
-				songName: songName,
-				songId: result._id
-			});
+			req.user.cocreationSongs.push(newSong);
 			req.user.save();
 			res.send(result);
 		});
@@ -197,14 +194,14 @@ var apiController = {
 								Key: Key,
 								trackTitle: trackTitle,
 								likes: 0
-					})
+					});
 					trackNumberMatches++;
 					result.save();
 				}
 			}
 			
 			if (trackNumberMatches === 0) {
-				console.log('is a new track...')
+				console.log('is a new track...');
 				result.tracks.push({
 							track: trackNumber,
 							userTracks: [{
@@ -213,14 +210,14 @@ var apiController = {
 								userPic: userPic,
 								userName: userName,
 								Key: Key,
-								userId: '',
 								trackTitle: trackTitle,
 								likes: 0
 							}]
 						});
 				result.save();
+			console.log('result updated?: ', result);
+
 			}
-			console.log('result updated?: ', result);	
 		});
 	},
 	getTrackUrl: function(key){
@@ -262,31 +259,31 @@ var apiController = {
 		CocreationSong.find({}, function(err, result){
 			// console.log('result of songs: ', result);
 			res.send(result);
-		})
+		});
 	},
 	getTrackUrls: function(req, res, onComplete){
-		console.log('req.user getTrackUrls: ', req.user);
+		// console.log('req.user getTrackUrls: ', req.user);
 		var tracks;
 		var trackKeys = [[],[],[],[],[],[]];
 		var songId;
 		
-			console.log('req.body getTrackUrls: ', req.body);
+			// console.log('req.body getTrackUrls: ', req.body);
 			
 			if (req.id) {
 				songId = req.id;
-				console.log('id coming from index');
+				// console.log('id coming from index');
 			} else {
 				songId = req.body;
-				console.log('id coming from js');
+				// console.log('id coming from js');
 			}	
 			var sId = songId.id;
-			console.log('sId!!!!!', sId);
+			// console.log('sId!!!!!', sId);
 			var id = 'ObjectId("' + songId.id + '")';
-			console.log('ObjectId', id);
+			// console.log('ObjectId', id);
 			CocreationSong.findOne({ _id: sId }, function(err, result){
-				console.log('***result: ', result);
+				// console.log('***result: ', result);
 				var tracks = result;
-				console.log('result!!!!!!!!!!!!!!!!', result);
+				// console.log('result!!!!!!!!!!!!!!!!', result);
 
 				
 				async.series([
@@ -313,8 +310,8 @@ var apiController = {
 									id: songId,
 									url: url,
 									trackTitle: trackTitle
-								}
-								console.log('trackNum: ', trackNum);
+								};
+								// console.log('trackNum: ', trackNum);
 								trackKeys[trackNum].push(keyAndNum);
 								
 						}
@@ -365,70 +362,6 @@ var apiController = {
 				
 			});
 	},
-	submitFoundation: function (req, res) {
-		console.log('req.user submitFoundation: ', req.user);
-		  var fName = req.files.audio.name;
-		  var fPath = req.files.audio.path;
-		  var cType = req.files.audio.type;
-		  var size = req.files.audio.size;
-		  var audio = req.body;
-
-		  var key = 'public/' + fName;
-		  var trackTitle = req.body.trackTitle;
-		  var songId = req.body.id;
-		  var trackNumber = req.body.trackNumber;
-		  var trackUrl = 'https://s3.amazonaws.com/tonetribe/' + key;
-
-		  console.log('trackNumber, trackUrl', trackNumber, trackUrl);
-		 
-		  fs.readFile(fPath, function (err, data) {
-		    console.log(err);
-		    s3.putObject({
-		        Bucket: BUCKET,
-		        Key: 'public/' + fName,
-		        ACL: 'public-read',
-		        Body: data
-		      }, function (err, result) {
-		          console.log(err, result);
-		          var track = {
-		          
-		                Key: key,
-		                trackTitle: trackTitle,
-		                ETag: trackETag,
-		                songId: songId,
-		                trackNumber: trackNumber,
-		                url: trackUrl
-		          };
-
-		          apiController.addTrack(track);
-
-		        });
-		   
-		    res.redirect('/song/' + songId);
-		  });
-		},
-		submitPrivate: function (req, res) {
-			console.log('req.user submitPrivate: ', req.user);
-		  console.log(req.files);
-		  var fName = req.files.image.name;
-		  var fPath = req.files.image.path;
-		  var cType = req.files.image.type;
-		  var size = req.files.image.size;
-
-		  fs.readFile(fPath, function (err, data) {
-		    console.log(err);
-		    s3.putObject({
-		      Bucket: BUCKET,
-		      Key: 'private/' + fName,
-		      ContentType: cType,
-		      Body: data
-		    }, function (err, result) {
-		      console.log(err, result);
-		      res.redirect('search');
-		      
-		    });
-		  });
-		},
 		findUsers: function(req, res){
 			console.log('req.user findUsers: ', req.user);
 			var positiveResults = [];
@@ -498,34 +431,30 @@ var apiController = {
 		  console.log('req.files on uploadProfilePic: ', req.files);
 		  console.log('req.body on uploadProfilePic: ', req.body);
 		  var fName = req.name;
-		      var fPath = req.path;
-		      var cType = req.type;
-		      var size = req.size;
+	      var fPath = req.path;
+	      var cType = req.type;
+	      var size = req.size;
+	      var profileUrl = 'https://s3.amazonaws.com/tonetribe/public/' + fName;
 
-		      var profileUrl = 'https://s3.amazonaws.com/tonetribe/public/' + fName;
+	      fs.readFile(fPath, function (err, data) {
+	        console.log(err);
+	        s3.putObject({
+	            Bucket: BUCKET,
+	            Key: 'public/' + fName,
+	            ACL: 'public-read',
+	            Body: data
+	          }, function (err, result) {
+	                console.log('finishing with upload.......', err, result);
+	          		console.log('about to render.........');
 
-		      var image = {
-		          Key: 'public/' + fName,
-		              };
-		     console.log('image', image);
-		      fs.readFile(fPath, function (err, data) {
-		        console.log(err);
-		        s3.putObject({
-		            Bucket: BUCKET,
-		            Key: 'public/' + fName,
-		            ACL: 'public-read',
-		            Body: data
-		          }, function (err, result) {
-		                console.log('finishing with upload.......', err, result);
-		          // console.log('about to render.........');
-		              });
-		       	// res.send();
-		          // res.render('signup4', {
-		          //   id: id,
-		          //   profileUrl: profileUrl,
-		          //   backgroundUrl: backgroundUrl
-		          // });
-		      });
+	              });
+	       	// res.send();
+	          // res.render('signup4', {
+	          //   id: id,
+	          //   profileUrl: profileUrl,
+	          //   backgroundUrl: backgroundUrl
+	          // });
+	      });
 		},
 		postComment: function(req, res){
 			console.log('req.body: ', req.body);
@@ -537,15 +466,61 @@ var apiController = {
 				result.save();
 
 			res.send(result);
-			})
+			});
 		},
 		getComments: function(req, res){
 			console.log('getComments req.body: ', req.body);
 
 		},
 		uploadSongBackgroundPic: function(req, res){
+			console.log('req!!!', req);
 			console.log('req.body uploadSongBackgroundPic: ', req.body);
+			var fName = req.files.songBackgroundImage.name;
+		      var fPath = req.files.songBackgroundImage.path;
+		      var cType = req.files.songBackgroundImage.type;
+		      var size = req.files.songBackgroundImage.size;
+
+		      var songId = req.body.songId;
+		      console.log('song id uploadSongBackgroundPic: ', songId);
+		      var songPicUrl = 'https://s3.amazonaws.com/tonetribe/public/' + fName;
+		      CocreationSong.findOne({_id: songId}, function(err, result){
+		      	console.log('err: ', err);
+				console.log('uploadSongBackgroundPic find song: ', result);
+				result.backgroundImage = songPicUrl;
+				result.save();
+			  });
+		      fs.readFile(fPath, function (err, data) {
+		        console.log(err);
+		        s3.putObject({
+		            Bucket: BUCKET,
+		            Key: 'public/' + fName,
+		            ACL: 'public-read',
+		            Body: data
+		          }, function (err, result) {
+		                console.log('finishing with songPic upload.......', err, result);
+		          console.log('about to render.........');
+		          res.redirect('song?id=' + songId);
+		              });
+		      });
+
 		},
+		addCommentLike: function(req, res){
+			var comment = req.body.comment.trim();
+			CocreationSong.findOne({_id: req.body.songId}, function(err, result){
+				for (var i = 0; i < result.comments.length; i++){
+					console.log('test comment is: ', comment, '---- result.comments[i].comment is: ', result.comments[i].comment);
+					console.log(comment);
+					console.log(result.comments[i].comment);
+					if (result.comments[i].comment === comment) {
+						console.log('found match...');
+						result.comments[i].likes = result.comments[i].likes + 1;
+						console.log('result likes updated:', result);
+						result.save();
+						res.send(result.comments[i].likes);
+					}
+				}
+			});
+		}
 };
 
 module.exports = apiController;

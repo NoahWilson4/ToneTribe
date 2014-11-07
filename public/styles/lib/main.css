@@ -451,14 +451,14 @@ margin-top: 70px;
 .search-profile-pic {
 background: lightgray;
 background-image: ;
-background-size: cover;
 background-position: center;
+background-size: cover;
 width: 67px;
 height: 67px;
 margin-right: 10px;
 float: left;
 }
-.memberPic {
+#memberPic {
 	
 }
 

@@ -88,8 +88,8 @@ box-shadow: inset 0px 0px 26px 1px #989696;
 }
 
 .song-user-image {
-border-right: 1px solid gray;
-border-left: 1px solid gray;
+/*border-right: 1px solid gray;
+border-left: 1px solid gray;*/
 position: absolute;
 top: 0px;
 left: 100px;
@@ -153,6 +153,17 @@ box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, 1);
 .comment-date{
 	margin: 5px;
 color: lightgray;
+}
+
+.comment-text {
+	border: 1px solid rgb(244, 244, 244);
+padding: 10px;
+margin-left: 75px;
+border-radius: 5px;
+box-shadow: inset 0px 0px 26px 1px #EAEAEA;
+-webkit-box-shadow: inset 0px 0px 26px 1px #EAEAEA;
+-moz-box-shadow: inset 0px 0px 26px 1px #EAEAEA;
+-o-box-shadow: inset 0px 0px 26px 1px #EAEAEA;
 }
 
 .comment-image-container{

@@ -1,6 +1,6 @@
 var User = require('../models/user.js');
 var CocreationSong = require('../models/cocreationSong.js');
-var apiController = require('./apiController.js')
+var apiController = require('./apiController.js');
 var async = require('async');
 var _ = require('underscore');
 
@@ -47,7 +47,7 @@ var indexController = {
 			user.skills = stringifyArray(user.skills);
 			res.render('profile-user', {
 				user: user
-			})
+			});
 			// });
 		},
 	profileBand: function(req, res) {
@@ -69,8 +69,8 @@ var indexController = {
 				var user = result;
 				res.render('profile', {
 					user: user
-				})
-			})
+				});
+			});
 		},
 	search: function(req, res) {
 			res.render('search', {
@@ -88,8 +88,13 @@ var indexController = {
 			});
 		},
 	cocreationUser: function(req, res){
-		res.render('cocreation-user', {
-			user: req.user
+		User
+		.findOne({_id: req.user._id})
+		.populate('cocreationSongs', null, 'cocreationsong')
+		.exec(function(err, result){
+			res.render('cocreation-user', {
+				user: result
+			});
 		})
 	},
 		song: function(req, res){
@@ -141,7 +146,7 @@ var indexController = {
 				track3: track3,
 				track4: track4,
 				track5: track5
-			})
+			});
 			});
 		},
 	liveStream: function(req, res) {

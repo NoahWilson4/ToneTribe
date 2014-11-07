@@ -1,16 +1,16 @@
 $(document).on('ready', function() {
 
 ////////////// cocreation main page ///////////////////////
-
+console.log('testing');
 $.get('/api/getSongs', {}, function(responseData){
-	console.log(responseData);
+	console.log('response data on load get songs: ', responseData);
 	responseData.map(function(song){
 		$('.song-container').append(renderSong(song));
 		});
-})
+});
 
 
-var renderSong = function(songData) {
+function renderSong(songData) {
 	console.log('songData',songData);
 	var el = $('<div>')
 	el.append('<form id="viewSong"></form>')

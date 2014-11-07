@@ -110,7 +110,7 @@ app.get('/profile-user', indexController.profileUser);
 app.get('/profile-band', indexController.profileBand);
 app.get('/search', indexController.search);
 app.get('/cocreation', indexController.cocreation);
-app.get('/cocreation-user', indexController.cocreationUser)
+app.get('/cocreation-user', indexController.cocreationUser);
 app.get('/song', indexController.song);
 app.get('/search-results', indexController.searchResults);
 app.get('/live-stream', indexController.liveStream);
@@ -127,6 +127,7 @@ app.post('/api/postComment', apiController.postComment);
 app.post('/api/getComments', apiController.getComments);
 app.get('/api/getSongs', apiController.getSongs);
 app.post('/uploadSongBackgroundPic', apiController.uploadSongBackgroundPic);
+app.post('/api/addCommentLike', apiController.addCommentLike);
 
 
 ////////////////////////////////////////////
@@ -147,11 +148,6 @@ app.post('/uploadProfilePic', function (req, res){
 
       console.log('profileUrl, id', profileUrl, id);
 
-      var image = {
-          Key: 'public/' + fName,
-          id: id
-              };
-     
       fs.readFile(fPath, function (err, data) {
         console.log(err);
         s3.putObject({
@@ -185,11 +181,6 @@ app.post('/uploadBackgroundPic', function (req, res){
 
       console.log('profileUrl, backgroundUrl, id', profileUrl, backgroundUrl, id);
 
-      var image = {
-          Key: 'public/' + fName,
-          id: id
-              };
-     
       fs.readFile(fPath, function (err, data) {
         console.log(err);
         s3.putObject({
@@ -234,7 +225,10 @@ app.post('/submitTrack', function (req, res) {
                   trackNumber: trackNumber,
                   // url: trackUrl
               };
-        apiController.addTrack(track);
+        var trackId = apiController.addTrack(track);
+        console.log('trackId: ', trackId);
+        req.user.cocreationCollaborations.push(id);
+        req.user.save();
      
       fs.readFile(fPath, function (err, data) {
         console.log(err);

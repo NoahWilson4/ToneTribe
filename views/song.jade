@@ -6,7 +6,7 @@ block content
 		.container
 			.song-container
 				h1#song-name= song.name
-				#inner-container
+				#inner-container(style="background-image: url(" + song.backgroundImage + ")")
 					.track-container.tc0
 						.canvas-container
 							canvas#canvas0.visuals
@@ -146,7 +146,8 @@ block content
 							i.fa.fa-picture-o
 						#upload-container.pull-right
 							form.song-pic-upload(method="post" action="/uploadSongBackgroundPic" role="form" enctype="multipart/form-data")
-								input.btn.btn-primary.btn-sm(type="file" onchange="previewSongBackground()" id="upload-song-background")
+								input.btn.btn-primary.btn-sm(type="file" onchange="previewSongBackground()" name="songBackgroundImage" id="upload-song-background")
+								input(type="hidden" value=song._id name="songId")
 								input.pull-right(type="submit" value="upload")
 		.container.margin-top
 			#comments-container
@@ -285,6 +286,7 @@ block content
 		var user = !{JSON.stringify(user)};
 		var song = !{JSON.stringify(song)};
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+	//- script(src="../scripts/main.js")
 	script(script src="../scripts/lib/cocreationSong.js")
 	script(src="../scripts/lib/moment.js")
 	script(id="comment-template" type="text/x-handlebars-template").
@@ -296,10 +298,11 @@ block content
 					<p class="comment-date"> {{date}} </p>
 				</div>
 				<div class="search-result-info">
-					<p id="comment-text" class="list-group-item-text"> {{comment}} </p>
+					<p id="comment-text" class="list-group-item-text comment-text"> {{comment}} </p>
 				</div>
 				<button class="like like-comment btn btn-xs btn-default">
 					<i class="fa fa-thumbs-o-up"></i>
+					<div id="commentInfo" value="{{songId}}"></div>
 				</button>
 				<div class="likes-comment"> {{likes}} Likes </div>
 							

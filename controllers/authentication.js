@@ -96,10 +96,10 @@ var performLogin = function(req, res, next, user){
   // so we are able to call req.login and pass the user we want
   // logged in.
   req.login(user, function(err){
-     console.log('performLogin inside first function');
+     // console.log('performLogin inside first function');
     // If there was an error, allow execution to move to the next middleware
     if(err) return next(err);
- console.log('performLogin after if');
+ // console.log('performLogin after if');
     // Otherwise, send the user to the homepage.
     return res.redirect('/profile-user'); ///*************
   });
@@ -127,7 +127,7 @@ var authenticationController = {
   // This is the post handler for any incoming login attempts.
   // Passing "next" allows us to easily handle any errors that may occur.
   processLogin: function(req, res, next){
-    console.log('processLogin');
+    // console.log('processLogin');
     // Passport's "authenticate" method returns a method, so we store it
     // in a variable and call it with the proper arguments afterwards.
     // We are using the "local" strategy defined (and used) in the
@@ -136,17 +136,17 @@ var authenticationController = {
 
       // If there was an error, allow execution to move to the next middleware
       if(err) return next(err);
-       console.log('processLogin after first if');
+       // console.log('processLogin after first if');
       // If the user was not successfully logged in due to not being in the
       // database or a password mismatch, set a flash variable to show the error
       // which will be read and used in the "login" handler above and then redirect
       // to that handler.
       if(!user) {
         req.flash('error', 'Error logging in. Please try again.');
-         console.log('processLogin inside 2nd if');
+         // console.log('processLogin inside 2nd if');
         return res.redirect('/auth/login');
       }
-       console.log('processLogin after 2nd if');
+       // console.log('processLogin after 2nd if');
       // If we make it this far, the user has correctly authenticated with passport
       // so now, we'll just log the user in to the system.
       performLogin(req, res, next, user);
@@ -164,7 +164,7 @@ var authenticationController = {
   processSignup: function(req, res, next){
     console.log('processSignup.body: ', req.body);
     console.log('req.files processSignup: ', req.files);
-    console.log('req.param processSignup: ', req.params);
+    // console.log('req.param processSignup: ', req.params);
     console.log('req.param processSignup: ', req.params);
 
 
