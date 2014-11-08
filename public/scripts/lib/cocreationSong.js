@@ -41,6 +41,7 @@ $(document).on('ready', function() {
 	});
 
 	$(document).on('click', '.like-comment', function(){
+		var clicked = $(this);
 		var songId = $(this).find('#commentInfo').attr('value');
 		var commentText = $(this).closest('.list-group-item').find('#comment-text').text();
 		console.log('songId, commentText: ', songId, commentText);
@@ -48,7 +49,6 @@ $(document).on('ready', function() {
 		// 	console.log('posting.....');
 		// 	console.log('addCommentLike responseData:', responseData);
 		// 	var likes = responseData.likes;
-		// 	console.log('this???', this);
 		// });
 		var responseData = $.ajax({
 			type: "POST",
@@ -63,7 +63,9 @@ $(document).on('ready', function() {
 			console.log('error');
 		})
 		.done(function(err, result){
-			console.log('done.');
+			console.log('done.', JSON.parse(responseData.responseText).likes);
+			console.log('this test: ', this);
+			$(clicked).closest('.list-group-item').find('.likes-comment').text(JSON.parse(responseData.responseText).likes + " Likes");
 		});
 	});
 
@@ -312,24 +314,21 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 
 		$('#play').on('click', function(){
 			console.log('play all...');
-			if(track0){
-
-			track0.play();
-			}
-			track1.play();
-			track2.play();
-			track3.play();
-			track4.play();
-			track5.play();
+			if(track0){track0.play();}
+			if (track1){track1.play();}
+			if (track2){track2.play();}
+			if (track3){track3.play();}
+			if (track4){track4.play();}
+			if (track5){track5.play();}
 		})
 		$('#stop').on('click', function(){
 			console.log('play all...');
-			track0.pause();
-			track1.pause();
-			track2.pause();
-			track3.pause();
-			track4.pause();
-			track5.pause();
+			if(track0){track0.pause();}
+			if (track1){track1.pause();}
+			if (track2){track2.pause();}
+			if (track3){track3.pause();}
+			if (track4){track4.pause();}
+			if (track5){track5.pause();}
 		})
 
 ////////// should be able to be refactored ...., this was being a pain and not working....

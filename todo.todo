@@ -1,25 +1,28 @@
+to do: 
+
+welcome message
 still use separate js files, minify each.
-change bootstrap styling
+style it
 hover text over buttons/links
 add dates to song creations, uploads,
-profile pics don't load upon first signing up...
-loading image?
 
+signup profile preview?
 styles on signup?
+view individual user cocreation pages, query string on link and page render
+image magick for thumbnails
+song stop instead of pause?
+
 
 COCREATION
 
-wire up the song background upload and likes
+wire up the song and track likes
 deleting songs... checking to see if they are still in the dataabase
 
-when you upload track, add it to your list of songs that youve collaborated on
-individual cocreation on each user page, with a main public page with popular cocreations
+main public page with popular cocreations
 search by styles, users, likes, instruments....
-links to user pages
+links to user pages from song player
 sort tracks by likes, button to pick tracks from
-main page of songs sorted by most liked songs
 different view for your own song
-upload background photo option
 
 live recording?
 download tracks, combine into one track?
@@ -29,15 +32,18 @@ animations
 
 SEARCH
 bands...
-sort options?
 
 PROFILES
+
+connect with friends!
+
+photo gallery
+
  link to bands from user profile
 bands
 
+second time editing bugs...
 view/load other user's profiles
-    from search
-    from comments
     from songtracks
 notifications (cocreation requests for instruments...)
 upload pics (reuse modal from cocreation?)

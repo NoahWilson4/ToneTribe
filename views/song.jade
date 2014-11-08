@@ -14,12 +14,13 @@ block content
 							select#select0.select-track.btn.btn-default
 								if track0
 									for track in track0.userTracks
-										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+										option(value=track.trackTitle data=track._id) #{track.trackTitle}, By userName, #{track.likes} Likes
 							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal0")
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
 								i.fa.fa-thumbs-o-up
-							.likes 0 Likes
+							if track0
+								.likes #{track0.userTracks[0].likes} Likes
 							button.play0.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute0.btn.btn-xs.btn-danger M
@@ -40,7 +41,8 @@ block content
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
 								i.fa.fa-thumbs-o-up
-							.likes 0 Likes
+							if track1
+								.likes #{track1.userTracks[0].likes} Likes
 							button.play1.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute1.btn.btn-xs.btn-danger M
@@ -61,7 +63,8 @@ block content
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
 								i.fa.fa-thumbs-o-up
-							.likes 0 Likes
+							if track2
+								.likes #{track2.userTracks[0].likes} Likes
 							button.play2.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute2.btn.btn-xs.btn-danger M
@@ -82,7 +85,8 @@ block content
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
 								i.fa.fa-thumbs-o-up
-							.likes 0 Likes
+							if track3
+								.likes #{track3.userTracks[0].likes} Likes
 							button.play3.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute3.btn.btn-xs.btn-danger M
@@ -103,7 +107,8 @@ block content
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
 								i.fa.fa-thumbs-o-up
-							.likes 0 Likes
+							if track4
+								.likes #{track4.userTracks[0].likes} Likes
 							button.play4.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute4.btn.btn-xs.btn-danger M
@@ -124,7 +129,8 @@ block content
 								i.fa.fa-caret-square-o-up
 							button.like.btn.btn-xs.btn-primary
 								i.fa.fa-thumbs-o-up
-							.likes 0 Likes
+							if track5
+								.likes #{track5.userTracks[0].likes} Likes
 							button.play5.play-track.btn.btn-lg.btn-success
 								i.fa.fa-play-circle
 							button.mute.mute5.btn.btn-xs.btn-danger M

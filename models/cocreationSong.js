@@ -19,8 +19,16 @@ var CocreationSong = mongoose.Schema({
 			]
 		}
 	],
-	comments: [],
-	backgroundImage: String
+	comments: [{
+		songId: String,
+		likes: Number,
+		comment: String,
+		date: String,
+		userName: String,
+		userProfilePic: String
+	}],
+	backgroundImage: String,
+	backgroundThumbnail: String
 
 });
 

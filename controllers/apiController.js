@@ -141,6 +141,30 @@ var apiController = {
 		});
 
 	},
+	updateUserProfile: function(req, res){
+		console.log('updateUserProfile req.body: ', req.body);
+		User.findOne({_id: req.user._id}, function(err, result){
+			console.log('result: ', result);
+			result.bands = req.body.bands;
+			result.instruments = req.body.instruments;
+			result.styles = req.body.styles;
+			result.skills = req.body.skills;
+			result.inspirations = req.body.inspirations;
+			result.improvComp = req.body.improvComp;
+			result.about = req.body.about;
+			result.philosophy = req.body.philosophy;
+			console.log('result updated: ', result);
+			result.save();
+			res.send('success');
+		});
+	},
+	addUserToTribe: function(req, res){
+		User.findOne({_id: req.user._id}, function(err, result){
+			result.tribe.push(req.body.userId);
+			result.save();
+			res.send('added to tribe.');
+		});
+	},
 	createNewSong: function(req, res){
 		console.log('req.user createNewSong: ', req.user);
 		var songName = req.body.name;
@@ -513,10 +537,13 @@ var apiController = {
 					console.log(result.comments[i].comment);
 					if (result.comments[i].comment === comment) {
 						console.log('found match...');
-						result.comments[i].likes = result.comments[i].likes + 1;
+						var likes = parseInt(result.comments[i].likes);
+						console.log(typeof likes);
+						console.log('likes: ', likes);
+						result.comments[i].likes = likes + 1;
 						console.log('result likes updated:', result);
 						result.save();
-						res.send(result.comments[i].likes);
+						res.send({likes: result.comments[i].likes});
 					}
 				}
 			});

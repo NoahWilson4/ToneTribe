@@ -27,22 +27,16 @@ var userSchema = mongoose.Schema({
 	about: String,
 	philosophy: String,
 	media: [String],
-	photos: [String],
+	photos: [{
+		url: String,
+		thumbnail: String,
+		caption: String,
+		likes: Number
+	}],
 	cocreationSongs: [mongoose.Schema.ObjectId],
 	cocreationCollaborations: [mongoose.Schema.ObjectId],
-	// cocreationSongs: [{
-	// 	songName: String,
-	// 	songId: String
-	// }],
-	// cocreationCollaborations: [{
-	// 	songName: String,
-	// 	songId: String
-	// }],
-	posts: [{
-		text: String,
-		date: String
-	}],
-	friends: [mongoose.Schema.ObjectId]
+	posts: [mongoose.Schema.ObjectId],
+	tribe: [mongoose.Schema.ObjectId]
 });
 
 

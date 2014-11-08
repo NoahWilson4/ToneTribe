@@ -7,7 +7,7 @@ var userInfo = {
 	skills: [],
 	inspirations: [],
 	improvComp: undefined
-}
+};
 	
 
 	$('.sidebar-list-text').append('<input type="text" class="add-new-word editing-profile edit" placeholder="Add New...">');
@@ -57,9 +57,9 @@ var userInfo = {
 		$('#comp').text($(this).text());
 		$('#improv').text(100 - $(this).text());
 		$('#improvComp').attr('value', $(this).text());
-		$('#ratio-bar-signup').attr("style", "width: " + $(this).text() + "%")
-		$('#ratio-bar-signup2').attr("style", "width: " + (100 - $(this).text()) + "%")
-	})
+		$('#ratio-bar-signup').attr("style", "width: " + $(this).text() + "%");
+		$('#ratio-bar-signup2').attr("style", "width: " + (100 - $(this).text()) + "%");
+	});
 
 	$('#signup2-submit').on('click', function(){
 		var id = $(this).closest('form').find('#id').attr('value');
@@ -82,7 +82,7 @@ var userInfo = {
 		// $.post('/updateUserFromClient', {userInfo: userInfo}, function(response){
 
 		// })
-	})
+	});
 
 	// var fileReader = new FileReader();
 	// 	fileReader.readAsDataURL(document.getElementById("upload-profilePic").files[0]);
@@ -117,4 +117,4 @@ var userInfo = {
 
 	//////////  create ajax call to save userinfo on submit/go to next page
 
-})
+});

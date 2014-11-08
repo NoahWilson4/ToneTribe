@@ -60,9 +60,9 @@ $(document).on('ready', function() {
 		var birthday = birthdate;
 		birthday = birthday.split('-');
 		birthday.shift();
-		for (var i = 0; i < birthday.length; i++) {
-			birthday[i] = Number(birthday[i]);
-		};
+			for (var i = 0; i < birthday.length; i++) {
+				birthday[i] = Number(birthday[i]);
+			};
 		console.log('birthday: ', birthday);
 		if ((birthday[0] === 12 && birthday[1] >= 22) || (birthday[0] === 1 && birthday[1] <= 19)) {
 			var sign = 'Capricorn';
@@ -87,7 +87,7 @@ $(document).on('ready', function() {
 		} else if ((birthday[0] === 10 && birthday[1] >= 24) || (birthday[0] === 11 && birthday[1] <= 22)) {
 			var sign = 'Scorpio';
 		} else if ((birthday[0] === 11 && birthday[1] >= 23) || (birthday[0] === 12 && birthday[1] <= 21)) {
-			var sign = 'Scorpio';
+			var sign = 'Sagittarius';
 		} 
 		console.log('sign: ', sign);
 		return sign;  
@@ -129,7 +129,7 @@ $(document).on('ready', function() {
 			newArray[newArray.length - 1] = "<div class='words'>" + newArray[i] +"</div>";
 			return newArray;
 		}
-	}
+	};
 	var divsToPage = function(element, array) {
 		if (array) {
 				$(element).text('');
@@ -137,7 +137,7 @@ $(document).on('ready', function() {
 				$(element).append(array[i]);
 			}
 		}
-	}
+	};
 
 	var findUserById = function(userId){
 			for (var i = 0; i < users.length; i++) {
@@ -145,7 +145,7 @@ $(document).on('ready', function() {
 					return users[i];
 				}
 			}
-		}
+		};
 
 
 
@@ -160,7 +160,7 @@ $(document).on('ready', function() {
 		this.password = password;
 		this.photos = [];
 		users.push(this);
-	}
+	};
 
 	User.prototype.render = function(){
 		
@@ -191,7 +191,7 @@ $(document).on('ready', function() {
 		divsToPage(inspirationsElement, inspirationsRender);
 		$('.improv-comp').val(this.improvComp);
 		$('.birthday').text(this.age);
-		$('.astro-sign').text(this.astro)
+		$('.astro-sign').text(this.astro);
 		for (var i = 0; i < this.media.length; i++){
 			$('.media').append(this.media[i]);
 		}
@@ -207,7 +207,7 @@ $(document).on('ready', function() {
 		console.log('this: ');
 		band.push(this);
 		band.combineMemberInfo();
-	}
+	};
 
 	User.prototype.displayAsMember = function(){
 				var pic = this.profilePic;
@@ -223,7 +223,7 @@ $(document).on('ready', function() {
 				// $('.search-profile-pic').append('<img class="search-profile-pic" src="' + pic + '">');
 				//$('#memberPic').css({backgroundImage: pic});
 				// return this.memberElement;
-			}
+			};
 
 // User.prototype.displayAsMember = function(){
 // 				this.memberElement = $('<div class="list-group results"><a href="#" class="list-group-item result-block"><div id="memberPic" class="search-profile-pic"></div><div class="search-result-info"><h4 class="list-group-item-heading">' + this.name + '</h4><p class="list-group-item-text">Location: ' + this.location + '</p></div></a></div>');
@@ -253,7 +253,7 @@ $(document).on('ready', function() {
 				this.searchElement = $('<div class="list-group results"><a href="#" class="list-group-item result-block"><img id="memberPic" class="search-profile-pic" src="' + pic + '"><div class="search-result-info"><h4 class="list-group-item-heading">' + this.name + '</h4><p class="list-group-item-text">Location: ' + this.location + '</p></div></a></div>');
 				$('#search-results-musicians').append(this.searchElement);
 				return this.searchElement;
-			}
+			};
 
 // User.prototype.displayResultsMusicians = function(){
 // 				this.searchElement = $('<div class="list-group results"><a href="#" class="list-group-item result-block"><div class="search-profile-pic"></div><div class="search-result-info"><h4 class="list-group-item-heading">' + this.name + '</h4><p class="list-group-item-text">Location: ' + this.location + '</p></div></a></div>');
@@ -275,7 +275,7 @@ $(document).on('ready', function() {
 		this.members = [];
 		this.photos = [];
 
-	}
+	};
 	
 
 Band.prototype.render = function(){
@@ -298,7 +298,7 @@ Band.prototype.render = function(){
 		$('.band-philosophy').text(this.philosophy);
 
 
-		this.combineMemberInfo()
+		this.combineMemberInfo();
 		console.log('this band: ', this);
 
 		var instrumentArray = this.instruments;
@@ -335,7 +335,7 @@ Band.prototype.combineMemberInfo = function() {
 				.uniq()
 				.value();
 	this.inspirations = combineInspirations;
-}
+};
 	
 Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
 				pic = pic.split('"');
@@ -343,7 +343,7 @@ Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
 				this.searchElement = $('<div class="list-group results"><a href="#" class="list-group-item result-block"><img id="memberPic" class="search-profile-pic" src="' + pic + '"><div class="search-result-info"><h4 class="list-group-item-heading">' + this.name + '</h4><p class="list-group-item-text">Location: ' + this.location + '</p></div></a></div>');
 				$('#search-results-bands').append(this.searchElement);
 				return this.searchElement;
-			}
+			};
 
 
 
@@ -379,7 +379,7 @@ Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
 		
 		$('.media').before(embedEdit);
 		$('.embed-media-button').hide();
-	})
+	});
 
 	$(document).on('submit', '#embed-form', function(e){
 		e.preventDefault();
@@ -395,20 +395,37 @@ Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
 
 
 		//////////////////////// add new media to user by id?????
-	})
+	});
 
 
 //// edit profile clicker
 
 	$(document).on('click', '.edit-profile', function(){
 		// $('.edit-directions').show();
+		var userInfo = [$('.bands'), $('.instruments'), $('.styles'), $('.skills'), $('.inspirations')];
+		userInfo.map(function(info){
+			var attr = info.closest('.sidebar-list').attr('title');
+			console.log('info attr: ', attr);
+			info.text(user[attr]);
+			var infoArray = info.text().split(', ');
+
+			info.empty();
+			console.log('infoArray: ', infoArray);
+			infoArray.map(function(item){
+				var testX = item.split('').pop();
+				if (testX === 'X'){
+					item = item.substring(0, item.length - 1);
+				}
+				info.append('<div class="words editing-profile edit">' + item +'</div>');
+			});
+		});
+		// $(this).closest('.sidebar-list-text').append('<div class="words editing-profile edit">' + $(this).val() +'</div>');
 		$('.words').append('<button class="btn btn-default btn-xs delete-word">X</button>');
 		$('.words, .about, .philosophy').addClass('editing-profile edit');
 		$('.name, .location, .band').addClass('edit');
 		$('.sidebar-list-text').addClass('editing-profile');
 		$('.name-loc').addClass('edit-name-loc');
-		$('#edit').removeClass('edit-profile btn-xs').addClass('edit-done btn-md').text('Done Editing');
-		$('edit-directions').show();
+		$('.edit-profile').removeClass('edit-profile btn-xs').addClass('edit-done btn-md').text('Done Editing');
 		$('.media').before(embedEdit);
 		$(embedEdit).show();
 		$('.profile-pic').append('<span class="glyphicon glyphicon-picture make-it-white edit-icon-profile">Change-Photo</span>');
@@ -417,24 +434,27 @@ Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
 		$('.ratio-graph').hide();
 		$('.ratio-graph').after('<input type="range" id="edit-ratio">');
 		$('.sidebar-list-text').append('<input type="text" class="add-new-word editing-profile edit" placeholder="Add New...">');
-		var userId = $('.name').data();
-		userId = userId.userId;
-		var thisUser = findUserById(userId);
-		console.log('this user: ', thisUser);
-	
-//title attribute search needs to be fixed for name and location..........
+		
 
 	$(document).on('blur', '.add-new-word', function(){
-		console.log('find name of value by title: ', $(this).closest('p').attr('title'));
 		var val = $(this).val();
-		var attr = $(this).closest('p').attr('title');
-		thisUser[attr].push(val);
-		console.log('thisUser new info added test: ', thisUser);
+		var attr = $(this).closest('.sidebar-list').attr('title');
+		console.log('attr: ', attr);
 		$(this).closest('.sidebar-list-text').append('<div class="words editing-profile edit">' + $(this).val() +'</div>');
 		$(this).closest('.sidebar-list-text').find('.words').last().append('<button class="btn btn-default btn-xs delete-word">X</button>');
 		$(this).closest('.sidebar-list-text').append('<input type="text" class="add-new-word editing-profile edit" placeholder="Add New...">');
+		///// hacked way of getting info...
+		var updatedInfo = $(this).closest('.sidebar-list-text').text().split('X');
+		updatedInfo.pop();
+		updatedInfo = updatedInfo.join(', ');
+		console.log('updatedInfo: ', updatedInfo);
+		user[attr]= updatedInfo;
+		console.log(user);
+
+		// user[attr].push(val);
+
 		$(this).remove();
-	})
+	});
 
 
 
@@ -448,14 +468,9 @@ Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
 		var array = thisUser[attr];
 		console.log('array: ', array);
 		console.log('array index of', array.indexOf(val));
-		
-		
-		console.log('thisUser new info added test: ', thisUser);
-
-
 		$(this).closest('.words').remove();
 		
-	})
+	});
 
 	$(document).on('click', '.edit', function(){
 		$(this).attr('contenteditable', 'true');
@@ -463,13 +478,13 @@ Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
 
 	});
 
-	$(document).on('blur', '.edit', function(){
-		console.log('find name of value by title: ', $(this).closest('p').attr('title'));
-		var attr = $(this).closest('p').attr('title');
-		console.log('attr blur .edit', attr);
-		
-
+	$('.about, .philosophy').on('blur', function(){
+		var attr = $(this).closest('.info-block').attr('title');
+		var text = $(this).text();
+		user[attr] = text;
+		console.log('user updated about philosophy: ', user);
 	});
+	
 
 	// $(document).on('blur', '.current-edit', function(){
 	// 	console.log('find name of value by title: ', $(this).closest('p').attr('title'));
@@ -488,7 +503,7 @@ Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
   	$(document).on('click', '.edit-done', function(){
   		$('.edit').attr('contenteditable', 'false');
 		$('.sidebar-list-text, .words, .name-loc, .about, .philosophy').removeClass('editing-profile edit');
-		$('#edit').addClass('edit-profile btn-xs').removeClass('edit-done btn-md').text('Edit Profile');
+		$('.edit-done').addClass('edit-profile btn-xs').removeClass('edit-done btn-md').text('Edit Profile');
 		$('.name, .location, .band').removeClass('edit');
 		$('.name-loc').removeClass('edit-name-loc');
 		$(embedEdit).hide();
@@ -503,14 +518,22 @@ Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
 		console.log('ratioValue: ', ratioValue);
 		$('#ratio-bar').css({
 			width: ratioValue
-		})
+		});
 		$('#edit-ratio').hide();
 		$('.add-new-word').remove();
-	})
+		$.post('/api/updateUserProfile', user, function(responseData){
+			console.log('responseData: ', responseData);
+		});
+	});
 
 });
 
-
+$('#btn-connect').on('click', function(){
+	console.log('click');
+	$.post('/addUserToTribe', {}, function(responseData){
+		console.log('responseData: ', responseData);
+	});
+});
 
 
 

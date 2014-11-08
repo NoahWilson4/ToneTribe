@@ -15,6 +15,7 @@ var moment = require('moment');
 var authenticationController = require('./controllers/authentication.js');
 var indexController = require('./controllers/index.js');
 var apiController = require('./controllers/apiController.js');
+var User = require('./models/user.js');
 
 
 // var CocreationSong = require('./models/cocreationSong.js')
@@ -128,6 +129,8 @@ app.post('/api/getComments', apiController.getComments);
 app.get('/api/getSongs', apiController.getSongs);
 app.post('/uploadSongBackgroundPic', apiController.uploadSongBackgroundPic);
 app.post('/api/addCommentLike', apiController.addCommentLike);
+app.post('/api/updateUserProfile', apiController.updateUserProfile);
+app.post('/ape/addUserToTribe', apiController.addUserToTribe);
 
 
 ////////////////////////////////////////////
@@ -144,7 +147,6 @@ app.post('/uploadProfilePic', function (req, res){
 
       var id = req.body._id;
       var profileUrl = 'https://s3.amazonaws.com/tonetribe/public/' + fName;
-      var backgroundUrl = req.body.backgroundUrl;
 
       console.log('profileUrl, id', profileUrl, id);
 
@@ -158,17 +160,18 @@ app.post('/uploadProfilePic', function (req, res){
           }, function (err, result) {
                 console.log('finishing with upload.......', err, result);
           console.log('about to render.........');
-              });
-          res.render('signup4', {
-            id: id,
-            profileUrl: profileUrl,
-            backgroundUrl: backgroundUrl
-          });
+          User.findOne({_id: req.user._id},function(err, result){
+              result.profilePic = profileUrl;
+              result.save();
+              res.redirect('profile-user');
+          });  
+        });
+
       });
 });
 app.post('/uploadBackgroundPic', function (req, res){
-  console.log('req.files on uploadBackgroundPic: ', req.files);
-  console.log('req.body on uploadBackgroundPic: ', req.body);
+  console.log('req.files on uploadProfilePic: ', req.files);
+  console.log('req.body on uploadProfilePic: ', req.body);
   var fName = req.files.image.name;
       var fPath = req.files.image.path;
       var cType = req.files.image.type;
@@ -176,10 +179,9 @@ app.post('/uploadBackgroundPic', function (req, res){
       var image = req.body;
 
       var id = req.body._id;
-      var profileUrl = req.body.profileUrl;
       var backgroundUrl = 'https://s3.amazonaws.com/tonetribe/public/' + fName;
 
-      console.log('profileUrl, backgroundUrl, id', profileUrl, backgroundUrl, id);
+      console.log('backgroundUrl, id', backgroundUrl, id);
 
       fs.readFile(fPath, function (err, data) {
         console.log(err);
@@ -191,14 +193,16 @@ app.post('/uploadBackgroundPic', function (req, res){
           }, function (err, result) {
                 console.log('finishing with upload.......', err, result);
           console.log('about to render.........');
-              });
-          res.render('signup4', {
-            id: id,
-            profileUrl: profileUrl,
-            backgroundUrl: backgroundUrl
-          });
+          User.findOne({_id: req.user._id},function(err, result){
+              result.backgroundPic = backgroundUrl;
+              result.save();
+              res.redirect('profile-user');
+          });  
+        });
+
       });
 });
+
 
 app.post('/submitTrack', function (req, res) {
       console.log('req.body on submitTrack', req.body);
@@ -213,6 +217,7 @@ app.post('/submitTrack', function (req, res) {
       var trackTitle = req.body.trackTitle;
       var id = req.body.id;
       var trackNumber = req.body.trackNum;
+      var trackUrl = 'https://s3.amazonaws.com/tonetribe/public/' + fName;
 
       console.log('id on appjs', id);
               var track = {
@@ -223,7 +228,7 @@ app.post('/submitTrack', function (req, res) {
                   userName: req.user.name,
                   songId: id,
                   trackNumber: trackNumber,
-                  // url: trackUrl
+                  url: trackUrl
               };
         var trackId = apiController.addTrack(track);
         console.log('trackId: ', trackId);

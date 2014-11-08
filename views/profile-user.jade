@@ -2,8 +2,10 @@ extends layout
 
 block content
 	div.container.profile-top(style="background-image: url(" + user.backgroundPic + ")")
+		button(data-toggle="modal" data-target="#uploadModalBackgroundPic").glyphicon.glyphicon-picture.make-it-white.edit-icon-background Change-Background
 		div.img-name.row
 			div.profile-pic.col-xs-4(style="background-image: url(" + user.profilePic + ")")
+				button#uploadProfilePic(data-toggle="modal" data-target="#uploadModalProfilePic").glyphicon.glyphicon-picture.make-it-white.edit-icon-profile Change-Photo
 			div.name-loc.col-xs-8
 				h2.name(title="name")= user.name
 				div.location(title="location")= user.location
@@ -18,21 +20,23 @@ block content
 						a(href="./cocreation-user")
 							button.btn.btn-default.btn-sm.btn-songs Cocreation Songs
 					.sidebar-list
-						h4.sidebar-list-heading(title="bands") Bands:
+						button.btn.btn-default.btn-sm.btn-tribe View Tribe Members
+					.sidebar-list(title="bands")
+						h4.sidebar-list-heading Bands:
 						p.sidebar-list-text.bands= user.bands
-					.sidebar-list
+					.sidebar-list(title="instruments")
 						h4.sidebar-list-heading Instruments:
 						p.sidebar-list-text.instruments= user.instruments
-					.sidebar-list
+					.sidebar-list(title="styles")
 						h4.sidebar-list-heading Styles:
 						p.sidebar-list-text.styles= user.styles
-					.sidebar-list
+					.sidebar-list(title="skills")
 						h4.sidebar-list-heading Skills:
 						p.sidebar-list-text.skills= user.skills
-					.sidebar-list
+					.sidebar-list(title="inspirations")
 						h4.sidebar-list-heading Inspired By:
 						p.sidebar-list-text.inspirations= user.inspirations
-					.sidebar-list
+					.sidebar-list(title="improvComp")
 						h4.sidebar-list-heading Improvisational/Compositional Orientation:
 						dl.ratio-graph
 							dd
@@ -41,18 +45,18 @@ block content
 					//- .sidebar-list
 						h4.sidebar-list-heading BirthDay:
 						p.sidebar-list-text.astro-sign= user.birthdate
-					.sidebar-list
+					.sidebar-list(title="age")
 						h4.sidebar-list-heading Age:
 						p.sidebar-list-text.astro-sign= user.age
 					.sidebar-list
 						h4.sidebar-list-heading Astrological Sign:
 						p.sidebar-list-text.astro-sign= user.astro
 			.col-sm-9
-				.info-block
-					h5.info-block-heading(title="about") About
+				.info-block(title="about")
+					h5.info-block-heading About
 					p.about= user.about
-				.info-block
-					h5.info-block-heading(title="philosophy") Philosophy
+				.info-block(title="philosophy")
+					h5.info-block-heading Philosophy
 					p.philosophy= user.philosophy
 				.info-block.gallery-block
 					h5.info-block-heading Photos
@@ -64,5 +68,70 @@ block content
 								.col-xs-3.gallery-pic.pic-2
 								.col-xs-3.gallery-pic.pic-3
 				.media
+				.container.margin-top
+					#post-container
+						h1 Posts
+						form#addPost(role="form")
+							.form-group
+								label(for="comment") Add Post
+								textarea.form-control(type="text" id="post" placeholder="Post…")
+							.form-group
+								input.btn.btn-primary.btn-post(type="submit" value="Post")
+	.modal.fade#uploadModalProfilePic
+				.modal-dialog
+					form#upload(method="post" action="/uploadProfilePic" enctype="multipart/form-data")
+						.modal-content
+							.modal-header
+								button.close(data-dismiss="modal")
+									span(aria-hidden="true") &times;
+									span.sr-only Close
+								h4.modal-title Upload Track
+							.modal-body
+								.upload-view-tracks
+									input.upload-button.btn.btn-default.btn-sm(type="file" name="image")
+									input#userId(type="hidden" value=user._id name="id")
+							.modal-footer
+								button.btn.btn-default(type="button" data-dismiss="modal") Close
+								input.btn.btn-success(type="submit" value="Upload")
+	.modal.fade#uploadModalBackgroundPic
+				.modal-dialog
+					form#upload(method="post" action="/uploadBackgroundPic" enctype="multipart/form-data")
+						.modal-content
+							.modal-header
+								button.close(data-dismiss="modal")
+									span(aria-hidden="true") &times;
+									span.sr-only Close
+								h4.modal-title Upload Track
+							.modal-body
+								.upload-view-tracks
+									input.upload-button.btn.btn-default.btn-sm(type="file" name="image")
+									input#userId(type="hidden" value=user._id name="id")
+							.modal-footer
+								button.btn.btn-default(type="button" data-dismiss="modal") Close
+								input.btn.btn-success(type="submit" value="Upload")
+	
+	script.
+		var user = !{JSON.stringify(user)};
+	script(id="post-template" type="text/x-handlebars-template").
+		<div class="list-group results">
+			<div class="list-group-item">
+				<div class="post-pic-holder">
+					<a href="../profile/?id={{userId}}"><img id="memberPic" class="search-profile-pic" src={{userProfilePic}}></a>
+					<a href="../profile/?id={{userId}}"><h4 class="list-group-item-heading"> {{userName}} </h4></a>
+					<p class="post-date"> {{date}} </p>
+				</div>
+				<div class="search-result-info">
+					<p id="post-text" class="list-group-item-text post-text"> {{post}} </p>
+				</div>
+				<button class="like like-post btn btn-xs btn-default">
+					<i class="fa fa-thumbs-o-up"></i>
+					<div id="postInfo" value="{{songId}}"></div>
+				</button>
+				<div class="likes-post"> {{likes}} Likes </div>
+							
+			</div>
+		</div>
+	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+	script(src="../scripts/lib/profile.js")
 
 						
