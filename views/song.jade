@@ -1,169 +1,182 @@
 extends layout
 
 block content
-	.main
+	.main-song
 		#song-id(value=id)
 		.container
-			.song-container
-				h1#song-name= song.name
-				#inner-container(style="background-image: url(" + song.backgroundImage + ")")
-					.track-container.tc0
-						.canvas-container
-							canvas#canvas0.visuals
-						.upload-switch-track
-							select#select0.select-track.btn.btn-default
-								if track0
-									for track in track0.userTracks
-										option(value=track.trackTitle data=track._id) #{track.trackTitle}, By userName, #{track.likes} Likes
-							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal0")
-								i.fa.fa-caret-square-o-up
-							button.like.btn.btn-xs.btn-primary
-								i.fa.fa-thumbs-o-up
+			h1#song-name= song.name
+			#inner-container(style="background-image: url(" + song.backgroundImage + ")")
+				.track-container.tc0
+					.canvas-container
+						canvas#canvas0.visuals
+					.upload-switch-track
+						select#select0.select-track.btn.btn-default
 							if track0
-								.likes #{track0.userTracks[0].likes} Likes
-							button.play0.play-track.btn.btn-lg.btn-success
-								i.fa.fa-play-circle
-							button.mute.mute0.btn.btn-xs.btn-danger M
+								for track in track0.userTracks
+									option(value=track.trackTitle data=track._id) #{track.trackTitle}, By userName, #{track.likes} Likes
+						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal0")
+							i.fa.fa-caret-square-o-up
+						button.like.btn.btn-xs.btn-primary
+							i.fa.fa-thumbs-o-up
 						if track0
-							.song-user-image
-							.song-user-info-box
-								.song-user-name= track0.userTracks[0].userName
-								.song-track-name= track0.userTracks[0].trackTitle
-					.track-container
-						.canvas-container
-							canvas#canvas1.visuals
-						.upload-switch-track
-							select#select1.select-track.btn.btn-default
-								if track1
-									for track in track1.userTracks
-										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
-							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal1")
-								i.fa.fa-caret-square-o-up
-							button.like.btn.btn-xs.btn-primary
-								i.fa.fa-thumbs-o-up
-							if track1
-								.likes #{track1.userTracks[0].likes} Likes
-							button.play1.play-track.btn.btn-lg.btn-success
-								i.fa.fa-play-circle
-							button.mute.mute1.btn.btn-xs.btn-danger M
-						if track1
-							.song-user-image
-							.song-user-info-box
-								.song-user-name= track1.userTracks[0].userName
-								.song-track-name= track1.userTracks[0].trackTitle
-					.track-container
-						.canvas-container
-							canvas#canvas2.visuals
-						.upload-switch-track
-							select#select2.select-track.btn.btn-default
-								if track2
-									for track in track2.userTracks
-										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
-							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal2")
-								i.fa.fa-caret-square-o-up
-							button.like.btn.btn-xs.btn-primary
-								i.fa.fa-thumbs-o-up
-							if track2
-								.likes #{track2.userTracks[0].likes} Likes
-							button.play2.play-track.btn.btn-lg.btn-success
-								i.fa.fa-play-circle
-							button.mute.mute2.btn.btn-xs.btn-danger M
-						if track2
-							.song-user-image
-							.song-user-info-box
-								.song-user-name= track2.userTracks[0].userName
-								.song-track-name= track2.userTracks[0].trackTitle
-					.track-container
-						.canvas-container
-							canvas#canvas3.visuals
-						.upload-switch-track
-							select#select3.select-track.btn.btn-default
-								if track3
-									for track in track3.userTracks
-										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
-							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal3")
-								i.fa.fa-caret-square-o-up
-							button.like.btn.btn-xs.btn-primary
-								i.fa.fa-thumbs-o-up
-							if track3
-								.likes #{track3.userTracks[0].likes} Likes
-							button.play3.play-track.btn.btn-lg.btn-success
-								i.fa.fa-play-circle
-							button.mute.mute3.btn.btn-xs.btn-danger M
-						if track3
-							.song-user-image
-							.song-user-info-box
-								.song-user-name= track3.userTracks[0].userName
-								.song-track-name= track3.userTracks[0].trackTitle
-					.track-container
-						.canvas-container
-							canvas#canvas4.visuals
-						.upload-switch-track
-							select#select4.select-track.btn.btn-default
-								if track4
-									for track in track4.userTracks
-										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
-							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal4")
-								i.fa.fa-caret-square-o-up
-							button.like.btn.btn-xs.btn-primary
-								i.fa.fa-thumbs-o-up
-							if track4
-								.likes #{track4.userTracks[0].likes} Likes
-							button.play4.play-track.btn.btn-lg.btn-success
-								i.fa.fa-play-circle
-							button.mute.mute4.btn.btn-xs.btn-danger M
-						if track4
-							.song-user-image
-							.song-user-info-box
-								.song-user-name= track4.userTracks[0].userName
-								.song-track-name= track4.userTracks[0].trackTitle
-					.track-container
-						.canvas-container
-							canvas#canvas5.visuals
-						.upload-switch-track
-							select#select5.select-track.btn.btn-default
-								if track5
-									for track in track5.userTracks
-										option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
-							button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal5")
-								i.fa.fa-caret-square-o-up
-							button.like.btn.btn-xs.btn-primary
-								i.fa.fa-thumbs-o-up
-							if track5
-								.likes #{track5.userTracks[0].likes} Likes
-							button.play5.play-track.btn.btn-lg.btn-success
-								i.fa.fa-play-circle
-							button.mute.mute5.btn.btn-xs.btn-danger M
-						if track5
-							.song-user-image
-							.song-user-info-box
-								.song-user-name= track5.userTracks[0].userName
-								.song-track-name= track5.userTracks[0].trackTitle
-					.song-controls
-						button#play.btn.btn-success.tb
+							.likes #{track0.userTracks[0].likes} Likes
+						button.play0.play-track.btn.btn-lg.btn-success
 							i.fa.fa-play-circle
-						button#stop.btn.btn-danger.tb
-							i.fa.fa-stop
-						button#share.tb.btn.btn-default.btn-sm
-							i.fa.fa-share-square
-						button#download.tb.btn.btn-default.btn-sm
-							i.fa.fa-caret-square-o-down
-						button#uploadBackgroundPic.btn.btn-default.btn-sm.tb2.pull-right
-							i.fa.fa-picture-o
-						#upload-container.pull-right
-							form.song-pic-upload(method="post" action="/uploadSongBackgroundPic" role="form" enctype="multipart/form-data")
-								input.btn.btn-primary.btn-sm(type="file" onchange="previewSongBackground()" name="songBackgroundImage" id="upload-song-background")
-								input(type="hidden" value=song._id name="songId")
-								input.pull-right(type="submit" value="upload")
+						button.mute.mute0.btn.btn-xs.btn-danger M
+					if track0
+						.song-user-image
+						.song-user-info-box
+							.song-user-name= track0.userTracks[0].userName
+							.song-track-name= track0.userTracks[0].trackTitle
+				.track-container
+					.canvas-container
+						canvas#canvas1.visuals
+					.upload-switch-track
+						select#select1.select-track.btn.btn-default
+							if track1
+								for track in track1.userTracks
+									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal1")
+							i.fa.fa-caret-square-o-up
+						button.like.btn.btn-xs.btn-primary
+							i.fa.fa-thumbs-o-up
+						if track1
+							.likes #{track1.userTracks[0].likes} Likes
+						button.play1.play-track.btn.btn-lg.btn-success
+							i.fa.fa-play-circle
+						button.mute.mute1.btn.btn-xs.btn-danger M
+					if track1
+						.song-user-image
+						.song-user-info-box
+							.song-user-name= track1.userTracks[0].userName
+							.song-track-name= track1.userTracks[0].trackTitle
+				.track-container
+					.canvas-container
+						canvas#canvas2.visuals
+					.upload-switch-track
+						select#select2.select-track.btn.btn-default
+							if track2
+								for track in track2.userTracks
+									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal2")
+							i.fa.fa-caret-square-o-up
+						button.like.btn.btn-xs.btn-primary
+							i.fa.fa-thumbs-o-up
+						if track2
+							.likes #{track2.userTracks[0].likes} Likes
+						button.play2.play-track.btn.btn-lg.btn-success
+							i.fa.fa-play-circle
+						button.mute.mute2.btn.btn-xs.btn-danger M
+					if track2
+						.song-user-image
+						.song-user-info-box
+							.song-user-name= track2.userTracks[0].userName
+							.song-track-name= track2.userTracks[0].trackTitle
+				.track-container
+					.canvas-container
+						canvas#canvas3.visuals
+					.upload-switch-track
+						select#select3.select-track.btn.btn-default
+							if track3
+								for track in track3.userTracks
+									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal3")
+							i.fa.fa-caret-square-o-up
+						button.like.btn.btn-xs.btn-primary
+							i.fa.fa-thumbs-o-up
+						if track3
+							.likes #{track3.userTracks[0].likes} Likes
+						button.play3.play-track.btn.btn-lg.btn-success
+							i.fa.fa-play-circle
+						button.mute.mute3.btn.btn-xs.btn-danger M
+					if track3
+						.song-user-image
+						.song-user-info-box
+							.song-user-name= track3.userTracks[0].userName
+							.song-track-name= track3.userTracks[0].trackTitle
+				.track-container
+					.canvas-container
+						canvas#canvas4.visuals
+					.upload-switch-track
+						select#select4.select-track.btn.btn-default
+							if track4
+								for track in track4.userTracks
+									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal4")
+							i.fa.fa-caret-square-o-up
+						button.like.btn.btn-xs.btn-primary
+							i.fa.fa-thumbs-o-up
+						if track4
+							.likes #{track4.userTracks[0].likes} Likes
+						button.play4.play-track.btn.btn-lg.btn-success
+							i.fa.fa-play-circle
+						button.mute.mute4.btn.btn-xs.btn-danger M
+					if track4
+						.song-user-image
+						.song-user-info-box
+							.song-user-name= track4.userTracks[0].userName
+							.song-track-name= track4.userTracks[0].trackTitle
+				.track-container
+					.canvas-container
+						canvas#canvas5.visuals
+					.upload-switch-track
+						select#select5.select-track.btn.btn-default
+							if track5
+								for track in track5.userTracks
+									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal5")
+							i.fa.fa-caret-square-o-up
+						button.like.btn.btn-xs.btn-primary
+							i.fa.fa-thumbs-o-up
+						if track5
+							.likes #{track5.userTracks[0].likes} Likes
+						button.play5.play-track.btn.btn-lg.btn-success
+							i.fa.fa-play-circle
+						button.mute.mute5.btn.btn-xs.btn-danger M
+					if track5
+						.song-user-image
+						.song-user-info-box
+							.song-user-name= track5.userTracks[0].userName
+							.song-track-name= track5.userTracks[0].trackTitle
+				.song-controls
+					button#play.btn.btn-success.tb
+						i.fa.fa-play-circle
+					button#stop.btn.btn-danger.tb
+						i.fa.fa-stop
+					
+					button#uploadBackgroundPic.btn.btn-default.btn-sm.tb2.pull-right
+						i.fa.fa-picture-o
+					#upload-container.pull-right
+						form.song-pic-upload(method="post" action="/uploadSongBackgroundPic" role="form" enctype="multipart/form-data")
+							input.btn.btn-primary.btn-sm(type="file" onchange="previewSongBackground()" name="songBackgroundImage" id="upload-song-background")
+							input(type="hidden" value=song._id name="songId")
+							input.pull-right(type="submit" value="upload")
+		.container
+			.info-block
+				button#share.tb.btn.btn-default.btn-sm
+					.fa.fa-share-square
+				button#download.tb.btn.btn-default.btn-sm
+					i.fa.fa-caret-square-o-down
 		.container.margin-top
-			#comments-container
-				h1 Comments
-				form#addComment(role="form")
-					.form-group
-						label(for="comment") Add Comment
-						textarea.form-control(type="text" id="comment" placeholder="Comment…")
-					.form-group
-						input.btn.btn-primary.btn-comment(type="submit" value="Post")
+			.info-block.remove-margin
+					button#dropNote.btn.btn-default.drop-note.btn-simple-sm.pull-left Drop a Note
+					h1.heading-about Comments
+					form#addComment(role="form")
+						.form-group
+							textarea.form-control.form-font(type="text" id="post" placeholder="Comment…")
+						.form-group
+							input.btn.btn-simple-sm.btn-post(type="submit" value="Post")
+					#comments-container
+
+
+			//- #comments-container
+			//- 	h1 Comments
+			//- 	form#addComment(role="form")
+			//- 		.form-group
+			//- 			label(for="comment") Add Comment
+			//- 			textarea.form-control(type="text" id="comment" placeholder="Comment…")
+			//- 		.form-group
+			//- 			input.btn.btn-primary.btn-comment(type="submit" value="Post")
 
 			.modal.fade#uploadModal0
 				.modal-dialog
@@ -297,20 +310,18 @@ block content
 	script(src="../scripts/lib/moment.js")
 	script(id="comment-template" type="text/x-handlebars-template").
 		<div class="list-group results">
-			<div class="list-group-item">
-				<div class="comment-pic-holder">
-					<a href="../profile/?id={{userId}}"><img id="memberPic" class="search-profile-pic" src={{userProfilePic}}></a>
-					<a href="../profile/?id={{userId}}"><h4 class="list-group-item-heading"> {{userName}} </h4></a>
-					<p class="comment-date"> {{date}} </p>
+			<div class="post-container">
+				<div class="post-pic-holder">
+					<a href="../profile/?id={{userId}}"><img class="post-profile-pic img-circle" src={{userProfilePic}}></a>
 				</div>
-				<div class="search-result-info">
-					<p id="comment-text" class="list-group-item-text comment-text"> {{comment}} </p>
-				</div>
-				<button class="like like-comment btn btn-xs btn-default">
+					<a href="../profile/?id={{userId}}"><h2 class="post-heading"> {{userName}} </h4></a>
+					<p class="post-secondary"> {{date}} </p>
+					<p id="comment-text" class="list-group-item-text post-text"> {{comment}} </p>
+				<button class="like-comment btn btn-xs btn-default">
 					<i class="fa fa-thumbs-o-up"></i>
 					<div id="commentInfo" value="{{songId}}"></div>
 				</button>
-				<div class="likes-comment"> {{likes}} Likes </div>
+				<div class="likes-comment post-secondary inline"> {{likes}} Likes </div>
 							
 			</div>
 		</div>

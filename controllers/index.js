@@ -38,17 +38,18 @@ var indexController = {
 			});
 		},
 	profileUser: function(req, res) {
-			// User.find({}, function(err, response){
-			var user = req.user;
-			user.bands = stringifyArray(user.bands);
-			user.instruments = stringifyArray(user.instruments);
-			user.styles = stringifyArray(user.styles);
-			user.inspirations = stringifyArray(user.inspirations);
-			user.skills = stringifyArray(user.skills);
-			res.render('profile-user', {
-				user: user
-			});
-			// });
+			User.findOne({_id: req.user._id})
+				.populate('posts', null, 'post')
+				.exec(function(err, user){
+					user.bands = stringifyArray(user.bands);
+					user.instruments = stringifyArray(user.instruments);
+					user.styles = stringifyArray(user.styles);
+					user.inspirations = stringifyArray(user.inspirations);
+					user.skills = stringifyArray(user.skills);
+					res.render('profile-user', {
+						user: user
+					});	
+				});
 		},
 	profileBand: function(req, res) {
 			var band = req.user;
@@ -91,11 +92,12 @@ var indexController = {
 		User
 		.findOne({_id: req.user._id})
 		.populate('cocreationSongs', null, 'cocreationsong')
+		.populate('cocreationCollaborations', null, 'cocreationsong')
 		.exec(function(err, result){
 			res.render('cocreation-user', {
 				user: result
 			});
-		})
+		});
 	},
 		song: function(req, res){
 			console.log('song req.query!!!', req.query);

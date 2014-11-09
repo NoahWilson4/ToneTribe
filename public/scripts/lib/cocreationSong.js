@@ -3,6 +3,21 @@ $(document).on('ready', function() {
 //////////////////////// comments ///////////////////////
 //////////////////////// comments ///////////////////////
 
+
+$(document).on('click', '.drop-note', function(){
+	console.log('click');
+	$('#addComment').css({display: 'inherit'});
+	$('#dropNote').text('Cancel').addClass('cancel').removeClass('drop-note');
+});
+
+$(document).on('click', '.cancel', function(){
+	$('#addComment').css({display: 'none'});
+	$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
+});
+
+
+
+
 // song and user data is bootstrapped into the script
 
 
@@ -11,9 +26,11 @@ $(document).on('ready', function() {
 
 	console.log('song test!!!!:', song);
 
+
+//////// on page load, add previous comments to page
 	song.comments.map(function(comment){
 		var outputHTML = compileCommentTemplate(comment);
-		$('#comments-container').append(outputHTML);
+		$('#comments-container').prepend(outputHTML);
 	});
 
 	$('#addComment').on('submit', function(event){
@@ -34,22 +51,20 @@ $(document).on('ready', function() {
 		$.post('/api/postComment', {comment: comment, songId: song._id} , function(responseData){
 			console.log('responseData: ', responseData);
 			console.log('addComment responseData: ', responseData);
-
-			var outputHTML = compileCommentTemplate(comment);
-			$('#comments-container').append(outputHTML);
 		});
+
+		var outputHTML = compileCommentTemplate(comment);
+		$('#comments-container').prepend(outputHTML);
+
+		$('#addComment').css({display: 'none'});
+		$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
 	});
 
 	$(document).on('click', '.like-comment', function(){
 		var clicked = $(this);
 		var songId = $(this).find('#commentInfo').attr('value');
-		var commentText = $(this).closest('.list-group-item').find('#comment-text').text();
+		var commentText = $(this).closest('.list-group').find('#comment-text').text();
 		console.log('songId, commentText: ', songId, commentText);
-		// $.post('/api/addCommentLike', {songId: songId, comment: comment}, function(responseData){
-		// 	console.log('posting.....');
-		// 	console.log('addCommentLike responseData:', responseData);
-		// 	var likes = responseData.likes;
-		// });
 		var responseData = $.ajax({
 			type: "POST",
 			data: {
@@ -65,7 +80,7 @@ $(document).on('ready', function() {
 		.done(function(err, result){
 			console.log('done.', JSON.parse(responseData.responseText).likes);
 			console.log('this test: ', this);
-			$(clicked).closest('.list-group-item').find('.likes-comment').text(JSON.parse(responseData.responseText).likes + " Likes");
+			$(clicked).closest('.list-group').find('.likes-comment').text(JSON.parse(responseData.responseText).likes + " Likes");
 		});
 	});
 

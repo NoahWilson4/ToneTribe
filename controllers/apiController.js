@@ -1,5 +1,6 @@
 var CocreationSong = require('../models/cocreationSong.js');
 var User = require('../models/user.js');
+var Post = require('../models/post.js');
 
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -177,7 +178,6 @@ var apiController = {
 		var newSong = new CocreationSong(song);
 		newSong.save(function(err, result){
 			console.log('result test: ', result);
-
 			req.user.cocreationSongs.push(newSong);
 			req.user.save();
 			res.send(result);
@@ -547,7 +547,36 @@ var apiController = {
 					}
 				}
 			});
-		}
+		},
+		addPost: function(req, res){
+			console.log('addPost req.body: ', req.body);
+			console.log('req.query: ', req.query);
+			var postedTo;
+			if (req.query > 0){
+				console.log('posted to different user');
+				postedTo = req.query;
+			} else {
+				('posted to current user');
+				postedTo = req.user;
+			}
+			var newPost = new Post({
+				userName: req.body.userName,
+				userProfilePic: req.body.userProfilePic,
+				user: req.user,
+				postedTo: postedTo,
+				text: req.body.text,
+				likes: 0,
+				date: req.body.date
+			});
+			console.log('newPost: ', newPost);
+			newPost.save();
+			User.findOne({_id: postedTo}, function(err, result){
+				result.posts.push(newPost._id);
+				console.log('result updated post: ', result);
+				result.save();
+				res.send('saved.');
+			});
+		},
 };
 
 module.exports = apiController;

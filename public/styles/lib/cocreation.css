@@ -9,11 +9,32 @@ border-radius: 1000px;
 /* border: 15px solid gray; */
 /*}*/
 
-.main {
-	background: rgb(228, 228, 228);
+.main-song {
 	padding-top: 100px;
 	margin: 0px;
 	padding-bottom: 20px;
+}
+
+.input-new{
+	font-size: 20px;
+width: 80%;
+padding: 25px;
+}
+
+#addComment{
+	margin-top: 15px;
+	display: none;
+}
+
+.btn-songs-sm {
+		margin-bottom: 10px;
+
+border-radius: 60px;
+padding: 20px;
+color: white;
+border: none;
+font-size: 30px;
+background: rgb(99, 101, 103);
 }
 
 .song-result-container{
@@ -28,11 +49,7 @@ border-radius: 1000px;
 }
 
 #comments-container {
-	background: whitesmoke;
-padding: 25px;
-border-radius: 5px;
-border: 1px solid gray;
-margin: 15px;
+
 }
 
 .song-container {
@@ -45,8 +62,8 @@ max-width: 1150px;
 padding: 15px;
 height: 720px;
 /*/*/*border-radius: 492px;
-/*-webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);*/
-/*-moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);*/
+/*-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;*/
+/*-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;*/
 /*box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, .5);*/
 */*/*//*display: none;*/
 }
@@ -66,20 +83,14 @@ left: 0px;
 }
 
 #song-name {
-color: rgb(161, 153, 153);
-padding-left: 30px;
-padding-bottom: 5px;
-padding-top: 15px;
+padding-left: 50px;
+padding-bottom: 25px;
+padding-top: 45px;
 margin-bottom: 0;
 width: 100%;
 border-top-right-radius: 20px;
 border-top-left-radius: 20px;
- background: white; 
-
-box-shadow: inset 0px 0px 26px 1px #989696;
--webkit-box-shadow: inset 0px 0px 26px 1px #989696;
--moz-box-shadow: inset 0px 0px 26px 1px #989696;
--o-box-shadow: inset 0px 0px 26px 1px #989696;
+background: white;
 }
 
 .song-info-box {
@@ -114,8 +125,8 @@ bottom: 0px;
 }
 
 .song-user-name {
-color: white;
-font-size: 19px;
+color: rgb(74, 73, 73);
+font-size: 30px;
 }
 
 .song-track-name {
@@ -287,17 +298,17 @@ border-bottom-right-radius: 15px;
 border-bottom-left-radius: 15px;
 background: -webkit-linear-gradient(rgb(54, 53, 76),rgb(54, 53, 76),rgb(25, 25, 27));
 /* border: 10px solid rgb(190, 190, 190); */
--webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
--moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
+-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
 }
 
 .tb{
 margin: 20px 0px 15px 7px;
 position: relative;
--webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
--moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
-box-shadow: 1px 3px 30px 0px rgba(44, 53, 53, 1);
+-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 font-size: 25px;
 padding: 3px 10px;
 }
@@ -305,30 +316,28 @@ padding: 3px 10px;
 .tb2{
 margin: 20px 20px 15px 7px;
 position: relative;
--webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
--moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
-box-shadow: 1px 3px 30px 0px rgba(44, 53, 53, 1);
+-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 font-size: 25px;
 padding: 3px 10px;
 }
 
 #inner-container{
-
-border: 10px solid rgb(160, 158, 158);
+border: 50px solid white;
 position: relative;
-border-bottom-right-radius: 5px;
-border-bottom-left-radius: 5px;
--webkit-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
--moz-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
-box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, 1);
-background: rgb(89, 89, 89);
+border-bottom-right-radius: 15px;
+border-bottom-left-radius: 15px;
+-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+background: rgb(87, 86, 86);
 background-image: url();
 background-size: cover;
 box-shadow: inset 0px 0px 26px 1px #464952;
 -webkit-box-shadow: inset 0px 0px 26px 1px #464952;
 -moz-box-shadow: inset 0px 0px 26px 1px #464952;
 -o-box-shadow: inset 0px 0px 26px 1px #464952;
-
 }
 
 .bottom-fill{
@@ -342,14 +351,27 @@ background: -webkit-linear-gradient(rgb(30, 32, 39), rgb(44, 43, 61));
 
 .song-controls {
 position: relative;
-background: rgb(224, 224, 224);
+background: rgb(237, 237, 237);
 width: 100%;
-border: 1px solid rgb(107, 106, 106);
-box-shadow: inset 0px 0px 26px 1px #989696;
--webkit-box-shadow: inset 0px 0px 26px 1px #989696;
--moz-box-shadow: inset 0px 0px 26px 1px #989696;
--o-box-shadow: inset 0px 0px 26px 1px #989696;
+height: 100px;
+/* border: 1px solid rgb(107, 106, 106); */
+/* box-shadow: 0px 0px 26px 1px #989696; */
+/* border-bottom-right-radius: 0px; */
+/* -webkit-box-shadow: 0px 10px 14px -7px #C8C3C3; */
+}
 
+
+#stop{
+	margin-left: 3%;
+height: 60px;
+width: 60px;
+}
+
+#play{
+	width: 100px;
+height: 60px;
+margin-left: 13%;
+font-size: 40px;
 }
 
 .upload-view-foundation {

@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
 
 var Post = mongoose.Schema({
+	userName: String,
+	userProfilePic: String,
 	user: mongoose.Schema.ObjectId,
+	postedTo: mongoose.Schema.ObjectId,
 	text: String,
 	date: String,
 	likes: Number,
@@ -13,4 +16,4 @@ var Post = mongoose.Schema({
 	}]
 });
 
-module.exports = mongoose.model('post', CocreationSong);
+module.exports = mongoose.model('post', Post);

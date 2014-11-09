@@ -537,9 +537,58 @@ $('#btn-connect').on('click', function(){
 
 
 
+/////////////////////// posting ////////////////////////
+/////////////////////// posting ////////////////////////
 
 
+/////// post templating ///////////
 
+var postTemplate = $('#post-template').html();
+	var compilePostTemplate = Handlebars.compile(postTemplate);
+
+
+/////////////// submitting posts  ///////////////
+
+$(document).on('click', '.drop-note', function(){
+	console.log('click');
+	$('#addPost').css({display: 'inherit'});
+	$('#dropNote').text('Cancel').addClass('cancel').removeClass('drop-note');
+});
+
+$(document).on('click', '.cancel', function(){
+	$('#addPost').css({display: 'none'});
+	$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
+});
+
+$('#addPost').on('submit', function(e){
+	e.preventDefault();
+	var text = $(this).find('textarea').val();
+	var date = moment().format('MMMM Do YYYY, h:mm:ss a');
+	var post = {
+		date: date,
+		text: text,
+		likes: 0,
+		userName: user.name,
+		userProfilePic: user.profilePic
+	};
+
+	$.post('/api/addPost', post , function(responseData){
+		console.log('addpost responseData: ', responseData);
+	});
+
+	var outputHTML = compilePostTemplate(post);
+	$('#post-container').prepend(outputHTML);
+
+	$('#addPost').css({display: 'none'});
+	$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
+});
+
+////// on page load, display previous posts
+
+user.posts.map(function(post){
+		var outputHTML = compilePostTemplate(post);
+		$('#post-container').prepend(outputHTML);
+	});
 
 
 

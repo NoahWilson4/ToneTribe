@@ -28,7 +28,8 @@ var CocreationSong = mongoose.Schema({
 		userProfilePic: String
 	}],
 	backgroundImage: String,
-	backgroundThumbnail: String
+	backgroundThumbnail: String,
+	description: String
 
 });
 

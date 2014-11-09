@@ -4,26 +4,33 @@ block content
 	div.container.profile-top(style="background-image: url(" + user.backgroundPic + ")")
 		button(data-toggle="modal" data-target="#uploadModalBackgroundPic").glyphicon.glyphicon-picture.make-it-white.edit-icon-background Change-Background
 		div.img-name.row
-			div.profile-pic.col-xs-4(style="background-image: url(" + user.profilePic + ")")
-				button#uploadProfilePic(data-toggle="modal" data-target="#uploadModalProfilePic").glyphicon.glyphicon-picture.make-it-white.edit-icon-profile Change-Photo
-			div.name-loc.col-xs-8
+			div.name-loc.col-xs-6.col-sm-6.c0l-md-7.col-xl-5
 				h2.name(title="name")= user.name
 				div.location(title="location")= user.location
-
+			div.profile-pic.img-circle.col-xs-4(style="background-image: url(" + user.profilePic + ")")
+				button#uploadProfilePic(data-toggle="modal" data-target="#uploadModalProfilePic").glyphicon.glyphicon-picture.make-it-white.edit-icon-profile Change-Photo
+	button.edit-profile.btn.btn-default.btn-xs.btn-simple.pull-left Edit Profile
+	.container
+		.info-block(title="about")
+			.row
+				.heading-container.col-sm-4.col-md-2
+					h2.heading-about About:
+				.content-container.col-sm-8.col-md-10
+					p.about= user.about
 	.container
 		.row
-			div.col-sm-3#sidebar
+			div.col-sm-5.col-md-4#sidebar
 				.profile-sidebar
-					button.edit-profile.btn.btn-default.btn-xs Edit Profile
-						//- .edit-directions Update By Clicking on Text
+					.sidebar-list(title="bands")
+						h4.sidebar-list-heading Bands:
+						p.sidebar-list-text.bands= user.bands
+				.profile-sidebar
 					.sidebar-list
 						a(href="./cocreation-user")
 							button.btn.btn-default.btn-sm.btn-songs Cocreation Songs
 					.sidebar-list
 						button.btn.btn-default.btn-sm.btn-tribe View Tribe Members
-					.sidebar-list(title="bands")
-						h4.sidebar-list-heading Bands:
-						p.sidebar-list-text.bands= user.bands
+				.profile-sidebar
 					.sidebar-list(title="instruments")
 						h4.sidebar-list-heading Instruments:
 						p.sidebar-list-text.instruments= user.instruments
@@ -42,41 +49,40 @@ block content
 							dd
 								div#ratio-bar.bar(style="width: " + user.improvComp + "%")
 						.improv Improv . . . . . . . . . . . . Composition
-					//- .sidebar-list
-						h4.sidebar-list-heading BirthDay:
-						p.sidebar-list-text.astro-sign= user.birthdate
 					.sidebar-list(title="age")
 						h4.sidebar-list-heading Age:
 						p.sidebar-list-text.astro-sign= user.age
 					.sidebar-list
 						h4.sidebar-list-heading Astrological Sign:
 						p.sidebar-list-text.astro-sign= user.astro
-			.col-sm-9
-				.info-block(title="about")
-					h5.info-block-heading About
-					p.about= user.about
-				.info-block(title="philosophy")
-					h5.info-block-heading Philosophy
-					p.philosophy= user.philosophy
+
+			.col-sm-7.col-md-8
+				.info-block.remove-margin(title="philosophy")
+					.row
+						.heading-container.col-sm-5.col-md-4
+							h3.heading-about Philosophy:
+						.content-container.col-sm-7.col-md-8
+							p.about-content= user.philosophy
 				.info-block.gallery-block
-					h5.info-block-heading Photos
 					.photo-gallery
-						button.btn.btn-default.btn-xs.view-gallery View Photo Gallery
 						.photo-container
 							.row
 								.col-xs-3.gallery-pic.pic-1
 								.col-xs-3.gallery-pic.pic-2
 								.col-xs-3.gallery-pic.pic-3
+								button.col-xs-3.btn.btn-default.btn-xs.btn-simple 
+									strong Photos 
+									div View Gallery
 				.media
-				.container.margin-top
+				.info-block.remove-margin
+					button#dropNote.drop-note.btn-simple-sm.pull-left Drop a Note
+					h1.heading-about Posts
+					form#addPost(role="form")
+						.form-group
+							textarea.form-control.form-font(type="text" id="post" placeholder="Post…")
+						.form-group
+							input.btn.btn-simple-sm.btn-post(type="submit" value="Post")
 					#post-container
-						h1 Posts
-						form#addPost(role="form")
-							.form-group
-								label(for="comment") Add Post
-								textarea.form-control(type="text" id="post" placeholder="Post…")
-							.form-group
-								input.btn.btn-primary.btn-post(type="submit" value="Post")
 	.modal.fade#uploadModalProfilePic
 				.modal-dialog
 					form#upload(method="post" action="/uploadProfilePic" enctype="multipart/form-data")
@@ -114,20 +120,18 @@ block content
 		var user = !{JSON.stringify(user)};
 	script(id="post-template" type="text/x-handlebars-template").
 		<div class="list-group results">
-			<div class="list-group-item">
+			<div class="post-container">
 				<div class="post-pic-holder">
-					<a href="../profile/?id={{userId}}"><img id="memberPic" class="search-profile-pic" src={{userProfilePic}}></a>
-					<a href="../profile/?id={{userId}}"><h4 class="list-group-item-heading"> {{userName}} </h4></a>
-					<p class="post-date"> {{date}} </p>
+					<a href="../profile/?id={{userId}}"><img class="post-profile-pic img-circle" src={{userProfilePic}}></a>
 				</div>
-				<div class="search-result-info">
-					<p id="post-text" class="list-group-item-text post-text"> {{post}} </p>
-				</div>
-				<button class="like like-post btn btn-xs btn-default">
-					<i class="fa fa-thumbs-o-up"></i>
-					<div id="postInfo" value="{{songId}}"></div>
-				</button>
-				<div class="likes-post"> {{likes}} Likes </div>
+					<a href="../profile/?id={{userId}}"><h2 class="post-heading"> {{userName}} </h4></a>
+					<p class="post-secondary"> {{date}} </p>
+				<p id="post-text" class="list-group-item-text post-text"> {{text}} </p>
+					<button class="btn btn-xs btn-default">
+						<i class="fa fa-thumbs-o-up"></i>
+						<div id="postInfo" value="{{songId}}"></div>
+					</button>
+					<div class="post-secondary inline"> {{likes}} Likes </div>
 							
 			</div>
 		</div>

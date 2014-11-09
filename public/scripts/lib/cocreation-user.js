@@ -3,6 +3,21 @@ $(document).on('ready', function() {
 ////////////// cocreation main page ///////////////////////
 
 
+/////// cocreation templating ///////////
+
+var cocreationTemplate = $('#cocreation-template').html();
+var compileCocreationTemplate = Handlebars.compile(cocreationTemplate);
+
+user.cocreationSongs.map(function(song){
+	console.log('song test: ', song);
+	var outputHTML = compileCocreationTemplate(song);
+		$('#cocreation-container').prepend(outputHTML);
+});
+
+
+
+
+
 
 
 var renderSong = function(songData) {
@@ -13,6 +28,9 @@ var renderSong = function(songData) {
 	el.attr('data-id', songData._id);
 	return el;
 };
+
+
+
 user.cocreationSongs.map(function(song){
 	console.log('song test: ', song);
 	$('.song-container').append(renderSong(song));
@@ -22,16 +40,15 @@ user.cocreationSongs.map(function(song){
 $('#create-new-song').on('submit', function(e){
 	e.preventDefault();
 	var songName = $(this).find('[name=name]').val();
-	var songData = {
+	var song = {
 		name: songName
 	};
 
-	$.post('/api/createNewSong', songData, function(responseData){
+	$.post('/api/createNewSong', song, function(responseData){
 		console.log('responseData: ', responseData);
-		var songEl = renderSong(responseData);
-		console.log('songEl: ', songEl);
-		$('.song-container').append(songEl);
-	})
+		var outputHTML = compileCocreationTemplate(responseData);
+		$('#cocreation-container').prepend(outputHTML);
+	});
 });
 
 

@@ -4,6 +4,20 @@ body {
 	font-size: 12px;
 }
 
+a {
+	color:   rgb(82, 117, 145);
+}
+
+a:hover{
+	text-decoration: none;
+	color: rgb(47, 86, 110);
+
+}
+
+.form-font {
+	font-size: 25px;
+}
+
 .float-right{
 	float: right;
 }
@@ -25,7 +39,8 @@ body {
 margin-top: 50px;
 padding: 10px;
 background-color: rgb(146, 160, 158);
-height: 280px;
+height: 450px;
+width: 100%;
 position: relative;
 /*background-image: ;*/
 background-size: cover;
@@ -46,15 +61,64 @@ border-bottom: 10px solid black;
 }
 
 .img-name {
-	position: absolute;
-bottom: 10px;
+
+}
+
+.heading-about{
+	text-align: right;
+padding: 0px 15px 20px 25px;
+margin: 0;
+/* background: rgb(239, 239, 239); */
+}
+
+.about-content{
+	font-size: 20px;
 }
 
 .gallery-pic {
-	background: lightgray;
-	width: 100px;
-	height: 100px;
-	margin: 10px;
+	background: rgb(210, 211, 215);
+width: 150px;
+height: 150px;
+margin: 10px;
+}
+
+.btn-simple {
+border: none;
+background: rgb(237, 237, 237);
+padding: 15px;
+border-radius: 10px;
+margin: 35px 20px;
+width: 150px;
+font-size: 20px;
+}
+
+.btn-simple2 {
+border: none;
+background: rgb(237, 237, 237);
+padding: 15px;
+border-radius: 10px;
+margin: 20px 0px;
+font-size: 20px;
+}
+
+.btn-simple-sm {
+	border: none;
+background: rgb(237, 237, 237);
+padding: 15px;
+border-radius: 10px;
+/* margin: 35px 20px; */
+width: 150px;
+font-size: 20px;
+}
+
+.btn-tribe{
+	border: none;
+background: rgb(237, 237, 237);
+padding: 15px 0px;
+border-radius: 50px;
+margin-bottom: 20px;
+width: 100%;
+font-size: 22px;
 }
 
 .gallery-block {
@@ -65,17 +129,19 @@ bottom: 10px;
 padding: 0px 15px;
 }
 .profile-pic {
-float: left;
-margin-right: 15px;
+background: black;
+position: absolute;
+bottom: -60px;
+left: 20px;
 margin-left: 15px;
 margin-top: -30px;
-width: 150px;
-height: 150px;
+width: 280px;
+height: 280px;
 padding: 0;
 background-image: ;
 background-size: cover;
 background-position: center;
-border: 1px solid rgb(128, 118, 118);
+border: 10px solid rgb(55, 51, 51);
 }
 
 .edit-icon-profile {
@@ -117,13 +183,18 @@ border: 3px solid lightgray;
 }
 
 .name-loc {
-	display: inline-block;
-width: 240px;
+position: absolute;
+bottom: 0px;
+left: 280px;
+display: inline-block;
+min-width: 320px;
 color: rgb(233, 231, 228);
-padding: 10px 15px;
+padding: 0px 50px 10px 55px;
 background-color: rgba(0, 0, 0, 0.35);
-border-radius: 10px;
-
+border-top-right-radius: 140px;
+border-top-left-radius: 120px;
+border-top: 2px solid rgb(152, 152, 152);
+border-bottom: none;
 }
 
 .edit-name-loc {
@@ -140,6 +211,7 @@ font-size: 17px;
 
 .name {
 	margin-bottom: 0px;
+	font-size: 60px;
 }
 
 .band-name {
@@ -148,6 +220,7 @@ font-size: 17px;
 
 .location {
 	color: lightgray;
+	font-size: 33px;
 }
 
 .band-location {
@@ -158,15 +231,19 @@ font-size: 17px;
 	font-size: 15px;
 }
 
+
+
 #sidebar {
-	padding: 0;
+	
 }
 
 .profile-sidebar {
 background-color: white;
 padding: 10px;
-border: 1px solid lightgray;
-border-top: none;
+margin-bottom: 25px;
+
+/*border: 1px solid lightgray;
+border-top: none;*/
 }
 
 .sidebar-list {
@@ -174,17 +251,30 @@ border-top: none;
 }
 
 .btn-songs{
-	margin-top: 15px;
+	margin-bottom: 10px;
+width: 100%;
+border-radius: 60px;
+padding: 20px;
+color: white;
+border: none;
+font-size: 30px;
+background: rgb(99, 101, 103);
 }
 
 .sidebar-list-heading {
-	font-size: 15px;
-	border-left: 3px solid gray;
+font-size: 22px;
+color: rgb(86, 7, 7);
+border-left: 3px solid rgb(215, 215, 215);
 padding-left: 5px;
 }
 
 .sidebar-list-text {
-	font-size: 13px;
+	font-size: 30px;
+	margin-bottom: 15px;
+}
+
+.bands{
+	font-size: 40px;
 }
 
 .tag {
@@ -192,11 +282,14 @@ padding-left: 5px;
 }
 
 .info-block {
-	border: 1px solid lightgray;
+/*border: 1px solid lightgray;*/
 background: white;
-padding: 12px;
-margin: 25px;
-position: relative;
+color: rgb(86, 84, 84);
+width: 100%;
+padding: 25px;
+font-size: 24px;
+margin: 25px 0px;
+
 }
 
 .embed-info-block {
@@ -244,6 +337,55 @@ margin: 10px;
 	
 }
 
+#addPost{
+	display: none;
+	margin-top: 15px;
+}
+
+.post-secondary{
+	color: rgb(108, 101, 101);
+font-size: 20px;
+font-weight: 200;
+
+}
+
+.inline{
+	display: inline;
+}
+
+.reveal{
+	display: inherit;
+}
+
+.post-container{
+	position: relative;
+display: block;
+padding: 10px 15px;
+margin-bottom: -1px;
+background-color: #FAF9F9;
+min-height: 140px;
+/* border: 1px solid #ddd; */
+}
+
+.remove-margin {
+	margin-top: 0px;
+}
+
+.post-profile-pic {
+background: lightgray;
+background-image: ;
+background-position: center;
+background-size: cover;
+width: 120px;
+height: 120px;
+margin-right: 10px;
+float: left;
+border: 10px solid white;
+}
+
+.post-heading {
+	margin-bottom: 0px;
+}
 /*///////////  editing profile   //////////////////////////////////////////////////*/
 
 .add-new-word {
@@ -458,9 +600,7 @@ height: 67px;
 margin-right: 10px;
 float: left;
 }
-#memberPic {
-	
-}
+
 
 .search-result-info {
 
