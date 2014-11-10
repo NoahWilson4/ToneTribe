@@ -13,6 +13,14 @@ a:hover{
 	color: rgb(47, 86, 110);
 
 }
+.hide{
+	display: none;
+}
+
+.reveal {
+	display: inherit;
+}
+
 
 .form-font {
 	font-size: 25px;
@@ -33,6 +41,12 @@ a:hover{
 
 .margin-top{
 	margin-top: 100px;
+}
+
+.shadow {
+	-webkit-box-shadow: 5px 9px 22px 0px rgba(158, 158, 158, .8);
+-moz-box-shadow: 5px 9px 22px 0px rgba(158, 158, 158, .8);
+box-shadow: 5px 9px 22px 0px rgba(158, 158, 158, .8);
 }
 
 .profile-top {
@@ -73,6 +87,7 @@ margin: 0;
 
 .about-content{
 	font-size: 20px;
+	width: 100%;
 }
 
 .gallery-pic {
@@ -111,6 +126,21 @@ width: 150px;
 font-size: 20px;
 }
 
+.btn-simple-edit {
+	border: none;
+background: rgb(223, 231, 185);
+padding: 15px;
+border-radius: 10px;
+margin: 35px 60px 0px 15px;
+width: 150px;
+font-size: 20px;
+
+}
+
+.add-margin {
+	margin-top: 35px;
+}
+
 .btn-tribe{
 	border: none;
 background: rgb(237, 237, 237);
@@ -145,27 +175,30 @@ border: 10px solid rgb(55, 51, 51);
 }
 
 .edit-icon-profile {
-	position: absolute;
-top: 117px;
-left: 0px;
+position: absolute;
+top: 10px;
+left: -20px;
+font-size: 18px;
+height: 50px;
 background: rgba(0, 0, 0, 0.4);
-padding: 10px 10px 5px 5px;
-border-top: 1px solid lightgray;
-border-right: 1px solid lightgray;
-border-top-right-radius: 10px;
+padding: 10px 10px 10px 10px;
+border: 1px solid lightgray;
+border-radius: 10px;
 font-weight: bold;
 }
 
 .edit-icon-background {
 position: absolute;
-
 right: 0px;
+height: 50px;
 background: rgba(0, 0, 0, 0.4);
-padding: 10px 10px 5px 5px;
+padding: 10px 10px 10px 10px;
+border-top: none;
 border-bottom: 1px solid lightgray;
-border-right: 1px solid lightgray;
+border-right: none;
 border-bottom-left-radius: 10px;
 font-weight: bold;
+font-size: 18px;
 }
 
 .band-profile-pic {
@@ -192,7 +225,7 @@ color: rgb(233, 231, 228);
 padding: 0px 50px 10px 55px;
 background-color: rgba(0, 0, 0, 0.35);
 border-top-right-radius: 140px;
-border-top-left-radius: 120px;
+/*border-top-left-radius: 120px;*/
 border-top: 2px solid rgb(152, 152, 152);
 border-bottom: none;
 }
@@ -262,15 +295,27 @@ background: rgb(99, 101, 103);
 }
 
 .sidebar-list-heading {
-font-size: 22px;
+font-size: 25px;
 color: rgb(86, 7, 7);
-border-left: 3px solid rgb(215, 215, 215);
+/* border-left: 3px solid rgb(215, 215, 215); */
 padding-left: 5px;
+margin-top: 25px;
 }
 
 .sidebar-list-text {
 	font-size: 30px;
-	margin-bottom: 15px;
+	margin-bottom: 0px;
+	padding-left: 15px;
+	min-height: 40px;
+	width: 100%;
+}
+
+.sidebar-list-text-noedit {
+	font-size: 30px;
+	margin-bottom: 0px;
+	padding-left: 15px;
+	min-height: 40px;
+	width: 100%;
 }
 
 .bands{
@@ -293,8 +338,7 @@ margin: 25px 0px;
 }
 
 .embed-info-block {
-	background: -webkit-linear-gradient(rgb(197, 197, 197), transparent);
-	border-color: gray;
+	height: 400px;
 }
 
 .info-block-heading {
@@ -389,7 +433,7 @@ border: 10px solid white;
 /*///////////  editing profile   //////////////////////////////////////////////////*/
 
 .add-new-word {
-	width: 75px;
+	width: 100%;
 }
 
 .which {
@@ -656,17 +700,16 @@ margin: 1px 2px;
 }
 
 .delete-word {
-	position: absolute;
+position: absolute;
 top: -2px;
 right: -2px;
-width: 10px;
+width: 40px;
 padding: 0px;
-height: 10px;
-font-size: 7px;
+height: 40px;
+font-size: 17px;
 text-align: center;
 color: darkred;
 font-weight: bold;
-
 }
 
 /*   graph           ///////////////////*/
@@ -680,7 +723,7 @@ font-weight: bold;
 }
 
 .improvCompNumbers {
-	width: 400px;
+	width: 100%;
 	margin: auto;
 	text-align: center;
 	font-size: 17px;
@@ -692,8 +735,9 @@ font-weight: bold;
 }
 
 #improvCompRange {
-	margin-bottom: 20px;
+
 position: absolute;
+top: 0px;
 background: transparent;
 }
 .bar {
@@ -706,7 +750,7 @@ border-bottom-right-radius: 0px;
 
 .bar-signup {
 height: 34px;
-background: -webkit-linear-gradient(right,rgb(207, 204, 201), rgb(242, 242, 242), rgb(250, 250, 250));
+background: -webkit-linear-gradient(right,rgb(142, 166, 120), rgb(242, 242, 242), rgb(250, 250, 250));
 color: transparent;
 border-radius: 7px;
 border-top-right-radius: 0px;
@@ -714,7 +758,7 @@ border-bottom-right-radius: 0px;
 }
 .bar-signup2 {
 height: 34px;
-background: -webkit-linear-gradient(left,rgb(207, 204, 201), rgb(242, 242, 242), rgb(250, 250, 250));
+background: -webkit-linear-gradient(left,rgb(142, 166, 120), rgb(242, 242, 242), rgb(250, 250, 250));
 color: transparent;
 
 position: absolute;
@@ -722,16 +766,15 @@ right: 0px;
 border-radius: 0px;
 border-top-right-radius: 5px;
 border-bottom-right-radius: 5px;
-bottom: -2px;
+bottom: -1px;
 }
 
 
 .ratio-graph-signup {
-position: absolute;
 width: 100%;
 background: rgb(239, 239, 239);
 border-radius: 7px;
-margin-bottom: 0px;
+margin-bottom: 20px;
 top: 0px;
 height: 33px;
 }

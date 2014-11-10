@@ -132,6 +132,7 @@ app.post('/api/addCommentLike', apiController.addCommentLike);
 app.post('/api/updateUserProfile', apiController.updateUserProfile);
 app.post('/ape/addUserToTribe', apiController.addUserToTribe);
 app.post('/api/addPost', apiController.addPost);
+app.post('/api/isNewUserFalse', apiController.isNewUserFalse);
 
 
 ////////////////////////////////////////////

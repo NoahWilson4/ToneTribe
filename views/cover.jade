@@ -20,12 +20,49 @@ html(lang='en')
 				.cover-container
 					.inner-cover
 						h1.cover-heading ToneTribe
-						p.lead Welcome to ToneTribe, where creativity thrives and souls shine.  <br>Connect with artists around the globe and close to home.  <br>Share your tones with the world.
-						a.btn.btn-success.join(href="/signup") Join the Tribe
+						p.lead Welcome to ToneTribe, where creativity thrives and souls shine.
+						p.lead Connect with artists around the globe and close to home.
+						p.lead Share your tones with the world.
+						a.btn.btn-success.join(data-toggle="modal" data-target="#signupModal") Join the Tribe
+
+		.modal.m.fade#signupModal
+			.modal-dialog
+				form#signup(method="post" action="/auth/signup" enctype="multipart/form-data")
+					.modal-content
+						.modal-header.mh
+							button.close(data-dismiss="modal")
+								span(aria-hidden="true") &times;
+								span.sr-only Close
+							h4.mt Sign Up!
+						.modal-body.mb
+							.row
+								.form-group
+									label.col-sm-4.control-label.ml(for="email") Email:
+									.col-sm-8
+										input.form-control.mfc.searchInput(type="email" placeholder="Email…" name="email")
+								.form-group
+									label.col-sm-4.control-label.ml(for="password") Password:
+									.col-sm-8
+										input.form-control.mfc.searchInput(type="password" placeholder="Password…" name="password")
+								.form-group
+									label.col-sm-4.control-label.ml(for="name") Name:
+									.col-sm-8
+										input.form-control.mfc.searchInput(type="text" name="name" placeholder="Musician or Band Name…")
+								.form-group
+									label.col-sm-4.control-label.ml(for="location") Location:
+									.col-sm-8
+										input.form-control.mfc.searchInput(type="text" name="location" placeholder="Location…")
+								.form-group
+									label.col-sm-4.control-label.ml(for="birthdate") Birthdate:
+									.col-sm-8
+										input.form-control.mfc.searchInput(type="date" name="birthdate")
+						.modal-footer.mf
+							button.btn.btn-default(type="button" data-dismiss="modal") Close
+							input.btn.btn-success.btn-lg.mbtn(type="submit" value="Join!")
 		script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
 		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
 		script(src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")
-		script(src="../scripts/lib/originalMain.js")
+		script(src="../scripts/lib/signup.js")
 
 
 

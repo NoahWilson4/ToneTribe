@@ -159,6 +159,14 @@ var apiController = {
 			res.send('success');
 		});
 	},
+	isNewUserFalse: function(req, res){
+		User.findOne({_id: req.user._id}, function(err, result){
+			result.isNewUser = false;
+			result.save();
+			console.log('result no longer new user: ', result);
+			res.send('saved.');
+		});
+	},
 	addUserToTribe: function(req, res){
 		User.findOne({_id: req.user._id}, function(err, result){
 			result.tribe.push(req.body.userId);

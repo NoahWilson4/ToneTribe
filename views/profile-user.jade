@@ -2,48 +2,95 @@ extends layout
 
 block content
 	div.container.profile-top(style="background-image: url(" + user.backgroundPic + ")")
-		button(data-toggle="modal" data-target="#uploadModalBackgroundPic").glyphicon.glyphicon-picture.make-it-white.edit-icon-background Change-Background
+		button#uploadBackgroundPic.hide(data-toggle="modal" data-target="#uploadModalBackgroundPic").glyphicon.glyphicon-picture.make-it-white.edit-icon-background Change-Background
 		div.img-name.row
 			div.name-loc.col-xs-6.col-sm-6.c0l-md-7.col-xl-5
 				h2.name(title="name")= user.name
 				div.location(title="location")= user.location
 			div.profile-pic.img-circle.col-xs-4(style="background-image: url(" + user.profilePic + ")")
-				button#uploadProfilePic(data-toggle="modal" data-target="#uploadModalProfilePic").glyphicon.glyphicon-picture.make-it-white.edit-icon-profile Change-Photo
-	button.edit-profile.btn.btn-default.btn-xs.btn-simple.pull-left Edit Profile
+				button#uploadProfilePic.hide(data-toggle="modal" data-target="#uploadModalProfilePic").glyphicon.glyphicon-picture.make-it-white.edit-icon-profile Upload-Photo
+	button.edit-profile.btn.btn-default.btn-simple.btn-simple.pull-left Edit Profile
+	if user.isNewUser
+		#welcome.container
+			.info-block.shadow(title="welcome")
+				.row
+					.heading-container.col-sm-4.col-md-2
+						h2.heading-about Welcome to the Tribe!
+					.content-container.col-sm-8.col-md-10
+						p.sidebar-list-text-noedit Welcome to our global community of musicians.  
+						p.sidebar-list-text-noedit Please fill in more info about yourself and we'll connect you in!
+						button.close-welcome.btn.btn-simple-sm.pull-right.add-margin Close
+						button.close-welcome.btn.btn-simple-edit.pull-right Done Editing
 	.container
-		.info-block(title="about")
+		.info-block.edit-add-shadow(title="about")
 			.row
 				.heading-container.col-sm-4.col-md-2
 					h2.heading-about About:
-				.content-container.col-sm-8.col-md-10
-					p.about= user.about
+				#about.content-container.info-edit-textarea.col-sm-8.col-md-10
+					if user.about
+						p.about-content= user.about
+					else
+						p.about-content.empty - -
 	.container
 		.row
 			div.col-sm-5.col-md-4#sidebar
-				.profile-sidebar
-					.sidebar-list(title="bands")
+				.profile-sidebar.edit-add-shadow
+					.sidebar-list.info-edit(title="bands")
 						h4.sidebar-list-heading Bands:
-						p.sidebar-list-text.bands= user.bands
+						if user.bands.length > 0
+							for band in user.bands
+								p.sidebar-list-text.bands= band
+						else
+							p.sidebar-list-text.empty - -
 				.profile-sidebar
 					.sidebar-list
 						a(href="./cocreation-user")
 							button.btn.btn-default.btn-sm.btn-songs Cocreation Songs
 					.sidebar-list
 						button.btn.btn-default.btn-sm.btn-tribe View Tribe Members
-				.profile-sidebar
-					.sidebar-list(title="instruments")
+				.profile-sidebar.edit-add-shadow
+					.sidebar-list.info-edit(title="instruments")
 						h4.sidebar-list-heading Instruments:
-						p.sidebar-list-text.instruments= user.instruments
-					.sidebar-list(title="styles")
+						if user.instruments.length > 0
+							for instrument in user.instruments
+								p.sidebar-list-text= instrument
+						else
+							p.sidebar-list-text.empty - -
+					.sidebar-list.info-edit(title="styles")
 						h4.sidebar-list-heading Styles:
-						p.sidebar-list-text.styles= user.styles
-					.sidebar-list(title="skills")
+						if user.styles.length > 0
+							for style in user.styles
+								p.sidebar-list-text= style
+						else
+							p.sidebar-list-text.empty - -
+					.sidebar-list.info-edit(title="skills")
 						h4.sidebar-list-heading Skills:
-						p.sidebar-list-text.skills= user.skills
-					.sidebar-list(title="inspirations")
+						if user.skills.length > 0
+							for skill in user.skills
+								p.sidebar-list-text= skill
+						else
+							p.sidebar-list-text.empty - -
+					.sidebar-list.info-edit(title="inspirations")
 						h4.sidebar-list-heading Inspired By:
-						p.sidebar-list-text.inspirations= user.inspirations
-					.sidebar-list(title="improvComp")
+						if user.inspirations.length > 0
+							for inspiration in user.inspirations
+								p.sidebar-list-text= inspiration
+						else
+							p.sidebar-list-text.empty - -
+					.sidebar-list
+						h4.sidebar-list-heading Improvisational/Compositional Orientation:
+						.improvCompNumbers Improv = 
+							span: strong#improv= 100 - user.improvComp
+							span % / 
+							span: strong#comp= user.improvComp
+							span % = Comp
+						.range-container
+							dl.ratio-graph-signup
+										dd
+											div#ratio-bar-signup.bar-signup(style="width: " + (100 - user.improvComp) + "%") ratio
+											div#ratio-bar-signup2.bar-signup2(style="width: " + user.improvComp + "%") ratio
+							input#improvCompRange.hide.form-control.searchInput(type="range" min="0" max="100" value="" step="1" onchange="getRangeValue(this.value)")
+					//- .sidebar-list(title="improvComp")
 						h4.sidebar-list-heading Improvisational/Compositional Orientation:
 						dl.ratio-graph
 							dd
@@ -51,18 +98,22 @@ block content
 						.improv Improv . . . . . . . . . . . . Composition
 					.sidebar-list(title="age")
 						h4.sidebar-list-heading Age:
-						p.sidebar-list-text.astro-sign= user.age
+						p.sidebar-list-text-noedit.astro-sign= user.age
+						#birthdate
 					.sidebar-list
 						h4.sidebar-list-heading Astrological Sign:
-						p.sidebar-list-text.astro-sign= user.astro
+						p.sidebar-list-text-noedit.astro-sign= user.astro
 
 			.col-sm-7.col-md-8
-				.info-block.remove-margin(title="philosophy")
+				.info-block.remove-margin.edit-add-shadow(title="philosophy")
 					.row
 						.heading-container.col-sm-5.col-md-4
 							h3.heading-about Philosophy:
-						.content-container.col-sm-7.col-md-8
-							p.about-content= user.philosophy
+						#philosophy.content-container.info-edit-textarea.col-sm-7.col-md-8
+							if user.philosophy
+								p.about-content= user.philosophy
+							else
+								p.about.empty - -
 				.info-block.gallery-block
 					.photo-gallery
 						.photo-container
@@ -73,7 +124,17 @@ block content
 								button.col-xs-3.btn.btn-default.btn-xs.btn-simple 
 									strong Photos 
 									div View Gallery
+				#addMedia.info-block.embed-info-block.edit-add-shadow.hide
+					h3.heading-about Embed Media
+					p Here you can embed media from other sites including Soundcloud, Youtube, CDBaby, and any other site that provides the iframe code for media. Click on share, and there you will find an embed link. (Make sure that http:// is in the code.)
+					form#embed-form(role="form")
+						label.col-sm-2.control-label(for="code") Embed Code:
+						.col-sm-10
+							input(type="text")
+						.col-sm-offset-2.col-sm-10
+							button.btn.btn-simple-sm.pull-right(type="submit") Embed
 				.media
+
 				.info-block.remove-margin
 					button#dropNote.drop-note.btn-simple-sm.pull-left Drop a Note
 					h1.heading-about Posts

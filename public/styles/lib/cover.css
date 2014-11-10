@@ -55,6 +55,10 @@ body {
   margin-left: auto;
 }
 
+.cover-heading {
+  font-size: 75px;
+}
+
 /* Padding for spacing */
 .inner {
   padding: 30px;
@@ -97,6 +101,19 @@ body {
   border-bottom-color: #fff;
 }
 
+.lead{
+  margin-bottom: 20px;
+  font-size: 35px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.join{
+  padding: 18px 40px;
+  font-size: 30px;
+}
+
+
 @media (min-width: 768px) {
   .masthead-brand {
     float: left;
@@ -120,8 +137,8 @@ body {
 }
 
 .inner-cover {
-  background: rgba(225, 225, 225, 0.15);
-padding: 10px 0px 20px 0px;
+background: rgba(27, 27, 27, 0.5);
+padding: 50px 20px 70px 20px;
 }
 
 
@@ -159,25 +176,68 @@ padding: 10px 0px 20px 0px;
   .cover-container {
     width: 100%; /* Must be percentage or pixels for horizontal alignment */
   }
+.modal-dialog {
+width: 770px;
+margin: 30px auto;
+}
 }
 
 @media (min-width: 992px) {
   .masthead,
   .mastfoot,
   .cover-container {
-    width: 700px;
+    width: 80%;
   }
 }
 
 
+.m{
+  top: 250px;
+}
 
+.mb {
+background: rgb(84, 84, 84);
+padding: 80px 70px;
+}
 
+.ml {
+  font-size: 25px;
+font-weight: normal;
+text-align: right;
+}
 
+.mfc {
+  margin-bottom: 20px;
+font-size: 20px;
+padding: 20px;
+}
 
+.mh {
+  background: rgb(224, 224, 224);
+color: black;
+border-top-left-radius: 15px;
+border-top-right-radius: 15px;
+}
 
+.mf {
+  background: rgb(224, 224, 224);
+color: black;
+border-bottom-left-radius: 15px;
+border-bottom-right-radius: 15px;
+}
 
+.mbtn {
+  width: 150px;
+  margin-left: 25px;
+}
 
-
+.mt {
+  margin: 0;
+font-size: 30px;
+text-shadow: none;
+color: rgb(108, 106, 106);
+line-height: 1.42857143;
+}
 
 
 

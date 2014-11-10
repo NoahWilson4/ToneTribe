@@ -36,7 +36,8 @@ var userSchema = mongoose.Schema({
 	cocreationSongs: [mongoose.Schema.ObjectId],
 	cocreationCollaborations: [mongoose.Schema.ObjectId],
 	posts: [mongoose.Schema.ObjectId],
-	tribe: [mongoose.Schema.ObjectId]
+	tribe: [mongoose.Schema.ObjectId],
+	isNewUser: Boolean
 });
 
 

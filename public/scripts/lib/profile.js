@@ -93,259 +93,6 @@ $(document).on('ready', function() {
 		return sign;  
 	};
 
-	
-
-
-///////// what the freak!!! changes the values within the user object...
-
-	// var arrayToDivs = function(array) {
-	// 	console.log('original array test: ', array);
-	// 	var originalArray = array;
-	// 	console.log('original array copy test: ', originalArray);
-	// 	var arrayDiv = array;
-	// 	for (var i = 0; i < arrayDiv.length - 1; i++) {
-	// 		arrayDiv[i] = "<div class='words'> " + arrayDiv[i] + ", </div>";
-	// 		console.log('arrayDiv[i] test: ', arrayDiv[i]);
-	// 	}
-	// 	arrayDiv[arrayDiv.length - 1] = "<div class='words'>" + arrayDiv[i] +"</div>";
-	// 	console.log('ending array test array test: ', array);
-	// 	console.log('ending copy test: ', originalArray);
-	// 	return arrayDiv;
-	// }
-
-
-	//// rendering functions...
-
-	var arrayToDivs = function(array) {
-		if (array) {
-			var originalArray = array;
-			var newArray = [];
-			for (var x = 0; x < originalArray.length; x++) {
-				newArray.push(originalArray[x]);
-			}
-			for (var i = 0; i < newArray.length - 1; i++) {
-				newArray[i] = "<div class='words'> " + newArray[i] + ", </div>";
-			}
-			newArray[newArray.length - 1] = "<div class='words'>" + newArray[i] +"</div>";
-			return newArray;
-		}
-	};
-	var divsToPage = function(element, array) {
-		if (array) {
-				$(element).text('');
-			for (var i = 0; i < array.length; i++){
-				$(element).append(array[i]);
-			}
-		}
-	};
-
-	var findUserById = function(userId){
-			for (var i = 0; i < users.length; i++) {
-				if (users[i].userId === userId) {
-					return users[i];
-				}
-			}
-		};
-
-
-
-
-
-
-/////////// create user //////////////
-	/////create id?
-
-	var User = function(email, password) {
-		this.email = email;
-		this.password = password;
-		this.photos = [];
-		users.push(this);
-	};
-
-	User.prototype.render = function(){
-		
-		$('.name').text(this.name);
-		$('.name').data('userId', this.userId);
-		$('.location').text(this.location);
-		var bandsArray = this.bands;
-		var bandsRender = arrayToDivs(bandsArray);
-		var bandsElement = '.bands';
-		divsToPage(bandsElement, bandsRender);
-		$('.profile-pic').css({backgroundImage: this.profilePic});
-		$('.profile-top').css({backgroundImage: this.backgroundPic});
-		var instrumentArray = this.instruments;
-		var instrumentsRender = arrayToDivs(instrumentArray);
-		var instrumentElement = '.instruments';
-		divsToPage(instrumentElement, instrumentsRender);
-		var stylesArray = this.styles;
-		var stylesRender = arrayToDivs(stylesArray);
-		var stylesElement = '.styles';
-		divsToPage(stylesElement, stylesRender);
-		var skillsArray = this.skills;
-		var skillsRender = arrayToDivs(skillsArray);
-		var skillsElement = '.skills';
-		divsToPage(skillsElement, skillsRender);
-		var inspirationsArray = this.inspirations;
-		var inspirationsRender = arrayToDivs(inspirationsArray);
-		var inspirationsElement = '.inspirations';
-		divsToPage(inspirationsElement, inspirationsRender);
-		$('.improv-comp').val(this.improvComp);
-		$('.birthday').text(this.age);
-		$('.astro-sign').text(this.astro);
-		for (var i = 0; i < this.media.length; i++){
-			$('.media').append(this.media[i]);
-		}
-		$('.about').text(this.about);
-		$('.philosophy').text(this.philosophy);
-
-
-	};
-
-///this needs to be tested....
-	User.prototype.addToBand = function(band){
-		this.band = band;
-		console.log('this: ');
-		band.push(this);
-		band.combineMemberInfo();
-	};
-
-	User.prototype.displayAsMember = function(){
-				var pic = this.profilePic;
-				pic = pic.split('"');
-				pic = pic[1];
-				this.memberElement = $('<div class="list-group results"><a href="#" class="list-group-item result-block"><img id="memberPic" class="search-profile-pic" src="' + pic + '"><div class="search-result-info"><h4 class="list-group-item-heading">' + this.name + '</h4><p class="list-group-item-text">Location: ' + this.location + '</p></div></a></div>');
-				
-				
-				$('.member-container').append(this.memberElement);
-
-
-				
-				// $('.search-profile-pic').append('<img class="search-profile-pic" src="' + pic + '">');
-				//$('#memberPic').css({backgroundImage: pic});
-				// return this.memberElement;
-			};
-
-// User.prototype.displayAsMember = function(){
-// 				this.memberElement = $('<div class="list-group results"><a href="#" class="list-group-item result-block"><div id="memberPic" class="search-profile-pic"></div><div class="search-result-info"><h4 class="list-group-item-heading">' + this.name + '</h4><p class="list-group-item-text">Location: ' + this.location + '</p></div></a></div>');
-				
-				
-// 				$('.member-container').append(this.memberElement);
-
-
-// 				var pic = this.profilePic;
-// 				console.log('pic test: ', pic);
-				
-// 				pic = pic.split('"');
-// 				pic = pic[1];
-// 				console.log('pic transformed: ', pic);
-// 				// $('.search-profile-pic').append('<img class="search-profile-pic" src="' + pic + '">');
-// 				//$('#memberPic').css({backgroundImage: pic});
-// 				// return this.memberElement;
-// 			}
-
-			
-
-
-	User.prototype.displayResultsMusicians = function(){
-		var pic = this.profilePic;
-				pic = pic.split('"');
-				pic = pic[1];
-				this.searchElement = $('<div class="list-group results"><a href="#" class="list-group-item result-block"><img id="memberPic" class="search-profile-pic" src="' + pic + '"><div class="search-result-info"><h4 class="list-group-item-heading">' + this.name + '</h4><p class="list-group-item-text">Location: ' + this.location + '</p></div></a></div>');
-				$('#search-results-musicians').append(this.searchElement);
-				return this.searchElement;
-			};
-
-// User.prototype.displayResultsMusicians = function(){
-// 				this.searchElement = $('<div class="list-group results"><a href="#" class="list-group-item result-block"><div class="search-profile-pic"></div><div class="search-result-info"><h4 class="list-group-item-heading">' + this.name + '</h4><p class="list-group-item-text">Location: ' + this.location + '</p></div></a></div>');
-// 				$('#search-results-musicians').append(this.searchElement);
-// 				return this.searchElement;
-// 			}
-			
-
-////////////////////////////////////////
-//// users and bands, current users
-	var users = [];
-	var currentUser;
-	var bands = [];
-	var currentBand;
-
-	var Band = function(name) {
-		this.name = name;
-		bands.push(this);
-		this.members = [];
-		this.photos = [];
-
-	};
-	
-
-Band.prototype.render = function(){
-		
-		$('.band-name').text(this.name);
-		$('.band-location').text(this.location);
-		$('.band-profile-pic').css({backgroundImage: this.profilePic});
-		$('.band-profile-top').css({backgroundImage: this.backgroundPic});
-		////// remove duplicates.......
-		
-		$('.band-improv-comp').val(this.improvComp);
-		$('.band-birthdate').text(this.birthdate);
-		for (var i = 0; i < this.media.length; i++){
-			$('.band-media').append(this.media[i]);
-		}
-		for (var i = 0; i < this.members.length; i++) {
-			this.members[i].displayAsMember();
-		}
-		$('.band-about').text(this.about);
-		$('.band-philosophy').text(this.philosophy);
-
-
-		this.combineMemberInfo();
-		console.log('this band: ', this);
-
-		var instrumentArray = this.instruments;
-		var instrumentsRender = arrayToDivs(instrumentArray);
-		var instrumentElement = '.band-instrumentation';
-		divsToPage(instrumentElement, instrumentsRender);
-		var stylesArray = this.styles;
-		var stylesRender = arrayToDivs(stylesArray);
-		var stylesElement = '.band-styles';
-		divsToPage(stylesElement, stylesRender);
-		var inspirationsArray = this.inspirations;
-		var inspirationsRender = arrayToDivs(inspirationsArray);
-		var inspirationsElement = '.band-inspirations';
-		divsToPage(inspirationsElement, inspirationsRender);
-	};
-
-Band.prototype.combineMemberInfo = function() {
-	console.log('this test: ', this);
-	var combineInstruments = _.chain(this.members)
-				.pluck('instruments')
-				.flatten()
-				.uniq()
-				.value();
-	this.instruments = combineInstruments;
-	var combineStyles = _.chain(this.members)
-				.pluck('styles')
-				.flatten()
-				.uniq()
-				.value();
-	this.styles = combineStyles;
-	var combineInspirations = _.chain(this.members)
-				.pluck('inspirations')
-				.flatten()
-				.uniq()
-				.value();
-	this.inspirations = combineInspirations;
-};
-	
-Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
-				pic = pic.split('"');
-				pic = pic[1];
-				this.searchElement = $('<div class="list-group results"><a href="#" class="list-group-item result-block"><img id="memberPic" class="search-profile-pic" src="' + pic + '"><div class="search-result-info"><h4 class="list-group-item-heading">' + this.name + '</h4><p class="list-group-item-text">Location: ' + this.location + '</p></div></a></div>');
-				$('#search-results-bands').append(this.searchElement);
-				return this.searchElement;
-			};
-
-
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////// profile page///////////////////////////////
@@ -369,173 +116,259 @@ Band.prototype.displayResultsBands = function(){var pic = this.profilePic;
 	/////////////// Profile-user edit//////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
+////////////////  welcome new user //////
 
-////////// embedding media
-
-	$('.edit-directions').hide();
-	var embedEdit = $('<div class="info-block embed-info-block"><h5 class="info-block-heading embed-heading">Embed Media</h5><div class="embed-info">Here you can embed media from other sites including Soundcloud, Youtube, CDBaby, and any other site that provides the iframe code for media. Click on share, and there you will find an embed link. (Make sure that http:// is in the code.)</div><form id="embed-form" class="form-horizontal" role="form"><div class="form-group"><label for="code" class="col-sm-2 control-label">Embed Code:</label><div class="col-sm-10"><input type="text" class="form-control" name="code" ></div></div><div class="form-group"><div class="col-sm-offset-2 col-sm-10"><button type="submit" class="btn btn-success btn-xs">Embed</button></div></div></form></div>');
-
-	$(document).on('click', '.embed-media-button', function(){
-		
-		$('.media').before(embedEdit);
-		$('.embed-media-button').hide();
+$('.close-welcome').on('click', function(){
+	$.post('/api/isNewUserFalse', function(responseData){
+		console.log('responseData:', responseData);
 	});
-
-	$(document).on('submit', '#embed-form', function(e){
-		e.preventDefault();
-		$(embedEdit).hide();
-		$('.embed-media-button').show();
-		var form = $(e.target);
-		var media = form.find('[name=code]').val();
-		$('.media').append(media);
-		var userId = $('.name').data();
-		userId = userId.userId;
-		var thisUser = findUserById(userId);
-		thisUser.media.push(media);
+	$('#welcome').addClass('hide');
+});
 
 
-		//////////////////////// add new media to user by id?????
-	});
 
+function editProfile(){
+		$('.edit-add-shadow').addClass('shadow');
+		$('.empty').addClass('hide');
+		// $(document).remove('.empty');
 
-//// edit profile clicker
+		$('#improvCompRange').removeClass('hide');
 
-	$(document).on('click', '.edit-profile', function(){
-		// $('.edit-directions').show();
-		var userInfo = [$('.bands'), $('.instruments'), $('.styles'), $('.skills'), $('.inspirations')];
-		userInfo.map(function(info){
-			var attr = info.closest('.sidebar-list').attr('title');
-			console.log('info attr: ', attr);
-			info.text(user[attr]);
-			var infoArray = info.text().split(', ');
-
-			info.empty();
-			console.log('infoArray: ', infoArray);
-			infoArray.map(function(item){
-				var testX = item.split('').pop();
-				if (testX === 'X'){
-					item = item.substring(0, item.length - 1);
-				}
-				info.append('<div class="words editing-profile edit">' + item +'</div>');
-			});
-		});
-		// $(this).closest('.sidebar-list-text').append('<div class="words editing-profile edit">' + $(this).val() +'</div>');
-		$('.words').append('<button class="btn btn-default btn-xs delete-word">X</button>');
-		$('.words, .about, .philosophy').addClass('editing-profile edit');
-		$('.name, .location, .band').addClass('edit');
+		/// add class to target individual words
+		$('.sidebar-list-text').addClass('words');
 		$('.sidebar-list-text').addClass('editing-profile');
-		$('.name-loc').addClass('edit-name-loc');
+		$('.words').append('<button class="btn btn-default btn-xs delete-word">X</button>');
+
+		/// add visual to show editing with editing-profile, edit is just to target them, no visual...
+		$('.words, .about, .philosophy').addClass('editing-profile edit');
+		$('.location').addClass('edit');
+
+	///// switch button up...
 		$('.edit-profile').removeClass('edit-profile btn-xs').addClass('edit-done btn-md').text('Done Editing');
-		$('.media').before(embedEdit);
-		$(embedEdit).show();
-		$('.profile-pic').append('<span class="glyphicon glyphicon-picture make-it-white edit-icon-profile">Change-Photo</span>');
-		$('.profile-top').append('<span class="glyphicon glyphicon-picture make-it-white edit-icon-background">Change-Background</span>');
 		$(this).blur();
+
+		//// add media
+		$('#addMedia').removeClass('hide');
+
 		$('.ratio-graph').hide();
 		$('.ratio-graph').after('<input type="range" id="edit-ratio">');
-		$('.sidebar-list-text').append('<input type="text" class="add-new-word editing-profile edit" placeholder="Add New...">');
-		
 
-	$(document).on('blur', '.add-new-word', function(){
-		var val = $(this).val();
-		var attr = $(this).closest('.sidebar-list').attr('title');
-		console.log('attr: ', attr);
-		$(this).closest('.sidebar-list-text').append('<div class="words editing-profile edit">' + $(this).val() +'</div>');
-		$(this).closest('.sidebar-list-text').find('.words').last().append('<button class="btn btn-default btn-xs delete-word">X</button>');
-		$(this).closest('.sidebar-list-text').append('<input type="text" class="add-new-word editing-profile edit" placeholder="Add New...">');
-		///// hacked way of getting info...
-		var updatedInfo = $(this).closest('.sidebar-list-text').text().split('X');
-		updatedInfo.pop();
-		updatedInfo = updatedInfo.join(', ');
-		console.log('updatedInfo: ', updatedInfo);
-		user[attr]= updatedInfo;
-		console.log(user);
+		//// add inputs
+		$('.info-edit').append('<input type="text" class="sidebar-list-text add-new-word editing-profile edit" placeholder="Add+">');
 
-		// user[attr].push(val);
+		var textareaAbout = $('<textarea class="about-content add-new-text editing-profile edit" placeholder="Add+">');
+		var textareaPhilosophy = $('<textarea class="about-content add-new-text editing-profile edit" placeholder="Add+">');
+		$('.info-edit-textarea').empty();
+		$('#about').append(textareaAbout);
+		$('#about textarea').val(user.about);
+		$('#philosophy').append(textareaPhilosophy);
+		$('#philosophy textarea').val(user.philosophy);
 
-		$(this).remove();
+		// /// birthday edit
+		// $('#birthdate').append('<input type="date" name="birthdate">');
+
+	};
+
+	if (user.isNewUser === true){
+
+		editProfile();
+	}
+
+	$(document).on('click', '.edit-profile', function(){
+		editProfile();
 	});
 
+		$(document).on('blur', '.add-new-word', function(){
+			if ($(this).val() !== ''){
+				var val = $(this).val();
+				var attr = $(this).closest('.sidebar-list').attr('title');
+				console.log('attr: ', attr);
+				$(this).closest('.sidebar-list').append('<p class="sidebar-list-text words editing-profile edit">' + val +'</p>');
+				$(this).closest('.sidebar-list').find('.words').last().append('<button class="btn btn-default btn-xs delete-word">X</button>');
+				$(this).closest('.sidebar-list').append('<input type="text" class="sidebar-list-text add-new-word editing-profile edit" placeholder="Add+">');
+				///// hacked way of getting info...
+				// var updatedInfo = $(this).closest('.sidebar-list-text').text().split('X');
+				// updatedInfo.pop();
+				// updatedInfo = updatedInfo.join(', ');
+				// console.log('updatedInfo: ', updatedInfo);
+				user[attr].push(val);
+				console.log(user);
+
+				// user[attr].push(val);
+
+				$(this).remove();
+				
+			}
+		});
+
+		$(document).on('blur', '.add-new-text', function(){
+			if ($(this).val() !== ''){
+				console.log('this', this);
+				var val = $(this).val();
+				var attr = $(this).closest('.info-block').attr('title');
+				console.log('attr: ', attr);
+				user[attr] = val;
+				console.log(user);
+
+				// user[attr].push(val);
+				// $(this).closest('.content-container').append('<p class="about-content words editing-profile edit">' + val +'</p>');
+				// $(this).closest('.content-container').append('<input type="text" class="about-content add-new-word editing-profile edit" placeholder="Add+">');
+				///// hacked way of getting info...
+				// var updatedInfo = $(this).closest('.sidebar-list-text').text().split('X');
+				// updatedInfo.pop();
+				// updatedInfo = updatedInfo.join(', ');
+				// console.log('updatedInfo: ', updatedInfo);
+
+				// $(this).remove();
+
+				
+			}
+		});
 
 
-	$(document).on('click', '.delete-word', function(){
-		console.log('find name of value by title: ', $(this).closest('p').attr('title'));
-		var val = $(this).closest('.words').text().split(',').shift().split('X').pop();
-		var attr = $(this).closest('p').attr('title');
-		console.log('val', val);
-		console.log('attr', attr);
-		console.log('thisuser:', thisUser);
-		var array = thisUser[attr];
-		console.log('array: ', array);
-		console.log('array index of', array.indexOf(val));
-		$(this).closest('.words').remove();
-		
-	});
+		///////// delete items from user
+		$(document).on('click', '.delete-word', function(){
+			
+			var val = $(this).closest('.words').text();
+			val = val.substr(0, val.length-1);
+			var attr = $(this).closest('.sidebar-list').attr('title');
+			console.log('val', val);
+			console.log('attr', attr);
+			var attrArray = user[attr];
+			var updatedArray = [];
+			for (var i = 0; i < attrArray.length; i++){
+				if (attrArray[i] !== val) {
+					updatedArray.push(attrArray[i]);
+				}
+			}
+			user[attr] = updatedArray;
+			console.log('user delete word: ', user[attr]);
+			$(this).closest('.words').remove();
+			
+		});
 
-	$(document).on('click', '.edit', function(){
-		$(this).attr('contenteditable', 'true');
-		$(this).focus();
+		$(document).on('click', '.edit', function(){
+			$(this).attr('contenteditable', 'true');
+			$(this).focus();
 
-	});
+		});
 
-	$('.about, .philosophy').on('blur', function(){
-		var attr = $(this).closest('.info-block').attr('title');
-		var text = $(this).text();
-		user[attr] = text;
-		console.log('user updated about philosophy: ', user);
-	});
+		$('.about, .philosophy').on('blur', function(){
+			var attr = $(this).closest('.info-block').attr('title');
+			var text = $(this).text();
+			user[attr] = text;
+			console.log('user updated about philosophy: ', user);
+		});
+
+
+		$('#improvCompRange').change(function(){
+			user.improvComp = $(this).text();
+			console.log(user);
+			$('#comp').text($(this).text());
+			$('#improv').text(100 - $(this).text());
+			$('#improvComp').attr('value', $(this).text());
+			$('#ratio-bar-signup').attr("style", "width: " + $(this).text() + "%");
+			$('#ratio-bar-signup2').attr("style", "width: " + (100 - $(this).text()) + "%");
+		});
+
+
+		////////// embedding media
+
+		$(document).on('submit', '#embed-form', function(e){
+			e.preventDefault();
+			var form = $(e.target);
+			var media = form.find('[name=code]').val();
+			$('.media').append(media);
+			user.media.push(media);
+		});
 	
-
-	// $(document).on('blur', '.current-edit', function(){
-	// 	console.log('find name of value by title: ', $(this).closest('p').attr('title'));
-	// 	var updatedText = $(this).val();
-	// 	var textToUpdate = $(this).prev();
-	// 	$(textToUpdate).show();
-	// 	$(textToUpdate).text(updatedText);
-	// 	$(this).empty();
-	// 	$(this).hide();
-	// 	$(this).removeClass('current-edit');
-
-	// })
 
 
   	
-  	$(document).on('click', '.edit-done', function(){
-  		$('.edit').attr('contenteditable', 'false');
-		$('.sidebar-list-text, .words, .name-loc, .about, .philosophy').removeClass('editing-profile edit');
-		$('.edit-done').addClass('edit-profile btn-xs').removeClass('edit-done btn-md').text('Edit Profile');
-		$('.name, .location, .band').removeClass('edit');
-		$('.name-loc').removeClass('edit-name-loc');
-		$(embedEdit).hide();
-		$('.edit-icon').hide();
-		$('.edit-directions').hide();
-		$('.edit-icon-profile').hide();
-		$('.edit-icon-background').hide();
-		$('.delete-word').hide();
-		$('.ratio-graph').show();
-		// var orientation = $('#edit-ratio').val(); /////////// send this to user info...
-		var ratioValue = $('#edit-ratio').val() * 2;
-		console.log('ratioValue: ', ratioValue);
-		$('#ratio-bar').css({
-			width: ratioValue
+	  	$(document).on('click', '.edit-done, .close-welcome', function(){
+	  		////// remove all the many editing classes...
+	  		$('.edit-add-shadow').removeClass('shadow');
+	  		$('.edit').attr('contenteditable', 'false');
+			$('.sidebar-list-text, .words, .name-loc, .about, .philosophy').removeClass('editing-profile edit');
+			$('.name, .location, .band').removeClass('edit');
+
+			$('#about').empty();
+			$('#about').append('<p class="about-content">' + user.about +'</p>');
+			$('#philosophy').empty();
+			$('#philosophy').append('<p class="about-content">' + user.about +'</p>');
+
+			$('#improvCompRange, #addMedia').addClass('hide');
+
+			///// return edit button to original state
+			$('.edit-done').addClass('edit-profile btn-xs').removeClass('edit-done btn-md').text('Edit Profile');
+
+			$('.delete-word').hide();
+			$('.ratio-graph').show();
+			
+			var ratioValue = $('#edit-ratio').val() * 2;
+			console.log('ratioValue: ', ratioValue);
+			$('#ratio-bar').css({
+				width: ratioValue
+			});
+			$('#edit-ratio').hide();
+			$('.add-new-word').remove();
+
+
+			$.post('/api/updateUserProfile', user, function(responseData){
+				console.log('user saved');
+			});
+
+			var attributes = ['bands', 'instruments', 'styles', 'skills', 'inspirations'];
+			attributes.map(function(attr){
+				console.log('user[attr].length: ', user[attr].length);
+				if (user[attr].length === 0){
+					console.log('is empty');
+					var empty = $('[title=' + attr + ']').find('p');
+					console.log('empty: ', empty);
+					$(empty).removeClass('hide');
+					
+				}
+			});
 		});
-		$('#edit-ratio').hide();
-		$('.add-new-word').remove();
-		$.post('/api/updateUserProfile', user, function(responseData){
+
+	// });
+
+
+
+
+////////// hover to edit photos  ////////
+
+$('.profile-pic').hover(
+	function(){
+		$('#uploadProfilePic').removeClass('hide');
+	},
+	function(){
+		$('#uploadProfilePic').addClass('hide');
+	}
+);
+
+$('.profile-top').hover(
+	function(){
+		$('#uploadBackgroundPic').removeClass('hide');
+	},
+	function(){
+		$('#uploadBackgroundPic').addClass('hide');
+	}
+);
+
+
+
+
+
+
+	///////  add user to tribe /////////
+
+	$('#btn-connect').on('click', function(){
+		console.log('click');
+		$.post('/addUserToTribe', {}, function(responseData){
 			console.log('responseData: ', responseData);
 		});
 	});
-
-});
-
-$('#btn-connect').on('click', function(){
-	console.log('click');
-	$.post('/addUserToTribe', {}, function(responseData){
-		console.log('responseData: ', responseData);
-	});
-});
-
-
 
 /////////////////////// posting ////////////////////////
 /////////////////////// posting ////////////////////////

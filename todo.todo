@@ -2,27 +2,27 @@ to do:
 
 welcome message
 still use separate js files, minify each.
-style it
 hover text over buttons/links
 add dates to song creations, uploads,
-
+conditionals for empty form submissions
 signup profile preview?
 styles on signup?
 view individual user cocreation pages, query string on link and page render
-image magick for thumbnails
 song stop instead of pause?
-
+refacotoru profile edit
 
 COCREATION
 
-wire up the song and track likes
+wire up the song and track likes, sort tracks by likes in button
 deleting songs... checking to see if they are still in the dataabase
 
 main public page with popular cocreations
+
 search by styles, users, likes, instruments....
 links to user pages from song player
-sort tracks by likes, button to pick tracks from
+
 different view for your own song
+
 
 live recording?
 download tracks, combine into one track?
@@ -39,7 +39,7 @@ connect with friends!
 
 photo gallery
 
- link to bands from user profile
+link to bands from user profile
 bands
 
 second time editing bugs...
@@ -52,5 +52,6 @@ edit button if it is your own page
 
 COOL THINGS TO ADD
 
+image magick for thumbnails
 use d3 or another data graphics library to show web of connections globally between musicians
 

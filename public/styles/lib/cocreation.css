@@ -15,6 +15,21 @@ border-radius: 1000px;
 	padding-bottom: 20px;
 }
 
+#upload-download {
+display: none; 
+position: absolute;
+right: 98px;
+bottom: -10px;
+background: rgba(105, 102, 102, 0);
+width: 105px;
+}
+
+
+
+.btn-updown{
+	width: 100px;
+}
+
 .input-new{
 	font-size: 20px;
 width: 80%;
@@ -114,13 +129,15 @@ background-size: cover;
 }
 
 .song-user-info-box{
-background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3));
+/*background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3)); */
+background: rgba(242, 241, 241, 0.5);
 color: white;
 position: absolute;
+height: 100%;
 left: 200px;
-padding: 8px 25px 2px 5px;
-border-top-right-radius: 15px;
-border-top: 1px solid white;
+padding: 15px 25px 4px 15px;
+/* border-top-right-radius: 15px; */
+/* border-top: 2px solid rgb(29, 26, 26); */
 bottom: 0px;
 }
 
@@ -131,7 +148,8 @@ font-size: 30px;
 
 .song-track-name {
 color: white;
-font-size: 15px;
+font-size: 30px;
+margin-top: -10px;
 }
 
 .select-track {
@@ -250,7 +268,8 @@ box-shadow: 1px 3px 30px 0px rgba(158, 158, 158, .8);
 .upload-switch-track {
 position: relative;
 width: 100px;
-background: -webkit-linear-gradient(top, rgb(64, 65, 62), rgba(64, 65, 62,.9), rgba(73, 71, 69,.3));
+/*background: -webkit-linear-gradient(top, rgb(64, 65, 62), rgba(64, 65, 62,.9), rgba(73, 71, 69,.3));*/
+background: rgb(132, 132, 132);
 height: 100px;
 padding: 2px;
 }
@@ -298,16 +317,16 @@ border-bottom-right-radius: 15px;
 border-bottom-left-radius: 15px;
 background: -webkit-linear-gradient(rgb(54, 53, 76),rgb(54, 53, 76),rgb(25, 25, 27));
 /* border: 10px solid rgb(190, 190, 190); */
--webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
--moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
+-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
+box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 }
 
 .tb{
 margin: 20px 0px 15px 7px;
 position: relative;
--webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
--moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
+-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 font-size: 25px;
 padding: 3px 10px;
@@ -316,8 +335,8 @@ padding: 3px 10px;
 .tb2{
 margin: 20px 20px 15px 7px;
 position: relative;
--webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
--moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
+-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 font-size: 25px;
 padding: 3px 10px;
@@ -328,9 +347,9 @@ border: 50px solid white;
 position: relative;
 border-bottom-right-radius: 15px;
 border-bottom-left-radius: 15px;
--webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
--moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;
+-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
+-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
+box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 background: rgb(87, 86, 86);
 background-image: url();
 background-size: cover;
@@ -405,10 +424,13 @@ font-size: 40px;
 float: right;
 background: white;
 width: 309px;
-height: 67px;
-padding: 5px 15px;
-margin-top: 7px;
+height: 120px;
+padding: 15px 20px;
+margin-top: 10px;
 border-radius: 5px;
+-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
+-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
+box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 }
 
 #upload-song-background{

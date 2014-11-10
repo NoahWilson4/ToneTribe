@@ -163,22 +163,11 @@ var authenticationController = {
   // assume that they are ready to log in, so we do that as well.
   processSignup: function(req, res, next){
     console.log('processSignup.body: ', req.body);
-    console.log('req.files processSignup: ', req.files);
-    // console.log('req.param processSignup: ', req.params);
-    console.log('req.param processSignup: ', req.params);
-
-
+   
     var birthdate = req.param('birthdate');
     var age = ageConvert(birthdate);
     var astro = astroConvert(birthdate);
 
-    console.log('req.files.profilePic: ', req.files.profilePic);
-    apiController.uploadProfilePic(req.files.profilePic);
-    apiController.uploadProfilePic(req.files.backgroundPic);
-
-    var profilePic = 'https://tonetribe.s3.amazonaws.com/public/' + req.files.profilePic.name;
-    var backgroundPic = 'https://tonetribe.s3.amazonaws.com/public/' + req.files.backgroundPic.name;
-    console.log('profilePic, backgroundPic: ', profilePic, backgroundPic);
     // Create a new instance of the User model with the data passed to this
     // handler. By using "param," we can safely assume that this route will
     // work regardless of how the data is sent (post, get).
@@ -189,19 +178,11 @@ var authenticationController = {
       password: req.param('password'),
       email: req.param('email'),
       location: req.param('location'),
-      bands: req.param('bands').toString().split(','),
-      profilePic: profilePic,
-      backgroundPic: backgroundPic,
-      instruments: req.param('instruments').toString().split(','),
-      styles: req.param('styles').toString().split(','),
-      skills: req.param('skills').toString().split(','),
-      inspirations: req.param('inspirations').toString().split(','),
-      improvComp: req.param('improvComp'),
       birthdate: req.param('birthdate'),
       age: age,
       astro: astro,
-      about: req.param('about'),
-      philosophy: req.param('philosophy')
+      isNewUser: true,
+      improvComp: 50
     });
 
     console.log('user test: ', user);
@@ -235,6 +216,84 @@ var authenticationController = {
       performLogin(req, res, next, user);
     });
   },
+
+
+////// used with original sign up page....
+
+  // processSignup: function(req, res, next){
+  //   console.log('processSignup.body: ', req.body);
+  //   console.log('req.files processSignup: ', req.files);
+  //   // console.log('req.param processSignup: ', req.params);
+  //   console.log('req.param processSignup: ', req.params);
+
+
+  //   var birthdate = req.param('birthdate');
+  //   var age = ageConvert(birthdate);
+  //   var astro = astroConvert(birthdate);
+
+  //   console.log('req.files.profilePic: ', req.files.profilePic);
+  //   apiController.uploadProfilePic(req.files.profilePic);
+  //   apiController.uploadProfilePic(req.files.backgroundPic);
+
+  //   var profilePic = 'https://tonetribe.s3.amazonaws.com/public/' + req.files.profilePic.name;
+  //   var backgroundPic = 'https://tonetribe.s3.amazonaws.com/public/' + req.files.backgroundPic.name;
+  //   console.log('profilePic, backgroundPic: ', profilePic, backgroundPic);
+  //   // Create a new instance of the User model with the data passed to this
+  //   // handler. By using "param," we can safely assume that this route will
+  //   // work regardless of how the data is sent (post, get).
+  //   // It is safer to send as post, however, because the actual data won't
+  //   // show up in browser history.
+  //   var user = new User({
+  //     name: req.param('name'),
+  //     password: req.param('password'),
+  //     email: req.param('email'),
+  //     location: req.param('location'),
+  //     bands: req.param('bands').toString().split(','),
+  //     profilePic: profilePic,
+  //     backgroundPic: backgroundPic,
+  //     instruments: req.param('instruments').toString().split(','),
+  //     styles: req.param('styles').toString().split(','),
+  //     skills: req.param('skills').toString().split(','),
+  //     inspirations: req.param('inspirations').toString().split(','),
+  //     improvComp: req.param('improvComp'),
+  //     birthdate: req.param('birthdate'),
+  //     age: age,
+  //     astro: astro,
+  //     about: req.param('about'),
+  //     philosophy: req.param('philosophy')
+  //   });
+
+  //   console.log('user test: ', user);
+
+  //   // Now that the user is created, we'll attempt to save them to the
+  //   // database.
+  //   user.save(function(err, user){
+
+  //     // If there is an error, it will come with some special codes and
+  //     // information. We can customize the printed message based on
+  //     // the error mongoose encounters
+  //     if(err) {
+
+  //       // By default, we'll show a generic message...
+  //       var errorMessage = 'An error occured, please try again';
+
+  //       // If we encounter this error, the duplicate key error,
+  //       // this means that one of our fields marked as "unique"
+  //       // failed to validate on this object.
+  //       if(err.code === 11000){
+  //         errorMessage = 'This user already exists.';
+  //       }
+
+  //       // Flash the message and redirect to the login view to
+  //       // show it.
+  //       req.flash('error', errorMessage);
+  //       return res.redirect('/auth/login');
+  //     }
+
+  //     // If we make it this far, we are ready to log the user in.
+  //     performLogin(req, res, next, user);
+  //   });
+  // },
 
   // Handle logout requests
   logout: function(req, res){

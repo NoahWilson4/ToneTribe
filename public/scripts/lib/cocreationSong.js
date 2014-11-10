@@ -92,6 +92,14 @@ $('#uploadBackgroundPic').on('click', function(){
 });
 
 
+
+///// upload-download tracks
+
+$('#upload-button').on('click', function(){
+	$('#upload-download').toggle('reveal');
+});
+
+
 ///////////////// audio context /////////////
 var navigator = window.navigator;
 navigator.getUserMedia = (

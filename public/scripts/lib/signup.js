@@ -1,5 +1,14 @@
 $(document).on('ready', function() {
 
+
+$('.join').on('click', function(){
+
+});
+
+
+
+
+
 var userInfo = {
 	bands: [],
 	instruments: [],

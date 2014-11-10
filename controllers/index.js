@@ -41,11 +41,11 @@ var indexController = {
 			User.findOne({_id: req.user._id})
 				.populate('posts', null, 'post')
 				.exec(function(err, user){
-					user.bands = stringifyArray(user.bands);
-					user.instruments = stringifyArray(user.instruments);
-					user.styles = stringifyArray(user.styles);
-					user.inspirations = stringifyArray(user.inspirations);
-					user.skills = stringifyArray(user.skills);
+					// user.bands = stringifyArray(user.bands);
+					// user.instruments = stringifyArray(user.instruments);
+					// user.styles = stringifyArray(user.styles);
+					// user.inspirations = stringifyArray(user.inspirations);
+					// user.skills = stringifyArray(user.skills);
 					res.render('profile-user', {
 						user: user
 					});	

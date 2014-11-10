@@ -14,8 +14,13 @@ block content
 							if track0
 								for track in track0.userTracks
 									option(value=track.trackTitle data=track._id) #{track.trackTitle}, By userName, #{track.likes} Likes
-						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal0")
+						button#upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
+						#upload-download.shadow
+							button.btn.btn-default.btn-updown(data-toggle="modal" data-target="#uploadModal0") Upload
+							if track0.userTracks[0].url
+								a(href=track0.userTracks[0].url)
+									button.btn.btn-default.btn-updown Download
 						button.like.btn.btn-xs.btn-primary
 							i.fa.fa-thumbs-o-up
 						if track0
@@ -150,13 +155,15 @@ block content
 						form.song-pic-upload(method="post" action="/uploadSongBackgroundPic" role="form" enctype="multipart/form-data")
 							input.btn.btn-primary.btn-sm(type="file" onchange="previewSongBackground()" name="songBackgroundImage" id="upload-song-background")
 							input(type="hidden" value=song._id name="songId")
-							input.pull-right(type="submit" value="upload")
+							input.pull-right.btn.btn-default(type="submit" value="upload")
 		.container
 			.info-block
 				button#share.tb.btn.btn-default.btn-sm
 					.fa.fa-share-square
-				button#download.tb.btn.btn-default.btn-sm
-					i.fa.fa-caret-square-o-down
+				a(href=track0.userTracks[0].url)
+					a(href=track1.userTracks[0].url)
+					button#download.tb.btn.btn-default.btn-sm
+						i.fa.fa-caret-square-o-down
 		.container.margin-top
 			.info-block.remove-margin
 					button#dropNote.btn.btn-default.drop-note.btn-simple-sm.pull-left Drop a Note
