@@ -10,6 +10,7 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy
 var passportConfig = require('./config/passport');
 var moment = require('moment');
+var _ = require('underscore');
 
 
 var authenticationController = require('./controllers/authentication.js');
@@ -130,9 +131,10 @@ app.get('/api/getSongs', apiController.getSongs);
 app.post('/uploadSongBackgroundPic', apiController.uploadSongBackgroundPic);
 app.post('/api/addCommentLike', apiController.addCommentLike);
 app.post('/api/updateUserProfile', apiController.updateUserProfile);
-app.post('/ape/addUserToTribe', apiController.addUserToTribe);
 app.post('/api/addPost', apiController.addPost);
 app.post('/api/isNewUserFalse', apiController.isNewUserFalse);
+app.post('/api/addToTribe', apiController.addToTribe);
+app.post('/api/getTribe', apiController.getTribe);
 
 
 ////////////////////////////////////////////
@@ -234,8 +236,22 @@ app.post('/submitTrack', function (req, res) {
               };
         var trackId = apiController.addTrack(track);
         console.log('trackId: ', trackId);
-        req.user.cocreationCollaborations.push(id);
-        req.user.save();
+        var userSongs = _.union(req.user.cocreationSongs, req.user.cocreationCollaborations);
+        console.log('userSongs: ', userSongs);
+        var isNewTrack = true;
+        for (var i = 0; i < userSongs.length; i++){
+          var testId = userSongs[i].toString();
+          testId = testId.trim();
+          if (id === testId){
+            isNewTrack = false;
+            console.log('not isNewTrack');
+          }
+        }
+        if(isNewTrack){
+          console.log('isNewTrack');
+          req.user.cocreationCollaborations.push(id);
+          req.user.save();
+        }
      
       fs.readFile(fPath, function (err, data) {
         console.log(err);

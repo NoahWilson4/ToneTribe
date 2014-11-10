@@ -1,46 +1,48 @@
 extends layout
 
 block content
-	.heading-form
-		.search-form
-			h1 Search for Musicians
-			p Fill in the fields that you would like to search by:
-			//- form#submitSearch.form-horizontal(action="/submitSearch" method="post" role="form")
-			form#submitSearch.form-horizontal(role="form")
-				.form-group
-					label.col-sm-2.control-label(for="name") Name:
-					.col-sm-10
-						input.form-control.searchInput(type="text" name="name" placeholder="Musician or Band Name…")
-				.form-group
-					label.col-sm-2.control-label(for="location") Location:
-					.col-sm-10
-						input.form-control.searchInput(type="text" name="location" placeholder="Location…")
-				.form-group
-					label.col-sm-2.control-label(for="insruments") Instrument:
-					.col-sm-10
-						input.form-control.searchInput(type="text" name="instruments" placeholder="Instrument…")
-				.form-group
-					label.col-sm-2.control-label(for="styles") Style:
-					.col-sm-10
-						input.form-control.searchInput(type="text" name="styles" placeholder="Style…")
-				.form-group
-					label.col-sm-2.control-label(for="skill") Skill:
-					.col-sm-10
-						input.form-control.searchInput(type="text" name="skills" placeholder="Skill…")
-				.form-group
-					.col-sm-offset-2.col-sm-10
-						input.btn.btn-success(type="submit" value="Search")
-	.search-results
-		h1 Search Results:
-		a(href="/search"): button.btn.btn-success.btn-xs.search-again Search Again
-		.list-group.results
-		.no-results
-			h2.list-group-item-heading No Results Found.
-		.search-results-container
-			h3 Musicians:
-			div#search-results-musicians
-			h3 Bands:
-			div#search-results-bands
+	.container
+		.info-block
+			.heading-form
+				.search-form
+					h1.heading-about Search for Musicians
+					//- form#submitSearch.form-horizontal(action="/submitSearch" method="post" role="form")
+					form#submitSearch.form-horizontal(role="form")
+						.form-group
+							label.col-sm-3.control-label(for="name") Name:
+							.col-sm-9
+								input.form-control.searchInput(type="text" name="name" placeholder="Musician or Band Name…")
+						.form-group
+							label.col-sm-3.control-label(for="location") Location:
+							.col-sm-9
+								input.form-control.searchInput(type="text" name="location" placeholder="Location…")
+						.form-group
+							label.col-sm-3.control-label(for="insruments") Instrument:
+							.col-sm-9
+								input.form-control.searchInput(type="text" name="instruments" placeholder="Instrument…")
+						.form-group
+							label.col-sm-3.control-label(for="styles") Style:
+							.col-sm-9
+								input.form-control.searchInput(type="text" name="styles" placeholder="Style…")
+						.form-group
+							label.col-sm-3.control-label(for="skill") Skill:
+							.col-sm-9
+								input.form-control.searchInput(type="text" name="skills" placeholder="Skill…")
+						.form-group
+							.col-sm-offset-4
+								input.btn.btn-default.btn-simple-sm(type="submit" value="Search")
+		.col-sm-5
+		#search-results.info-block.col-sm-7
+			.search-results
+				h1.heading-about Search Results
+				.list-group.results
+				.no-results
+					h2.list-group-item-heading No Results Found.
+				.search-results-container
+					h2 Musicians:
+					div#search-results-musicians
+					h2 Bands:
+					div#search-results-bands
 				
 	script(id="search-result-template" type="text/x-handlebars-template").
 		<div class="list-group results">
@@ -51,6 +53,18 @@ block content
 					<p class="list-group-item-text"> {{location}} </p>
 				</div>
 			</a>
-		</div>				
+		</div>
+	script(id="user-template" type="text/x-handlebars-template").
+		<div class="list-group results">
+			<div class="post-container">
+				<div class="post-pic-holder">
+					<a href="../profile/?id={{_id}}"><img class="post-profile-pic img-circle" src={{profilePic}}></a>
+				</div>
+					<a href="../profile/?id={{_id}}"><h2 class="post-heading"> {{name}} </h4></a>
+				<p id="post-text" class="list-group-item-text post-text"> {{location}} </p>
+					
+							
+			</div>
+		</div>			
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
 	script(script src="../scripts/lib/search.js")

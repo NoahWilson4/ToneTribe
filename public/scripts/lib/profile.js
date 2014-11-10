@@ -169,8 +169,7 @@ function editProfile(){
 
 	};
 
-	if (user.isNewUser === true){
-
+	if (user.isNewUser === true && user._id === currentUser){
 		editProfile();
 	}
 
@@ -417,18 +416,80 @@ $('#addPost').on('submit', function(e){
 });
 
 ////// on page load, display previous posts
+if (user['posts'].length > 0){
+	console.log('there are posts...');
+	user.posts.map(function(post){
+			var outputHTML = compilePostTemplate(post);
+			$('#post-container').prepend(outputHTML);
+		});
+}
 
-user.posts.map(function(post){
-		var outputHTML = compilePostTemplate(post);
-		$('#post-container').prepend(outputHTML);
+
+////// connect and add user to tribe ///////////
+
+$('#btn-connect').on('click', function(){
+	var userIdToAdd = $(this).attr('value');
+	console.log('userIdToAdd: ', userIdToAdd);
+	$.post('/api/addToTribe', {userIdToAdd: userIdToAdd}, function(response){
+		console.log('response: ', response);
 	});
+	$('#song-tribe-sidebar').append('<div class="connected">Connected</div>');
+	$(this).remove();
+});
 
+//// either show connect button or display connected
+console.log(currentUser);
+console.log(user._id);
+if (user._id !== currentUser){
+	for (var i = 0; i < currentUser.tribe.length; i++){
+		console.log(currentUser.tribe[i], 'test');
+		console.log(user._id), 'test';
+		if (currentUser.tribe[i] === user._id){
+			$('#song-tribe-sidebar').append('<div class="connected">Connected</div>');
+			$('#btn-connect').remove();
 
+		}
+	}
+}
 
+////////// view tribe members ////////
 
+var userTemplate = $('#user-template').html();
+var compileTemplate = Handlebars.compile(userTemplate);
 
+$('#view-tribe').on('click', function(){
+	$(this).addClass('clear-tribe-view');
+	$('#tribe-view').toggle('.reveal');
+	$.post('/api/getTribe', {_id: user._id}, function(responseData){
+		console.log('getTribe responseData: ', responseData);
+		var tr = responseData;
+		console.log('tr: ', tr);
+		var tribe = tr.tribe;
+		console.log('????: ', tribe, tr, tr.tribe);
+		tribe.map(function(usr){
+			console.log('mapping...', usr.name);
+			var u = {
+				name: usr.name,
+				profilePic: usr.profilePic,
+				_id: usr._id,
+				location: usr.location
+			};
+			console.log('u: ', u);
+			var outputHTML = compileTemplate(u);
+			$('#tribe-container').append(outputHTML);
+		});
+	});
+});
 
+$(document).on('click', '.clear-tribe-view', function(){
+	$(this).removeClass('.clear-tribe-view');
+	$('#tribe-container').empty();
+});
 
+$(document).on('click', '.clear-tribe-view-close', function(){
+	$('#tribe-view').toggle('.reveal');
+	$('#tribe-container').empty();
+});
 
 
 

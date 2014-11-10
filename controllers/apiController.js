@@ -167,11 +167,32 @@ var apiController = {
 			res.send('saved.');
 		});
 	},
-	addUserToTribe: function(req, res){
+	addToTribe: function(req, res){
+		console.log('addToTribe req.user: ', req.user);
+		console.log('addToTribe req.body: ', req.body);
 		User.findOne({_id: req.user._id}, function(err, result){
-			result.tribe.push(req.body.userId);
+			result.tribe.push(req.body.userIdToAdd);
 			result.save();
-			res.send('added to tribe.');
+			console.log('addToTribe current user result: ', result);
+		});
+		User.findOne({_id: req.body.userIdToAdd}, function(err, result){
+			result.tribe.push(req.user._id);
+			result.save();
+			console.log('addToTribe user result: ', result);
+		});
+		res.send('joined tribe.');
+	},
+	getTribe: function(req, res){
+		console.log('getTribe req.body: ', req.body);
+		User
+			.findOne({_id: req.body._id})
+			.populate('tribe', null, 'user')
+			.exec(function(err, result){
+				var tribe = _.uniq(result.tribe);
+				console.log('unip tribe: ', tribe);
+				res.send({
+					tribe: tribe
+				});
 		});
 	},
 	createNewSong: function(req, res){

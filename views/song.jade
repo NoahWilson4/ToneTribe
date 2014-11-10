@@ -14,11 +14,11 @@ block content
 							if track0
 								for track in track0.userTracks
 									option(value=track.trackTitle data=track._id) #{track.trackTitle}, By userName, #{track.likes} Likes
-						button#upload-button.btn.btn-default
+						button#upload-button0.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
-						#upload-download.shadow
+						#upload-download0.upload-download.shadow
 							button.btn.btn-default.btn-updown(data-toggle="modal" data-target="#uploadModal0") Upload
-							if track0.userTracks[0].url
+							if track0
 								a(href=track0.userTracks[0].url)
 									button.btn.btn-default.btn-updown Download
 						button.like.btn.btn-xs.btn-primary
@@ -41,8 +41,13 @@ block content
 							if track1
 								for track in track1.userTracks
 									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
-						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal1")
+						button#upload-button1.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
+						#upload-download1.upload-download.shadow
+							button.btn.btn-default.btn-updown(data-toggle="modal" data-target="#uploadModal1") Upload
+							if track1
+								a(href=track1.userTracks[0].url)
+									button.btn.btn-default.btn-updown Download
 						button.like.btn.btn-xs.btn-primary
 							i.fa.fa-thumbs-o-up
 						if track1
@@ -63,8 +68,13 @@ block content
 							if track2
 								for track in track2.userTracks
 									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
-						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal2")
+						button#upload-button2.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
+						#upload-download2.upload-download.shadow
+							button.btn.btn-default.btn-updown(data-toggle="modal" data-target="#uploadModal2") Upload
+							if track2
+								a(href=track2.userTracks[0].url)
+									button.btn.btn-default.btn-updown Download
 						button.like.btn.btn-xs.btn-primary
 							i.fa.fa-thumbs-o-up
 						if track2
@@ -85,8 +95,13 @@ block content
 							if track3
 								for track in track3.userTracks
 									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
-						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal3")
+						button#upload-button3.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
+						#upload-download3.upload-download.shadow
+							button.btn.btn-default.btn-updown(data-toggle="modal" data-target="#uploadModal3") Upload
+							if track3
+								a(href=track3.userTracks[0].url)
+									button.btn.btn-default.btn-updown Download
 						button.like.btn.btn-xs.btn-primary
 							i.fa.fa-thumbs-o-up
 						if track3
@@ -107,8 +122,13 @@ block content
 							if track4
 								for track in track4.userTracks
 									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
-						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal4")
+						button#upload-button4.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
+						#upload-download4.upload-download.shadow
+							button.btn.btn-default.btn-updown(data-toggle="modal" data-target="#uploadModal4") Upload
+							if track4
+								a(href=track4.userTracks[0].url)
+									button.btn.btn-default.btn-updown Download
 						button.like.btn.btn-xs.btn-primary
 							i.fa.fa-thumbs-o-up
 						if track4
@@ -129,8 +149,13 @@ block content
 							if track5
 								for track in track5.userTracks
 									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
-						button#upload-button.btn.btn-default(data-toggle="modal" data-target="#uploadModal5")
+						button#upload-button5.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
+						#upload-download5.upload-download.shadow
+							button.btn.btn-default.btn-updown(data-toggle="modal" data-target="#uploadModal5") Upload
+							if track5
+								a(href=track5.userTracks[0].url)
+									button.btn.btn-default.btn-updown Download
 						button.like.btn.btn-xs.btn-primary
 							i.fa.fa-thumbs-o-up
 						if track5
@@ -160,10 +185,8 @@ block content
 			.info-block
 				button#share.tb.btn.btn-default.btn-sm
 					.fa.fa-share-square
-				a(href=track0.userTracks[0].url)
-					a(href=track1.userTracks[0].url)
-					button#download.tb.btn.btn-default.btn-sm
-						i.fa.fa-caret-square-o-down
+				button#download.tb.btn.btn-default.btn-sm
+					i.fa.fa-caret-square-o-down
 		.container.margin-top
 			.info-block.remove-margin
 					button#dropNote.btn.btn-default.drop-note.btn-simple-sm.pull-left Drop a Note
@@ -196,7 +219,7 @@ block content
 								h4.modal-title Upload Track
 							.modal-body
 								.upload-view-tracks
-									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input.btn.btn-simple-sm.btn-sm(type="file" name="audio")
 									input(type="text" name="trackTitle" placeholder="Name Your Track!")
 									input#songId(type="hidden" value=song._id name="id")
 									input#trackNum(type="hidden" value="0" name="trackNum")
@@ -214,7 +237,7 @@ block content
 								h4.modal-title Upload Track
 							.modal-body
 								.upload-view-tracks
-									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input.btn.btn-simple-sm.btn-sm(type="file" name="audio")
 									input(type="text" name="trackTitle" placeholder="Name Your Track!")
 									input#songId(type="hidden" value=song._id name="id")
 									input#trackNum(type="hidden" value="1" name="trackNum")
@@ -232,7 +255,7 @@ block content
 								h4.modal-title Upload Track
 							.modal-body
 								.upload-view-tracks
-									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input.btn.btn-simple-sm.btn-sm(type="file" name="audio")
 									input(type="text" name="trackTitle" placeholder="Name Your Track!")
 									input#songId(type="hidden" value=song._id name="id")
 									input#trackNum(type="hidden" value="2" name="trackNum")
@@ -250,7 +273,7 @@ block content
 								h4.modal-title Upload Track
 							.modal-body
 								.upload-view-tracks
-									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input.btn.btn-simple-sm.btn-sm(type="file" name="audio")
 									input(type="text" name="trackTitle" placeholder="Name Your Track!")
 									input#songId(type="hidden" value=song._id name="id")
 									input#trackNum(type="hidden" value="3" name="trackNum")
@@ -268,7 +291,7 @@ block content
 								h4.modal-title Upload Track
 							.modal-body
 								.upload-view-tracks
-									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input.btn.btn-simple-sm.btn-sm(type="file" name="audio")
 									input(type="text" name="trackTitle" placeholder="Name Your Track!")
 									input#songId(type="hidden" value=song._id name="id")
 									input#trackNum(type="hidden" value="4" name="trackNum")
@@ -286,7 +309,7 @@ block content
 								h4.modal-title Upload Track
 							.modal-body
 								.upload-view-tracks
-									input.upload-button.btn.btn-default.btn-sm(type="file" name="audio")
+									input.btn.btn-simple-sm.btn-sm(type="file" name="audio")
 									input(type="text" name="trackTitle" placeholder="Name Your Track!")
 									input#songId(type="hidden" value=song._id name="id")
 									input#trackNum(type="hidden" value="5" name="trackNum")

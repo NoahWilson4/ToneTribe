@@ -47,7 +47,7 @@ block content
 						a(href="./cocreation-user")
 							button.btn.btn-default.btn-sm.btn-songs Cocreation Songs
 					.sidebar-list
-						button.btn.btn-default.btn-sm.btn-tribe View Tribe Members
+						button#view-tribe.btn.btn-default.btn-sm.btn-tribe View Tribe Members
 				.profile-sidebar.edit-add-shadow
 					.sidebar-list.info-edit(title="instruments")
 						h4.sidebar-list-heading Instruments:
@@ -105,6 +105,10 @@ block content
 						p.sidebar-list-text-noedit.astro-sign= user.astro
 
 			.col-sm-7.col-md-8
+				#tribe-view.shadow.info-block.remove-margin
+					h2 Tribe Members:
+					button.btn.btn-default.btn-simple-sm.clear-tribe-view-close Close
+					#tribe-container
 				.info-block.remove-margin.edit-add-shadow(title="philosophy")
 					.row
 						.heading-container.col-sm-5.col-md-4
@@ -152,14 +156,14 @@ block content
 								button.close(data-dismiss="modal")
 									span(aria-hidden="true") &times;
 									span.sr-only Close
-								h4.modal-title Upload Track
+								h4.modal-title Upload Pic
 							.modal-body
 								.upload-view-tracks
-									input.upload-button.btn.btn-default.btn-sm(type="file" name="image")
+									input.btn.btn-default.btn-sm(type="file" name="image")
 									input#userId(type="hidden" value=user._id name="id")
 							.modal-footer
 								button.btn.btn-default(type="button" data-dismiss="modal") Close
-								input.btn.btn-success(type="submit" value="Upload")
+								input.btn.btn-simple-sm(type="submit" value="Upload")
 	.modal.fade#uploadModalBackgroundPic
 				.modal-dialog
 					form#upload(method="post" action="/uploadBackgroundPic" enctype="multipart/form-data")
@@ -168,17 +172,18 @@ block content
 								button.close(data-dismiss="modal")
 									span(aria-hidden="true") &times;
 									span.sr-only Close
-								h4.modal-title Upload Track
+								h4.modal-title Upload Pic
 							.modal-body
 								.upload-view-tracks
-									input.upload-button.btn.btn-default.btn-sm(type="file" name="image")
+									input.btn.btn-default.btn-sm(type="file" name="image")
 									input#userId(type="hidden" value=user._id name="id")
 							.modal-footer
 								button.btn.btn-default(type="button" data-dismiss="modal") Close
-								input.btn.btn-success(type="submit" value="Upload")
+								input.btn.btn-simple-sm(type="submit" value="Upload")
 	
 	script.
 		var user = !{JSON.stringify(user)};
+		var currentUser = !{JSON.stringify(currentUser)};
 	script(id="post-template" type="text/x-handlebars-template").
 		<div class="list-group results">
 			<div class="post-container">
@@ -193,6 +198,18 @@ block content
 						<div id="postInfo" value="{{songId}}"></div>
 					</button>
 					<div class="post-secondary inline"> {{likes}} Likes </div>
+							
+			</div>
+		</div>
+	script(id="user-template" type="text/x-handlebars-template").
+		<div class="list-group results">
+			<div class="post-container">
+				<div class="post-pic-holder">
+					<a href="../profile/?id={{_id}}"><img class="post-profile-pic img-circle" src={{profilePic}}></a>
+				</div>
+					<a href="../profile/?id={{_id}}"><h2 class="post-heading"> {{name}} </h4></a>
+				<p id="post-text" class="list-group-item-text post-text"> {{location}} </p>
+					
 							
 			</div>
 		</div>

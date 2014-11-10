@@ -95,8 +95,23 @@ $('#uploadBackgroundPic').on('click', function(){
 
 ///// upload-download tracks
 
-$('#upload-button').on('click', function(){
-	$('#upload-download').toggle('reveal');
+$('#upload-button0').on('click', function(){
+	$('#upload-download0').toggle('reveal');
+});
+$('#upload-button1').on('click', function(){
+	$('#upload-download1').toggle('reveal');
+});
+$('#upload-button2').on('click', function(){
+	$('#upload-download2').toggle('reveal');
+});
+$('#upload-button3').on('click', function(){
+	$('#upload-download3').toggle('reveal');
+});
+$('#upload-button4').on('click', function(){
+	$('#upload-download4').toggle('reveal');
+});
+$('#upload-button5').on('click', function(){
+	$('#upload-download5').toggle('reveal');
 });
 
 

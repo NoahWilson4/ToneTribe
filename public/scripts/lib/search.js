@@ -5,7 +5,7 @@ $(document).on('ready', function(){
 
 
 /////// HANDLEBARS SEARCH RESULT TEMPLATE
-var searchTemplate = $('#search-result-template').html();
+var searchTemplate = $('#user-template').html();
 var compileTemplate = Handlebars.compile(searchTemplate);
 
 
@@ -29,8 +29,8 @@ var lowerCase = function(x){
 	var positiveResultsFinal = [];
 	
 	$('#submitSearch').on('submit', function(e){
-		$('.search-form').hide();
-		$('.search-results').addClass('display');
+		// $('.search-form').hide();
+		$('#search-results').css({display: 'inherit'});
 		var positiveResultsBands = [];
 		var positiveResultsFinalBands = [];
 		var positiveResults = [];
@@ -86,10 +86,10 @@ var lowerCase = function(x){
 		    }
 
 		    for (var i = 0; i < results.length; i++){
-			var user = results[i];
-			console.log(user)
+			var searchResult = results[i];
+			console.log(searchResult);
 
-			var outputHTML = compileTemplate(user);
+			var outputHTML = compileTemplate(searchResult);
 			console.log(outputHTML);
 			$('#search-results-musicians').append(outputHTML);
 		    	
@@ -192,16 +192,16 @@ var lowerCase = function(x){
 			});
 			// $('.search-results').hide();
 
-	$(document).on('click', '.search-again', function(){
-		$('.search-results').removeClass('display');
-		$('.no-results').removeClass('display');
-		positiveResults = [];
-		positiveResultsFinal = [];
-		positiveResultsBands = [];
-		positiveResultsFinalBands = [];
-		$('.search-form').show();
-		$('input').val('');
-	})
+	// $(document).on('click', '.search-again', function(){
+	// 	$('.search-results').removeClass('display');
+	// 	$('.no-results').removeClass('display');
+	// 	positiveResults = [];
+	// 	positiveResultsFinal = [];
+	// 	positiveResultsBands = [];
+	// 	positiveResultsFinalBands = [];
+	// 	$('.search-form').show();
+	// 	$('input').val('');
+	// })
 
 
 });

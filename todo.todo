@@ -1,57 +1,60 @@
-to do: 
 
-welcome message
-still use separate js files, minify each.
-hover text over buttons/links
-add dates to song creations, uploads,
-conditionals for empty form submissions
-signup profile preview?
-styles on signup?
-view individual user cocreation pages, query string on link and page render
-song stop instead of pause?
-refacotoru profile edit
+bigger things:
+  live stream of posts
+  main cocreation page
+  notifications
+  bands
 
-COCREATION
+littler things:
+  still use separate js files, minify each.
+  hover text over buttons/links
+  add dates to song creations, uploads,
+  conditionals for empty form submissions
+  song stop instead of pause?
+  uploading status
+  subtle animations and shadowing
+  navbar styling - larger and brighter, arrange buttons and dropdown
+  remove user password from bootstrapped data
 
-wire up the song and track likes, sort tracks by likes in button
-deleting songs... checking to see if they are still in the dataabase
 
-main public page with popular cocreations
+COCREATION:
 
-search by styles, users, likes, instruments....
-links to user pages from song player
+  wire up the song and track likes, sort tracks by likes in button
+  deleting songs... checking to see if they are still in the dataabase
+  search by styles, users, likes, instruments....
+  links to user pages from song player
+  different view for your own song
 
-different view for your own song
 
+
+
+SEARCH:
+  bands...
+
+PROFILES:
+
+  link to bands from user profile
+  bands
+
+  view/load other user's profiles
+      from songtracks
+  notifications (cocreation requests for instruments...)
+
+
+
+
+
+
+Eventual things to do:
+
+  photo gallery  
+  limit sort results to 20ish, infinite scrolling
+  sort tribe
+
+
+
+COOL THINGS TO ADD:
 
 live recording?
-download tracks, combine into one track?
-simultaneous sequencing??
-animations
-
-
-SEARCH
-bands...
-
-PROFILES
-
-connect with friends!
-
-photo gallery
-
-link to bands from user profile
-bands
-
-second time editing bugs...
-view/load other user's profiles
-    from songtracks
-notifications (cocreation requests for instruments...)
-upload pics (reuse modal from cocreation?)
-edit button if it is your own page
-
-
-COOL THINGS TO ADD
-
 image magick for thumbnails
 use d3 or another data graphics library to show web of connections globally between musicians
-

@@ -47,7 +47,8 @@ var indexController = {
 					// user.inspirations = stringifyArray(user.inspirations);
 					// user.skills = stringifyArray(user.skills);
 					res.render('profile-user', {
-						user: user
+						user: user,
+						currentUser: req.user._id
 					});	
 				});
 		},
@@ -69,8 +70,14 @@ var indexController = {
 				console.log('result finding user viewProfile: ', result);
 				var user = result;
 				res.render('profile', {
-					user: user
+					user: user,
+					currentUser: req.user
 				});
+			});
+		},
+		addToTribe: function(req, res){
+			User.findOne({_id: req.user.id}, function(err, result){
+				result.tribe.push(req.body.userIdToAdd);
 			});
 		},
 	search: function(req, res) {
@@ -84,10 +91,17 @@ var indexController = {
 			});
 		},
 	cocreation: function(req, res) {
+		console.log('req.query cocreation: ', req.query);
+		User
+		.findOne({_id: req.query.id})
+		.populate('cocreationSongs', null, 'cocreationsong')
+		.populate('cocreationCollaborations', null, 'cocreationsong')
+		.exec(function(err, result){
 			res.render('cocreation', {
-				user: req.user
+				user: result
 			});
-		},
+		});
+	},
 	cocreationUser: function(req, res){
 		User
 		.findOne({_id: req.user._id})
@@ -100,17 +114,17 @@ var indexController = {
 		});
 	},
 		song: function(req, res){
-			console.log('song req.query!!!', req.query);
+			// console.log('song req.query!!!', req.query);
 			var tracks;
 			var id = req.query.id;
-			console.log('id???', id);
+			// console.log('id???', id);
 			var songName;
 			var song;
 
 			CocreationSong.findOne({_id: id}, function(err, result){
-				console.log('result in song render: ', result);
+				// console.log('result in song render: ', result);
 				songName = result.name;
-				console.log('songName: ', songName);
+				// console.log('songName: ', songName);
 				song = result;
 				var track0;
 				var track1;
@@ -136,7 +150,7 @@ var indexController = {
 					}
 				}
 
-				console.log('sorted???? ', track0, track1, track2, track3, track4, track5);
+				// console.log('sorted???? ', track0, track1, track2, track3, track4, track5);
 			req.user.password = '';
 			res.render('song', {
 				user: req.user,

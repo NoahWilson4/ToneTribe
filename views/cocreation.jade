@@ -1,17 +1,46 @@
 extends layout
 
 block content
-	.container-fluid
-		.jumbotron.cocreation-jt
-			h1 CoCreation
-			form#create-new-song
-				input(type="text" name="name" placeholder="Name of Song…")
-				a(href="./song")
-					input.btn.btn-success(type="submit" value="Add New Song")
-	
-			.song-container
-			//- 	ul
-			//- 		for name in songs.names
-			//- 			li= name
+	div.container.profile-top(style="background-image: url(" + user.backgroundPic + ")")
+		button(data-toggle="modal" data-target="#uploadModalBackgroundPic").glyphicon.glyphicon-picture.make-it-white.edit-icon-background Change-Background
+		div.img-name.row
+			div.name-loc.col-xs-6.col-sm-6.c0l-md-7.col-xl-5
+				h2.name(title="name")= user.name
+				div.location(title="location")= user.location
+			div.profile-pic.img-circle.col-xs-4(style="background-image: url(" + user.profilePic + ")")
+				button#uploadProfilePic(data-toggle="modal" data-target="#uploadModalProfilePic").glyphicon.glyphicon-picture.make-it-white.edit-icon-profile Change-Photo
+	button.edit-profile.btn.btn-default.btn-xs.btn-simple.pull-left Edit Profile
+	.container
+		.info-block(title="about")
+			.row
+				.heading-container.col-sm-4.col-md-2
+					h2.heading-about CoCreation Songs:
+				.content-container.col-sm-8.col-md-10
+					p.about Here are the collaborative pieces that have been shared with the world.
+	.container
+		.row
+			div.col-sm-5.col-md-4#sidebar
+				.profile-sidebar
+					h2 CoCreations with Others:
+					for song in user.cocreationCollaborations
+						.sidebar-list
+							p.sidebar-list-text.instruments= song.name
+
+			.col-sm-7.col-md-8
+				.info-block.remove-margin
+					h1.heading-about CoCreations
+					#cocreation-container
+	script(id="cocreation-template" type="text/x-handlebars-template").
+		<div class="list-group results">
+			<div class="post-container">
+				<div class="post-pic-holder">
+					<a href="../song/?id={{_id}}"><img class="post-profile-pic img-circle" src={{backgroundImage}}></a>
+				</div>
+					<a href="../song/?id={{_id}}"><h2 class="post-heading"> {{name}} </h4></a>
+				<p id="post-text" class="list-group-item-text post-text"> {{description}} </p>			
+			</div>
+		</div>
+	script.
+		var user = !{JSON.stringify(user)};
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
-	script(script src="../scripts/lib/cocreation.js")
+	script(script src="../scripts/lib/cocreation-user.js")
