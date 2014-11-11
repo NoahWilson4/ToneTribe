@@ -1,32 +1,41 @@
 
 bigger things:
-  live stream of posts
-  main cocreation page
+
   notifications
   bands
 
 littler things:
+
+  on create new song, load player with form to add name, description and image
+  on close welcome, style the edit button to slide to its final position
+  on load page initially as new user, fade shadows in
+  song description
   still use separate js files, minify each.
   hover text over buttons/links
   add dates to song creations, uploads,
   conditionals for empty form submissions
-  song stop instead of pause?
-  uploading status
+  song stop instead of pause, or restart?
+  uploading status, and loading for song player
   subtle animations and shadowing
   navbar styling - larger and brighter, arrange buttons and dropdown
   remove user password from bootstrapped data
-
+  cocreation background image
 
 COCREATION:
 
+  main page:
+
+  description of song
+  limited display, infinite scrolling
+  search by styles, users, likes, instruments....
+
+song page:
+  
+  share - posts it to live feed and your page
   wire up the song and track likes, sort tracks by likes in button
   deleting songs... checking to see if they are still in the dataabase
-  search by styles, users, likes, instruments....
   links to user pages from song player
   different view for your own song
-
-
-
 
 SEARCH:
   bands...
@@ -35,9 +44,7 @@ PROFILES:
 
   link to bands from user profile
   bands
-
-  view/load other user's profiles
-      from songtracks
+  view/load other user's profiles and from songtracks
   notifications (cocreation requests for instruments...)
 
 

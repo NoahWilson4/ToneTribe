@@ -5,52 +5,32 @@ $(document).on('ready', function() {
 
 /////// cocreation templating ///////////
 
-var cocreationTemplate = $('#cocreation-template').html();
-var compileCocreationTemplate = Handlebars.compile(cocreationTemplate);
-
-user.cocreationSongs.map(function(song){
-	console.log('song test: ', song);
-	var outputHTML = compileCocreationTemplate(song);
-		$('#cocreation-container').prepend(outputHTML);
-});
+	var cocreationTemplate = $('#cocreation-template').html();
+	var compileCocreationTemplate = Handlebars.compile(cocreationTemplate);
 
 
-
-
-
-
-
-var renderSong = function(songData) {
-	console.log('songData',songData);
-	var el = $('<div>')
-	el.append('<form id="viewSong"></form>')
-	el.append('<div class="song-result-container"><h3><a href="/song/?id=' + songData._id + '">' + songData.name + '</a></h3></div>');
-	el.attr('data-id', songData._id);
-	return el;
-};
-
-
-
-user.cocreationSongs.map(function(song){
-	console.log('song test: ', song);
-	$('.song-container').append(renderSong(song));
-
-});
-
-$('#create-new-song').on('submit', function(e){
-	e.preventDefault();
-	var songName = $(this).find('[name=name]').val();
-	var song = {
-		name: songName
-	};
-
-	$.post('/api/createNewSong', song, function(responseData){
-		console.log('responseData: ', responseData);
-		var outputHTML = compileCocreationTemplate(responseData);
-		$('#cocreation-container').prepend(outputHTML);
+	/// append songs to page
+	user.cocreationSongs.map(function(song){
+		console.log('song test: ', song);
+		var outputHTML = compileCocreationTemplate(song);
+			$('#cocreation-container').prepend(outputHTML);
 	});
-});
 
+
+	////// create new song
+	$('#create-new-song').on('submit', function(e){
+		e.preventDefault();
+		var songName = $(this).find('[name=name]').val();
+		var song = {
+			name: songName
+		};
+
+		$.post('/api/createNewSong', song, function(responseData){
+			console.log('responseData: ', responseData);
+			var outputHTML = compileCocreationTemplate(responseData);
+			$('#cocreation-container').prepend(outputHTML);
+		});
+	});
 
 
 

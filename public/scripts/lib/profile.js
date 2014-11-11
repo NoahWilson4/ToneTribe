@@ -173,6 +173,23 @@ function editProfile(){
 		editProfile();
 	}
 
+
+///////////// append media items /////
+	(user.media).map(function(media){
+		if (user.media.length > 0){
+			$('#no-media').remove();
+			$('#media').append('<div class="media-item">' + media + '</div>');
+		}
+	});
+
+	$(document).on('click', '#view-media', function(){
+	$('#media').toggle('.reveal');
+});
+
+
+/////////// edit profile ////////////////////
+
+
 	$(document).on('click', '.edit-profile', function(){
 		editProfile();
 	});
@@ -224,6 +241,32 @@ function editProfile(){
 			}
 		});
 
+		//////////////// add media /////////
+		$('#submit-media').on('submit', function(e){
+			e.preventDefault();
+			var media = $('#submit-media').find('[name=media]').val();
+			console.log('media: ', media);
+			$('#media').append('<div class="media-item">' + media + '</div>');
+			$('#submit-media').find('[name=media]').val('');
+			$.post('/api/addMedia', {media: media}, function(response){
+				console.log(response);
+			});
+			var responseData = $.ajax({
+			type: "POST",
+			data: {
+				media: media
+			},
+			url: '/api/addMedia',
+			traditional: true
+			})
+			.error(function(){
+				console.log('error');
+			})
+			.done(function(err, result){
+				console.log('media added.');
+			});
+		});
+
 
 		///////// delete items from user
 		$(document).on('click', '.delete-word', function(){
@@ -271,18 +314,9 @@ function editProfile(){
 		});
 
 
-		////////// embedding media
+		
 
-		$(document).on('submit', '#embed-form', function(e){
-			e.preventDefault();
-			var form = $(e.target);
-			var media = form.find('[name=code]').val();
-			$('.media').append(media);
-			user.media.push(media);
-		});
-	
-
-
+////////////// done editing ///////////////////
   	
 	  	$(document).on('click', '.edit-done, .close-welcome', function(){
 	  		////// remove all the many editing classes...
@@ -438,8 +472,7 @@ $('#btn-connect').on('click', function(){
 });
 
 //// either show connect button or display connected
-console.log(currentUser);
-console.log(user._id);
+
 if (user._id !== currentUser){
 	for (var i = 0; i < currentUser.tribe.length; i++){
 		console.log(currentUser.tribe[i], 'test');

@@ -21,7 +21,7 @@ block content
 						p.sidebar-list-text-noedit Please fill in more info about yourself and we'll connect you in!
 						button.close-welcome.btn.btn-simple-sm.pull-right.add-margin Close
 						button.close-welcome.btn.btn-simple-edit.pull-right Done Editing
-	.container
+	.container-fluid
 		.info-block.edit-add-shadow(title="about")
 			.row
 				.heading-container.col-sm-4.col-md-2
@@ -31,7 +31,7 @@ block content
 						p.about-content= user.about
 					else
 						p.about-content.empty - -
-	.container
+	.container-fluid
 		.row
 			div.col-sm-5.col-md-4#sidebar
 				.profile-sidebar.edit-add-shadow
@@ -131,14 +131,16 @@ block content
 				#addMedia.info-block.embed-info-block.edit-add-shadow.hide
 					h3.heading-about Embed Media
 					p Here you can embed media from other sites including Soundcloud, Youtube, CDBaby, and any other site that provides the iframe code for media. Click on share, and there you will find an embed link. (Make sure that http:// is in the code.)
-					form#embed-form(role="form")
-						label.col-sm-2.control-label(for="code") Embed Code:
-						.col-sm-10
-							input(type="text")
-						.col-sm-offset-2.col-sm-10
+					form#submit-media(role="form")
+						label.col-sm-4.control-label(for="media") Embed Code:
+						.col-sm-8
+							input(type="text" name="media")
 							button.btn.btn-simple-sm.pull-right(type="submit") Embed
-				.media
-
+				#media-block.info-block
+					button#view-media.btn.btn-default.btn-simple-sm.pull-left View Media
+					h1.heading-about Media
+					#media
+						h3#no-media No Media to View!
 				.info-block.remove-margin
 					button#dropNote.drop-note.btn-simple-sm.pull-left Drop a Note
 					h1.heading-about Posts
@@ -148,6 +150,9 @@ block content
 						.form-group
 							input.btn.btn-simple-sm.btn-post(type="submit" value="Post")
 					#post-container
+
+
+						
 	.modal.fade#uploadModalProfilePic
 				.modal-dialog
 					form#upload(method="post" action="/uploadProfilePic" enctype="multipart/form-data")

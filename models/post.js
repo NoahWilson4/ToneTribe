@@ -13,7 +13,8 @@ var Post = mongoose.Schema({
 		likes: Number,
 		comment: String,
 		date: String
-	}]
+	}],
+	cocreationSong: [mongoose.Schema.ObjectId]
 });
 
 module.exports = mongoose.model('post', Post);

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var CocreationSong = mongoose.Schema({
 	name: String,
-	userId: String,
+	users: [mongoose.Schema.ObjectId],
 	tracks: [
 		{
 			track: Number,
@@ -29,8 +29,8 @@ var CocreationSong = mongoose.Schema({
 	}],
 	backgroundImage: String,
 	backgroundThumbnail: String,
-	description: String
-
+	description: String,
+	likes: Number
 });
 
 module.exports = mongoose.model('cocreationsong', CocreationSong);

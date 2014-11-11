@@ -314,6 +314,16 @@ var apiController = {
 			res.send(result);
 		});
 	},
+	getAllCocreations: function(req, res){
+		CocreationSong
+			.find({})
+			.populate('users', 'name profilePic _id', 'user')
+			.exec(function(err, result){
+				res.send({
+					cocreationSongs: result
+			});
+		});
+	},
 	getTrackUrls: function(req, res, onComplete){
 		// console.log('req.user getTrackUrls: ', req.user);
 		var tracks;
@@ -557,17 +567,23 @@ var apiController = {
 		      });
 
 		},
+		addMedia: function(req, res){
+			console.log('adding media...');
+			console.log('req.user._id, req.body.media', req.user._id, req.body.media);
+			User.findOne({_id: req.user._id}, function(err, user){
+				(user.media).push(req.body.media);
+				user.save();
+				console.log('user.media updated: ', user);
+			});
+		},
 		addCommentLike: function(req, res){
 			var comment = req.body.comment.trim();
 			CocreationSong.findOne({_id: req.body.songId}, function(err, result){
 				for (var i = 0; i < result.comments.length; i++){
-					console.log('test comment is: ', comment, '---- result.comments[i].comment is: ', result.comments[i].comment);
 					console.log(comment);
 					console.log(result.comments[i].comment);
 					if (result.comments[i].comment === comment) {
-						console.log('found match...');
 						var likes = parseInt(result.comments[i].likes);
-						console.log(typeof likes);
 						console.log('likes: ', likes);
 						result.comments[i].likes = likes + 1;
 						console.log('result likes updated:', result);
@@ -606,6 +622,17 @@ var apiController = {
 				res.send('saved.');
 			});
 		},
+		getAllPosts: function(req, res){
+			Post.find({})
+				.populate('user', 'name _id profilePic', 'user')
+				.populate('postedTo', 'name _id profilePic', 'user')
+				.populate('cocreationSong', 'name _id backgroundImage', 'cocreationsong')
+				.exec(function(err, result){
+					res.send({
+						posts: result
+					});
+				});
+		}
 };
 
 module.exports = apiController;

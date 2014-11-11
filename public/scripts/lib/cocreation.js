@@ -1,40 +1,46 @@
 $(document).on('ready', function() {
 
 ////////////// cocreation main page ///////////////////////
-console.log('testing');
-$.get('/api/getSongs', {}, function(responseData){
-	console.log('response data on load get songs: ', responseData);
-	responseData.map(function(song){
-		$('.song-container').append(renderSong(song));
+
+	var cocreationTemplate = $('#cocreation-template').html();
+	var compileCocreationTemplate = Handlebars.compile(cocreationTemplate);
+
+Handlebars.registerHelper('if_even', function(conditional, options) {
+  if((conditional % 2) == 0) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});
+
+var cocreationSongs;
+
+$.get('/api/getAllCocreations', function(response){
+	console.log('response: ', response);
+	cocreationSongs = response.cocreationSongs;
+	console.log('cocreationSongs: ', cocreationSongs);
+//// fill page with songs //////////
+	cocreationSongs.map(function(song){
+		console.log('song test: ', song);
+		var outputHTML = compileCocreationTemplate(song);
+		$('#cocreation-container').prepend(outputHTML);
+	});
+});
+
+
+	$('#create-new-song').on('submit', function(e){
+		e.preventDefault();
+		var songName = $(this).find('[name=name]').val();
+		var song = {
+			name: songName
+		};
+
+		$.post('/api/createNewSong', song, function(responseData){
+			console.log('responseData: ', responseData);
+			var outputHTML = compileCocreationTemplate(responseData);
+			$('#cocreation-container').prepend(outputHTML);
 		});
-});
-
-
-function renderSong(songData) {
-	console.log('songData',songData);
-	var el = $('<div>')
-	el.append('<form id="viewSong"></form>')
-	el.append('<h3><a href="/song/?id=' + songData._id + '">' + songData.name + '</a></h3>');
-	el.attr('data-id', songData._id);
-	return el;
-};
-
-$('#create-new-song').on('submit', function(e){
-	e.preventDefault();
-	var songName = $(this).find('[name=name]').val();
-	var songData = {
-		name: songName
-	};
-
-	$.post('/api/createNewSong', songData, function(responseData){
-		console.log('responseData: ', responseData);
-		var songEl = renderSong(responseData);
-		console.log('songEl: ', songEl);
-		$('.song-container').append(songEl);
-	})
-});
-
-
+	});
 
 
 

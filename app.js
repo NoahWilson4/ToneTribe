@@ -17,6 +17,7 @@ var authenticationController = require('./controllers/authentication.js');
 var indexController = require('./controllers/index.js');
 var apiController = require('./controllers/apiController.js');
 var User = require('./models/user.js');
+var CocreationSong = require('./models/cocreationSong.js');
 
 
 // var CocreationSong = require('./models/cocreationSong.js')
@@ -128,6 +129,7 @@ app.post('/api/createNewSong', apiController.createNewSong);
 app.post('/api/postComment', apiController.postComment);
 app.post('/api/getComments', apiController.getComments);
 app.get('/api/getSongs', apiController.getSongs);
+app.get('/api/getAllCocreations', apiController.getAllCocreations);
 app.post('/uploadSongBackgroundPic', apiController.uploadSongBackgroundPic);
 app.post('/api/addCommentLike', apiController.addCommentLike);
 app.post('/api/updateUserProfile', apiController.updateUserProfile);
@@ -135,6 +137,8 @@ app.post('/api/addPost', apiController.addPost);
 app.post('/api/isNewUserFalse', apiController.isNewUserFalse);
 app.post('/api/addToTribe', apiController.addToTribe);
 app.post('/api/getTribe', apiController.getTribe);
+app.post('/api/addMedia', apiController.addMedia);
+app.get('/api/getAllPosts', apiController.getAllPosts);
 
 
 ////////////////////////////////////////////
@@ -252,6 +256,11 @@ app.post('/submitTrack', function (req, res) {
           req.user.cocreationCollaborations.push(id);
           req.user.save();
         }
+
+        CocreationSong.findOne({_id: id}, function(err, song){
+            song.users.push(req.user._id);
+            song.save();
+        });
      
       fs.readFile(fPath, function (err, data) {
         console.log(err);

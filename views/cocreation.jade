@@ -1,15 +1,12 @@
 extends layout
 
 block content
-	div.container.profile-top(style="background-image: url(" + user.backgroundPic + ")")
-		button(data-toggle="modal" data-target="#uploadModalBackgroundPic").glyphicon.glyphicon-picture.make-it-white.edit-icon-background Change-Background
+	div.container.profile-top(style="")
 		div.img-name.row
 			div.name-loc.col-xs-6.col-sm-6.c0l-md-7.col-xl-5
-				h2.name(title="name")= user.name
-				div.location(title="location")= user.location
-			div.profile-pic.img-circle.col-xs-4(style="background-image: url(" + user.profilePic + ")")
-				button#uploadProfilePic(data-toggle="modal" data-target="#uploadModalProfilePic").glyphicon.glyphicon-picture.make-it-white.edit-icon-profile Change-Photo
-	button.edit-profile.btn.btn-default.btn-xs.btn-simple.pull-left Edit Profile
+				h2.name(title="name") CoCreation
+				div.location(title="location") The Creative Playground
+			div.profile-pic.img-circle.col-xs-4(style="")
 	.container
 		.info-block(title="about")
 			.row
@@ -20,27 +17,51 @@ block content
 	.container
 		.row
 			div.col-sm-5.col-md-4#sidebar
+				//- .profile-sidebar
+					.sidebar-list
+						button.btn.btn-default.btn-sm.btn-songs Create New Song
 				.profile-sidebar
-					h2 CoCreations with Others:
-					for song in user.cocreationCollaborations
-						.sidebar-list
-							p.sidebar-list-text.instruments= song.name
+					h2 Something can go here:
+					.sidebar-list
+						p.sidebar-list-text sorting maybe?
+						p.sidebar-list-text list of most active users?
+						p.sidebar-list-text or a song of the week?
+					.info-block.remove-margin
+								h1 Create New Song
+								form#create-new-song
+									input.form-control.input-new(type="text" name="name" placeholder="Name of Song…")
+									input.btn.btn-default.btn-simple2(type="submit" value="Create New Song")
 
 			.col-sm-7.col-md-8
 				.info-block.remove-margin
 					h1.heading-about CoCreations
 					#cocreation-container
+
 	script(id="cocreation-template" type="text/x-handlebars-template").
 		<div class="list-group results">
 			<div class="post-container">
-				<div class="post-pic-holder">
-					<a href="../song/?id={{_id}}"><img class="post-profile-pic img-circle" src={{backgroundImage}}></a>
+				<div class="cocreation-likes pull-right">{{likes}} Likes</div>
+				<div class="cocreation-pic-holder">
+					<a href="../song/?id={{_id}}"><img class="cocreation-profile-pic img-circle" src={{backgroundImage}}></a>
+					<a href="../song/?id={{_id}}">
+						<div class="cocreation-heading">
+							<h2 class="post-heading"> {{name}} </h4></a>
+							<p id="post-text" class="list-group-item-text post-text"> space holding for description{{description}} </p>
+						</div>
 				</div>
-					<a href="../song/?id={{_id}}"><h2 class="post-heading"> {{name}} </h4></a>
-				<p id="post-text" class="list-group-item-text post-text"> {{description}} </p>			
+				<h2>CoCreators</h2>
+				{{#each users}}
+					<div class="cocreation-user-container">
+						<a href="../profile/?id={{_id}}">
+							<img class="cocreation-user-pic img-circle" src={{profilePic}}>
+							<h3 class="cocreation-user-name">{{name}}</h3>
+						</a>
+					</div>
+				{{/each}}	
+	
 			</div>
 		</div>
 	script.
 		var user = !{JSON.stringify(user)};
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
-	script(script src="../scripts/lib/cocreation-user.js")
+	script(script src="../scripts/lib/cocreation.js")

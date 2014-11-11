@@ -91,16 +91,9 @@ var indexController = {
 			});
 		},
 	cocreation: function(req, res) {
-		console.log('req.query cocreation: ', req.query);
-		User
-		.findOne({_id: req.query.id})
-		.populate('cocreationSongs', null, 'cocreationsong')
-		.populate('cocreationCollaborations', null, 'cocreationsong')
-		.exec(function(err, result){
 			res.render('cocreation', {
-				user: result
+				user: req.user
 			});
-		});
 	},
 	cocreationUser: function(req, res){
 		User

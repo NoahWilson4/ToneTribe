@@ -374,8 +374,9 @@ border-top-right-radius: 24px;
 	border-color: gray;
 }
 
-.media {
-	
+
+.media-item{
+	margin: 25px;
 }
 
 .add-media {
@@ -384,6 +385,10 @@ width: 96%;
 min-width: 220px;
 margin: 10px;
 border: 1px solid rgb(156, 156, 156);
+}
+
+#media{
+	display: none;
 }
 
 .embed-info {
@@ -439,8 +444,46 @@ background-size: cover;
 width: 120px;
 height: 120px;
 margin-right: 10px;
-float: left;
 border: 10px solid white;
+
+display: inline-block;
+}
+
+.cocreation-profile-pic {
+background: lightgray;
+background-image: ;
+background-position: center;
+background-size: cover;
+width: 180px;
+height: 180px;
+margin-right: 10px;
+border: 10px solid white;
+}
+
+.cocreation-user-pic{
+	background: lightgray;
+background-image: ;
+background-position: center;
+background-size: cover;
+width: 80px;
+height: 80px;
+margin-right: 10px;
+display: inline-block;
+border: 10px solid white;
+}
+
+.cocreation-user-name{
+	display: inline-block;
+}
+
+.cocreation-user-container{
+	display: block;
+	margin-left: 100px;
+}
+
+.cocreation-heading {
+	margin-bottom: 0px;
+	display: inline-block;
 }
 
 .post-heading {
