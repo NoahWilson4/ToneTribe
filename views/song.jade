@@ -5,6 +5,13 @@ block content
 		#song-id(value=id)
 		.container
 			h1#song-name= song.name
+				button#share-song.tb.btn.btn-default.btn-sm.pull-right(data-toggle="modal" data-target="#shareModal")
+					.fa.fa-share-square  Share
+				button#like-song.tb.btn.btn-default.btn-sm.pull-right
+					.fa.fa-thumbs-o-up  Like
+					.likes #{song.likes} Likes
+				//- button#download.tb.btn.btn-default.btn-sm.pull-right
+					i.fa.fa-caret-square-o-down  Download
 			#inner-container(style="background-image: url(" + song.backgroundImage + ")")
 				.track-container.tc0
 					.canvas-container
@@ -175,18 +182,34 @@ block content
 						i.fa.fa-stop
 					
 					button#uploadBackgroundPic.btn.btn-default.btn-sm.tb2.pull-right
-						i.fa.fa-picture-o
+						i.fa.fa-picture-o  Background
 					#upload-container.pull-right
 						form.song-pic-upload(method="post" action="/uploadSongBackgroundPic" role="form" enctype="multipart/form-data")
 							input.btn.btn-primary.btn-sm(type="file" onchange="previewSongBackground()" name="songBackgroundImage" id="upload-song-background")
 							input(type="hidden" value=song._id name="songId")
 							input.pull-right.btn.btn-default(type="submit" value="upload")
 		.container
-			.info-block
-				button#share.tb.btn.btn-default.btn-sm
-					.fa.fa-share-square
-				button#download.tb.btn.btn-default.btn-sm
-					i.fa.fa-caret-square-o-down
+			.info-block#song-description
+				
+				h1.heading-about Song Description
+				if song.description
+					p.about= song.description
+					button#edit-description.btn.btn-default.btn-simple-sm.btn-post Edit
+					form#add-description.hide
+						.form-group
+							textarea.form-control.form-font(name="songDescription" placeholder="Song Description…")
+						.form-group
+							input.btn.btn-default.btn-simple-sm.btn-post(type="submit" value="Save")
+				else
+					form#add-description
+						.form-group
+							textarea.form-control.form-font(name="songDescription" placeholder="Song Description…")
+						.form-group
+							input.btn.btn-default.btn-simple-sm.btn-post(type="submit" value="Save")
+
+
+				
+				
 		.container.margin-top
 			.info-block.remove-margin
 					button#dropNote.btn.btn-default.drop-note.btn-simple-sm.pull-left Drop a Note
@@ -207,7 +230,21 @@ block content
 			//- 			textarea.form-control(type="text" id="comment" placeholder="Comment…")
 			//- 		.form-group
 			//- 			input.btn.btn-primary.btn-comment(type="submit" value="Post")
-
+			.modal.fade#shareModal
+				.modal-dialog
+					form#share-form(role="form")
+						.modal-content
+							.modal-header
+								button.close(data-dismiss="modal")
+									span(aria-hidden="true") &times;
+									span.sr-only Close
+								h4.modal-title Share #{song.name}
+							.modal-body
+								.form-group
+									textarea.form-control.form-font(type="text" name="share-message" placeholder="Comment…")
+							.modal-footer
+								button.btn.btn-default(type="button" data-dismiss="modal") Close
+								input.btn.btn-default.btn-simple-sm.btn-post(type="submit" value="Upload")
 			.modal.fade#uploadModal0
 				.modal-dialog
 					form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")

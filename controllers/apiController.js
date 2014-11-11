@@ -195,7 +195,25 @@ var apiController = {
 				});
 		});
 	},
+	// createNewSong: function(req, res){
+	// 	console.log('req.user createNewSong: ', req.user);
+	// 	var songName = req.body.name;
+	// 	var userId = req.user._id;
+	// 	var song = {
+	// 		name: songName,
+	// 		userId: userId
+	// 	};
+	// 	console.log('song objecta: ', song);
+	// 	var newSong = new CocreationSong(song);
+	// 	newSong.save(function(err, result){
+	// 		console.log('result test: ', result);
+	// 		req.user.cocreationSongs.push(newSong);
+	// 		req.user.save();
+	// 		res.send(result);
+	// 	});
+	// },
 	createNewSong: function(req, res){
+		console.log('req.user createNewSong: ', req.user);
 		console.log('req.user createNewSong: ', req.user);
 		var songName = req.body.name;
 		var userId = req.user._id;
@@ -209,7 +227,31 @@ var apiController = {
 			console.log('result test: ', result);
 			req.user.cocreationSongs.push(newSong);
 			req.user.save();
-			res.send(result);
+			res.redirect('../song?id=' + result._id);
+		});
+	},
+	shareSong: function(req, res){
+		console.log('shareSong req.body: ', req.body);
+		var newPost = new Post(req.body.songShare);
+		console.log('newPost: ', newPost);
+		newPost.save(function(err, result){
+			User.findOne({_id: req.user._id}, function(err, user){
+				console.log('newpost result._id:', result._id);
+				console.log('user: ', user);
+				user.posts.push(result._id);
+				console.log('user posts updated: ', user);
+				user.save();
+				res.send('saved.');
+			});
+		});
+	},
+	addSongDescription: function(req, res){
+		console.log('addSongDescription req.body: ', req.body);
+		CocreationSong.findOne({_id: req.body._id}, function(err, result){
+			result.description = req.body.description;
+			console.log('result description updated: ', result);
+			result.save();
+			res.send('description saved.');
 		});
 	},
 	addTrack: function(req, res){
@@ -629,7 +671,20 @@ var apiController = {
 				.populate('cocreationSong', 'name _id backgroundImage', 'cocreationsong')
 				.exec(function(err, result){
 					res.send({
-						posts: result
+						posts: result.posts
+					});
+				});
+		},
+		getPosts: function(req, res){
+			console.log('getPosts req.body._id: ', req.body._id);
+			User.findOne({_id: req.body._id})
+				.populate('posts', null, 'post')
+				.exec(function(err, result){
+					console.log('user find result: ',result);
+					var posts = result.posts;
+					console.log('posts: ', posts);
+					res.send({
+						posts: posts
 					});
 				});
 		}

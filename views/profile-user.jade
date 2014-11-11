@@ -202,9 +202,21 @@ block content
 						<i class="fa fa-thumbs-o-up"></i>
 						<div id="postInfo" value="{{songId}}"></div>
 					</button>
-					<div class="post-secondary inline"> {{likes}} Likes </div>
-							
+					<div class="post-secondary inline"> {{likes}} Likes </div>		
 			</div>
+			{{#if cocreationSong}}
+				{{#each cocreationSong}}
+					<div class="list-group results">
+						<div class="post-container">
+							<div class="post-pic-holder">
+								<a href="../song/?id={{_id}}"><img class="post-profile-pic img-circle" src={{backgroundImage}}></a>
+							</div>
+								<a href="../song/?id={{_id}}"><h2 class="post-heading"> {{name}} </h4></a>
+							<p id="post-text" class="list-group-item-text post-text"> {{description}} </p>		
+						</div>
+					</div>
+				{{/each}}
+			{{/if}}
 		</div>
 	script(id="user-template" type="text/x-handlebars-template").
 		<div class="list-group results">

@@ -3,9 +3,13 @@ bigger things:
 
   notifications
   bands
+  likes songs, posts
 
 littler things:
 
+  im working on getting posts, prepopulate post info or save specific data to post?
+
+  convert loading of posts to ajax call
   on create new song, load player with form to add name, description and image
   on close welcome, style the edit button to slide to its final position
   on load page initially as new user, fade shadows in
@@ -14,28 +18,31 @@ littler things:
   hover text over buttons/links
   add dates to song creations, uploads,
   conditionals for empty form submissions
-  song stop instead of pause, or restart?
-  uploading status, and loading for song player
   subtle animations and shadowing
   navbar styling - larger and brighter, arrange buttons and dropdown
   remove user password from bootstrapped data
-  cocreation background image
+  fade in pic uploads
+  ensure that post/song/user images are dynamic and will change if the user changes image
 
 COCREATION:
 
   main page:
 
+  cocreation background image
   description of song
   limited display, infinite scrolling
   search by styles, users, likes, instruments....
 
 song page:
   
+  uploading status, and loading for song player
+  mute button - different image and css change 
   share - posts it to live feed and your page
   wire up the song and track likes, sort tracks by likes in button
   deleting songs... checking to see if they are still in the dataabase
   links to user pages from song player
   different view for your own song
+  song stop instead of pause, or restart?
 
 SEARCH:
   bands...

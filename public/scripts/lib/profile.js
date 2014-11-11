@@ -450,14 +450,22 @@ $('#addPost').on('submit', function(e){
 });
 
 ////// on page load, display previous posts
-if (user['posts'].length > 0){
-	console.log('there are posts...');
-	user.posts.map(function(post){
-			var outputHTML = compilePostTemplate(post);
-			$('#post-container').prepend(outputHTML);
-		});
-}
+// if (user['posts'].length > 0){
+// 	console.log('there are posts...');
+// 	user.posts.map(function(post){
+// 			var outputHTML = compilePostTemplate(post);
+// 			$('#post-container').prepend(outputHTML);
+// 		});
+// }
 
+$.post('/api/getPosts', {_id: user._id}, function(response){
+	console.log('asking for posts...');
+	console.log('response: ', response);
+	response.posts.map(function(post){
+		var outputHTML = compilePostTemplate(post);
+		$('#post-container').prepend(outputHTML);
+	});
+});
 
 ////// connect and add user to tribe ///////////
 

@@ -1,6 +1,35 @@
 $(document).on('ready', function() {
+// song and user data is bootstrapped into the script
 
-//////////////////////// comments ///////////////////////
+
+
+///// like song /////
+
+
+
+//// share song /////////
+
+$('#share-form').on('submit', function(e){
+	console.log('submitting share');
+	e.preventDefault();
+	var shareMessage = $(this).find('[name=share-message]').val();
+	var date = moment().format('MMMM Do YYYY, h:mm:ss a');
+	var songShare = {
+		text: shareMessage,
+		cocreationSong: song._id,
+		user: user._id,
+		userName: user.name,
+		userProfilePic: user.profilePic,
+		postedTo: user._id,
+		date: date
+	};
+	console.log('submitting share2', songShare);
+	$.post('/api/shareSong', {songShare: songShare}, function(response){
+		console.log('response: ', response);
+	});
+});
+
+
 //////////////////////// comments ///////////////////////
 
 
@@ -14,11 +43,6 @@ $(document).on('click', '.cancel', function(){
 	$('#addComment').css({display: 'none'});
 	$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
 });
-
-
-
-
-// song and user data is bootstrapped into the script
 
 
 	var commentTemplate = $('#comment-template').html();
@@ -89,6 +113,26 @@ $(document).on('click', '.cancel', function(){
 $('#uploadBackgroundPic').on('click', function(){
 	console.log('click');
 	$('#upload-container').toggle('reveal');
+});
+
+/////////////  description ////////
+
+$(document).on('click', '#edit-description', function(){
+	$(this).addClass('hide');
+	$('#add-description').find('[name=songDescription]').val($('#song-description').find('p').text());
+	$('#add-description').removeClass('hide');
+	$('#song-description').find('p').remove();
+});
+
+$('#add-description').on('submit', function(e){
+	e.preventDefault();
+	var description = $(this).find('[name=songDescription]').val();
+	$('#song-description').append('<button id="edit-description" class="btn btn-default btn-simple-sm btn-post pull-right">Edit</button><p class="about">' + description + '</p>');
+	$(this).toggle('reveal');
+
+	$.post('/api/addSongDescription', {description: description, _id: song._id}, function(response){
+		console.log('response: ', response);
+	});
 });
 
 

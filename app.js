@@ -139,6 +139,9 @@ app.post('/api/addToTribe', apiController.addToTribe);
 app.post('/api/getTribe', apiController.getTribe);
 app.post('/api/addMedia', apiController.addMedia);
 app.get('/api/getAllPosts', apiController.getAllPosts);
+app.post('/api/addSongDescription', apiController.addSongDescription);
+app.post('/api/shareSong', apiController.shareSong);
+app.post('/api/getPosts', apiController.getPosts);
 
 
 ////////////////////////////////////////////
