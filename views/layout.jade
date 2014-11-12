@@ -72,10 +72,116 @@ html(lang='en')
                                 li.dropdown-header Search Classifieds
                                 li: a(href="#") Looking for Musicians
                                 li: a(href="#") Equipment and Services
+                                
         block content
+        script(id="post-template" type="text/x-handlebars-template").
+            <div class="list-group results">
+                <div class="post-container">
+                    {{#if user._id}}
+                        <div class="post-pic-holder">
+                            <a href="../profile/?id={{user._id}}"><img class="post-profile-pic img-circle" src={{user.profilePic}}></a>
+                        </div>
+                        <a href="../profile/?id={{user._id}}">
+                    {{else}}
+                        <div class="post-pic-holder">
+                            <a href="../profile/?id={{user}}"><img class="post-profile-pic img-circle" src={{userProfilePic}}></a>
+                        </div>
+                        <a href="../profile/?id={{user}}">
+                    {{/if}}
+                        {{#if user.name}}
+                            <h2 class="post-heading"> {{user.name}} </h4>
+                        {{else}}
+                            <h2 class="post-heading"> {{userName}} </h4>
+                        {{/if}}
+                    </a>
+                    <p class="post-secondary"> {{date}} </p>
+                    <p id="post-text" class="list-group-item-text post-text"> {{text}} </p>
+                    <button class="like-post btn btn-xs btn-default" value="{{_id}}">
+                        <i class="fa fa-thumbs-o-up"></i>
+                        <div id="postInfo" value="{{songId}}"></div>
+                    </button>
+                    <div class="post-likes post-secondary inline"> {{likes}} Likes </div>
+                    {{#if cocreationSong}}  
+                        <div class="list-group results">
+                            <div class="post-container">
+                                <div class="post-pic-holder">
+                                    <a href="../song/?id={{cocreationSong.0._id}}"><img class="post-profile-pic img-circle" src={{cocreationSong.0.backgroundImage}}></a>
+                                </div>
+                                <a href="../song/?id={{cocreationSong.0._id}}"><h2 class="post-heading"> {{cocreationSong.0.name}} </h4></a>
+                                <p id="post-text" class="list-group-item-text post-text"> {{cocreationSong.0.description}} </p>
+                                <div class="post-secondary inline"> {{cocreationSong.0.likes}} Likes </div> 
+                            </div>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+        script(id="user-template" type="text/x-handlebars-template").
+            <div class="list-group results">
+                <div class="post-container">
+                    <div class="post-pic-holder">
+                        <a href="../profile/?id={{_id}}"><img class="post-profile-pic img-circle" src={{profilePic}}></a>
+                    </div>
+                        <a href="../profile/?id={{_id}}"><h2 class="post-heading"> {{name}} </h4></a>
+                    <p id="post-text" class="list-group-item-text post-text"> {{location}} </p>
+                        
+                                
+                </div>
+            </div>
+        script(id="comment-template" type="text/x-handlebars-template").
+            <div class="list-group results">
+                <div class="post-container">
+                    <div class="post-pic-holder">
+                        <a href="../profile/?id={{userId}}"><img class="post-profile-pic img-circle" src={{userProfilePic}}></a>
+                    </div>
+                        <a href="../profile/?id={{userId}}"><h2 class="post-heading"> {{userName}} </h4></a>
+                        <p class="post-secondary"> {{date}} </p>
+                        <p id="comment-text" class="list-group-item-text post-text"> {{comment}} </p>
+                    <button class="like-comment btn btn-xs btn-default">
+                        <i class="fa fa-thumbs-o-up"></i>
+                        <div id="commentInfo" value="{{songId}}"></div>
+                    </button>
+                    <div class="likes-comment post-secondary inline"> {{likes}} Likes </div>
+                                
+                </div>
+            </div>
+        script(id="cocreation-template" type="text/x-handlebars-template").
+            <div class="list-group results">
+                <div class="post-container">
+                    <div class="cocreation-likes pull-right">{{likes}} Likes</div>
+                    <div class="cocreation-pic-holder">
+                        <a href="../song/?id={{_id}}"><img class="cocreation-profile-pic img-circle" src={{backgroundImage}}></a>
+                        <a href="../song/?id={{_id}}">
+                            <div class="cocreation-heading">
+                                <h2 class="post-heading"> {{name}} </h4></a>
+                                <p id="post-text" class="list-group-item-text post-text"> space holding for description{{description}} </p>
+                            </div>
+                    </div>
+                    <h2>CoCreators</h2>
+                    {{#each users}}
+                        <div class="cocreation-user-container">
+                            <a href="../profile/?id={{_id}}">
+                                <img class="cocreation-user-pic img-circle" src={{profilePic}}>
+                                <h3 class="cocreation-user-name">{{name}}</h3>
+                            </a>
+                        </div>
+                    {{/each}}   
+        
+                </div>
+            </div>  
         script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
         script(src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")
         script(src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js")
-        script(src="./scripts/lib/moment.js")
+        script(src="../scripts/lib/moment.js")
+        script(src="../scripts/lib/main.js")
+
         //- script(script src="../scripts/lib/originalMain.js")
+
+
+
+
+
+
+
+
+

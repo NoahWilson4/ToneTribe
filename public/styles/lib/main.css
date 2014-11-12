@@ -13,6 +13,22 @@ a:hover{
 	color: rgb(47, 86, 110);
 
 }
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
 .hide{
 	display: none;
 }
@@ -56,7 +72,7 @@ box-shadow: 5px 9px 22px 0px rgba(158, 158, 158, .8);
 margin-top: 50px;
 padding: 10px;
 background-color: rgb(146, 160, 158);
-height: 450px;
+height: 525px;
 width: 100%;
 position: relative;
 /*background-image: ;*/
@@ -171,6 +187,12 @@ color: rgb(86, 85, 84);
 
 }
 
+.upload-input {
+	width: 100%;
+padding: 10px;
+background: whitesmoke;
+}
+
 .photo-container{
 padding: 0px 15px;
 }
@@ -181,8 +203,8 @@ bottom: -60px;
 left: 20px;
 margin-left: 15px;
 margin-top: -30px;
-width: 280px;
-height: 280px;
+width: 333px;
+height: 333px;
 padding: 0;
 background-image: ;
 background-size: cover;
@@ -234,16 +256,17 @@ border: 3px solid lightgray;
 .name-loc {
 position: absolute;
 bottom: 0px;
-left: 280px;
+left: 250px;
 display: inline-block;
-min-width: 320px;
+min-width: 400px;
 color: rgb(233, 231, 228);
-padding: 0px 50px 10px 55px;
+padding: 0px 50px 10px 140px;
 background-color: rgba(0, 0, 0, 0.35);
 border-top-right-radius: 140px;
-/*border-top-left-radius: 120px;*/
+/* border-top-left-radius: 120px; */
 border-top: 2px solid rgb(152, 152, 152);
 border-bottom: none;
+border-left: 1px solid rgb(152, 152, 152);
 }
 
 .edit-name-loc {
@@ -260,7 +283,8 @@ font-size: 17px;
 
 .name {
 	margin-bottom: 0px;
-	font-size: 60px;
+	margin-top: 40px;
+	font-size: 80px;
 }
 
 .band-name {
@@ -269,7 +293,7 @@ font-size: 17px;
 
 .location {
 	color: lightgray;
-	font-size: 33px;
+	font-size: 40px;
 }
 
 .band-location {

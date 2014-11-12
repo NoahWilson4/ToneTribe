@@ -16,6 +16,7 @@ var _ = require('underscore');
 var authenticationController = require('./controllers/authentication.js');
 var indexController = require('./controllers/index.js');
 var apiController = require('./controllers/apiController.js');
+var songController = require('./controllers/songController.js');
 var User = require('./models/user.js');
 var CocreationSong = require('./models/cocreationSong.js');
 
@@ -24,7 +25,7 @@ var CocreationSong = require('./models/cocreationSong.js');
 
 mongoose.connect('mongodb://localhost/toneTribe');
 /// if no users, add a few for testing
-require('./models/seeds/userSeed.js');
+// require('./models/seeds/userSeed.js');
 
 ////////////////////////////////////////////
 //for aws
@@ -114,6 +115,7 @@ app.get('/profile-band', indexController.profileBand);
 app.get('/search', indexController.search);
 app.get('/cocreation', indexController.cocreation);
 app.get('/cocreation-user', indexController.cocreationUser);
+app.get('/cocreation-other-user', indexController.cocreationOtherUser);
 app.get('/song', indexController.song);
 app.get('/search-results', indexController.searchResults);
 app.get('/live-stream', indexController.liveStream);
@@ -142,6 +144,8 @@ app.get('/api/getAllPosts', apiController.getAllPosts);
 app.post('/api/addSongDescription', apiController.addSongDescription);
 app.post('/api/shareSong', apiController.shareSong);
 app.post('/api/getPosts', apiController.getPosts);
+app.post('/song/likeSong', songController.likeSong);
+app.post('/api/likePost', apiController.likePost);
 
 
 ////////////////////////////////////////////
@@ -181,6 +185,7 @@ app.post('/uploadProfilePic', function (req, res){
       });
 });
 app.post('/uploadBackgroundPic', function (req, res){
+  console.log('hello???');
   console.log('req.files on uploadProfilePic: ', req.files);
   console.log('req.body on uploadProfilePic: ', req.body);
   var fName = req.files.image.name;
@@ -261,8 +266,25 @@ app.post('/submitTrack', function (req, res) {
         }
 
         CocreationSong.findOne({_id: id}, function(err, song){
+          var isNewUser = true;
+          console.log('song: ', song);
+          console.log('song.users: ', song.users);
+          song.users.map(function(user){
+              console.log('mapping...');
+
+              console.log(user,"*");
+              console.log(req.user._id,'*');
+
+              if (user.toString() === (req.user._id).toString()) {
+                isNewUser = false;
+                console.log('is not new user.');
+              }
+          });
+          if (isNewUser === true){
+             console.log('is new user!');
             song.users.push(req.user._id);
             song.save();
+          }
         });
      
       fs.readFile(fPath, function (err, data) {

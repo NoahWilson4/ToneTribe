@@ -1,19 +1,14 @@
 
 bigger things:
 
-  notifications
-  bands
-  likes songs, posts
 
 littler things:
 
-  im working on getting posts, prepopulate post info or save specific data to post?
-
-  convert loading of posts to ajax call
-  on create new song, load player with form to add name, description and image
+ 
+  share song, close modal after shared, change button title
+  uploadbackground song, show spinner
   on close welcome, style the edit button to slide to its final position
   on load page initially as new user, fade shadows in
-  song description
   still use separate js files, minify each.
   hover text over buttons/links
   add dates to song creations, uploads,
@@ -23,13 +18,14 @@ littler things:
   remove user password from bootstrapped data
   fade in pic uploads
   ensure that post/song/user images are dynamic and will change if the user changes image
+  songcomments and tracks now have user schemas, shift display of comments and tracks to display current user
 
 COCREATION:
 
+  song styles and dates
+
   main page:
 
-  cocreation background image
-  description of song
   limited display, infinite scrolling
   search by styles, users, likes, instruments....
 
@@ -37,9 +33,8 @@ song page:
   
   uploading status, and loading for song player
   mute button - different image and css change 
-  share - posts it to live feed and your page
   wire up the song and track likes, sort tracks by likes in button
-  deleting songs... checking to see if they are still in the dataabase
+  deleting songs... checking to see if they are still in the database
   links to user pages from song player
   different view for your own song
   song stop instead of pause, or restart?
@@ -51,8 +46,8 @@ PROFILES:
 
   link to bands from user profile
   bands
-  view/load other user's profiles and from songtracks
-  notifications (cocreation requests for instruments...)
+  
+ 
 
 
 
@@ -60,6 +55,14 @@ PROFILES:
 
 
 Eventual things to do:
+
+  consolidate: pull out reused code into a commonly used js file...
+                      place templates in layout for use on multiple pages
+                      create new controllers for organization and ease
+
+   notifications (cocreation requests for instruments...)
+  bands
+ 
 
   photo gallery  
   limit sort results to 20ish, infinite scrolling
@@ -69,6 +72,7 @@ Eventual things to do:
 
 COOL THINGS TO ADD:
 
+on different user's profile, their info is user, and current user is currentuser.... confusing and troublesome.
 live recording?
 image magick for thumbnails
 use d3 or another data graphics library to show web of connections globally between musicians

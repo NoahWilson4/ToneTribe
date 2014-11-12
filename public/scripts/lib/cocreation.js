@@ -19,28 +19,38 @@ $.get('/api/getAllCocreations', function(response){
 	console.log('response: ', response);
 	cocreationSongs = response.cocreationSongs;
 	console.log('cocreationSongs: ', cocreationSongs);
+
+	var sortedByLikes = cocreationSongs.sort(function(a, b){
+		console.debug(a, b);
+		if ( (a.likes||0) > (b.likes||0) ) {
+		    return -1;
+		} else if ( (a.likes||0) < (b.likes||0) ) {
+		    return 1;
+		}
+		return 0;
+	});
 //// fill page with songs //////////
-	cocreationSongs.map(function(song){
+	sortedByLikes.map(function(song){
 		console.log('song test: ', song);
 		var outputHTML = compileCocreationTemplate(song);
-		$('#cocreation-container').prepend(outputHTML);
+		$('#cocreation-container').append(outputHTML);
 	});
 });
 
 
-	$('#create-new-song').on('submit', function(e){
-		e.preventDefault();
-		var songName = $(this).find('[name=name]').val();
-		var song = {
-			name: songName
-		};
+	// $('#create-new-song').on('submit', function(e){
+	// 	e.preventDefault();
+	// 	var songName = $(this).find('[name=name]').val();
+	// 	var song = {
+	// 		name: songName
+	// 	};
 
-		$.post('/api/createNewSong', song, function(responseData){
-			console.log('responseData: ', responseData);
-			var outputHTML = compileCocreationTemplate(responseData);
-			$('#cocreation-container').prepend(outputHTML);
-		});
-	});
+	// 	$.post('/api/createNewSong', song, function(responseData){
+	// 		console.log('responseData: ', responseData);
+	// 		var outputHTML = compileCocreationTemplate(responseData);
+	// 		$('#cocreation-container').prepend(outputHTML);
+	// 	});
+	// });
 
 
 

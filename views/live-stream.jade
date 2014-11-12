@@ -5,7 +5,7 @@ block content
 		div.img-name.row
 			div.name-loc.col-xs-6.col-sm-6.c0l-md-7.col-xl-5
 				h2.name(title="name") Live Stream
-				div.location(title="location") The Creative Playground
+				div.location(title="location") The Collective Conversation
 			div.profile-pic.img-circle.col-xs-4(style="")
 	.container
 		.info-block(title="about")
@@ -38,49 +38,9 @@ block content
 							input.btn.btn-simple-sm.btn-post(type="submit" value="Post")
 					#post-container
 
-
-	script(id="post-template" type="text/x-handlebars-template").
-		<div class="list-group results">
-			<div class="post-container">
-				<div class="post-pic-holder">
-					<a href="../profile/?id={{user._id}}"><img class="post-profile-pic img-circle" src={{userProfilePic}}></a>
-				</div>
-					<a href="../profile/?id={{user._id}}"><h2 class="post-heading"> {{userName}} </h4></a>
-					<p class="post-secondary"> {{date}} </p>
-				<p id="post-text" class="list-group-item-text post-text"> {{text}} </p>
-					<button class="btn btn-xs btn-default">
-						<i class="fa fa-thumbs-o-up"></i>
-						<div id="postInfo" value="{{songId}}"></div>
-					</button>
-					<div class="post-secondary inline"> {{likes}} Likes </div>
-							
-			</div>
-		</div>
-	script(id="cocreation-template" type="text/x-handlebars-template").
-		<div class="list-group results">
-			<div class="post-container">
-				<div class="cocreation-likes pull-right">{{likes}} Likes</div>
-				<div class="cocreation-pic-holder">
-					<a href="../song/?id={{_id}}"><img class="cocreation-profile-pic img-circle" src={{backgroundImage}}></a>
-					<a href="../song/?id={{_id}}">
-						<div class="cocreation-heading">
-							<h2 class="post-heading"> {{name}} </h4></a>
-							<p id="post-text" class="list-group-item-text post-text"> space holding for description{{description}} </p>
-						</div>
-				</div>
-				<h2>CoCreators</h2>
-				{{#each users}}
-					<div class="cocreation-user-container">
-						<a href="../profile/?id={{_id}}">
-							<img class="cocreation-user-pic img-circle" src={{profilePic}}>
-							<h3 class="cocreation-user-name">{{name}}</h3>
-						</a>
-					</div>
-				{{/each}}	
 	
-			</div>
-		</div>
 	script.
 		var user = !{JSON.stringify(user)};
+		var currentUser = !{JSON.stringify(currentUser)};
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
 	script(script src="../scripts/lib/liveStream.js")

@@ -155,7 +155,7 @@ block content
 						
 	.modal.fade#uploadModalProfilePic
 				.modal-dialog
-					form#upload(method="post" action="/uploadProfilePic" enctype="multipart/form-data")
+					form#uploadProfilePicForm(method="post" action="/uploadProfilePic" enctype="multipart/form-data")
 						.modal-content
 							.modal-header
 								button.close(data-dismiss="modal")
@@ -164,14 +164,17 @@ block content
 								h4.modal-title Upload Pic
 							.modal-body
 								.upload-view-tracks
-									input.btn.btn-default.btn-sm(type="file" name="image")
+									input.btn.btn-default.btn-sm.upload-input(type="file" name="image")
 									input#userId(type="hidden" value=user._id name="id")
+										
 							.modal-footer
-								button.btn.btn-default(type="button" data-dismiss="modal") Close
-								input.btn.btn-simple-sm(type="submit" value="Upload")
+								button#close.btn.btn-default.btn-simple-sm(type="button" data-dismiss="modal") Close
+								button#uploadProfilePicButton.btn.btn-simple-sm(type="submit" value="Upload") Upload
+								span#uploadingProfilePic.hide.btn.btn-default.btn-simple-sm
+									.glyphicon.glyphicon-refresh.glyphicon-refresh-animate
 	.modal.fade#uploadModalBackgroundPic
 				.modal-dialog
-					form#upload(method="post" action="/uploadBackgroundPic" enctype="multipart/form-data")
+					form#uploadBackgroundPicForm(method="post" action="/uploadBackgroundPic" enctype="multipart/form-data")
 						.modal-content
 							.modal-header
 								button.close(data-dismiss="modal")
@@ -180,56 +183,18 @@ block content
 								h4.modal-title Upload Pic
 							.modal-body
 								.upload-view-tracks
-									input.btn.btn-default.btn-sm(type="file" name="image")
+									input.btn.btn-default.btn-sm.upload-input(type="file" name="image")
 									input#userId(type="hidden" value=user._id name="id")
 							.modal-footer
-								button.btn.btn-default(type="button" data-dismiss="modal") Close
-								input.btn.btn-simple-sm(type="submit" value="Upload")
+								button#close-b.btn.btn-default.btn-simple-sm(type="button" data-dismiss="modal") Close
+								button#uploadBackgroundPicButton.btn.btn-simple-sm(type="submit" value="Upload") Upload
+								span#uploadingBackgroundPic.hide.btn.btn-default.btn-simple-sm
+									.glyphicon.glyphicon-refresh.glyphicon-refresh-animate
 	
 	script.
 		var user = !{JSON.stringify(user)};
 		var currentUser = !{JSON.stringify(currentUser)};
-	script(id="post-template" type="text/x-handlebars-template").
-		<div class="list-group results">
-			<div class="post-container">
-				<div class="post-pic-holder">
-					<a href="../profile/?id={{userId}}"><img class="post-profile-pic img-circle" src={{userProfilePic}}></a>
-				</div>
-					<a href="../profile/?id={{userId}}"><h2 class="post-heading"> {{userName}} </h4></a>
-					<p class="post-secondary"> {{date}} </p>
-				<p id="post-text" class="list-group-item-text post-text"> {{text}} </p>
-					<button class="btn btn-xs btn-default">
-						<i class="fa fa-thumbs-o-up"></i>
-						<div id="postInfo" value="{{songId}}"></div>
-					</button>
-					<div class="post-secondary inline"> {{likes}} Likes </div>		
-			</div>
-			{{#if cocreationSong}}
-				{{#each cocreationSong}}
-					<div class="list-group results">
-						<div class="post-container">
-							<div class="post-pic-holder">
-								<a href="../song/?id={{_id}}"><img class="post-profile-pic img-circle" src={{backgroundImage}}></a>
-							</div>
-								<a href="../song/?id={{_id}}"><h2 class="post-heading"> {{name}} </h4></a>
-							<p id="post-text" class="list-group-item-text post-text"> {{description}} </p>		
-						</div>
-					</div>
-				{{/each}}
-			{{/if}}
-		</div>
-	script(id="user-template" type="text/x-handlebars-template").
-		<div class="list-group results">
-			<div class="post-container">
-				<div class="post-pic-holder">
-					<a href="../profile/?id={{_id}}"><img class="post-profile-pic img-circle" src={{profilePic}}></a>
-				</div>
-					<a href="../profile/?id={{_id}}"><h2 class="post-heading"> {{name}} </h4></a>
-				<p id="post-text" class="list-group-item-text post-text"> {{location}} </p>
-					
-							
-			</div>
-		</div>
+	
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
 	script(src="../scripts/lib/profile.js")
 

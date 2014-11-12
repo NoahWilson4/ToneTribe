@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var async = require('async');
 var _ = require('underscore');
+var moment = require('moment');
 //for aws
 var http = require('http');
 var path = require('path');
@@ -217,9 +218,12 @@ var apiController = {
 		console.log('req.user createNewSong: ', req.user);
 		var songName = req.body.name;
 		var userId = req.user._id;
+		var date = moment().format('MMMM Do YYYY, h:mm:ss a');
 		var song = {
 			name: songName,
-			userId: userId
+			userId: userId,
+			likes: 0,
+			date: date
 		};
 		console.log('song objecta: ', song);
 		var newSong = new CocreationSong(song);
@@ -357,12 +361,20 @@ var apiController = {
 		});
 	},
 	getAllCocreations: function(req, res){
+		console.log('getting all cocreationSongs');
 		CocreationSong
 			.find({})
 			.populate('users', 'name profilePic _id', 'user')
 			.exec(function(err, result){
+				console.log('foundsongs');
+				var songsSorted = result.sort(function(a, b){
+					console.log('sorting...');
+					return parseFloat(a.likes) - parseFloat(b.likes);
+				});
+		////////// sorting not working....  /////////////
+				console.log('songsSorted: ', songsSorted);
 				res.send({
-					cocreationSongs: result
+					cocreationSongs: songsSorted
 			});
 		});
 	},
@@ -637,57 +649,212 @@ var apiController = {
 		},
 		addPost: function(req, res){
 			console.log('addPost req.body: ', req.body);
-			console.log('req.query: ', req.query);
+
 			var postedTo;
-			if (req.query > 0){
+			if (req.query.length > 0){
 				console.log('posted to different user');
 				postedTo = req.query;
+				var newPost = new Post({
+					userName: req.body.userName,
+					userProfilePic: req.body.userProfilePic,
+					user: req.user,
+					postedTo: postedTo,
+					text: req.body.text,
+					likes: 0,
+					date: req.body.date
+				});
+				console.log('newPost: ', newPost);
+				User.findOne({_id: postedTo}, function(err, result){
+					result.posts.push(newPost._id);
+					console.log('result updated post: ', result);
+					result.save();
+					console.log('newPost._id: ', newPost._id);
+					res.send({postId: newPost._id});
+				});
+				User.findOne({_id: req.user._id}, function(err, result){
+					result.posts.push(newPost._id);
+					console.log('result updated post: ', result);
+					result.save();
+					console.log('newPost._id: ', newPost._id);
+					res.send({postId: newPost._id});
+				});
 			} else {
-				('posted to current user');
-				postedTo = req.user;
+				('posted to current user', req.user._id);
+				postedTo = req.user._id;
+				var newPost = new Post({
+					userName: req.body.userName,
+					userProfilePic: req.body.userProfilePic,
+					user: req.user,
+					postedTo: postedTo,
+					text: req.body.text,
+					likes: 0,
+					date: req.body.date
+				});
+				console.log('newPost: ', newPost);
+				User.findOne({_id: req.user._id}, function(err, result){
+					result.posts.push(newPost._id);
+					console.log('result updated post: ', result);
+					result.save();
+					console.log('newPost._id: ', newPost._id);
+					res.send({postId: newPost._id});
+				});
+
 			}
-			var newPost = new Post({
-				userName: req.body.userName,
-				userProfilePic: req.body.userProfilePic,
-				user: req.user,
-				postedTo: postedTo,
-				text: req.body.text,
-				likes: 0,
-				date: req.body.date
-			});
+			
 			console.log('newPost: ', newPost);
 			newPost.save();
-			User.findOne({_id: postedTo}, function(err, result){
-				result.posts.push(newPost._id);
-				console.log('result updated post: ', result);
-				result.save();
-				res.send('saved.');
-			});
+			
 		},
 		getAllPosts: function(req, res){
+			var posts = [];
 			Post.find({})
 				.populate('user', 'name _id profilePic', 'user')
 				.populate('postedTo', 'name _id profilePic', 'user')
-				.populate('cocreationSong', 'name _id backgroundImage', 'cocreationsong')
-				.exec(function(err, result){
-					res.send({
-						posts: result.posts
+				.populate('cocreationSong', null, 'cocreationsong')
+				.exec(function(err, results){
+					var numOfPosts = results.length;
+					console.log('numOfPosts: ', numOfPosts);
+					results.map(function(post){
+						Post.findOne({_id: post._id})
+							.populate('user', 'name profilePic _id', 'user')
+							.populate('postedTo', 'name profilePic _id', 'user')
+							.populate('cocreationSong', null, 'cocreationsong')
+							.exec(function(err, result){
+								console.log('pushing post');
+								posts.push(result);
+								if (posts.length === numOfPosts){
+									console.log('posts: ', posts);
+									console.log('complete with populate, now sending');
+									var sortedPosts = posts.sort(function(a, b){
+										if (a.date < b.date){
+										     return -1;
+										}
+										if (a.date > b.date) {
+										    return 1;
+										}
+										return 0;
+									});
+									res.send({
+										posts: sortedPosts
+									});
+								}
+						});
 					});
 				});
 		},
 		getPosts: function(req, res){
+			var posts = [];
 			console.log('getPosts req.body._id: ', req.body._id);
 			User.findOne({_id: req.body._id})
 				.populate('posts', null, 'post')
-				.exec(function(err, result){
-					console.log('user find result: ',result);
-					var posts = result.posts;
-					console.log('posts: ', posts);
-					res.send({
-						posts: posts
+				.exec(function(err, doc){
+					var numOfPosts = doc.posts.length;
+					console.log('numOfPosts: ', numOfPosts);
+					doc.posts.map(function(post){
+						Post.findOne({_id: post._id})
+							.populate('user', 'name profilePic _id', 'user')
+							.populate('postedTo', 'name profilePic _id', 'user')
+							.populate('cocreationSong', null, 'cocreationsong')
+							.exec(function(err, result){
+								console.log('pushing post');
+								posts.push(result);
+								if (posts.length === numOfPosts){
+									console.log('posts: ', posts);
+									console.log('complete with populate, now sending');
+									var sortedPosts = posts.sort(function(a, b){
+										if (a.date < b.date){
+										     return -1;
+										}
+										if (a.date > b.date) {
+										    return 1;
+										}
+										return 0;
+									});
+									res.send({
+										posts: sortedPosts
+									});
+								}
+						});
 					});
 				});
-		}
+		},
+		likePost: function(req, res){
+		console.log('req.body liking post', req.body);
+		console.log('req.body._id liking post', req.body._id);
+		Post.findOne({_id: req.body._id}, function(err, post){
+			console.log('post:', post);
+			var likes;
+			if (post.likes > 0) {
+				likes = parseInt(post.likes);
+				console.log('likes: ', likes);
+				likes = likes + 1;
+			} else {
+				likes = 1;
+			}
+			post.likes = likes;
+			console.log('post.likes updated:', post.likes);
+			post.save();
+			res.send({
+				likes: likes
+			});
+		});
+	}
+		// getPosts: function(req, res){
+		// 	console.log('getPosts req.body._id: ', req.body._id);
+		// 	User.findOne({_id: req.body._id})
+		// 		.populate('posts', null, 'post')
+		// 		.exec(function(err, doc){
+		// 			console.log('user find doc: ', doc);
+
+		// 			// doc.populate({
+		// 			// 	path: 'user',
+		// 			// 	select: 'name profilePic _id',
+		// 			// 	model: 'user'
+		// 			// })
+		// 			// .populate({
+		// 			// 	path: 'postedTo',
+		// 			// 	select: 'name profilePic _id',
+		// 			// 	model: 'user'
+		// 			// })
+		// 			// .populate({
+		// 			// 	path: 'cocreationSong',
+		// 			// 	select: 'name _id backgroundImage',
+		// 			// 	model: 'cocreationsong'
+		// 			// }, function(err, pop){
+		// 			// 	console.log('populating complete, pop: ', pop);
+		// 			// 	// assert.equal(doc._id, pop._id);
+		// 			// });
+
+		// 			doc
+		// 				.populate('user', 'name profilePic _id', 'user')
+		// 				.populate('postedTo', 'name profilePic _id', 'user')
+		// 				.populate('cocreationSong', 'name _id backgroundImage', 'cocreationsong')
+		// 				;
+		// 			console.log('posts updated: ', doc);
+		// 			res.send({
+		// 				user: doc
+		// 			});
+		// 		});
+		// }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = apiController;

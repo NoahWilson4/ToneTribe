@@ -5,7 +5,12 @@ $(document).on('ready', function() {
 
 ///// like song /////
 
-
+$('#like-song').on('click', function(){
+	console.log('click?');
+	$.post('/song/likeSong', {_id: song._id}, function(response){
+		$('#song-likes').text(response.likes + ' Likes');
+	});
+});
 
 //// share song /////////
 
@@ -17,6 +22,9 @@ $('#share-form').on('submit', function(e){
 	var songShare = {
 		text: shareMessage,
 		cocreationSong: song._id,
+		cocreationSongPic: song.backgroundImage,
+		cocreationSongName: song.name,
+		cocreationSongDescription: song.description,
 		user: user._id,
 		userName: user.name,
 		userProfilePic: user.profilePic,
@@ -49,6 +57,45 @@ $(document).on('click', '.cancel', function(){
 	var compileCommentTemplate = Handlebars.compile(commentTemplate);
 
 	console.log('song test!!!!:', song);
+
+
+	////////// uploading tracks ///////////
+
+	$('#uploadTrackButton0').on('click', function(){
+		$('#uploadingTrack0').removeClass('hide');
+		$(this).addClass('hide');
+		$('#close0').addClass('hide');
+	});
+
+	$('#uploadTrackButton1').on('click', function(){
+		$('#uploadingTrack1').removeClass('hide');
+		$(this).addClass('hide');
+		$('#close1').addClass('hide');
+	});
+
+	$('#uploadTrackButton2').on('click', function(){
+		$('#uploadingTrack2').removeClass('hide');
+		$(this).addClass('hide');
+		$('#close2').addClass('hide');
+	});
+
+	$('#uploadTrackButton3').on('click', function(){
+		$('#uploadingTrack3').removeClass('hide');
+		$(this).addClass('hide');
+		$('#close3').addClass('hide');
+	});
+
+	$('#uploadTrackButton4').on('click', function(){
+		$('#uploadingTrack4').removeClass('hide');
+		$(this).addClass('hide');
+		$('#close4').addClass('hide');
+	});
+
+	$('#uploadTrackButton5').on('click', function(){
+		$('#uploadingTrack5').removeClass('hide');
+		$(this).addClass('hide');
+		$('#close5').addClass('hide');
+	});
 
 
 //////// on page load, add previous comments to page

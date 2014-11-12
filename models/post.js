@@ -14,7 +14,10 @@ var Post = mongoose.Schema({
 		comment: String,
 		date: String
 	}],
-	cocreationSong: [mongoose.Schema.ObjectId]
+	cocreationSong: [mongoose.Schema.ObjectId],
+	cocreationSongName: String,
+	cocreationSongPic: String,
+	cocreationSongDescription: String
 });
 
 module.exports = mongoose.model('post', Post);

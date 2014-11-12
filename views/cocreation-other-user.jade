@@ -29,7 +29,7 @@ block content
 								p.sidebar-list-text.instruments= song.name
 
 			.col-sm-7.col-md-8
-				.info-block.remove-margin
+				//- .info-block.remove-margin
 							h1 Create New Song
 							form#create-new-song(method="post" action="/api/createNewSong" name="createNewSong")
 								input.form-control.input-new(type="text" name="name" placeholder="Name of Song…")

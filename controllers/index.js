@@ -106,6 +106,19 @@ var indexController = {
 			});
 		});
 	},
+	cocreationOtherUser: function(req, res){
+		console.log('cocreationOtherUser req.query', req.query);
+		User
+		.findOne({_id: req.query.id})
+		.populate('cocreationSongs', null, 'cocreationsong')
+		.populate('cocreationCollaborations', null, 'cocreationsong')
+		.exec(function(err, result){
+			res.render('cocreation-other-user', {
+				user: result,
+				currentUser: req.user
+			});
+		});
+	},
 		song: function(req, res){
 			// console.log('song req.query!!!', req.query);
 			var tracks;
@@ -160,7 +173,8 @@ var indexController = {
 		},
 	liveStream: function(req, res) {
 			res.render('live-stream', {
-				user: req.user
+				user: req.user,
+				currentUser: req.user
 			});
 		},
 	submitSearch: function(req, res) {

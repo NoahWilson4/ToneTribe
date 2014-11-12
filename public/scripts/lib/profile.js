@@ -366,8 +366,22 @@ function editProfile(){
 
 	// });
 
+/////////////////////// uploading images ////////////////////////
 
 
+///// uploading spinning image //////////
+
+$('#uploadProfilePicButton').on('click', function(e){
+	$('#uploadingProfilePic').removeClass('hide');
+	$(this).addClass('hide');
+	$('#close').addClass('hide');
+});
+
+$('#uploadBackgroundPicButton').on('click', function(e){
+	$('#uploadingBackgroundPic').removeClass('hide');
+	$(this).addClass('hide');
+	$('#close-b').addClass('hide');
+});
 
 ////////// hover to edit photos  ////////
 
@@ -403,7 +417,9 @@ $('.profile-top').hover(
 		});
 	});
 
-/////////////////////// posting ////////////////////////
+
+
+
 /////////////////////// posting ////////////////////////
 
 
@@ -415,39 +431,39 @@ var postTemplate = $('#post-template').html();
 
 /////////////// submitting posts  ///////////////
 
-$(document).on('click', '.drop-note', function(){
-	console.log('click');
-	$('#addPost').css({display: 'inherit'});
-	$('#dropNote').text('Cancel').addClass('cancel').removeClass('drop-note');
-});
+// $(document).on('click', '.drop-note', function(){
+// 	console.log('click');
+// 	$('#addPost').css({display: 'inherit'});
+// 	$('#dropNote').text('Cancel').addClass('cancel').removeClass('drop-note');
+// });
 
-$(document).on('click', '.cancel', function(){
-	$('#addPost').css({display: 'none'});
-	$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
-});
+// $(document).on('click', '.cancel', function(){
+// 	$('#addPost').css({display: 'none'});
+// 	$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
+// });
 
-$('#addPost').on('submit', function(e){
-	e.preventDefault();
-	var text = $(this).find('textarea').val();
-	var date = moment().format('MMMM Do YYYY, h:mm:ss a');
-	var post = {
-		date: date,
-		text: text,
-		likes: 0,
-		userName: user.name,
-		userProfilePic: user.profilePic
-	};
+// $('#addPost').on('submit', function(e){
+// 	e.preventDefault();
+// 	var text = $(this).find('textarea').val();
+// 	var date = moment().format('MMMM Do YYYY, h:mm:ss a');
+// 	var post = {
+// 		date: date,
+// 		text: text,
+// 		likes: 0,
+// 		userName: currentUser.name || user.name,
+// 		userProfilePic: currentUser.profilePic || user.profilePic
+// 	};
 
-	$.post('/api/addPost', post , function(responseData){
-		console.log('addpost responseData: ', responseData);
-	});
+// 	$.post('/api/addPost', post , function(responseData){
+// 		console.log('addpost responseData: ', responseData);
+// 	});
 
-	var outputHTML = compilePostTemplate(post);
-	$('#post-container').prepend(outputHTML);
+// 	var outputHTML = compilePostTemplate(post);
+// 	$('#post-container').prepend(outputHTML);
 
-	$('#addPost').css({display: 'none'});
-	$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
-});
+// 	$('#addPost').css({display: 'none'});
+// 	$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
+// });
 
 ////// on page load, display previous posts
 // if (user['posts'].length > 0){
@@ -460,7 +476,7 @@ $('#addPost').on('submit', function(e){
 
 $.post('/api/getPosts', {_id: user._id}, function(response){
 	console.log('asking for posts...');
-	console.log('response: ', response);
+	console.log('response.user: ', response.posts);
 	response.posts.map(function(post){
 		var outputHTML = compilePostTemplate(post);
 		$('#post-container').prepend(outputHTML);
