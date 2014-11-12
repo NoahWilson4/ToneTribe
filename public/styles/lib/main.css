@@ -33,6 +33,11 @@ a:hover{
 	display: none;
 }
 
+.main-container {
+	max-width: 2000px;
+}
+
+
 .reveal {
 	display: inherit;
 }
@@ -431,6 +436,12 @@ margin: 10px;
 	margin-top: 15px;
 }
 
+.post-divider {
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid rgb(239, 239, 239);
+}
+
 .post-secondary{
 	color: rgb(108, 101, 101);
 font-size: 20px;
@@ -699,7 +710,7 @@ top: 85px;
 .heading-form {
 	width: 90%;
 	min-width: 300px;
-
+	max-width: 1000px;
 	margin-left: 5%;
 	margin-top: 70px;
 }
@@ -961,9 +972,18 @@ min-height: 26px;
 	height: 300px;
 }
 
+.add-margin {
+	margin-top: 150px;
+}
 
+.add-margin-sm {
+	margin-top: 50px;
+}
 
-
+.inline-block{
+	display: inline-block;
+	margin-left: 15px;
+}
 
 
 

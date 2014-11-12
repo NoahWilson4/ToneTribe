@@ -1,28 +1,47 @@
 
 bigger things:
 
+get up on heroku
 
 littler things:
 
- 
+  songtrack likes
+
+  error messages with signin/signup
+
+ navbar styling - larger and brighter, arrange buttons and dropdown
+
   share song, close modal after shared, change button title
-  uploadbackground song, show spinner
-  on close welcome, style the edit button to slide to its final position
+  uploadbackground song, show spinner, and increase size of modal to show need of uploading
+  onpage load, loading song spinner?
+
   on load page initially as new user, fade shadows in
-  still use separate js files, minify each.
   hover text over buttons/links
-  add dates to song creations, uploads,
+
+  background pic, 625 large, 550 smaller
+  main-container width limit
+
+
   conditionals for empty form submissions
+  error messages for forms/logins
+
   subtle animations and shadowing
-  navbar styling - larger and brighter, arrange buttons and dropdown
-  remove user password from bootstrapped data
-  fade in pic uploads
-  ensure that post/song/user images are dynamic and will change if the user changes image
-  songcomments and tracks now have user schemas, shift display of comments and tracks to display current user
+  
+  fade in pic upload buttons on profilepage
+
+  still use separate js files, minify each.
+
+  connected will come up twice? or connect will come up again?
+
+  another song?
+
+  profile edit previous item, types within close button?
+  deletes wrong word glitch?
 
 COCREATION:
 
   song styles and dates
+    add dates to song creations, uploads,
 
   main page:
 
@@ -30,6 +49,8 @@ COCREATION:
   search by styles, users, likes, instruments....
 
 song page:
+
+  presort songs by likes for  the selectors
   
   uploading status, and loading for song player
   mute button - different image and css change 
@@ -43,6 +64,8 @@ SEARCH:
   bands...
 
 PROFILES:
+
+    on close welcome, style the edit button to slide to its final position
 
   link to bands from user profile
   bands
@@ -68,7 +91,7 @@ Eventual things to do:
   limit sort results to 20ish, infinite scrolling
   sort tribe
 
-
+  remove user password from bootstrapped data
 
 COOL THINGS TO ADD:
 

@@ -219,6 +219,7 @@ block content
 							textarea.form-control.form-font(type="text" id="post" placeholder="Comment…")
 						.form-group
 							input.btn.btn-simple-sm.btn-post(type="submit" value="Post")
+					.post-divider
 					#comments-container
 
 
@@ -244,7 +245,7 @@ block content
 									textarea.form-control.form-font(type="text" name="share-message" placeholder="Comment…")
 							.modal-footer
 								button.btn.btn-default(type="button" data-dismiss="modal") Close
-								input.btn.btn-default.btn-simple-sm.btn-post(type="submit" value="Upload")
+								input.btn.btn-default.btn-simple-sm.btn-post(type="submit" value="Share" data-toggle="modal" data-target="#shareModal")
 			.modal.fade#uploadModal0
 				.modal-dialog
 					form#upload(method="post" action="/submitTrack" enctype="multipart/form-data")

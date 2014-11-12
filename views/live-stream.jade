@@ -1,22 +1,22 @@
 extends layout
 
 block content
-	div.container.profile-top(style="")
+	div.container.profile-top(style="background-image: url('./images/Sunset-at-Barrett-Lakes_blackandwhite.jpg')")
 		div.img-name.row
 			div.name-loc.col-xs-6.col-sm-6.c0l-md-7.col-xl-5
-				h2.name(title="name") Live Stream
+				h2.name(title="name") LiveStream
 				div.location(title="location") The Collective Conversation
-			div.profile-pic.img-circle.col-xs-4(style="")
+			div.profile-pic.img-circle.col-xs-4(style="background-image: url('./images/earth-spirals2.png')")
 	.container
 		.info-block(title="about")
 			.row
-				.heading-container.col-sm-4.col-md-2
+				//- .heading-container.col-sm-4.col-md-2
 					h2.heading-about Live Stream:
-				.content-container.col-sm-8.col-md-10
-					p.about Here's what's happening in the ToneTribe universe.
+				.content-container
+					h1.about Check out what's happening in the ToneTribe universe!
 	.container
 		.row
-			div.col-sm-5.col-md-4#sidebar
+			//- div.col-sm-5.col-md-4#sidebar
 				//- .profile-sidebar
 					.sidebar-list
 						button.btn.btn-default.btn-sm.btn-songs Create New Song
@@ -28,15 +28,16 @@ block content
 					
 
 			.col-sm-7.col-md-8
-				.info-block.remove-margin
-					button#dropNote.drop-note.btn-simple-sm.pull-left Drop a Note
-					h1.heading-about Posts
-					form#addPost(role="form")
-						.form-group
-							textarea.form-control.form-font(type="text" id="post" placeholder="Post…")
-						.form-group
-							input.btn.btn-simple-sm.btn-post(type="submit" value="Post")
-					#post-container
+		.info-block.remove-margin
+			button#dropNote.drop-note.btn-simple-sm.pull-left Drop a Note
+			h1.heading-about Posts
+			form#addPost(role="form")
+				.form-group
+					textarea.form-control.form-font(type="text" id="post" placeholder="Post…")
+				.form-group
+					input.btn.btn-simple-sm.btn-post(type="submit" value="Post")
+			.post-divider
+			#post-container
 
 	
 	script.

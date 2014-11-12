@@ -1,13 +1,14 @@
 extends layout
 
 block content
-	.container
-		.info-block
+	.container-fluid.main-container
+		.info-block.add-margin
 			.heading-form
 				.search-form
 					h1.heading-about Search for Musicians
 					//- form#submitSearch.form-horizontal(action="/submitSearch" method="post" role="form")
-					form#submitSearch.form-horizontal(role="form")
+					.post-divider
+					form#submitSearch.form-horizontal.add-margin-sm(role="form")
 						.form-group
 							label.col-sm-3.control-label(for="name") Name:
 							.col-sm-9
@@ -33,15 +34,17 @@ block content
 								input.btn.btn-default.btn-simple-sm(type="submit" value="Search")
 		.col-sm-5
 		#search-results.info-block.col-sm-7
+
 			.search-results
 				h1.heading-about Search Results
-				.list-group.results
+				.post-divider
+				.list-group.results.add-margin-sm
 				.no-results
 					h2.list-group-item-heading No Results Found.
 				.search-results-container
-					h2 Musicians:
+					//- h2 Musicians:
 					div#search-results-musicians
-					h2 Bands:
+					//- h2 Bands:
 					div#search-results-bands
 				
 	script(id="search-result-template" type="text/x-handlebars-template").

@@ -35,6 +35,8 @@ $.get('/api/getAllCocreations', function(response){
 		var outputHTML = compileCocreationTemplate(song);
 		$('#cocreation-container').append(outputHTML);
 	});
+
+	$('#song-of-the-week').append(compileCocreationTemplate(sortedByLikes[0]));
 });
 
 
