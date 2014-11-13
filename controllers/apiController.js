@@ -14,6 +14,9 @@ var path = require('path');
 var aws = require('aws-sdk');
 var fs = require('fs');
 
+/// if developing
+// var privateSettings = require('../private.js');
+
 var multer = require('multer');
 
 var KEY, SECRET;
@@ -23,7 +26,7 @@ if(process.env.AWS_KEY){
   SECRET = process.env.AWS_SECRET;
 } else {
   // if the process doesn't have stuff set, we'll load in our config file
-  var privateSettings = require('../private.js');
+  
   KEY = privateSettings.aws.key;
   SECRET = privateSettings.aws.secret;
 }

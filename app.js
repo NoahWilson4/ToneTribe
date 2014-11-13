@@ -21,9 +21,13 @@ var User = require('./models/user.js');
 var CocreationSong = require('./models/cocreationSong.js');
 
 
+
+/////////////  if developing, use this...
+  // var privateSettings = require('./private.js');
+
 // var CocreationSong = require('./models/cocreationSong.js')
 
-mongoose.connect('mongodb://localhost/toneTribe');
+mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/toneTribe');
 /// if no users, add a few for testing
 // require('./models/seeds/userSeed.js');
 
@@ -41,7 +45,6 @@ if(process.env.AWS_KEY){
   SECRET = process.env.AWS_SECRET;
 } else {
   // if the process doesn't have stuff set, we'll load in our config file
-  var privateSettings = require('./private.js');
   KEY = privateSettings.aws.key;
   SECRET = privateSettings.aws.secret;
 }
@@ -327,9 +330,25 @@ app.post('/submitPrivate', function (req, res) {
 });
 app.use(passportConfig.ensureAuthenticated);
 
-http.createServer(app).listen(app.get('port'), function(){
+
+
+
+
+
+///// new heroku port......
+
+var port = process.env.PORT || 8713;
+var server = app.listen(port, function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+
+
+///// previous port....
+
+// http.createServer(app).listen(app.get('port'), function(){
+//   console.log('Express server listening on port ' + app.get('port'));
+// });
 
 
 
