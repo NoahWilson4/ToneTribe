@@ -9,8 +9,8 @@ block content
 				div.location(title="location")= user.location
 			div.profile-pic.img-circle.col-xs-4(style="background-image: url(" + user.profilePic + ")")
 				button#uploadProfilePic.hide(data-toggle="modal" data-target="#uploadModalProfilePic").glyphicon.glyphicon-picture.make-it-white.edit-icon-profile Upload-Photo
+	button.edit-profile.btn.btn-default.btn-simple.btn-simple.pull-left Edit Profile
 	.container-fluid.main-container
-		button.edit-profile.btn.btn-default.btn-simple.btn-simple.pull-left Edit Profile
 		if user.isNewUser
 			#welcome.container
 				.info-block.shadow(title="welcome")
@@ -26,7 +26,7 @@ block content
 			.info-block.edit-add-shadow(title="about")
 				.row
 					.heading-container.col-sm-4.col-md-2
-						h2.heading-about About:
+						h1.heading-about About:
 					#about.content-container.info-edit-textarea.col-sm-8.col-md-10
 						if user.about
 							p.about-content= user.about
@@ -46,9 +46,9 @@ block content
 					.profile-sidebar
 						.sidebar-list
 							a(href="./cocreation-user")
-								button.btn.btn-default.btn-sm.btn-songs Cocreation Songs
+								button.btn.btn-default.btn-sm.btn-songs.hover Cocreation Songs
 						.sidebar-list
-							button#view-tribe.btn.btn-default.btn-sm.btn-tribe View Tribe Members
+							button#view-tribe.btn.btn-default.btn-sm.btn-tribe.hover View Tribe Members
 					.profile-sidebar.edit-add-shadow
 						.sidebar-list.info-edit(title="instruments")
 							h4.sidebar-list-heading Instruments:
@@ -113,7 +113,7 @@ block content
 					.info-block.remove-margin.edit-add-shadow(title="philosophy")
 						.row
 							.heading-container.col-sm-5.col-md-4
-								h3.heading-about Philosophy:
+								h1.heading-about Philosophy:
 							#philosophy.content-container.info-edit-textarea.col-sm-7.col-md-8
 								if user.philosophy
 									p.about-content= user.philosophy
@@ -130,12 +130,12 @@ block content
 										strong Photos 
 										div View Gallery
 					#addMedia.info-block.embed-info-block.edit-add-shadow.hide
-						h3.heading-about Embed Media
+						h1.heading-about Add Media
 						p Here you can embed media from other sites including Soundcloud, Youtube, CDBaby, and any other site that provides the iframe code for media. Click on share, and there you will find an embed link. (Make sure that http:// is in the code.)
 						form#submit-media(role="form")
-							label.col-sm-4.control-label(for="media") Embed Code:
+							label.col-sm-4.control-label.text-right(for="media") Embed Code:
 							.col-sm-8
-								input(type="text" name="media")
+								input(type="text" name="media").full-width.add-margin-below-sm
 								button.btn.btn-simple-sm.pull-right(type="submit") Embed
 					#media-block.info-block
 						button#view-media.btn.btn-default.btn-simple-sm.pull-left View Media

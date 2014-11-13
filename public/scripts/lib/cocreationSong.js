@@ -38,6 +38,11 @@ $('#share-form').on('submit', function(e){
 });
 
 
+
+
+
+
+
 //////////////////////// comments ///////////////////////
 
 
@@ -269,6 +274,53 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 		console.log('tracks1 at beginning', tracks1);
 
 
+		////// like track   //////////
+
+$(document).on('click', '.like-track', function(){
+	var trackId = $(this).attr('value');
+	var trackNum = $(this).attr('name');
+	var songId = song._id;
+	var optionSelect = $('option[id=' + trackId + ']');
+	var displayLikes = $(this).closest('.upload-switch-track').find('.likes');
+	console.log('displayLikes: ', displayLikes);
+	console.log('optionSelect: ', optionSelect);
+
+	$.post('/song/likeTrack', {
+			songId: songId,
+			trackId: trackId,
+			trackNum: trackNum
+		}, function(response){
+			$(displayLikes).removeClass('hide');
+			$(displayLikes).text(response.likes + ' Likes');
+			$(optionSelect).attr("data", response.likes);
+			$(optionSelect).text($(optionSelect).attr('value') + ', By ' + $(optionSelect).attr('name') + ', ' + response.likes + ' Likes');
+
+///// buggy buggy..... not worth fixing for demo, just dance around it.
+
+			var allTracks = [tracks0, tracks1, tracks2, tracks3, tracks4, tracks5];
+			console.log('allTracks: !!!!!!!', allTracks);
+			for (var i = 0; i < allTracks[trackNum].length; i++){
+				console.log('allTracks[trackNum][i]', allTracks[trackNum][i]);
+				console.log('allTracks[trackNum][i].id', allTracks[trackNum][i].id);
+				console.log(allTracks[trackNum][i].id.id);
+				console.log(trackId);
+				console.log('trackId: ',trackId);
+				if( allTracks[trackNum][i].id.id.toString() === trackId.toString()){
+					console.log('!! Yay!!!!!');
+					allTracks[trackNum][i].likes = response.likes;
+					console.log(allTracks[trackNum][i].likes);
+					console.log(allTracks[trackNum][i]);
+					console.log(tracks0);
+				}
+			}
+		}
+	);
+});
+
+
+
+
+
 		console.log('test....')
 
 		if (tracks0[0]){
@@ -474,6 +526,8 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 		//     }
 		// }
 
+
+
 		$('#select0').on('change', function() {
 		    console.log('test: ', $("#select0 option:selected").val());
 		    var trackTitle = $("#select0 option:selected").val();
@@ -507,6 +561,7 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 		    		$(this).closest('.track-container').find('.song-track-name').text(trackTitle);
 		    		$(this).closest('.track-container').find('.song-user-image').css({backgroundImage: 'url(' + tracks1[i].userPic + ')'});
 		    		$(this).closest('.track-container').find('.likes').text(tracks1[i].likes + ' Likes');
+
 		    	}
 		    }
 		  })

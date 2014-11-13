@@ -20,7 +20,7 @@ block content
 						select#select0.select-track.btn.btn-default
 							if track0
 								for track in track0.userTracks
-									option(value=track.trackTitle data=track._id) #{track.trackTitle}, By userName, #{track.likes} Likes
+									option(value=track.trackTitle data=track.likes id=track._id name=track.userName) #{track.trackTitle}, By #{track.userName}, #{track.likes} Likes
 						button#upload-button0.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
 						#upload-download0.upload-download.shadow
@@ -28,10 +28,16 @@ block content
 							if track0
 								a(href=track0.userTracks[0].url)
 									button.btn.btn-default.btn-updown Download
-						button.like.btn.btn-xs.btn-primary
-							i.fa.fa-thumbs-o-up
+						if track0
+							button.like-track.like.btn.btn-xs.btn-primary(value=track0.userTracks[0]._id name=0)
+								i.fa.fa-thumbs-o-up
+						else
+							button.hide.hidden-like.like-track.like.btn.btn-xs.btn-primary(value="")
+								i.fa.fa-thumbs-o-up
 						if track0
 							.likes #{track0.userTracks[0].likes} Likes
+						else
+							.hidden-likes.likes.hide
 						button.play0.play-track.btn.btn-lg.btn-success
 							i.fa.fa-play-circle
 						button.mute.mute0.btn.btn-xs.btn-danger M
@@ -47,7 +53,7 @@ block content
 						select#select1.select-track.btn.btn-default
 							if track1
 								for track in track1.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+									option(value=track.trackTitle data=track.likes id=track._id name=track.userName) #{track.trackTitle}, By #{track.userName}, #{track.likes} Likes
 						button#upload-button1.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
 						#upload-download1.upload-download.shadow
@@ -55,10 +61,16 @@ block content
 							if track1
 								a(href=track1.userTracks[0].url)
 									button.btn.btn-default.btn-updown Download
-						button.like.btn.btn-xs.btn-primary
-							i.fa.fa-thumbs-o-up
+						if track1	
+							button.like-track.like.btn.btn-xs.btn-primary(value=track1.userTracks[0]._id name=1)
+								i.fa.fa-thumbs-o-up
+						else
+							button.hide.hidden-like.like-track.like.btn.btn-xs.btn-primary(value="")
+								i.fa.fa-thumbs-o-up
 						if track1
 							.likes #{track1.userTracks[0].likes} Likes
+						else
+							.hidden-likes.likes.hide
 						button.play1.play-track.btn.btn-lg.btn-success
 							i.fa.fa-play-circle
 						button.mute.mute1.btn.btn-xs.btn-danger M
@@ -74,7 +86,7 @@ block content
 						select#select2.select-track.btn.btn-default
 							if track2
 								for track in track2.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+									option(value=track.trackTitle data=track.likes id=track._id name=track.userName) #{track.trackTitle}, By #{track.userName}, #{track.likes} Likes
 						button#upload-button2.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
 						#upload-download2.upload-download.shadow
@@ -82,10 +94,16 @@ block content
 							if track2
 								a(href=track2.userTracks[0].url)
 									button.btn.btn-default.btn-updown Download
-						button.like.btn.btn-xs.btn-primary
-							i.fa.fa-thumbs-o-up
+						if track2
+							button.like-track.like.btn.btn-xs.btn-primary(value=track2.userTracks[0]._id name=2)
+								i.fa.fa-thumbs-o-up
+						else
+							button.hide.hidden-like.like-track.like.btn.btn-xs.btn-primary(value="")
+								i.fa.fa-thumbs-o-up
 						if track2
 							.likes #{track2.userTracks[0].likes} Likes
+						else
+							.hidden-likes.likes.hide
 						button.play2.play-track.btn.btn-lg.btn-success
 							i.fa.fa-play-circle
 						button.mute.mute2.btn.btn-xs.btn-danger M
@@ -101,7 +119,7 @@ block content
 						select#select3.select-track.btn.btn-default
 							if track3
 								for track in track3.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+									option(value=track.trackTitle data=track.likes id=track._id name=track.userName) #{track.trackTitle}, By #{track.userName}, #{track.likes} Likes
 						button#upload-button3.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
 						#upload-download3.upload-download.shadow
@@ -109,10 +127,16 @@ block content
 							if track3
 								a(href=track3.userTracks[0].url)
 									button.btn.btn-default.btn-updown Download
-						button.like.btn.btn-xs.btn-primary
-							i.fa.fa-thumbs-o-up
+						if track3
+							button.like-track.like.btn.btn-xs.btn-primary(value=track3.userTracks[0]._id name=3)
+								i.fa.fa-thumbs-o-up
+						else
+							button.hide.hidden-like.like-track.like.btn.btn-xs.btn-primary(value="")
+								i.fa.fa-thumbs-o-up
 						if track3
 							.likes #{track3.userTracks[0].likes} Likes
+						else
+							.hidden-likes.likes.hide
 						button.play3.play-track.btn.btn-lg.btn-success
 							i.fa.fa-play-circle
 						button.mute.mute3.btn.btn-xs.btn-danger M
@@ -128,7 +152,7 @@ block content
 						select#select4.select-track.btn.btn-default
 							if track4
 								for track in track4.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+									option(value=track.trackTitle data=track.likes id=track._id name=track.userName) #{track.trackTitle}, By #{track.userName}, #{track.likes} Likes
 						button#upload-button4.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
 						#upload-download4.upload-download.shadow
@@ -136,10 +160,16 @@ block content
 							if track4
 								a(href=track4.userTracks[0].url)
 									button.btn.btn-default.btn-updown Download
-						button.like.btn.btn-xs.btn-primary
-							i.fa.fa-thumbs-o-up
+						if track4
+							button.like-track.like.btn.btn-xs.btn-primary(value=track4.userTracks[0]._id name=4)
+								i.fa.fa-thumbs-o-up
+						else
+							button.hide.hidden-like.like-track.like.btn.btn-xs.btn-primary(value="")
+								i.fa.fa-thumbs-o-up
 						if track4
 							.likes #{track4.userTracks[0].likes} Likes
+						else
+							.hidden-likes.likes.hide
 						button.play4.play-track.btn.btn-lg.btn-success
 							i.fa.fa-play-circle
 						button.mute.mute4.btn.btn-xs.btn-danger M
@@ -155,7 +185,7 @@ block content
 						select#select5.select-track.btn.btn-default
 							if track5
 								for track in track5.userTracks
-									option(value=track.trackTitle name="userName" data="userPic") #{track.trackTitle}, By userName, #{track.likes} Likes
+									option(value=track.trackTitle data=track.likes id=track._id name=track.userName) #{track.trackTitle}, By #{track.userName}, #{track.likes} Likes
 						button#upload-button5.upload-button.btn.btn-default
 							i.fa.fa-caret-square-o-up
 						#upload-download5.upload-download.shadow
@@ -163,10 +193,16 @@ block content
 							if track5
 								a(href=track5.userTracks[0].url)
 									button.btn.btn-default.btn-updown Download
-						button.like.btn.btn-xs.btn-primary
-							i.fa.fa-thumbs-o-up
+						if track5
+							button.like-track.like.btn.btn-xs.btn-primary(value=track5.userTracks[0]._id name=5)
+								i.fa.fa-thumbs-o-up
+						else
+							button.hide.hidden-like.like-track.like.btn.btn-xs.btn-primary(value="")
+								i.fa.fa-thumbs-o-up
 						if track5
 							.likes #{track5.userTracks[0].likes} Likes
+						else
+							.hidden-likes.likes.hide
 						button.play5.play-track.btn.btn-lg.btn-success
 							i.fa.fa-play-circle
 						button.mute.mute5.btn.btn-xs.btn-danger M
@@ -192,8 +228,9 @@ block content
 			.info-block#song-description
 				
 				h1.heading-about Song Description
+				.post-divider
 				if song.description
-					p.about= song.description
+					p.about.add-margin-sm.add-margin-below-sm= song.description
 					button#edit-description.btn.btn-default.btn-simple-sm.btn-post Edit
 					form#add-description.hide
 						.form-group
@@ -201,7 +238,7 @@ block content
 						.form-group
 							input.btn.btn-default.btn-simple-sm.btn-post(type="submit" value="Save")
 				else
-					form#add-description
+					form#add-description.add-margin-sm
 						.form-group
 							textarea.form-control.form-font(name="songDescription" placeholder="Song Description…")
 						.form-group
@@ -367,10 +404,10 @@ block content
 								span#uploadingTrack5.hide.btn.btn-default.btn-simple-sm
 									.glyphicon.glyphicon-refresh.glyphicon-refresh-animate
 
-	input.btn.btn-success.btn-sm(type="submit" value="Upload")
 	script.
 		var user = !{JSON.stringify(user)};
 		var song = !{JSON.stringify(song)};
+
 	script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
 	//- script(src="../scripts/main.js")
 	script(script src="../scripts/lib/cocreationSong.js")

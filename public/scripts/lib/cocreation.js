@@ -4,14 +4,9 @@ $(document).on('ready', function() {
 
 	var cocreationTemplate = $('#cocreation-template').html();
 	var compileCocreationTemplate = Handlebars.compile(cocreationTemplate);
+	var cocreationTemplateSmall = $('#cocreation-template-small').html();
+	var compileCocreationTemplateSmall = Handlebars.compile(cocreationTemplateSmall);
 
-Handlebars.registerHelper('if_even', function(conditional, options) {
-  if((conditional % 2) == 0) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
 
 var cocreationSongs;
 
@@ -36,7 +31,7 @@ $.get('/api/getAllCocreations', function(response){
 		$('#cocreation-container').append(outputHTML);
 	});
 
-	$('#song-of-the-week').append(compileCocreationTemplate(sortedByLikes[0]));
+	$('#song-of-the-week').append(compileCocreationTemplateSmall(sortedByLikes[0]));
 });
 
 

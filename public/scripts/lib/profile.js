@@ -140,7 +140,8 @@ function editProfile(){
 		$('.words').append('<button class="btn btn-default btn-xs delete-word">X</button>');
 
 		/// add visual to show editing with editing-profile, edit is just to target them, no visual...
-		$('.words, .about, .philosophy').addClass('editing-profile edit');
+		$('.words, .about, .philosophy').addClass('editing-profile');
+		$('.about, .philosophy').addClass('edit');
 		$('.location').addClass('edit');
 
 	///// switch button up...
@@ -187,12 +188,35 @@ function editProfile(){
 });
 
 
+
 /////////// edit profile ////////////////////
 
 
 	$(document).on('click', '.edit-profile', function(){
 		editProfile();
 	});
+
+////////////// delete items from user
+	$(document).on('click', '.delete-word', function(){
+		
+		var val = $(this).closest('p').text();
+		val = val.substr(0, val.length-1);
+		var attr = $(this).closest('.sidebar-list').attr('title');
+		console.log('val', val);
+		console.log('attr', attr);
+		var attrArray = user[attr];
+		var updatedArray = [];
+		for (var i = 0; i < attrArray.length; i++){
+			if (attrArray[i] !== val) {
+				updatedArray.push(attrArray[i]);
+			}
+		}
+		user[attr] = updatedArray;
+		console.log('user delete word: ', user[attr]);
+		$(this).closest('.words').remove();
+		
+	});
+
 
 		$(document).on('blur', '.add-new-word', function(){
 			if ($(this).val() !== ''){
@@ -201,7 +225,8 @@ function editProfile(){
 				console.log('attr: ', attr);
 				$(this).closest('.sidebar-list').append('<p class="sidebar-list-text words editing-profile edit">' + val +'</p>');
 				$(this).closest('.sidebar-list').find('.words').last().append('<button class="btn btn-default btn-xs delete-word">X</button>');
-				$(this).closest('.sidebar-list').append('<input type="text" class="sidebar-list-text add-new-word editing-profile edit" placeholder="Add+">');
+				$(this).closest('.sidebar-list').append('<input autofocus type="text" class="sidebar-list-text add-new-word editing-profile edit" placeholder="Add+">');
+
 				///// hacked way of getting info...
 				// var updatedInfo = $(this).closest('.sidebar-list-text').text().split('X');
 				// updatedInfo.pop();
@@ -217,6 +242,11 @@ function editProfile(){
 			}
 		});
 
+		$(document).on('click', '.edit', function(){
+			$(this).attr('contenteditable', 'true');
+			$(this).focus();
+
+		});
 		$(document).on('blur', '.add-new-text', function(){
 			if ($(this).val() !== ''){
 				console.log('this', this);
@@ -268,33 +298,10 @@ function editProfile(){
 		});
 
 
-		///////// delete items from user
-		$(document).on('click', '.delete-word', function(){
-			
-			var val = $(this).closest('.words').text();
-			val = val.substr(0, val.length-1);
-			var attr = $(this).closest('.sidebar-list').attr('title');
-			console.log('val', val);
-			console.log('attr', attr);
-			var attrArray = user[attr];
-			var updatedArray = [];
-			for (var i = 0; i < attrArray.length; i++){
-				if (attrArray[i] !== val) {
-					updatedArray.push(attrArray[i]);
-				}
-			}
-			user[attr] = updatedArray;
-			console.log('user delete word: ', user[attr]);
-			$(this).closest('.words').remove();
-			
-		});
+		
 
-		$(document).on('click', '.edit', function(){
-			$(this).attr('contenteditable', 'true');
-			$(this).focus();
 
-		});
-
+////// edit about and philosophy ////
 		$('.about, .philosophy').on('blur', function(){
 			var attr = $(this).closest('.info-block').attr('title');
 			var text = $(this).text();
@@ -302,7 +309,7 @@ function editProfile(){
 			console.log('user updated about philosophy: ', user);
 		});
 
-
+//////// edit improv comp  //////////
 		$('#improvCompRange').change(function(){
 			user.improvComp = $(this).text();
 			console.log(user);

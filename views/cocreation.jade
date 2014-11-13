@@ -2,11 +2,15 @@ extends layout
 
 block content
 
-	div.container.profile-top(style="background-image: url('./images/star_banner_blackandwhite.jpg')")
+	div.container.profile-top(style="background-image: url('./images/star_banner.jpg')")
 		div.img-name.row
-			div.name-loc.col-xs-6.col-sm-6.c0l-md-7.col-xl-5
-				h2.name(title="name") CoCreation
-				div.location(title="location") The Creative Playground
+		div.profile-pic-cocreation.img-circle.col-xs-4(style="background-image: url('./images/earth-spirals2.png')")
+		div.top-header-cocreation.col-xs-6.col-sm-6.c0l-md-7.col-xl-5
+			h2.top-header-name(title="name") CoCreation
+			div.top-header-description(title="location") The Creative Playground
+			//- div.name-loc.col-xs-6.col-sm-6.c0l-md-7.col-xl-5
+			//- 	h2.name(title="name") CoCreation
+			//- 	div.location(title="location") The Creative Playground
 			//- div.profile-pic.img-circle.col-xs-4(style="background-image: url('./images/earth-spirals2.png')")
 	.container-fluid
 		.info-block(title="about")
@@ -24,7 +28,7 @@ block content
 					.sidebar-list
 						button.btn.btn-default.btn-sm.btn-songs Create New Song
 				.profile-sidebar
-					h2 Song of the Week:
+					h1 Song of the Week:
 					#song-of-the-week
 					//- .sidebar-list
 						p.sidebar-list-text sorting maybe?
@@ -50,7 +54,7 @@ block content
 					.post-divider
 					#cocreation-container
 
-	script(id="cocreation-template" type="text/x-handlebars-template").
+	//- script(id="cocreation-template" type="text/x-handlebars-template").
 		<div class="list-group results">
 			<div class="post-container">
 				<div class="cocreation-likes pull-right">{{likes}} Likes</div>

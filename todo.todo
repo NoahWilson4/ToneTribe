@@ -5,18 +5,15 @@ get up on heroku
 
 littler things:
 
-  songtrack likes
 
-  error messages with signin/signup
+
+
 
  navbar styling - larger and brighter, arrange buttons and dropdown
 
-  share song, close modal after shared, change button title
-  uploadbackground song, show spinner, and increase size of modal to show need of uploading
+  uploadbackground song, show spinner, and increase size of modal
   onpage load, loading song spinner?
 
-  on load page initially as new user, fade shadows in
-  hover text over buttons/links
 
   background pic, 625 large, 550 smaller
   main-container width limit
@@ -25,8 +22,6 @@ littler things:
   conditionals for empty form submissions
   error messages for forms/logins
 
-  subtle animations and shadowing
-  
   fade in pic upload buttons on profilepage
 
   still use separate js files, minify each.
@@ -35,8 +30,10 @@ littler things:
 
   another song?
 
-  profile edit previous item, types within close button?
-  deletes wrong word glitch?
+  edit profile - add new item on tab or enter
+    
+
+    error messages with signin/signup
 
 COCREATION:
 
@@ -50,6 +47,7 @@ COCREATION:
 
 song page:
 
+ change track, change data
   presort songs by likes for  the selectors
   
   uploading status, and loading for song player

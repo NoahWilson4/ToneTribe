@@ -37,6 +37,7 @@ html(lang='en')
                   document.getElementById("improvCompRange").innerHTML = x;
                 };
 
+
     body
         .navbar.navbar-inverse.navbar-fixed-top(role="navigation")
 
@@ -147,28 +148,54 @@ html(lang='en')
             </div>
         script(id="cocreation-template" type="text/x-handlebars-template").
             <div class="list-group results">
-                <div class="post-container">
-                    <div class="cocreation-likes pull-right">{{likes}} Likes</div>
-                    <div class="cocreation-pic-holder">
-                        <a href="../song/?id={{_id}}"><img class="cocreation-profile-pic img-circle" src={{backgroundImage}}></a>
-                        <a href="../song/?id={{_id}}">
-                            <div class="cocreation-heading">
-                                <h2 class="post-heading"> {{name}} </h4></a>
-                                <p id="post-text" class="list-group-item-text post-text"> space holding for description{{description}} </p>
+                <div class="cocreation-post-container" style="background-image: url('{{backgroundImage}}');">
+                    <div class="cocreation-content-container">
+                        <div class="row">
+                           
+                            <div class="col-xs-9 cocreation-heading">
+                                <div class="cocreation-likes pull-right">{{likes}} Likes</div>
+                                <a href="../song/?id={{_id}}">
+                                <h2 class="cocreation-post-heading"> {{name}} </h4></a>
+                                <p id="post-text" class="post-text"> {{description}} </p>
+                                <h2 class="cocreation-secondary-heading">CoCreators</h2>
+                                {{#each users}}
+                                    <div class="cocreation-user-container">
+                                        <a href="../profile/?id={{_id}}">
+                                            <img class="cocreation-user-pic img-circle" src={{profilePic}}>
+                                            <h3 class="cocreation-user-name">{{name}}</h3>
+                                        </a>
+                                    </div>
+                                {{/each}}   
                             </div>
-                    </div>
-                    <h2>CoCreators</h2>
-                    {{#each users}}
-                        <div class="cocreation-user-container">
-                            <a href="../profile/?id={{_id}}">
-                                <img class="cocreation-user-pic img-circle" src={{profilePic}}>
-                                <h3 class="cocreation-user-name">{{name}}</h3>
-                            </a>
                         </div>
-                    {{/each}}   
-        
+                    </div>
                 </div>
-            </div>  
+            </div>
+        script(id="cocreation-template-small" type="text/x-handlebars-template").
+            <div class="list-group results">
+                <div class="cc-small-post-container" style="background-image: url('{{backgroundImage}}');">
+                    <div class="cc-small-content-container">
+                        <div class="row">
+                           
+                            <div class="cc-small-heading">
+                                <div class="cc-small-likes pull-right">{{likes}} Likes</div>
+                                <a href="../song/?id={{_id}}">
+                                <h2 class="cc-small-post-heading"> {{name}} </h4></a>
+                                <p id="post-text" class="post-text"> {{description}} </p>
+                                <h2 class="cc-small-secondary-heading">CoCreators</h2>
+                                {{#each users}}
+                                    <div class="cc-small-user-container">
+                                        <a href="../profile/?id={{_id}}">
+
+                                            <h3 class="cc-small-user-name">{{name}}</h3>
+                                        </a>
+                                    </div>
+                                {{/each}}   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
         script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
         script(src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")
@@ -178,7 +205,9 @@ html(lang='en')
 
         //- script(script src="../scripts/lib/originalMain.js")
 
-
+    //- <div class="col-xs-3 cocreation-pic-holder">
+    //-                             <a href="../song/?id={{_id}}"><img class="cocreation-profile-pic img-circle" src={{backgroundImage}}></a>
+    //-                         </div>
 
 
 

@@ -10,7 +10,7 @@ $(document).on('ready', function() {
 
 
 	/// append songs to page
-	user.cocreationSongs.map(function(song){
+	songs.map(function(song){
 		console.log('song test: ', song);
 		var outputHTML = compileCocreationTemplate(song);
 			$('#cocreation-container').prepend(outputHTML);

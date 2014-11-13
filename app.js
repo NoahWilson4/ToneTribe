@@ -146,6 +146,7 @@ app.post('/api/shareSong', apiController.shareSong);
 app.post('/api/getPosts', apiController.getPosts);
 app.post('/song/likeSong', songController.likeSong);
 app.post('/api/likePost', apiController.likePost);
+app.post('/song/likeTrack', songController.likeTrack);
 
 
 ////////////////////////////////////////////

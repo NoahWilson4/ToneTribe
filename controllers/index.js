@@ -96,15 +96,34 @@ var indexController = {
 			});
 	},
 	cocreationUser: function(req, res){
+		console.log('hello???');
+		var songs = [];
 		User
 		.findOne({_id: req.user._id})
 		.populate('cocreationSongs', null, 'cocreationsong')
 		.populate('cocreationCollaborations', null, 'cocreationsong')
 		.exec(function(err, result){
-			res.render('cocreation-user', {
-				user: result
-			});
+			console.log('result: ', result.cocreationSongs);
+			for (var i = 0; i < result.cocreationSongs.length; i++){
+				CocreationSong.findOne({_id: result.cocreationSongs[i]._id})
+							.populate('users', null, 'user')
+							.exec(function(err, data){
+								console.log('mapping, ', data);
+								songs.push(data);
+								if (songs.length === result.cocreationSongs.length){
+									
+									console.log('complete with getting songs');
+									res.render('cocreation-user', {
+											user: result,
+											songs: songs
+									});
+								}
+							});
+			}
+
 		});
+
+	
 	},
 	cocreationOtherUser: function(req, res){
 		console.log('cocreationOtherUser req.query', req.query);
