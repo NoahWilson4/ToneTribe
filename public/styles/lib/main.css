@@ -245,11 +245,11 @@ font-size: 20px;
 }
 
 .btn-simple-edit {
-	border: none;
+border: none;
 background: rgb(223, 231, 185);
 padding: 15px;
 border-radius: 10px;
-margin: 35px 60px 0px 15px;
+margin: 100px 60px 0px 15px;
 width: 150px;
 font-size: 20px;
 

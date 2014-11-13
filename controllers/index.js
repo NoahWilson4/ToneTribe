@@ -111,7 +111,7 @@ var indexController = {
 								console.log('mapping, ', data);
 								songs.push(data);
 								if (songs.length === result.cocreationSongs.length){
-									
+
 									console.log('complete with getting songs');
 									res.render('cocreation-user', {
 											user: result,
@@ -126,18 +126,48 @@ var indexController = {
 	
 	},
 	cocreationOtherUser: function(req, res){
-		console.log('cocreationOtherUser req.query', req.query);
+		console.log('hello???', req.query.id);
+		var songs = [];
 		User
 		.findOne({_id: req.query.id})
 		.populate('cocreationSongs', null, 'cocreationsong')
 		.populate('cocreationCollaborations', null, 'cocreationsong')
 		.exec(function(err, result){
-			res.render('cocreation-other-user', {
-				user: result,
-				currentUser: req.user
-			});
+			console.log('result: ', result.cocreationSongs);
+			for (var i = 0; i < result.cocreationSongs.length; i++){
+				CocreationSong.findOne({_id: result.cocreationSongs[i]._id})
+							.populate('users', null, 'user')
+							.exec(function(err, data){
+								console.log('mapping, ', data);
+								songs.push(data);
+								if (songs.length === result.cocreationSongs.length){
+									
+									console.log('complete with getting songs');
+									res.render('cocreation-user', {
+											user: result,
+											songs: songs
+									});
+								}
+							});
+			}
+
 		});
+
+	
 	},
+	// cocreationOtherUser: function(req, res){
+	// 	console.log('cocreationOtherUser req.query', req.query);
+	// 	User
+	// 	.findOne({_id: req.query.id})
+	// 	.populate('cocreationSongs', null, 'cocreationsong')
+	// 	.populate('cocreationCollaborations', null, 'cocreationsong')
+	// 	.exec(function(err, result){
+	// 		res.render('cocreation-other-user', {
+	// 			user: result,
+	// 			currentUser: req.user
+	// 		});
+	// 	});
+	// },
 		song: function(req, res){
 			// console.log('song req.query!!!', req.query);
 			var tracks;
