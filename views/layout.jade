@@ -50,7 +50,8 @@ html(lang='en')
                         span.icon-bar
                         span.icon-bar
                     a.navbar-brand
-                        strong ToneTribe
+                        //- img#tonetribe-logo(src=('./images/grey-two-tribal-big.png'))
+                        #tonetribe-logo: strong ToneTribe
                     //- form#tune-in.navbar-form.navbar-right(role="form")
                         .form-group
                             input.form-control.login(type="email" placeholder="Email…" name="email")
@@ -60,34 +61,28 @@ html(lang='en')
                 .navbar-collapse.collapse
                     ul.nav.navbar-nav
                         li: a#navt(href="/profile-user") Profile
-                        li: a#navt(href="/live-stream") Live Stream
-                        li: a#navt(href="/cocreation") Co-Creation
+                        li: a#navt(href="/live-stream") LiveStream
+                        li: a#navt(href="/cocreation") CoCreation
                         
                     ul.nav.navbar-nav.navbar-right
                         li.dropdown
                             a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown") Connect
                                 i#nav-caret.fa.fa-chevron-down
-                            ul.dropdown-menu(role="menu")
+                            ul#dd-menu.dropdown-menu(role="menu")
                                 li: a(id="navbar-search" href="/search") Search for Musicians and Bands
                                 li: a(href="/cocreation") Co-Creation
-                                li: a(href="#") Discussion Forums
-                                li.divider
-                                li.dropdown-header Search Classifieds
+                                li: a(href="/live-stream") LiveStream
+
+                                li#dd-header Search Classifieds
                                 li: a(href="#") Looking for Musicians
                                 li: a(href="#") Equipment and Services
-                                li.divider
-                                li: a(href="/auth/logout") Logout
                         li.nav-username.dropdown
                             a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown")= user.name
                                 i#nav-caret.fa.fa-chevron-down
-                            ul.dropdown-menu(role="menu")
-                                li: a(id="navbar-search" href="/search") Search for Musicians and Bands
-                                li: a(href="/cocreation") Co-Creation
-                                li: a(href="#") Discussion Forums
-                                li.divider
-                                li.dropdown-header Search Classifieds
-                                li: a(href="#") Looking for Musicians
-                                li: a(href="#") Equipment and Services
+                            ul#dd-menu.dropdown-menu(role="menu")
+                                li: a Messages
+                                li: a Notifications
+                                li: a Edit Profile
                                 li.divider
                                 li: a(href="/auth/logout") Logout
                         

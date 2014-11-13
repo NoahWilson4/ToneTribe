@@ -242,5 +242,20 @@ line-height: 1.42857143;
 
 
 
+#tune-in{
+
+ position: absolute;
+ top: 30px;
+ right: 30px;
+}
+
+input, #l-in, .form-control, .login-input, .lg-in, .log-me-in, .login, .l-in, .llogin, .loin{
+ height: 47px;
+width: 250px;
+border-radius: 5px;
+margin: 10px;
+font-size: 22px;
+padding: 15px;
+}
 
 

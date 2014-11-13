@@ -6,15 +6,10 @@ get up on heroku
 navbar styling - larger and brighter, arrange buttons and dropdown
 
 uploadbackground song, show spinner, and increase size of modal
-onpage load, loading song spinner?
-
-populate users and songs
 
 tune in on cover page
 
-cocreation/livestream enlargement
 
-song like/share
 
 
 littler things:
@@ -39,6 +34,8 @@ COCREATION:
   search by styles, users, likes, instruments....
 
 song page:
+
+  onpage load, loading song spinner?
 
  change track, change data
   presort songs by likes for  the selectors
