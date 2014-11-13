@@ -3,22 +3,22 @@ bigger things:
 
 get up on heroku
 
-uploadbackground song, show spinner, and increase size of modal
-
-no media to view shows up  on initial loading of media, add hide functionality
 
 tune in on cover page
 
-other user cocreationsongs page!!
 
 
 
 littler things:
 
+  
+no media to view shows up  on initial loading of media, add hide functionality
+
 fade in pic upload buttons on profilepage
 
 still use separate js files, minify each.
 
+other user cocreationsongs page!!
 
  
 
