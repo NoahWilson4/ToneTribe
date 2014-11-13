@@ -3,37 +3,30 @@ bigger things:
 
 get up on heroku
 
+navbar styling - larger and brighter, arrange buttons and dropdown
+
+uploadbackground song, show spinner, and increase size of modal
+onpage load, loading song spinner?
+
+populate users and songs
+
+tune in on cover page
+
+cocreation/livestream enlargement
+
+song like/share
+
+
 littler things:
 
-
-
-
-
- navbar styling - larger and brighter, arrange buttons and dropdown
-
-  uploadbackground song, show spinner, and increase size of modal
-  onpage load, loading song spinner?
-
-
-  background pic, 625 large, 550 smaller
-  main-container width limit
-
-
-  conditionals for empty form submissions
-  error messages for forms/logins
 
   fade in pic upload buttons on profilepage
 
   still use separate js files, minify each.
 
-  connected will come up twice? or connect will come up again?
-
-  another song?
-
   edit profile - add new item on tab or enter
-    
 
-    error messages with signin/signup
+ 
 
 COCREATION:
 
@@ -76,6 +69,11 @@ PROFILES:
 
 
 Eventual things to do:
+
+   conditionals for empty form submissions
+  error messages for forms/logins
+
+
 
   consolidate: pull out reused code into a commonly used js file...
                       place templates in layout for use on multiple pages

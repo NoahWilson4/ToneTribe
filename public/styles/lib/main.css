@@ -14,6 +14,43 @@ a:hover{
 
 }
 
+h1 {
+	font-size: 50px;
+}
+
+.tonetribe-navbar{
+	background: rgb(19, 19, 19);
+height: 100px;
+border-bottom: 5px solid rgb(190, 190, 190);
+}
+
+.nav-main{
+	width: 90%;
+margin: 5px auto;
+
+}
+
+.nav-username{
+	color: white;
+font-size: 45px;
+margin-left: 30px;
+}
+
+#navt {
+	color: white;
+padding: 20px 20px;
+font-size: 40px;
+font-weight: 100;
+}
+
+#nav-caret{
+	font-size: 20px;
+position: relative;
+bottom: 5px;
+padding-left: 5px;
+font-weight: bold;
+}
+
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
     -webkit-animation: spin2 .7s infinite linear;
@@ -86,11 +123,13 @@ box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
 box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
 }
 
+
+
 .profile-top {
 margin-top: 50px;
 padding: 10px;
 background-color: rgb(146, 160, 158);
-height: 525px;
+height: 650px;
 width: 100%;
 position: relative;
 /*background-image: ;*/
@@ -127,6 +166,7 @@ color: darkred;
 }
 
 .heading-about{
+	font-size: 60px;
 	text-align: right;
 padding: 0px 15px 20px 25px;
 margin: 0;
@@ -409,7 +449,7 @@ background: rgb(99, 101, 103);
 }
 
 .sidebar-list-heading {
-font-size: 25px;
+font-size: 35px;
 color: rgb(86, 7, 7);
 /* border-left: 3px solid rgb(215, 215, 215); */
 padding-left: 5px;
@@ -417,7 +457,7 @@ margin-top: 25px;
 }
 
 .sidebar-list-text {
-	font-size: 30px;
+	font-size: 40px;
 	margin-bottom: 0px;
 	padding-left: 15px;
 	min-height: 40px;
@@ -433,7 +473,7 @@ margin-top: 25px;
 }
 
 .bands{
-	font-size: 40px;
+	font-size: 60px;
 }
 
 .tag {
@@ -505,6 +545,12 @@ margin: 10px;
 	margin-top: 15px;
 }
 
+.song-of-the-week{
+	color: rgb(85,85,85);
+font-size: 50px;
+margin-left: 40px;
+}
+
 .post-divider {
 	width: 100%;
 	height: 50px;
@@ -532,7 +578,7 @@ display: block;
 padding: 10px 15px;
 margin-bottom: -1px;
 background-color: #FAF9F9;
-min-height: 140px;
+min-height: 250px;
 /* border: 1px solid #ddd; */
 }
 
@@ -545,12 +591,45 @@ background: lightgray;
 background-image: ;
 background-position: center;
 background-size: cover;
-width: 120px;
-height: 120px;
+width: 175px;
+height: 175px;
 margin-right: 10px;
 border: 10px solid white;
-
 display: inline-block;
+}
+
+.post-song-profile-pic {
+background: lightgray;
+background-image: ;
+background-position: center;
+
+width: 175px;
+height: 175px;
+margin: 25px;
+border: 10px solid white;
+display: inline-block;
+background-size: cover;
+}
+
+.post-song-container{
+background-size: cover;
+border: 15px solid white;
+min-height: 333px;
+border-radius: 40px;
+width: 950px;
+margin: 30px auto;
+}
+
+.post-song-likes{
+	padding: 15px;
+}
+
+.post-song-info{
+background: rgba(255, 255, 255, 0.5);
+padding: 0px 20px 15px 15px;
+border-left: 5px solid white;
+min-height: 200px;
+border-bottom-left-radius: 50px;
 }
 
 .cocreation-profile-pic {
@@ -624,6 +703,10 @@ border-radius: 65px;
 	margin-bottom: 0px;
 }
 
+.like-post{
+	margin-left: 15px;
+}
+
 .cocreation-post-heading {
 	margin-bottom: 0px;
 font-size: 80px;
@@ -693,7 +776,7 @@ border-radius: 30px;
 
 .cc-small-user-name{
 	display: inline-block;
-	font-size: 40px;
+	font-size: 30px;
 /* color: black; */
 }
 
@@ -727,6 +810,7 @@ border-radius: 65px;
 	margin-bottom: 0px;
 font-size: 65px;
 margin-top: 0px;
+
 }
 
 .post-text{
@@ -740,7 +824,8 @@ font-size: 38px;
 }
 
 .cc-small-secondary-heading{
-	font-size: 50px;
+	font-size: 40px;
+	color: rgb(86, 84, 84);
 }
 
 
