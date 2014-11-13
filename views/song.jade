@@ -7,9 +7,10 @@ block content
 			h1#song-name= song.name
 				button#share-song.tb.btn.btn-default.btn-sm.pull-right(data-toggle="modal" data-target="#shareModal")
 					.fa.fa-share-square  Share
-				button#like-song.tb.btn.btn-default.btn-sm.pull-right
-					.fa.fa-thumbs-o-up  Like
-					#song-likes.likes #{song.likes} Likes
+				div.shares-song
+					button#like-song.tb.btn.btn-default.btn-sm.pull-right
+						.fa.fa-thumbs-o-up  Like
+						#song-likes.likes #{song.likes} Likes
 				//- button#download.tb.btn.btn-default.btn-sm.pull-right
 					i.fa.fa-caret-square-o-down  Download
 			#inner-container(style="background-image: url(" + song.backgroundImage + ")")
@@ -223,7 +224,9 @@ block content
 						form.song-pic-upload(method="post" action="/uploadSongBackgroundPic" role="form" enctype="multipart/form-data")
 							input.btn.btn-primary.btn-sm(type="file" onchange="previewSongBackground()" name="songBackgroundImage" id="upload-song-background")
 							input(type="hidden" value=song._id name="songId")
-							input.pull-right.btn.btn-default(type="submit" value="upload")
+							input#uploadBackgroundButton.pull-right.btn.btn-default.btn-simple-sm.add-margin-sm(type="submit" value="upload")
+							span#uploadingBackground.hide.btn.btn-default.btn-simple-sm
+									.glyphicon.glyphicon-refresh.glyphicon-refresh-animate
 		.container
 			.info-block#song-description
 				

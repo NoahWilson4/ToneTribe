@@ -1328,6 +1328,36 @@ min-height: 26px;
 	margin-left: 15px;
 }
 
+.shares-song {
+	position: relative;
+bottom: 100px;
+right: 50px;
+}
+
+#song-likes{
+	margin-top: 20px;
+	color: rgb(85,85,85);
+	margin-left: -20px;
+}
+
+#share-song{
+	position: relative;
+top: -50px;
+right: 35px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

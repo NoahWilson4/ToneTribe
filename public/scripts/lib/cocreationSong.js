@@ -167,6 +167,12 @@ $('#uploadBackgroundPic').on('click', function(){
 	$('#upload-container').toggle('reveal');
 });
 
+$('#uploadBackgroundButton').on('click', function(){
+		$('#uploadingBackground').removeClass('hide');
+		$(this).addClass('hide');
+
+	});
+
 /////////////  description ////////
 
 $(document).on('click', '#edit-description', function(){
