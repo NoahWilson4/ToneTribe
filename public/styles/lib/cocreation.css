@@ -70,19 +70,13 @@ background: rgb(99, 101, 103);
 }
 
 .song-container {
-	position: relative;
-/*background: rgb(159, 160, 160);
-background-image: url('flowers.jpg');*/
+position: relative;
 background-size: cover;
+width: 95%;
 min-width: 300px;
-max-width: 1150px;
+max-width: 1170px;
 padding: 15px;
-height: 720px;
-/*/*/*border-radius: 492px;
-/*-webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;*/
-/*-moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);;*/
-/*box-shadow: 1px 3px 30px 0px rgba(48, 50, 50, .5);*/
-*/*/*//*display: none;*/
+margin: auto;
 }
 
 .canvas-container {
@@ -101,8 +95,8 @@ left: 0px;
 
 #song-name {
 padding-left: 50px;
-padding-bottom: 25px;
-padding-top: 45px;
+padding-top: 20px;
+padding-bottom: 15px;
 margin-bottom: 0;
 width: 100%;
 border-top-right-radius: 20px;
@@ -332,7 +326,7 @@ position: relative;
 -webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 -moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
-font-size: 25px;
+font-size: 20px;
 padding: 3px 10px;
 }
 
@@ -342,7 +336,7 @@ position: relative;
 -webkit-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 -moz-box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
 box-shadow: 1px 6px 20px 0px rgba(34, 53, 53, 0.7);
-font-size: 25px;
+font-size: 20px;
 padding: 3px 10px;
 }
 
@@ -454,6 +448,29 @@ margin-bottom: -82px;
 }
 
 
+.shares-song {
+	position: relative;
+bottom: 100px;
+right: 50px;
+}
+
+#song-likes{
+	/*margin-top: 20px; */
+color: rgb(85,85,85);
+/* margin-left: -20px; */
+left: -100px;
+top: 5px;
+}
+
+#share-song{
+	position: relative;
+top: -20px;
+right: 35px;
+}
+
+#like-song{
+	margin-top: 50px;
+}
 
 
 

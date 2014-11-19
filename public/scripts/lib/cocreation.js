@@ -32,7 +32,7 @@ $.get('/api/getAllCocreations', function(response){
 	});
 
 	// $('#song-of-the-week').append(compileCocreationTemplateSmall(sortedByLikes[0]));
-	$('#song-of-the-week').append(compileCocreationTemplate(sortedByLikes[0]));
+	$('#song-of-the-week').append(compileCocreationTemplateSmall(sortedByLikes[0]));
 });
 
 

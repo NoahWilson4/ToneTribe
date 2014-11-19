@@ -3,7 +3,7 @@ extends layout
 block content
 	.main-song
 		#song-id(value=id)
-		.container.song-container
+		.song-container
 			h1#song-name= song.name
 				button#share-song.tb.btn.btn-default.btn-sm.pull-right(data-toggle="modal" data-target="#shareModal")
 					.fa.fa-share-square  Share
@@ -227,7 +227,7 @@ block content
 							input#uploadBackgroundButton.pull-right.btn.btn-default.btn-simple-sm.add-margin-sm(type="submit" value="upload")
 							span#uploadingBackground.hide.btn.btn-default.btn-simple-sm
 									.glyphicon.glyphicon-refresh.glyphicon-refresh-animate
-		.container
+		.content-container
 			.info-block#song-description
 				
 				h1.heading-about Song Description
@@ -250,7 +250,7 @@ block content
 
 				
 				
-		.container.margin-top
+		.content-container
 			.info-block.remove-margin
 					button#dropNote.btn.btn-default.drop-note.btn-simple-sm.pull-left Drop a Note
 					h1.heading-about Comments

@@ -107,6 +107,10 @@ margin-left: 50px;
 	max-width: 1100px;
 }
 
+.main-container-livestream {
+	max-width: 811px;
+}
+
 .hide{
 	display: none;
 }
@@ -595,8 +599,7 @@ margin: 10px;
 }
 
 .song-of-the-week{
-	color: rgb(85,85,85);
-font-size: 50px;
+	
 margin-left: 40px;
 }
 
@@ -627,7 +630,7 @@ display: block;
 padding: 10px 15px;
 margin-bottom: -1px;
 background-color: #FAF9F9;
-min-height: 250px;
+min-height: 180px;
 /* border: 1px solid #ddd; */
 }
 
@@ -640,11 +643,12 @@ background: lightgray;
 background-image: ;
 background-position: center;
 background-size: cover;
-width: 140px;
-height: 140px;
+width: 125px;
+height: 125px;
 margin-right: 10px;
 border: 7px solid white;
 display: inline-block;
+float: right;
 }
 
 .post-song-profile-pic {
@@ -664,8 +668,12 @@ background-size: cover;
 border: 15px solid white;
 
 border-radius: 40px;
-
+min-height: 270px;
 margin: 30px auto;
+}
+
+.post-liking{
+
 }
 
 .post-song-likes{
@@ -678,6 +686,7 @@ padding: 0px 20px 35px 15px;
 border-left: 5px solid white;
 margin-bottom: 50px;
 border-bottom-left-radius: 50px;
+min-height: 154px;
 }
 
 .cocreation-profile-pic {
@@ -695,9 +704,9 @@ border: 11px solid rgba(215, 212, 212, 0.3);
 background: lightgray;
 background-position: center;
 background-size: cover;
-width: 50px;
+width: 40px;
 /* color: black; */
-height: 50px;
+height: 40px;
 /* margin-right: 10px; */
 /* margin-bottom: 10px; */
 display: inline-block;
@@ -708,43 +717,45 @@ border: 2px solid rgba(237, 237, 237, 0.8);
 .cocreation-post-container{
 position: relative;
 display: block;
-padding: 10px 15px;
-margin: 40px;
-background-color: #FAF9F9;
 
+margin: 17px;
+background-color: #FAF9F9;
 background-size: cover;
-padding: 30px;
-border: 5px solid rgb(245, 245, 245);
+padding: 11px 25px;
+border: 4px solid rgb(86, 86, 86);
 border-radius: 15px;
 }
 
 .cocreation-pic-holder{
-
+	
 }
 
 .cocreation-user-name{
 display: inline-block;
-font-size: 25px;
+font-size: 18px;
 /* color: black; */
 }
-}
+
+
 
 .cocreation-likes {
 	color: rgb(85,85,85);
+	font-size: 13px;
 }
 
 .cocreation-user-container{
 display: block;
-margin-left: 20px;
+margin-left: 5%;
 }
 
 .cocreation-heading {
-margin-bottom: 35px;
+margin-bottom: 11px;
 font-size: 20px;
 display: inline-block;
 background: rgba(239, 239, 239, 0.6);
-padding: 15px 20px;
-border-radius: 15px;
+padding: 4px 8px 8px 8px;
+border-radius: 8px;
+border: 1px solid rgb(195, 195, 195);
 }
 
 .post-heading {
@@ -752,18 +763,18 @@ border-radius: 15px;
 }
 
 .like-post{
-	margin-left: 15px;
+	
 }
 
 .cocreation-post-heading {
 margin-bottom: 0px;
-font-size: 40px;
+font-size: 30px;
 margin-top: 20px;
 }
 
 .post-text{
 
-font-size: 20px;
+font-size: 22px;
 }
 
 .cocreation-content-container{
@@ -771,7 +782,7 @@ font-size: 20px;
 }
 
 .cocreation-secondary-heading{
-	font-size: 30px;
+	font-size: 23px;
 }
 
 /*/////////// smaller template  ////////////*/
@@ -1100,6 +1111,9 @@ float: left;
 
 .results {
 	margin-top: 20px;
+	max-width: 811px;
+padding-left: 0;
+margin: 20px auto;
 }
 
 
@@ -1195,7 +1209,7 @@ border-bottom-right-radius: 0px;
 
 .bar-signup {
 height: 34px;
-background: -webkit-linear-gradient(right,rgb(92, 30, 30), rgb(242, 242, 242), rgb(250, 250, 250));
+background: -webkit-linear-gradient(right,rgb(144, 132, 132), rgb(242, 242, 242), rgb(250, 250, 250));
 color: transparent;
 border-radius: 7px;
 border-top-right-radius: 0px;
@@ -1203,7 +1217,7 @@ border-bottom-right-radius: 0px;
 }
 .bar-signup2 {
 height: 34px;
-background: -webkit-linear-gradient(left,rgb(92, 30, 30), rgb(242, 242, 242), rgb(250, 250, 250));
+background: -webkit-linear-gradient(left,rgb(144, 132, 132), rgb(242, 242, 242), rgb(250, 250, 250));
 color: transparent;
 
 position: absolute;
@@ -1329,7 +1343,7 @@ min-height: 26px;
 }
 
 .add-margin-sm {
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 .add-margin-below-sm {
@@ -1341,28 +1355,14 @@ min-height: 26px;
 	margin-left: 15px;
 }
 
-.shares-song {
-	position: relative;
-bottom: 100px;
-right: 50px;
-}
-
-#song-likes{
-	/*margin-top: 20px; */
-color: rgb(85,85,85);
-/* margin-left: -20px; */
-left: -100px;
-top: 5px;
-}
-
-#share-song{
-	position: relative;
-top: -30px;
-right: 35px;
-}
-
-#like-song{
-	margin-top: 40px;
+.content-container {
+position: relative;
+background-size: cover;
+width: 95%;
+min-width: 300px;
+max-width: 1170px;
+padding: 15px;
+margin: auto;
 }
 
 

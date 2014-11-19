@@ -49,6 +49,7 @@ html(lang='en')
                         span.icon-bar
                         span.icon-bar
                         span.icon-bar
+                    
                     a.navbar-brand
                         //- img#tonetribe-logo(src=('./images/grey-two-tribal-big.png'))
                         #tonetribe-logo: strong ToneTribe
@@ -63,8 +64,29 @@ html(lang='en')
                         li: a#navt(href="/profile-user") Profile
                         li: a#navt(href="/live-stream") LiveStream
                         li: a#navt(href="/cocreation") CoCreation
-                        
-                ul.nav.navbar-nav.navbar-right
+                     
+                .navbar-collapse.collapse.pull-right 
+                    ul.nav.navbar-nav.navbar-right
+                        li.dropdown
+                            a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown") Connect
+                                i#nav-caret.fa.fa-chevron-down
+                            ul#dd-menu.dropdown-menu(role="menu")
+                                li: a(id="navbar-search" href="/search") Search for Musicians and Bands
+                                li: a(href="/cocreation") Co-Creation
+                                li: a(href="/live-stream") LiveStream
+
+                                li#dd-header Search Classifieds
+                                li: a(href="#") Looking for Musicians
+                                li: a(href="#") Equipment and Services
+                        li.nav-username.dropdown.navbar-right
+                            a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown")= user.name
+                                i#nav-caret.fa.fa-chevron-down
+                            ul#dd-menu.dropdown-menu(role="menu")
+                                li: a Messages
+                                li: a Notifications
+                                li.divider
+                                li: a(href="/auth/logout") Logout
+                 //- ul.nav.navbar-nav.navbar-right
                     li.dropdown
                         a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown") Connect
                             i#nav-caret.fa.fa-chevron-down
@@ -82,9 +104,8 @@ html(lang='en')
                         ul#dd-menu.dropdown-menu(role="menu")
                             li: a Messages
                             li: a Notifications
-                            li: a Edit Profile
                             li.divider
-                            li: a(href="/auth/logout") Logout
+              
                         
     
                                 
@@ -116,13 +137,15 @@ html(lang='en')
                             {{/if}}
                             <p class="post-secondary"> {{date}} </p>
                             <p id="post-text" class="list-group-item-text post-text"> {{text}} </p>
+                            <div class="post-liking">
+                                <button class="like-post btn btn-xs btn-default" value="{{_id}}">
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                    <div id="postInfo" value="{{songId}}"></div>
+                                </button>
+                                <div class="post-likes post-secondary inline"> {{likes}} Likes </div>
+                            </div>
                         </div>
                     </div>
-                    <button class="like-post btn btn-xs btn-default" value="{{_id}}">
-                        <i class="fa fa-thumbs-o-up"></i>
-                        <div id="postInfo" value="{{songId}}"></div>
-                    </button>
-                    <div class="post-likes post-secondary inline"> {{likes}} Likes </div>
                     {{#if cocreationSong}}  
                         <div class="list-group results">
                             <a href="../song/?id={{cocreationSong.0._id}}">
@@ -182,13 +205,13 @@ html(lang='en')
                                 <div class="cocreation-likes pull-right">{{likes}} Likes</div>
                                 <a href="../song/?id={{_id}}">
                                 <h2 class="cocreation-post-heading"> {{name}} </h4></a>
-                                <p id="post-text" class="post-text"> {{description}} </p>
-                                <h2 class="cocreation-secondary-heading">CoCreators</h2>
+                                <div id="post-text" class="post-text"> {{description}} </div>
+                                <h5 class="cocreation-secondary-heading">CoCreators</h5>
                                 {{#each users}}
                                     <div class="cocreation-user-container">
                                         <a href="../profile/?id={{_id}}">
                                             <img class="cocreation-user-pic img-circle" src={{profilePic}}>
-                                            <h3 class="cocreation-user-name">{{name}}</h3>
+                                            <h5 class="cocreation-user-name">{{name}}</h5>
                                         </a>
                                     </div>
                                 {{/each}}   
@@ -199,21 +222,21 @@ html(lang='en')
             </div>
         script(id="cocreation-template-small" type="text/x-handlebars-template").
             <div class="list-group results">
-                <div class="cc-small-post-container" style="background-image: url('{{backgroundImage}}');">
-                    <div class="cc-small-content-container">
+                <div class="cocreation-post-container" style="background-image: url('{{backgroundImage}}');">
+                    <div class="cocreation-content-container">
                         <div class="row">
                            
-                            <div class="cc-small-heading">
-                                <div class="cc-small-likes pull-right">{{likes}} Likes</div>
+                            <div class="col-xs-11 cocreation-heading">
+                                <div class="cocreation-likes pull-right">{{likes}} Likes</div>
                                 <a href="../song/?id={{_id}}">
-                                <h2 class="cc-small-post-heading"> {{name}} </h4></a>
+                                <h2 class="cocreation-post-heading"> {{name}} </h4></a>
                                 <p id="post-text" class="post-text"> {{description}} </p>
-                                <h2 class="cc-small-secondary-heading">CoCreators</h2>
+                                <h2 class="cocreation-secondary-heading">CoCreators</h2>
                                 {{#each users}}
-                                    <div class="cc-small-user-container">
+                                    <div class="cocreation-user-container">
                                         <a href="../profile/?id={{_id}}">
-
-                                            <h3 class="cc-small-user-name">{{name}}</h3>
+                                            
+                                            <div class="">{{name}}</div>
                                         </a>
                                     </div>
                                 {{/each}}   
@@ -221,7 +244,7 @@ html(lang='en')
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
         script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
         script(src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js")

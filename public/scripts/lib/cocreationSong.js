@@ -43,25 +43,7 @@ $('#share-form').on('submit', function(e){
 
 
 
-//////////////////////// comments ///////////////////////
 
-
-$(document).on('click', '.drop-note', function(){
-	console.log('click');
-	$('#addComment').css({display: 'inherit'});
-	$('#dropNote').text('Cancel').addClass('cancel').removeClass('drop-note');
-});
-
-$(document).on('click', '.cancel', function(){
-	$('#addComment').css({display: 'none'});
-	$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
-});
-
-
-	var commentTemplate = $('#comment-template').html();
-	var compileCommentTemplate = Handlebars.compile(commentTemplate);
-
-	console.log('song test!!!!:', song);
 
 
 	////////// uploading tracks ///////////
@@ -102,23 +84,46 @@ $(document).on('click', '.cancel', function(){
 		$('#close5').addClass('hide');
 	});
 
+//////////////////////// comments ///////////////////////
+
+
+$(document).on('click', '.drop-note', function(){
+	console.log('click');
+	$('#addComment').css({display: 'inherit'});
+	$('#dropNote').text('Cancel').addClass('cancel').removeClass('drop-note');
+});
+
+$(document).on('click', '.cancel', function(){
+	$('#addComment').css({display: 'none'});
+	$('#dropNote').text('Drop a Note').removeClass('cancel').addClass('drop-note');
+});
+
+
+	// var commentTemplate = $('#comment-template').html();
+	// var compileCommentTemplate = Handlebars.compile(commentTemplate);
+
+	var postTemplate = $('#post-template').html();
+	var compilePostTemplate = Handlebars.compile(postTemplate);
 
 //////// on page load, add previous comments to page
+
 	song.comments.map(function(comment){
-		var outputHTML = compileCommentTemplate(comment);
+		console.log('comment: ', comment);
+		// var outputHTML = compileCommentTemplate(comment);
+		var outputHTML = compilePostTemplate(comment);
 		$('#comments-container').prepend(outputHTML);
 	});
 
 	$('#addComment').on('submit', function(event){
 		event.preventDefault();
-		var comment = $(this).find('textarea').val();
+		var text = $(this).find('textarea').val();
 		var date = moment().format('MMMM Do YYYY, h:mm:ss a');
 		var comment = {
 			userProfilePic: user.profilePic,
-			userId: user._id,
+			user: user,
 			userName: user.name,
 			date: date,
-			comment: comment,
+			text: text,
 			likes: 0,
 			songId: song._id
 		};
@@ -129,7 +134,8 @@ $(document).on('click', '.cancel', function(){
 			console.log('addComment responseData: ', responseData);
 		});
 
-		var outputHTML = compileCommentTemplate(comment);
+		// var outputHTML = compileCommentTemplate(comment);
+		var outputHTML = compilePostTemplate(comment);
 		$('#comments-container').prepend(outputHTML);
 
 		$('#addComment').css({display: 'none'});
