@@ -145,7 +145,7 @@ function editProfile(){
 		$('.location').addClass('edit');
 
 	///// switch button up...
-		$('.edit-profile').removeClass('edit-profile btn-xs').addClass('edit-done btn-md').text('Done Editing');
+		$('.edit-profile').removeClass('edit-profile btn-xs').addClass('edit-done btn-md btn-danger').text('Done Editing');
 		$(this).blur();
 
 		//// add media
@@ -335,12 +335,12 @@ function editProfile(){
 			$('#about').empty();
 			$('#about').append('<p class="about-content">' + user.about +'</p>');
 			$('#philosophy').empty();
-			$('#philosophy').append('<p class="about-content">' + user.about +'</p>');
+			$('#philosophy').append('<p class="about-content">' + user.philosophy +'</p>');
 
 			$('#improvCompRange, #addMedia').addClass('hide');
 
 			///// return edit button to original state
-			$('.edit-done').addClass('edit-profile btn-xs').removeClass('edit-done btn-md').text('Edit Profile');
+			$('.edit-done').addClass('edit-profile btn-xs').removeClass('edit-done btn-md btn-danger').text('Edit Profile');
 
 			$('.delete-word').hide();
 			$('.ratio-graph').show();

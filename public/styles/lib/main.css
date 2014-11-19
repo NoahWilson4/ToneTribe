@@ -14,41 +14,39 @@ a:hover{
 
 }
 
-h1 {
-	font-size: 50px;
-}
+
 
 .tonetribe-navbar{
-	background: rgb(19, 19, 19);
-height: 100px;
-border-bottom: 5px solid rgb(190, 190, 190);
+background: rgb(19, 19, 19);
+min-height: 70px;
+border-bottom: 5px solid rgb(194, 194, 194);
 }
 
 .nav-main{
-	width: 90%;
+	width: 97%;
 margin: 5px auto;
 
 }
 
 .nav-username{
 	color: white;
-font-size: 45px;
-margin-left: 30px;
+
 }
 
 #tonetribe-logo{
-height: 60px;
-margin-right: 35px;
+
+margin-right: 0px;
 opacity: 1;
-font-size: 50px;
+font-size: 30px;
 color: white;
 }
 
 #navt {
 color: white;
-padding: 41px 20px;
-font-size: 40px;
+padding: 15px 0px;
+font-size: 21px;
 font-weight: 200;
+margin: 0px 5px;
 }
 
 #navt:hover{
@@ -56,9 +54,9 @@ font-weight: 200;
 }
 
 #nav-caret{
-	font-size: 20px;
+font-size: 14px;
 position: relative;
-bottom: 5px;
+bottom: 2px;
 padding-left: 5px;
 font-weight: bold;
 }
@@ -66,8 +64,17 @@ font-weight: bold;
 #dd-menu{
 background: rgba(255, 255, 255, 0.85);
 border: 5px solid black;
-font-size: 30px;
+font-size: 20px;
 min-width: 320px;
+}
+
+@media screen and (max-width: 767px) {
+	#dd-menu{
+		background: rgba(34, 33, 33, 0.85);
+border: 5px solid black;
+font-size: 25px;
+	}
+
 }
 
 #dd-header{
@@ -97,7 +104,7 @@ margin-left: 50px;
 }
 
 .main-container {
-	max-width: 2000px;
+	max-width: 1100px;
 }
 
 .hide{
@@ -112,6 +119,10 @@ margin-left: 50px;
 		-webkit-box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
 -moz-box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
 box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
+}
+
+.inline{
+	display: inline-block;
 }
 
 .full-width {
@@ -138,6 +149,10 @@ box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
 	background: white;
 }
 
+.add-margin {
+	margin-top: 35px;
+}
+
 .login {
 	margin-right: 7px;
 	max-width: 200px;
@@ -156,11 +171,12 @@ box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
 
 
 .profile-top {
-margin-top: 99px;
+margin-top: 69px;
 padding: 10px;
 background-color: rgb(146, 160, 158);
-height: 660px;
+height: 415px;
 width: 100%;
+max-width: 1670px;
 position: relative;
 /*background-image: ;*/
 background-size: cover;
@@ -181,14 +197,15 @@ border-bottom: 10px solid black;
 }
 
 .connected {
-	background: rgb(224, 224, 224);
-padding: 10px;
+background: rgb(224, 224, 224);
+padding: 11px;
 width: 100%;
 margin-bottom: 12px;
 border-radius: 75px;
 text-align: center;
-font-size: 20px;
+font-size: 18px;
 color: darkred;
+font-weight: 500;
 }
 
 .img-name {
@@ -196,15 +213,15 @@ color: darkred;
 }
 
 .heading-about{
-	font-size: 60px;
-	text-align: right;
-padding: 0px 15px 20px 25px;
+font-size: 30px;
+text-align: right;
+padding: 0px 15px 15px 18px;
 margin: 0;
 /* background: rgb(239, 239, 239); */
 }
 
 .about-content{
-	font-size: 30px;
+	font-size: 24px;
 	width: 100%;
 }
 
@@ -217,12 +234,12 @@ margin: 10px;
 
 .btn-simple {
 border: none;
-background: rgb(237, 237, 237);
-padding: 15px;
-border-radius: 10px;
-margin: 35px 20px;
-width: 150px;
-font-size: 20px;
+background: rgb(231, 230, 230);
+padding: 10px;
+border-radius: 5px;
+margin: 25px 25px;
+min-width: 110px;
+font-size: 15px;
 }
 
 .btn-simple2 {
@@ -235,13 +252,13 @@ font-size: 20px;
 }
 
 .btn-simple-sm {
-	border: none;
+border: none;
 background: rgb(237, 237, 237);
-padding: 15px;
-border-radius: 10px;
+padding: 10px;
+border-radius: 5px;
 /* margin: 35px 20px; */
-width: 150px;
-font-size: 20px;
+min-width: 110px;
+font-size: 15px;
 }
 
 .btn-simple-edit {
@@ -261,9 +278,23 @@ font-size: 20px;
 box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
 }
 
-.add-margin {
-	margin-top: 35px;
+
+.btn-songs{
+margin-bottom: 10px;
+width: 100%;
+border-radius: 40px;
+padding: 15px;
+color: white;
+border: none;
+font-size: 27px;
+background: rgb(99, 101, 103);
 }
+
+
+.btn-songs:hover{
+	background: gray;
+}
+
 
 .btn-tribe{
 border: none;
@@ -277,9 +308,6 @@ font-weight: 600;
 color: rgb(86, 85, 84);
 }
 
-.btn-songs:hover{
-	background: gray;
-}
 
 .gallery-block {
 
@@ -298,16 +326,16 @@ padding: 0px 15px;
 background: black;
 position: absolute;
 bottom: -60px;
-left: 20px;
+left: 30px;
 margin-left: 15px;
 margin-top: -30px;
-width: 333px;
-height: 333px;
+width: 230px;
+height: 230px;
 padding: 0;
 background-image: ;
 background-size: cover;
 background-position: center;
-border: 10px solid rgb(55, 51, 51);
+border: 7px solid rgb(34, 34, 34);
 }
 
 .profile-pic-cocreation{
@@ -316,10 +344,10 @@ position: absolute;
 bottom: -5px;
 opacity: 0.75;
 left: 10px;
-margin-left: 15px;
+/* margin-left: 15px; */
 margin-top: -30px;
-width: 393px;
-height: 393px;
+width: 231px;
+height: 231px;
 padding: 0;
 background-image: ;
 background-size: cover;
@@ -332,36 +360,37 @@ position: absolute;
 bottom: 0px;
 left: 0px;
 background: rgba(200,200,200,0.15);
-width: 1190px;
-height: 370px;
+/* width: 60%; */
+height: 230px;
 border-left: 10px solid black;
-padding: 100px 10px 0px 210px;
-border-right: 5px solid rgb(50, 50, 50);
-border-top: 2px solid rgb(50, 50, 50);
+padding: 40px 10px 0px 20px;
+border-right: 5px solid black;
+border-top: 2px solid black;
 border-top-right-radius: 250px;
+min-width: 515px;
 }
 
 .top-header-name{
-text-shadow: 1px 2px 5px rgba(102, 102, 102, 0.77);
+text-shadow: 1px 2px 5px rgba(190, 186, 186, 0.77);
 margin-bottom: 0px;
 margin-top: 30px;
-font-size: 150px;
-color: rgb(23, 23, 23);
+font-size: 80px;
+color: rgb(3, 3, 3);
 }
 
 .top-header-description{
 text-shadow: 1px 2px 5px rgba(6, 6, 6, 0.77);
 color: lightgray;
-font-size: 50px;
-margin-left: 100px;
+font-size: 35px;
+margin-left: 30px;
 }
 
 .edit-icon-profile {
 position: absolute;
 top: 10px;
 left: -20px;
-font-size: 18px;
-height: 50px;
+font-size: 11px;
+/* height: 50px; */
 background: rgba(0, 0, 0, 0.4);
 padding: 10px 10px 10px 10px;
 border: 1px solid lightgray;
@@ -372,7 +401,7 @@ font-weight: bold;
 .edit-icon-background {
 position: absolute;
 right: 0px;
-height: 50px;
+/*height: 50px;*/
 background: rgba(0, 0, 0, 0.4);
 padding: 10px 10px 10px 10px;
 border-top: none;
@@ -380,7 +409,7 @@ border-bottom: 1px solid lightgray;
 border-right: none;
 border-bottom-left-radius: 10px;
 font-weight: bold;
-font-size: 18px;
+font-size: 11px;
 }
 
 .band-profile-pic {
@@ -400,11 +429,11 @@ border: 3px solid lightgray;
 .name-loc {
 position: absolute;
 bottom: 0px;
-left: 250px;
+left: 100px;
 display: inline-block;
-min-width: 400px;
+/* min-width: 560px; */
 color: rgb(233, 231, 228);
-padding: 0px 50px 10px 140px;
+padding: 0px 50px 10px 190px;
 background-color: rgba(0, 0, 0, 0.35);
 border-top-right-radius: 140px;
 /* border-top-left-radius: 120px; */
@@ -427,8 +456,8 @@ font-size: 17px;
 
 .name {
 	margin-bottom: 0px;
-	margin-top: 40px;
-	font-size: 80px;
+margin-top: 30px;
+font-size: 55px;
 }
 
 .band-name {
@@ -437,7 +466,7 @@ font-size: 17px;
 
 .location {
 	color: lightgray;
-	font-size: 40px;
+	font-size: 30px;
 }
 
 .band-location {
@@ -467,19 +496,9 @@ border-top: none;*/
 
 }
 
-.btn-songs{
-	margin-bottom: 10px;
-width: 100%;
-border-radius: 60px;
-padding: 20px;
-color: white;
-border: none;
-font-size: 30px;
-background: rgb(99, 101, 103);
-}
 
 .sidebar-list-heading {
-font-size: 35px;
+font-size: 25px;
 color: rgb(86, 7, 7);
 /* border-left: 3px solid rgb(215, 215, 215); */
 padding-left: 5px;
@@ -487,7 +506,7 @@ margin-top: 25px;
 }
 
 .sidebar-list-text {
-	font-size: 40px;
+	font-size: 30px;
 	margin-bottom: 0px;
 	padding-left: 15px;
 	min-height: 40px;
@@ -503,7 +522,7 @@ margin-top: 25px;
 }
 
 .bands{
-	font-size: 60px;
+	font-size: 40px;
 }
 
 .tag {
@@ -513,7 +532,7 @@ margin-top: 25px;
 .info-block {
 /*border: 1px solid lightgray;*/
 background: white;
-color: rgb(86, 84, 84);
+color: rgb(71,71,71);
 width: 100%;
 padding: 25px;
 font-size: 24px;
@@ -621,10 +640,10 @@ background: lightgray;
 background-image: ;
 background-position: center;
 background-size: cover;
-width: 175px;
-height: 175px;
+width: 140px;
+height: 140px;
 margin-right: 10px;
-border: 10px solid white;
+border: 7px solid white;
 display: inline-block;
 }
 
@@ -632,11 +651,10 @@ display: inline-block;
 background: lightgray;
 background-image: ;
 background-position: center;
-
-width: 175px;
-height: 175px;
-margin: 25px;
-border: 10px solid white;
+width: 125px;
+height: 125px;
+margin: 15px;
+border: 5px solid white;
 display: inline-block;
 background-size: cover;
 }
@@ -644,9 +662,9 @@ background-size: cover;
 .post-song-container{
 background-size: cover;
 border: 15px solid white;
-min-height: 333px;
+
 border-radius: 40px;
-width: 950px;
+
 margin: 30px auto;
 }
 
@@ -656,9 +674,9 @@ margin: 30px auto;
 
 .post-song-info{
 background: rgba(255, 255, 255, 0.5);
-padding: 0px 20px 15px 15px;
+padding: 0px 20px 35px 15px;
 border-left: 5px solid white;
-min-height: 200px;
+margin-bottom: 50px;
 border-bottom-left-radius: 50px;
 }
 
@@ -674,31 +692,30 @@ border: 11px solid rgba(215, 212, 212, 0.3);
 }
 
 .cocreation-user-pic{
-background: lightgray; */
-background-image: ;
+background: lightgray;
 background-position: center;
 background-size: cover;
-width: 100px;
+width: 50px;
 /* color: black; */
-height: 100px;
-margin-right: 10px;
-margin-bottom: 10px;
+height: 50px;
+/* margin-right: 10px; */
+/* margin-bottom: 10px; */
 display: inline-block;
-border: 5px solid rgba(237, 237, 237, 0.8);
+border: 2px solid rgba(237, 237, 237, 0.8);
 }
 
 
 .cocreation-post-container{
-	position: relative;
+position: relative;
 display: block;
 padding: 10px 15px;
 margin: 40px;
 background-color: #FAF9F9;
-min-height: 550px;
+
 background-size: cover;
 padding: 30px;
-border: 15px solid rgb(245, 245, 245);
-border-radius: 30px;
+border: 5px solid rgb(245, 245, 245);
+border-radius: 15px;
 }
 
 .cocreation-pic-holder{
@@ -706,9 +723,10 @@ border-radius: 30px;
 }
 
 .cocreation-user-name{
-	display: inline-block;
-	font-size: 40px;
+display: inline-block;
+font-size: 25px;
 /* color: black; */
+}
 }
 
 .cocreation-likes {
@@ -716,17 +734,17 @@ border-radius: 30px;
 }
 
 .cocreation-user-container{
-	display: block;
-margin-left: 25px;
+display: block;
+margin-left: 20px;
 }
 
 .cocreation-heading {
-	margin-bottom: 100px;
-font-size: 30px;
+margin-bottom: 35px;
+font-size: 20px;
 display: inline-block;
 background: rgba(239, 239, 239, 0.6);
-padding: 35px 60px;
-border-radius: 65px;
+padding: 15px 20px;
+border-radius: 15px;
 }
 
 .post-heading {
@@ -738,26 +756,22 @@ border-radius: 65px;
 }
 
 .cocreation-post-heading {
-	margin-bottom: 0px;
-font-size: 80px;
-margin-top: 30px;
+margin-bottom: 0px;
+font-size: 40px;
+margin-top: 20px;
 }
 
 .post-text{
-	margin-bottom: 0;
-line-height: 1.3;
-font-size: 38px;
+
+font-size: 20px;
 }
 
 .cocreation-content-container{
-/*background: rgba(236, 236, 236, 0.2);*/
-padding: 50px;
-border-radius: 95px;
-/* border: 1px solid lightgray; */
+
 }
 
 .cocreation-secondary-heading{
-	font-size: 50px;
+	font-size: 30px;
 }
 
 /*/////////// smaller template  ////////////*/
@@ -843,12 +857,6 @@ margin-top: 0px;
 
 }
 
-.post-text{
-	margin-bottom: 0;
-line-height: 1.3;
-font-size: 38px;
-}
-
 .cc-small-content-container{
 
 }
@@ -863,6 +871,11 @@ font-size: 38px;
 
 
 /*///////////  editing profile   //////////////////////////////////////////////////*/
+.edit-profile {
+	position: absolute;
+bottom: -100px;
+left: -16px;
+}
 
 .add-new-word {
 	width: 100%;
@@ -1182,7 +1195,7 @@ border-bottom-right-radius: 0px;
 
 .bar-signup {
 height: 34px;
-background: -webkit-linear-gradient(right,rgb(85, 85, 85), rgb(242, 242, 242), rgb(250, 250, 250));
+background: -webkit-linear-gradient(right,rgb(92, 30, 30), rgb(242, 242, 242), rgb(250, 250, 250));
 color: transparent;
 border-radius: 7px;
 border-top-right-radius: 0px;
@@ -1190,7 +1203,7 @@ border-bottom-right-radius: 0px;
 }
 .bar-signup2 {
 height: 34px;
-background: -webkit-linear-gradient(left,rgb(85, 85, 85), rgb(242, 242, 242), rgb(250, 250, 250));
+background: -webkit-linear-gradient(left,rgb(92, 30, 30), rgb(242, 242, 242), rgb(250, 250, 250));
 color: transparent;
 
 position: absolute;
@@ -1335,18 +1348,22 @@ right: 50px;
 }
 
 #song-likes{
-	margin-top: 20px;
-	color: rgb(85,85,85);
-	margin-left: -20px;
+	/*margin-top: 20px; */
+color: rgb(85,85,85);
+/* margin-left: -20px; */
+left: -100px;
+top: 5px;
 }
 
 #share-song{
 	position: relative;
-top: -50px;
+top: -30px;
 right: 35px;
 }
 
-
+#like-song{
+	margin-top: 40px;
+}
 
 
 

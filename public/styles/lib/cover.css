@@ -102,15 +102,16 @@ body {
 }
 
 .lead{
-  margin-bottom: 20px;
-  font-size: 35px;
-  font-weight: 300;
-  line-height: 1.4;
+margin-bottom: 15px;
+font-size: 25px;
+font-weight: 300;
+line-height: 0.9;
 }
 
 .join{
-  padding: 18px 40px;
-  font-size: 30px;
+  padding: 13px 27px;
+font-size: 23px;
+margin-top: 25px;
 }
 
 
@@ -250,12 +251,12 @@ line-height: 1.42857143;
 }
 
 input, #l-in, .form-control, .login-input, .lg-in, .log-me-in, .login, .l-in, .llogin, .loin{
- height: 47px;
+/* height: 47px;
 width: 250px;
 border-radius: 5px;
 margin: 10px;
 font-size: 22px;
-padding: 15px;
+padding: 15px;*/
 }
 
 

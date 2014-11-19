@@ -23,7 +23,7 @@ var CocreationSong = require('./models/cocreationSong.js');
 
 
 /////////////  if developing, use this...
-  // var privateSettings = require('./private.js');
+  var privateSettings = require('./private.js');
 
 // var CocreationSong = require('./models/cocreationSong.js')
 
@@ -337,18 +337,18 @@ app.use(passportConfig.ensureAuthenticated);
 
 ///// new heroku port......
 
-var port = process.env.PORT || 8713;
-var server = app.listen(port, function() {
-  console.log('Express server listening on port ' + app.get('port'));
-});
+// var port = process.env.PORT || 8713;
+// var server = app.listen(port, function() {
+//   console.log('Express server listening on port ' + app.get('port'));
+// });
 
 
 
 ///// previous port....
 
-// http.createServer(app).listen(app.get('port'), function(){
-//   console.log('Express server listening on port ' + app.get('port'));
-// });
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
 
 
 

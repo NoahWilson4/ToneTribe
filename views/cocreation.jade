@@ -12,7 +12,7 @@ block content
 			//- 	h2.name(title="name") CoCreation
 			//- 	div.location(title="location") The Creative Playground
 			//- div.profile-pic.img-circle.col-xs-4(style="background-image: url('./images/earth-spirals2.png')")
-	.container-fluid
+	.container-fluid.main-container
 		.info-block(title="about")
 			.content-container
 					p.about Check out the collaborative pieces that have been shared with the world.  Join in and add your musical touch!
@@ -21,9 +21,9 @@ block content
 					h2.heading-about CoCreation Songs:
 				.content-container.col-sm-8.col-md-10
 					p.about Here are the collaborative pieces that have been shared with the world.
-	.container-fluid.main-container
+
 		.row
-			div.col-sm-5.col-md-4#sidebar
+			div.col-md-5.col-lg-5#sidebar
 				//- .profile-sidebar
 					.sidebar-list
 						button.btn.btn-default.btn-sm.btn-songs Create New Song
@@ -43,7 +43,7 @@ block content
 									input.form-control.input-new(type="text" name="name" placeholder="Name of Song…")
 									input.btn.btn-default.btn-simple2(type="submit" value="Create New Song")
 					
-			.col-sm-7.col-md-8
+			.col-md-7.col-lg-7
 				.info-block.remove-margin
 					h1.heading-about CoCreations
 					.sidebar-list.pull-right

@@ -58,33 +58,33 @@ html(lang='en')
                         .form-group
                             input.form-control.login(type="password" placeholder="Password…" name="password")
                         button.btn.btn-success(type="submit") Tune In
-                .navbar-collapse.collapse
+                .navbar-collapse.collapse.pull-left
                     ul.nav.navbar-nav
                         li: a#navt(href="/profile-user") Profile
                         li: a#navt(href="/live-stream") LiveStream
                         li: a#navt(href="/cocreation") CoCreation
                         
-                    ul.nav.navbar-nav.navbar-right
-                        li.dropdown
-                            a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown") Connect
-                                i#nav-caret.fa.fa-chevron-down
-                            ul#dd-menu.dropdown-menu(role="menu")
-                                li: a(id="navbar-search" href="/search") Search for Musicians and Bands
-                                li: a(href="/cocreation") Co-Creation
-                                li: a(href="/live-stream") LiveStream
+                ul.nav.navbar-nav.navbar-right
+                    li.dropdown
+                        a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown") Connect
+                            i#nav-caret.fa.fa-chevron-down
+                        ul#dd-menu.dropdown-menu(role="menu")
+                            li: a(id="navbar-search" href="/search") Search for Musicians and Bands
+                            li: a(href="/cocreation") Co-Creation
+                            li: a(href="/live-stream") LiveStream
 
-                                li#dd-header Search Classifieds
-                                li: a(href="#") Looking for Musicians
-                                li: a(href="#") Equipment and Services
-                        li.nav-username.dropdown
-                            a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown")= user.name
-                                i#nav-caret.fa.fa-chevron-down
-                            ul#dd-menu.dropdown-menu(role="menu")
-                                li: a Messages
-                                li: a Notifications
-                                li: a Edit Profile
-                                li.divider
-                                li: a(href="/auth/logout") Logout
+                            li#dd-header Search Classifieds
+                            li: a(href="#") Looking for Musicians
+                            li: a(href="#") Equipment and Services
+                    li.nav-username.dropdown.navbar-right
+                        a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown")= user.name
+                            i#nav-caret.fa.fa-chevron-down
+                        ul#dd-menu.dropdown-menu(role="menu")
+                            li: a Messages
+                            li: a Notifications
+                            li: a Edit Profile
+                            li.divider
+                            li: a(href="/auth/logout") Logout
                         
     
                                 
@@ -125,18 +125,20 @@ html(lang='en')
                     <div class="post-likes post-secondary inline"> {{likes}} Likes </div>
                     {{#if cocreationSong}}  
                         <div class="list-group results">
-                            <div class="post-song-container" style="background-image: url('{{cocreationSong.0.backgroundImage}}'); background-size: cover;">
-                                <div class="row">
-                                    <div class="post-song-pic-holder col-xs-3">
-                                        <a href="../song/?id={{cocreationSong.0._id}}"><img class="post-song-profile-pic img-circle" src={{cocreationSong.0.backgroundImage}}></a>
-                                    </div>
-                                    <div class="col-xs-9 post-song-info">
-                                        <div class="post-secondary pull-right post-song-likes"> {{cocreationSong.0.likes}} Likes </div> 
-                                        <a href="../song/?id={{cocreationSong.0._id}}"><h1 class="post-heading"> {{cocreationSong.0.name}} </h4></a>
-                                        <p id="post-text" class="list-group-item-text post-text"> {{cocreationSong.0.description}} </p>
+                            <a href="../song/?id={{cocreationSong.0._id}}">
+                                <div class="post-song-container" style="background-image: url('{{cocreationSong.0.backgroundImage}}'); background-size: cover;">
+                                    <div class="row">
+                                        <div class="post-song-pic-holder col-xs-2">
+                                            
+                                        </div>
+                                        <div class="col-xs-10 post-song-info">
+                                            <div class="post-secondary pull-right post-song-likes"> {{cocreationSong.0.likes}} Likes </div> 
+                                            <a href="../song/?id={{cocreationSong.0._id}}"><h1 class="post-heading"> {{cocreationSong.0.name}} </h4></a>
+                                            <p id="post-text" class="list-group-item-text post-text"> {{cocreationSong.0.description}} </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     {{/if}}
                 </div>
@@ -176,7 +178,7 @@ html(lang='en')
                     <div class="cocreation-content-container">
                         <div class="row">
                            
-                            <div class="col-xs-9 cocreation-heading">
+                            <div class="col-xs-11 cocreation-heading">
                                 <div class="cocreation-likes pull-right">{{likes}} Likes</div>
                                 <a href="../song/?id={{_id}}">
                                 <h2 class="cocreation-post-heading"> {{name}} </h4></a>
@@ -236,6 +238,9 @@ html(lang='en')
 
 
 
+
+ //- post cocreation 'profile' image in case i want it again....
+//- <img class="post-song-profile-pic img-circle" src={{cocreationSong.0.backgroundImage}}>
 
 
 

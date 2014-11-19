@@ -11,13 +11,11 @@ smaller pictures
 
 minor css:
 upload song background
-song description font size
-
-
 
 
 littler things:
 
+navbar- when viewing other user's profile, their name shows up in nav
 
 no media to view shows up  on initial loading of media, add hide functionality
 
@@ -27,7 +25,7 @@ still use separate js files, minify each.
 
 other user cocreationsongs page!!
 
- 
+ tune in on cover, back into a navbar
 
 COCREATION:
 

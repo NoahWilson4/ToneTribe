@@ -3,13 +3,13 @@ extends layout
 block content
 	div.container.profile-top(style="background-image: url(" + user.backgroundPic + ")")
 		button#uploadBackgroundPic.hide(data-toggle="modal" data-target="#uploadModalBackgroundPic").glyphicon.glyphicon-picture.make-it-white.edit-icon-background Change-Background
+		button.edit-profile.btn.btn-default.btn-simple.btn-simple.pull-left Edit Profile
 		div.img-name.row
-			div.name-loc.col-xs-6.col-sm-6.c0l-md-7.col-xl-5
+			div.name-loc.col-xs-10.col-sm-9.c0l-md-8.col-lg-7
 				h2.name(title="name")= user.name
 				div.location(title="location")= user.location
-			div.profile-pic.img-circle.col-xs-4(style="background-image: url(" + user.profilePic + ")")
+			div.profile-pic.img-circle(style="background-image: url(" + user.profilePic + ")")
 				button#uploadProfilePic.hide(data-toggle="modal" data-target="#uploadModalProfilePic").glyphicon.glyphicon-picture.make-it-white.edit-icon-profile Upload-Photo
-	button.edit-profile.btn.btn-default.btn-simple.btn-simple.pull-left Edit Profile
 	.container-fluid.main-container
 		if user.isNewUser
 			#welcome.container
@@ -25,13 +25,14 @@ block content
 		.container-fluid
 			.info-block.edit-add-shadow(title="about")
 				.row
-					.heading-container.col-sm-4.col-md-2
+					.heading-container.col-xs-2.col-md-2
 						h1.heading-about About:
-					#about.content-container.info-edit-textarea.col-sm-8.col-md-10
-						if user.about
-							p.about-content= user.about
-						else
-							p.about-content.empty - -
+					.col-xs-10.col-md-10.pull-right
+						#about.content-container.info-edit-textarea
+							if user.about
+								p.about-content= user.about
+							else
+								p.about-content.empty - -
 		.container-fluid
 			.row
 				div.col-sm-5.col-md-4#sidebar
@@ -79,7 +80,7 @@ block content
 							else
 								p.sidebar-list-text.empty - -
 						.sidebar-list
-							h4.sidebar-list-heading Improvisational/Compositional Orientation:
+							h4.sidebar-list-heading Improvisational-Compositional Orientation:
 							.improvCompNumbers Improv = 
 								span: strong#improv= 100 - user.improvComp
 								span % / 
