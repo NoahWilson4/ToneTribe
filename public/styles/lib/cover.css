@@ -56,7 +56,7 @@ body {
 }
 
 .cover-heading {
-  font-size: 75px;
+  font-size: 55px;
 }
 
 /* Padding for spacing */
@@ -103,14 +103,14 @@ body {
 
 .lead{
 margin-bottom: 15px;
-font-size: 25px;
+font-size: 23px;
 font-weight: 300;
 line-height: 0.9;
 }
 
 .join{
-  padding: 13px 27px;
-font-size: 23px;
+padding: 11px 23px;
+font-size: 22px;
 margin-top: 25px;
 }
 
@@ -193,7 +193,7 @@ margin: 30px auto;
 
 
 .m{
-  top: 100px;
+  top: 67px;
 }
 
 .mb {

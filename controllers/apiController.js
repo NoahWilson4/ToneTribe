@@ -14,7 +14,7 @@ var path = require('path');
 var aws = require('aws-sdk');
 var fs = require('fs');
 
-/// if developing
+/// if developing......
 // var privateSettings = require('../private.js');
 
 var multer = require('multer');

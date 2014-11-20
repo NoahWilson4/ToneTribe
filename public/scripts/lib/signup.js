@@ -11,6 +11,9 @@ $(document).on('ready', function() {
 		$('.cover-container').removeClass('hide');
 	});
 
+	$('.modal').on('blur', function(){
+		$('.cover-container').removeClass('hide');
+	});
 
 
 // var userInfo = {

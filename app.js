@@ -23,7 +23,7 @@ var CocreationSong = require('./models/cocreationSong.js');
 
 
 /////////////  if developing, use this...
-  // var privateSettings = require('./private.js');
+  var privateSettings = require('./private.js');
 
 // var CocreationSong = require('./models/cocreationSong.js')
 
@@ -344,7 +344,7 @@ var server = app.listen(port, function() {
 
 
 
-///// previous port....
+///// previous port.... for developing
 
 // http.createServer(app).listen(app.get('port'), function(){
 //   console.log('Express server listening on port ' + app.get('port'));
