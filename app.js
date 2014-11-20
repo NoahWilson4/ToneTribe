@@ -23,9 +23,9 @@ var CocreationSong = require('./models/cocreationSong.js');
 
 
 /////////////  if developing, use this...
-  var privateSettings = require('./private.js');
+  // var privateSettings = require('./private.js');
 
-// var CocreationSong = require('./models/cocreationSong.js')
+var CocreationSong = require('./models/cocreationSong.js');
 
 mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/toneTribe');
 /// if no users, add a few for testing
