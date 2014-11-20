@@ -193,11 +193,11 @@ margin: 30px auto;
 
 
 .m{
-  top: 250px;
+  top: 100px;
 }
 
 .mb {
-background: rgb(84, 84, 84);
+background: rgba(84, 84, 84,0.5);
 padding: 80px 70px;
 }
 
@@ -214,7 +214,7 @@ padding: 20px;
 }
 
 .mh {
-  background: rgb(224, 224, 224);
+background: rgb(224, 224, 224);
 color: black;
 border-top-left-radius: 15px;
 border-top-right-radius: 15px;
@@ -240,7 +240,9 @@ color: rgb(108, 106, 106);
 line-height: 1.42857143;
 }
 
-
+.transparent{
+  background: transparent;
+}
 
 
 #tune-in{
