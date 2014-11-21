@@ -104,7 +104,7 @@ margin-left: 50px;
 }
 
 .main-container {
-	max-width: 1100px;
+	max-width: 1074px;
 }
 
 .main-container-livestream {
@@ -172,13 +172,15 @@ box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
 box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
 }
 
-
+.center {
+	text-align: center;
+}
 
 .profile-top {
 margin-top: 69px;
 padding: 10px;
 background-color: rgb(146, 160, 158);
-height: 415px;
+height: 387px;
 width: 100%;
 max-width: 1670px;
 position: relative;
@@ -217,7 +219,7 @@ font-weight: 500;
 }
 
 .heading-about{
-font-size: 30px;
+font-size: 27px;
 text-align: right;
 padding: 0px 15px 15px 18px;
 margin: 0;
@@ -231,8 +233,8 @@ margin: 0;
 
 .gallery-pic {
 	background: rgb(210, 211, 215);
-width: 150px;
-height: 150px;
+width: 120px;
+height: 120px;
 margin: 10px;
 }
 
@@ -270,9 +272,9 @@ border: none;
 background: rgb(223, 231, 185);
 padding: 15px;
 border-radius: 10px;
-margin: 100px 60px 0px 15px;
-width: 150px;
-font-size: 20px;
+margin: 15px 50px 0px 0px;
+width: 130px;
+font-size: 17px;
 
 }
 
@@ -287,10 +289,10 @@ box-shadow: 3px 7px 20px 0px rgba(129, 128, 127, 0.5);
 margin-bottom: 10px;
 width: 100%;
 border-radius: 40px;
-padding: 15px;
+padding: 12px;
 color: white;
 border: none;
-font-size: 27px;
+font-size: 23px;
 background: rgb(99, 101, 103);
 }
 
@@ -303,11 +305,11 @@ background: rgb(99, 101, 103);
 .btn-tribe{
 border: none;
 background: rgb(237, 237, 237);
-padding: 13px 0px;
+padding: 8px 0px;
 border-radius: 50px;
 margin-bottom: 12px;
 width: 100%;
-font-size: 22px;
+font-size: 18px;
 font-weight: 600;
 color: rgb(86, 85, 84);
 }
@@ -490,7 +492,7 @@ font-size: 55px;
 .profile-sidebar {
 background-color: white;
 padding: 10px;
-margin-bottom: 25px;
+margin-bottom: 15px;
 
 /*border: 1px solid lightgray;
 border-top: none;*/
@@ -502,7 +504,7 @@ border-top: none;*/
 
 
 .sidebar-list-heading {
-font-size: 25px;
+font-size: 20px;
 color: rgb(86, 7, 7);
 /* border-left: 3px solid rgb(215, 215, 215); */
 padding-left: 5px;
@@ -510,23 +512,23 @@ margin-top: 25px;
 }
 
 .sidebar-list-text {
-	font-size: 30px;
+	font-size: 23px;
 	margin-bottom: 0px;
 	padding-left: 15px;
-	min-height: 40px;
+
 	width: 100%;
 }
 
 .sidebar-list-text-noedit {
-	font-size: 30px;
+	font-size: 23px;
 	margin-bottom: 0px;
 	padding-left: 15px;
-	min-height: 40px;
+
 	width: 100%;
 }
 
 .bands{
-	font-size: 40px;
+	font-size: 33px;
 }
 
 .tag {
@@ -534,14 +536,13 @@ margin-top: 25px;
 }
 
 .info-block {
-/*border: 1px solid lightgray;*/
+/*border: 1px solid lightgray; */
 background: white;
 color: rgb(71,71,71);
 width: 100%;
-padding: 25px;
-font-size: 24px;
-margin: 25px 0px;
-
+padding: 15px;
+font-size: 20px;
+margin: 15px 0px;
 }
 
 .embed-info-block {
@@ -611,7 +612,7 @@ margin-left: 40px;
 
 .post-secondary{
 	color: rgb(108, 101, 101);
-font-size: 20px;
+font-size: 13px;
 font-weight: 200;
 
 }
@@ -645,10 +646,10 @@ background-position: center;
 background-size: cover;
 width: 125px;
 height: 125px;
-margin-right: 10px;
+/*margin-right: 10px;*/
 border: 7px solid white;
 display: inline-block;
-float: right;
+/*float: right;*/
 }
 
 .post-song-profile-pic {
@@ -668,7 +669,7 @@ background-size: cover;
 border: 15px solid white;
 
 border-radius: 40px;
-min-height: 270px;
+min-height: 237px;
 margin: 30px auto;
 }
 
@@ -760,6 +761,7 @@ border: 1px solid rgb(195, 195, 195);
 
 .post-heading {
 	margin-bottom: 0px;
+	font-size: 27px;
 }
 
 .like-post{
@@ -774,7 +776,7 @@ margin-top: 20px;
 
 .post-text{
 
-font-size: 22px;
+font-size: 19px;
 }
 
 .cocreation-content-container{
@@ -884,7 +886,13 @@ margin-top: 0px;
 /*///////////  editing profile   //////////////////////////////////////////////////*/
 .edit-profile {
 	position: absolute;
-bottom: -100px;
+bottom: -95px;
+left: -16px;
+}
+
+.edit-done {
+	position: absolute;
+bottom: -95px;
 left: -16px;
 }
 
@@ -1045,9 +1053,7 @@ right: 15px;
 top: 85px;
 }
 
-.edit-done {
 
-}
 
 .white-background {
 	background: white;
@@ -1154,7 +1160,7 @@ border-top-right-radius: 45px;
 	display: inline-block;
 padding-right: 3px;
 position: relative;
-margin: 1px 2px;
+
 }
 
 .delete-word {
@@ -1361,12 +1367,21 @@ background-size: cover;
 width: 95%;
 min-width: 300px;
 max-width: 1170px;
-padding: 15px;
+padding: 7px 0px;
 margin: auto;
 }
 
 
+.welcome{
+	min-height: 250px;
+padding: 20px;
+max-width: 700px;
+margin: 15px auto;
+}
 
+.rmv-lp {
+	padding-left: 0;
+}
 
 
 

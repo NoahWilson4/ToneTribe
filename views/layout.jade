@@ -79,6 +79,12 @@ html(lang='en')
                                 li: a(href="#") Looking for Musicians
                                 li: a(href="#") Equipment and Services
                         li.nav-username.dropdown.navbar-right
+                            //- if currentUser.name
+                            //-     a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown")= currentUser.name
+                            //-         i#nav-caret.fa.fa-chevron-down
+                            //- else
+                            //-     a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown")= user.name
+                            //-         i#nav-caret.fa.fa-chevron-down
                             a#navt(href="#" class="dropdown-toggle" data-toggle="dropdown")= user.name
                                 i#nav-caret.fa.fa-chevron-down
                             ul#dd-menu.dropdown-menu(role="menu")

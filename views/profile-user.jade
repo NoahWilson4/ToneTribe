@@ -11,19 +11,19 @@ block content
 			div.profile-pic.img-circle(style="background-image: url(" + user.profilePic + ")")
 				button#uploadProfilePic.hide(data-toggle="modal" data-target="#uploadModalProfilePic").glyphicon.glyphicon-picture.make-it-white.edit-icon-profile Upload-Photo
 	.container-fluid.main-container
+		.post-divider
 		if user.isNewUser
-			#welcome.container
-				.info-block.shadow(title="welcome")
-					.row
-						h2.heading-about Welcome to the Tribe!
-						.heading-container.col-sm-4.col-md-2
-						.content-container.col-sm-8.col-md-10
-							p.sidebar-list-text-noedit Welcome to our global community of musicians.  
-							p.sidebar-list-text-noedit Please fill in more info about yourself and we'll connect you in!
-							button.close-welcome.btn.btn-simple-sm.pull-right.add-margin Close
-							button.close-welcome.btn.btn-simple-edit.pull-right Done Editing
+			#welcome
+				.info-block.welcome.shadow(title="welcome")
+					
+					h2.center Welcome to the Tribe!
+
+					p.sidebar-list-text-noedit Welcome to our global community of musicians. Please fill in more info about yourself and we'll connect you in!
+					button.close-welcome.btn.btn-simple-edit.pull-right Done Editing
 		.container-fluid
+			
 			.info-block.edit-add-shadow(title="about")
+
 				.row
 					.heading-container.col-xs-2.col-md-2
 						h1.heading-about About:
@@ -106,20 +106,21 @@ block content
 							h4.sidebar-list-heading Astrological Sign:
 							p.sidebar-list-text-noedit.astro-sign= user.astro
 
-				.col-sm-7.col-md-8
+				.col-sm-7.col-md-8.rmv-lp
 					#tribe-view.shadow.info-block.remove-margin
 						h2 Tribe Members:
 						button.btn.btn-default.btn-simple-sm.clear-tribe-view-close Close
 						#tribe-container
 					.info-block.remove-margin.edit-add-shadow(title="philosophy")
 						.row
-							.heading-container.col-sm-5.col-md-4
+							.heading-container.col-xs-3.col-md-4
 								h1.heading-about Philosophy:
-							#philosophy.content-container.info-edit-textarea.col-sm-7.col-md-8
-								if user.philosophy
-									p.about-content= user.philosophy
-								else
-									p.about.empty - -
+							.col-xs-9.col-md-8
+								#philosophy.content-container.info-edit-textarea
+									if user.philosophy
+										p.about-content= user.philosophy
+									else
+										p.about.empty - -
 					.info-block.gallery-block
 						.photo-gallery
 							.photo-container

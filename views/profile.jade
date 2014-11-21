@@ -8,16 +8,17 @@ block content
 				div.location(title="location")= user.location
 			div.profile-pic.img-circle.col-xs-4(style="background-image: url(" + user.profilePic + ")")
 	.container-fluid.main-container
-
+		.post-divider
 		.info-block.edit-add-shadow(title="about")
 			.row
-				.heading-container.col-sm-4.col-md-2
-					h2.heading-about About:
-				#about.content-container.info-edit-textarea.col-sm-8.col-md-10
-					if user.about
-						p.about-content= user.about
-					else
-						p.about-content.empty - -
+				.heading-container.col-xs-2.col-md-2
+					h1.heading-about About:
+				.col-xs-10.col-md-10.pull-right
+					#about.content-container.info-edit-textarea
+						if user.about
+							p.about-content= user.about
+						else
+							p.about-content.empty - -
 	
 		.row
 			div.col-sm-5.col-md-4#sidebar
@@ -93,20 +94,21 @@ block content
 						h4.sidebar-list-heading Astrological Sign:
 						p.sidebar-list-text-noedit.astro-sign= user.astro
 
-			.col-sm-7.col-md-8
+			.col-sm-7.col-md-8.rmv-lp
 				#tribe-view.shadow.info-block.remove-margin
 					h2 Tribe Members:
 					button.btn.btn-default.btn-simple-sm.clear-tribe-view-close Close
 					#tribe-container
 				.info-block.remove-margin.edit-add-shadow(title="philosophy")
 					.row
-						.heading-container.col-sm-5.col-md-4
-							h3.heading-about Philosophy:
-						#philosophy.content-container.info-edit-textarea.col-sm-7.col-md-8
-							if user.philosophy
-								p.about-content= user.philosophy
-							else
-								p.about.empty - -
+						.heading-container.col-xs-3.col-md-4
+							h1.heading-about Philosophy:
+						.col-xs-9.col-md-8
+							#philosophy.content-container.info-edit-textarea
+								if user.philosophy
+									p.about-content= user.philosophy
+								else
+									p.about.empty - -
 				.info-block.gallery-block
 					.photo-gallery
 						.photo-container
